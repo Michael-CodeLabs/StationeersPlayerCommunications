@@ -1,7 +1,9 @@
 using System;
 using BrainClock.PlayerComms;
 using HarmonyLib;
+using System.Linq;
 using StationeersMods.Interface;
+
 [StationeersMod("StationeersPlayerCommunications","StationeersPlayerCommunications [StationeersMods]","0.2.4657.21547.1")]
 public class StationeersPlayerCommunications : ModBehaviour
 {
@@ -9,7 +11,7 @@ public class StationeersPlayerCommunications : ModBehaviour
     
     public override void OnLoaded(ContentHandler contentHandler)
     {
-        UnityEngine.Debug.Log("StationeersPlayerCommunications says: Hello World!");
+        UnityEngine.Debug.Log("StationeersPlayerCommunications.OnLoaded()");
         
         //Config example
         // configBool = Config.Bind("Input",
@@ -18,6 +20,8 @@ public class StationeersPlayerCommunications : ModBehaviour
         //     "Boolean description");
         
         Harmony harmony = new Harmony("StationeersPlayerCommunications");
+
+        InventoryManagerPatch.VoiceTestPrefab = contentHandler.prefabs.FirstOrDefault(prefab => prefab.name == "VoiceTesting");
         PrefabPatch.prefabs = contentHandler.prefabs;
         harmony.PatchAll();
         UnityEngine.Debug.Log("StationeersPlayerCommunications Loaded with " + contentHandler.prefabs.Count + " prefab(s)");

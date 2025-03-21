@@ -17,7 +17,8 @@
         "Assembly-CSharp-firstpass.dll",
         "StationeersMods.Interface.dll",
         "0Harmony.dll",
-        "BepInEx.dll"
+        "BepInEx.dll",
+        "Facepunch.Steamworks.Win64.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
