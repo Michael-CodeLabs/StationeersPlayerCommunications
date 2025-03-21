@@ -57,6 +57,11 @@ namespace BrainClock.PlayerComms
             }
         }
 
+
+        [Header("Testing")]
+        public VoicePlayback playBack;
+
+
         // Start is called before the first frame update
         void Start()
         {
@@ -83,7 +88,7 @@ namespace BrainClock.PlayerComms
             if (EnableOnStart)
                 SteamUser.VoiceRecord = true;
 
-            Debug.Log($"VoiceRecorder.Awake({SteamUser.VoiceRecord})");
+            Debug.Log($"VoiceRecorder.Start({SteamUser.VoiceRecord})");
         }
 
         // Client call 
@@ -97,17 +102,24 @@ namespace BrainClock.PlayerComms
                 // Read as a compressed stream
                 int compressedRead = SteamUser.ReadVoiceData(voiceStream);
 
-                // convert to bytes
+                // convert to bytes and reset the buffer
                 voiceStream.Position = 0;
                 var bytes = new System.ArraySegment<byte>(voiceStream.GetBuffer(), 0, compressedRead);
-
                 Debug.Log($"Captured {bytes.Count} bytes from audio voice");
+
+                // Send to playback for testing
+                if (playBack != null)
+                    playBack.SendVoiceRecording(bytes.Array, compressedRead);
+
             }
             else
             {
                 Debug.Log("No voice data");
             }
         }
+
+
+
 
         public void OnDestroy()
         {

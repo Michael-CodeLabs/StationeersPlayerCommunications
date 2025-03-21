@@ -16,7 +16,7 @@ namespace BrainClock.PlayerComms
             if (VoiceTestPrefab != null)
             {
                 GameObject.Instantiate(VoiceTestPrefab, Vector3.zero, Quaternion.identity, __instance.transform);
-                Debug.Log("VoiceTestPrefab prefab spawned after ManagerAwake()");
+                Debug.Log("VoiceTestPrefab spawned after ManagerAwake()");
             }
             else
             {
