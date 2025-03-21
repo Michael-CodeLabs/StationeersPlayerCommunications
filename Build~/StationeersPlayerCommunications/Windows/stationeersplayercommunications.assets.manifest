@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 1194720838
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 9d99b701a8b6007148789e3f18bec170
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 8ad35f94749442f1a5eba92ec7579cfd
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 1200417347, guid: da8de3ecce08b7a469c6f2a86190a972, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/StationeersMods/Resources/ExportSettings.asset
+Dependencies: []
