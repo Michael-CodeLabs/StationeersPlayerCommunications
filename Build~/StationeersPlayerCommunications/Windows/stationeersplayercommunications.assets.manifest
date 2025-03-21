@@ -1,19 +1,26 @@
 ManifestFileVersion: 0
-CRC: 1194720838
+CRC: 717700846
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9d99b701a8b6007148789e3f18bec170
+    Hash: 5a788b413edf519a5ae3d6d497a33949
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 8ad35f94749442f1a5eba92ec7579cfd
+    Hash: 29f52df426339f8993dd7a988e41602f
 HashAppended: 0
 ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 1200417347, guid: da8de3ecce08b7a469c6f2a86190a972, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 09853e13a6428684c89d9a18dedef464, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/StationeersMods/Resources/ExportSettings.asset
+- Assets/Prefabs/VoiceTesting.prefab
 Dependencies: []

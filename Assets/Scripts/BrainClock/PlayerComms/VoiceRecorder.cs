@@ -82,10 +82,12 @@ namespace BrainClock.PlayerComms
             // Enable recording?
             if (EnableOnStart)
                 SteamUser.VoiceRecord = true;
+
+            Debug.Log($"VoiceRecorder.Awake({SteamUser.VoiceRecord})");
         }
 
         // Client call 
-        void Fixedupdate()
+        void FixedUpdate()
         {
             if (!SteamClient.IsValid)
                 return;
@@ -100,6 +102,10 @@ namespace BrainClock.PlayerComms
                 var bytes = new System.ArraySegment<byte>(voiceStream.GetBuffer(), 0, compressedRead);
 
                 Debug.Log($"Captured {bytes.Count} bytes from audio voice");
+            }
+            else
+            {
+                Debug.Log("No voice data");
             }
         }
 
