@@ -1,8 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Assets.Scripts;
+using Assets.Scripts.Inventory;
+using Assets.Scripts.Networking;
 using Steamworks;
 using UnityEngine;
+using UnityEngine.Networking;
 
 // Some code from https://github.com/Facepunch/Facepunch.Steamworks/issues/261
 
@@ -30,7 +34,7 @@ namespace BrainClock.PlayerComms
         // Is SteamClient ready
         public bool IsReady
         {
-            get 
+            get
             {
                 return SteamClient.IsValid;
             }
@@ -47,7 +51,7 @@ namespace BrainClock.PlayerComms
 
         public bool VoiceRecord
         {
-            get 
+            get
             {
                 return SteamUser.VoiceRecord;
             }
@@ -88,6 +92,9 @@ namespace BrainClock.PlayerComms
             if (EnableOnStart)
                 SteamUser.VoiceRecord = true;
 
+            // Adding custom message type
+            MessageFactoryInjector.InjectCustomMessageType(typeof(VoiceMessage));
+
             Debug.Log($"VoiceRecorder.Start({SteamUser.VoiceRecord})");
         }
 
@@ -111,6 +118,10 @@ namespace BrainClock.PlayerComms
                 if (playBack != null)
                     playBack.SendVoiceRecording(bytes.Array, compressedRead);
 
+                // Send audio only if we have a human character spawned                
+                if (NetworkManager.IsActive && InventoryManager.ParentHuman != null)
+                    OnVoiceRecording(bytes.Array, compressedRead);
+
             }
             else
             {
@@ -118,8 +129,23 @@ namespace BrainClock.PlayerComms
             }
         }
 
-
-
+        public void OnVoiceRecording(byte[] data, int Length)
+        {
+            VoiceMessage voiceMessage = new VoiceMessage();
+            long referenceId = InventoryManager.ParentHuman.ReferenceId;
+            voiceMessage.HumanId = InventoryManager.ParentHuman.ReferenceId;
+            voiceMessage.Length = Length;
+            voiceMessage.Message = data;
+            if (NetworkManager.IsClient)
+                NetworkClient.SendToServer<VoiceMessage>((MessageBase<VoiceMessage>)voiceMessage, NetworkChannel.GeneralTraffic);
+            else if (NetworkManager.IsServer)
+            {
+                voiceMessage.PrintDebug();
+                NetworkServer.SendToClients<VoiceMessage>((MessageBase<VoiceMessage>)voiceMessage, NetworkChannel.GeneralTraffic, -1L);
+            }
+            else
+                voiceMessage.PrintDebug();
+        }
 
         public void OnDestroy()
         {

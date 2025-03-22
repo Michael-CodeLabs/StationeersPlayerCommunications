@@ -71,6 +71,8 @@ namespace BrainClock.PlayerComms
             WriteToClip(outputBuffer, uncompressedWritten);
         }
 
+
+
         private void WriteToClip(byte[] uncompressed, int iSize)
         {
             for (int i = 0; i < iSize; i += 2)
