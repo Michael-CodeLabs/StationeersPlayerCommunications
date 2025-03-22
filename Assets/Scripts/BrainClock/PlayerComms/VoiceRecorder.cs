@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -27,6 +28,8 @@ namespace BrainClock.PlayerComms
         public bool EnableOnStart = true;
 
         public bool InitializeSteam = false;
+
+        public int ChunkSize = 512;
 
         [SerializeField]
         private bool _WasRecording;
@@ -120,7 +123,19 @@ namespace BrainClock.PlayerComms
 
                 // Send audio only if we have a human character spawned                
                 if (NetworkManager.IsActive && InventoryManager.ParentHuman != null)
-                    OnVoiceRecording(bytes.Array, compressedRead);
+                {
+                    int offset = 0;
+                    while (offset < compressedRead)
+                    {
+                        int bytesToSend = Math.Min(ChunkSize, compressedRead - offset);
+                        byte[] chunk = new byte[bytesToSend];
+                        Array.Copy(bytes.Array, offset, chunk, 0, bytesToSend);
+
+                        OnVoiceRecording(chunk, bytesToSend);
+                        offset += bytesToSend;
+                    }
+
+                }
 
             }
             else
