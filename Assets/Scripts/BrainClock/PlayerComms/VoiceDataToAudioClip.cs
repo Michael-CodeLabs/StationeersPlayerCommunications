@@ -36,6 +36,7 @@ namespace BrainClock.PlayerComms
 
             // Here optimalRate * 2 seems to be what fixes the playback issues
             audioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("External"));
+
             audioSource.clip = AudioClip.Create("HumanVoiceData", (int)optimalRate * 2, 1, (int)optimalRate, true, OnAudioRead, null);
             audioSource.loop = true;
             audioSource.Play();
