@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using Util;
 
 namespace BrainClock.PlayerComms
 {
@@ -48,8 +49,12 @@ namespace BrainClock.PlayerComms
             //audioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("Interface"));
             Debug.Log($"VoiceDataToAudioClip Started.");
 
+            staticAudioSource.GameAudioSource.SetSpatialBlend(1);
             staticAudioSource.GameAudioSource.ManageOcclusion(true);
             staticAudioSource.GameAudioSource.CalculateAndSetAtmosphericVolume(true);
+            staticAudioSource.GameAudioSource.SetEnabled(true);
+            staticAudioSource.SetEnable(true);
+            
 
             Debug.Log("GameAudioSource setup");
             Singleton<AudioManager>.Instance.AddPlayingAudioSource(staticAudioSource.GameAudioSource);
