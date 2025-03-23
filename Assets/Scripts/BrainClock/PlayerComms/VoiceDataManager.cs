@@ -54,7 +54,7 @@ namespace BrainClock.PlayerComms
             
             // Try to create the human audio source first
             // TODO: Move this to a human spawn event later.
-            if (source = null)
+            if (source == null)
             {
                 source = CreateHumanVoicePrefab(referenceId);
             }
