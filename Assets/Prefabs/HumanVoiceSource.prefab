@@ -219,3 +219,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 3238240743467812458}
+  IsReady: 0

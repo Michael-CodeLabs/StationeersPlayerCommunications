@@ -1,5 +1,6 @@
 using Assets.Scripts.Objects.Entities;
 using Assets.Scripts.Sound;
+using Audio;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,6 +91,7 @@ namespace BrainClock.PlayerComms
 
             StaticAudioSource staticAudioSource = go.GetComponent<StaticAudioSource>();
             staticAudioSource.GameAudioSource.CurrentMixerGroupNameHash = UnityEngine.Animator.StringToHash("External");
+            staticAudioSource.GameAudioSource.Init((IAudioParent) this);
 
             // Add to the sources list
             Debug.Log($"Adding HumanAudioSource for refId {referenceId}");
