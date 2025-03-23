@@ -21,6 +21,8 @@ namespace BrainClock.PlayerComms
         private int dataPosition;
         private int dataReceived;
 
+        public bool IsReady = false;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -41,12 +43,14 @@ namespace BrainClock.PlayerComms
             // Too Early to do it here for now, 
             //audioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("Interface"));
             Debug.Log($"VoiceDataToAudioClip Started.");
+
+            IsReady = true;
         }
 
         public void SendVoiceRecording(byte[] compressed, int length)
         {
             // Run once
-            if (audioSource == null)
+            if (audioSource == null || !IsReady)
                 return;
 
             Debug.Log($"VoiceDataToAudioClip Received {length} bytes");
