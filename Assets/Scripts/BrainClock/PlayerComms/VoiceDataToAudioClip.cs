@@ -1,4 +1,3 @@
-using Assets.Scripts.Objects.Entities;
 using Assets.Scripts.Sound;
 using Steamworks;
 using System.Collections;
@@ -8,11 +7,8 @@ using UnityEngine;
 
 namespace BrainClock.PlayerComms
 {
-    public class VoicePlayback : MonoBehaviour
+    public class VoiceDataToAudioClip : MonoBehaviour
     {
-
-        public static VoicePlayback Instance;
-
         public AudioSource audioSource;
 
         private MemoryStream uncompressedStream;
@@ -37,33 +33,23 @@ namespace BrainClock.PlayerComms
             audioclipBuffer = new float[audioclipBufferSize];
 
             // Here optimalRate * 2 seems to be what fixes the playback issues
-            audioSource.clip = AudioClip.Create("VoiceData", (int)optimalRate * 2, 1, (int)optimalRate, true, OnAudioRead, null);
+            audioSource.clip = AudioClip.Create("HumanVoiceData", (int)optimalRate * 2, 1, (int)optimalRate, true, OnAudioRead, null);
             audioSource.loop = true;
             audioSource.Play();
 
             // Attach to the right Audio mixer
             // Too Early to do it here for now, 
             //audioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("Interface"));
-
-            Instance = this;
-
-            Debug.Log($"VoicePlayback Started.");
+            Debug.Log($"VoiceDataToAudioClip Started.");
         }
 
         public void SendVoiceRecording(byte[] compressed, int length)
         {
             // Run once
-            if (audioSource.outputAudioMixerGroup == null)
-            {
-                if (AudioManager.Instance != null)
-                {
-                    audioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("Interface"));
-                    Debug.Log("Assigning Interface mixer");
-                }
-            }
+            if (audioSource == null)
+                return;
 
-
-            Debug.Log($"VoicePlayback Received {length} bytes");
+            Debug.Log($"VoiceDataToAudioClip Received {length} bytes");
             compressedStream.Position = 0;
             compressedStream.Write(compressed, 0, length);
             compressedStream.Position = 0;
@@ -75,8 +61,6 @@ namespace BrainClock.PlayerComms
             byte[] outputBuffer = uncompressedStream.GetBuffer();
             WriteToClip(outputBuffer, uncompressedWritten);
         }
-
-
 
         private void WriteToClip(byte[] uncompressed, int iSize)
         {
@@ -114,6 +98,12 @@ namespace BrainClock.PlayerComms
 
         }
 
-        
+
+        private void OnDestroy()
+        {
+            // If we are registered to the voicedatamanager, remove ourselfs from the list 
+            VoiceDataManager.Instance?.RemoveHumanAudioSource(this);
+        }
+
     }
 }

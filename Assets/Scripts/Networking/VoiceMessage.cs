@@ -33,7 +33,8 @@ namespace Assets.Scripts.Networking
                 if (Application.platform != RuntimePlatform.WindowsServer)
                 {
                     Debug.Log("+ Message bytes sent to playback (Not Dedicated Server)");
-                    VoicePlayback.Instance.SendVoiceRecording(Message, Length);
+                    //VoicePlayback.Instance.SendVoiceRecording(Message, Length);
+                    VoiceDataManager.Instance.SendVoiceRecording(HumanId, Message, Length);
                 }
             }
             else
@@ -50,7 +51,8 @@ namespace Assets.Scripts.Networking
                         else
                         {
                             Debug.Log("+ Message bytes sent to playback");
-                            VoicePlayback.Instance.SendVoiceRecording(Message, Length);
+                            //VoicePlayback.Instance.SendVoiceRecording(Message, Length);
+                            VoiceDataManager.Instance.SendVoiceRecording(HumanId, Message, Length);
                         }
 
                     }
@@ -60,11 +62,17 @@ namespace Assets.Scripts.Networking
                     Debug.Log("+ I'm not an this is the Client recieving voice from server");
                 }
             }
-                
-
 
             /*
-              
+            Debug.Log("start -----------");
+            foreach(Human human in Human.AllHumans)
+            {
+                Debug.Log($"* Human {human.name} {human.CustomName} {human.ReferenceId} at {human.Position} ");
+            }
+            Debug.Log("end -----------");
+            */
+
+            /*
              
              
             if (NetworkManager.IsServer)

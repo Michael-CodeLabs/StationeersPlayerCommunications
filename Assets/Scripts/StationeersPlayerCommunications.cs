@@ -23,6 +23,8 @@ public class StationeersPlayerCommunications : ModBehaviour
         
         Harmony harmony = new Harmony("StationeersPlayerCommunications");
 
+        VoiceDataManager.HumanVoicePrefab = contentHandler.prefabs.FirstOrDefault(prefab => prefab.name == "HumanVoiceSource");
+
         InventoryManagerPatch.VoiceTestPrefab = contentHandler.prefabs.FirstOrDefault(prefab => prefab.name == "VoiceTesting");
 
         PrefabPatch.prefabs = contentHandler.prefabs;

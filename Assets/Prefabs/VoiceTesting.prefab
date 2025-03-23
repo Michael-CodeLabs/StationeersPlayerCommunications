@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6027043505437286910}
   - component: {fileID: -3478487764067389962}
   - component: {fileID: -7399842429003376520}
+  - component: {fileID: -8330235879212432831}
   m_Layer: 0
   m_Name: VoiceTesting
   m_TagString: Untagged
@@ -48,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnableOnStart: 1
   InitializeSteam: 1
+  ChunkSize: 512
   _WasRecording: 0
   playBack: {fileID: -3478487764067389962}
 --- !u!114 &-3478487764067389962
@@ -57,7 +59,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2332494865836921329}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a7809caee4a1fa44b539b054a2d4548, type: 3}
   m_Name: 
@@ -159,3 +161,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-8330235879212432831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2332494865836921329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc6029c837721c45b05343960859ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
