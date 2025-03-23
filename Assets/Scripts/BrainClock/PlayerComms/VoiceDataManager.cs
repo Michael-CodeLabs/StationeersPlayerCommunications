@@ -91,8 +91,8 @@ namespace BrainClock.PlayerComms
 
             StaticAudioSource staticAudioSource = go.GetComponent<StaticAudioSource>();
             staticAudioSource.GameAudioSource.CurrentMixerGroupNameHash = UnityEngine.Animator.StringToHash("External");
-            staticAudioSource.Transform = this.transform.parent;
-            staticAudioSource.GameAudioSource.Init((IAudioParent) this.transform.parent);
+            //staticAudioSource.Transform = human.transform;
+            staticAudioSource.GameAudioSource.Init((IAudioParent)human.transform);
             
 
             // Add to the sources list
