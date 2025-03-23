@@ -30,6 +30,11 @@ namespace Assets.Scripts.Networking
                 Debug.Log("+ this is the Server recieving voice from client");
                 Debug.Log("+ this is the Server sending voice to clients");
                 this.SendToClients();
+                if (Application.platform != RuntimePlatform.WindowsServer)
+                {
+                    Debug.Log("+ Message bytes sent to playback (Not Dedicated Server)");
+                    VoicePlayback.Instance.SendVoiceRecording(Message, Length);
+                }
             }
             else
             {
