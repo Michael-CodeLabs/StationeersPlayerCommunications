@@ -42,19 +42,15 @@ namespace Assets.Scripts.Networking
                 if (NetworkManager.IsClient)
                 {
                     Debug.Log("+ this is the Client recieving voice from server");
-                    if (VoicePlayback.Instance)
+                    if (HumanId == InventoryManager.ParentHuman.ReferenceId)
                     {
-                        if (HumanId == InventoryManager.ParentHuman.ReferenceId)
-                        {
-                            Debug.Log("+ Ignoring own VoiceMessage");
-                        }
-                        else
-                        {
-                            Debug.Log("+ Message bytes sent to playback");
-                            //VoicePlayback.Instance.SendVoiceRecording(Message, Length);
-                            VoiceDataManager.Instance.SendVoiceRecording(HumanId, Message, Length);
-                        }
-
+                        Debug.Log("+ Ignoring own VoiceMessage");
+                    }
+                    else
+                    {
+                        Debug.Log("+ Message bytes sent to playback");
+                        //VoicePlayback.Instance.SendVoiceRecording(Message, Length);
+                        VoiceDataManager.Instance.SendVoiceRecording(HumanId, Message, Length);
                     }
                 }
                 else
