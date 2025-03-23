@@ -10,6 +10,8 @@ namespace BrainClock.PlayerComms
     public class VoicePlayback : MonoBehaviour
     {
 
+        public static VoicePlayback Instance;
+
         public AudioSource audioSource;
 
         private MemoryStream uncompressedStream;
@@ -41,6 +43,8 @@ namespace BrainClock.PlayerComms
             // Attach to the right Audio mixer
             // Too Early to do it here for now, 
             //audioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("Interface"));
+
+            Instance = this;
 
             Debug.Log($"VoicePlayback Started.");
         }

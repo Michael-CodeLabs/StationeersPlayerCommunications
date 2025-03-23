@@ -95,9 +95,6 @@ namespace BrainClock.PlayerComms
             if (EnableOnStart)
                 SteamUser.VoiceRecord = true;
 
-            // Adding custom message type
-            MessageFactoryInjector.InjectCustomMessageType(typeof(VoiceMessage));
-
             Debug.Log($"VoiceRecorder.Start({SteamUser.VoiceRecord})");
         }
 
@@ -118,8 +115,8 @@ namespace BrainClock.PlayerComms
                 Debug.Log($"Captured {bytes.Count} bytes from audio voice");
 
                 // Send to playback for testing
-                if (playBack != null)
-                    playBack.SendVoiceRecording(bytes.Array, compressedRead);
+                //if (playBack != null)
+                //    playBack.SendVoiceRecording(bytes.Array, compressedRead);
 
                 // Send audio only if we have a human character spawned                
                 if (NetworkManager.IsActive && InventoryManager.ParentHuman != null)
@@ -146,21 +143,26 @@ namespace BrainClock.PlayerComms
 
         public void OnVoiceRecording(byte[] data, int Length)
         {
+            Debug.Log($"Creating a VoiceMessage of {Length} bytes");
             VoiceMessage voiceMessage = new VoiceMessage();
-            long referenceId = InventoryManager.ParentHuman.ReferenceId;
             voiceMessage.HumanId = InventoryManager.ParentHuman.ReferenceId;
             voiceMessage.Length = Length;
             voiceMessage.Message = data;
+            //NetworkClient.SendToServer<VoiceMessage>((MessageBase<VoiceMessage>)voiceMessage, NetworkChannel.GeneralTraffic);
             if (NetworkManager.IsClient)
-                NetworkClient.SendToServer<VoiceMessage>((MessageBase<VoiceMessage>)voiceMessage, NetworkChannel.GeneralTraffic);
-            else if (NetworkManager.IsServer)
             {
-                voiceMessage.PrintDebug();
-                NetworkServer.SendToClients<VoiceMessage>((MessageBase<VoiceMessage>)voiceMessage, NetworkChannel.GeneralTraffic, -1L);
+                Debug.Log("Client sending message to server");
+                voiceMessage.SendToServer();
             }
-            else
-                voiceMessage.PrintDebug();
+            else {
+                if (!NetworkManager.IsServer)
+                    return;
+                Debug.Log("Server sending message to clients");
+                voiceMessage.SendToClients();
+                //NetworkServer.SendToClients<VoiceMessage>((MessageBase<VoiceMessage>)voiceMessage, NetworkChannel.GeneralTraffic, -1L);
+            }
         }
+
 
         public void OnDestroy()
         {
