@@ -219,4 +219,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 3238240743467812458}
+  staticAudioSource: {fileID: 826419822229028793}
   IsReady: 0

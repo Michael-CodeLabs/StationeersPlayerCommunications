@@ -1,4 +1,5 @@
 using Assets.Scripts.Sound;
+using Assets.Scripts.Util;
 using Steamworks;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace BrainClock.PlayerComms
     public class VoiceDataToAudioClip : MonoBehaviour
     {
         public AudioSource audioSource;
+        public StaticAudioSource staticAudioSource;
 
         private MemoryStream uncompressedStream;
         private MemoryStream compressedStream;
@@ -45,6 +47,16 @@ namespace BrainClock.PlayerComms
             // Too Early to do it here for now, 
             //audioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("Interface"));
             Debug.Log($"VoiceDataToAudioClip Started.");
+
+            staticAudioSource.GameAudioSource.ManageOcclusion(true);
+            staticAudioSource.GameAudioSource.CalculateAndSetAtmosphericVolume(true);
+
+            Debug.Log("GameAudioSource setup");
+            Singleton<AudioManager>.Instance.AddPlayingAudioSource(staticAudioSource.GameAudioSource);
+            //Singleton<AudioManager>.Instance.AddConcurrencySubscriptions(staticAudioSource.GameAudioSource);
+            Debug.Log("GameAudioSource added to AudioManager");
+
+
 
             IsReady = true;
         }
