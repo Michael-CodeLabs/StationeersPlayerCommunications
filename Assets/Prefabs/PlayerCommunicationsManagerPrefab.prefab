@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f566bc3550848d746afa0e715d4b9d95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  voiceRecorder: {fileID: 0}
-  audioStreamToAudioClipEntries:
-  - {fileID: 2254027799377473201}
+  voiceRecorder: {fileID: 1532860131109236498}
+  audioStreamReceiver: []
+  CaptureOnWorldStart: 1
 --- !u!114 &1532860131109236498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56,16 +56,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2254027799377473201}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f693e109811d8584dbc80219b425f617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioReceiver: {fileID: 0}
+  AudioReceiver: {fileID: 2254027799377473201}
   IsReady: 0
-  MinimumBuffer: 0
-  MaximumBuffer: 2147483647
-  voiceCaptureMode: 1
+  voiceCaptureMode: 0
   UseStream: 0
 --- !u!114 &431182552646830928
 MonoBehaviour:
@@ -79,3 +77,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17fba10354672b849ae92d505cd9c47c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MinimumMessageSize: 1
+  MaximumMessageSize: 1000

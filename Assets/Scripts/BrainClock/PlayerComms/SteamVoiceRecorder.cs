@@ -24,12 +24,7 @@ namespace BrainClock.PlayerComms
         private IAudioStreamReceiver audioStreamReceiver;
 
         public bool IsReady = false;
-
-        [Tooltip("Minimum buffer size before sending the capture audio stream")]
-        public int MinimumBuffer;
-
-        [Tooltip("Maximum buffer size of audio capture to transmit")]
-        public int MaximumBuffer = int.MaxValue;
+        private bool VoiceRecordEnabled = false;
 
         // Stream to store the audio data
         [Tooltip("Audio capture method")]
@@ -56,6 +51,22 @@ namespace BrainClock.PlayerComms
             IsReady = true;
         }
 
+        public void Initialize(bool startVoiceCapture)
+        {
+            // Create a new Stream for voice capture
+            voiceStream = new MemoryStream();
+
+            VoiceRecordEnabled = startVoiceCapture;
+            SteamUser.VoiceRecord = VoiceRecordEnabled;
+        }
+        public void Shutdown()
+        {
+            SteamUser.VoiceRecord = false;
+            voiceStream = null;
+        }
+
+
+
         private void FixedUpdate()
         {
             if (voiceCaptureMode == VoiceCaptureMode.FixedUpdate)
@@ -66,7 +77,7 @@ namespace BrainClock.PlayerComms
 
         public void ProcessCapture()
         {
-            if (!IsReady || voiceStream == null || audioStreamReceiver == null)
+            if (!IsReady || !VoiceRecordEnabled || voiceStream == null || audioStreamReceiver == null)
                 return;
 
             int compressedRead = SteamUser.ReadVoiceData(voiceStream);

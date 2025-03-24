@@ -17,6 +17,19 @@ namespace Assets.Scripts.Networking
 
         public byte[] Message { get; set; }
 
+        public float VolumeMultiplier { get; set; }
+
+        public bool HasHelmet { get; set; }
+
+        public VoiceMessage() { }
+
+        public VoiceMessage(long referenceId, byte[] Message, int Length, float VolumeMultiplier, bool HasHelmet) {
+            this.HumanId = referenceId;
+            this.Length = Length;
+            this.Message = Message;
+            this.VolumeMultiplier = VolumeMultiplier;
+            this.HasHelmet = HasHelmet;
+        }
 
         public override void Process(long hostId)
         {
@@ -30,6 +43,18 @@ namespace Assets.Scripts.Networking
                 Debug.Log("+ this is the Server recieving voice from client");
                 Debug.Log("+ this is the Server sending voice to clients");
                 this.SendToClients();
+                /*
+                foreach (Human human in Human.AllHumans)
+                {
+                    if (human.ReferenceId == HumanId)
+                    {
+                        Debug.Log($"* Human {human.name} {human.CustomName} {human.ReferenceId}");
+                        Debug.Log($"* helmet closed {(human.HasInternals && human.InternalsOn)}");
+                        Debug.Log($"* breathing world {(human.WorldAtmosphere == human.BreathingAtmosphere)}");
+                    }
+                }
+                */
+
                 if (Application.platform != RuntimePlatform.WindowsServer)
                 {
                     Debug.Log("+ Message bytes sent to playback (Not Dedicated Server)");
@@ -86,6 +111,8 @@ namespace Assets.Scripts.Networking
         public override void Deserialize(RocketBinaryReader reader)
         {
             this.HumanId = reader.ReadInt64();
+            this.VolumeMultiplier = reader.ReadFloatHalf();
+            this.HasHelmet = reader.ReadBoolean();
             this.Length = reader.ReadInt32();
             this.Message = reader.ReadBytes(Length);
         }
@@ -93,6 +120,8 @@ namespace Assets.Scripts.Networking
         public override void Serialize(RocketBinaryWriter writer)
         {
             writer.WriteInt64(this.HumanId);
+            writer.WriteFloatHalf(this.VolumeMultiplier);
+            writer.WriteBoolean(this.HasHelmet);
             writer.WriteInt32(this.Length);
             writer.WriteBytes(this.Message);
         }

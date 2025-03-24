@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2947459597
+CRC: 4127244643
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -7,5 +7,4 @@ AssetBundleManifest:
       Dependencies: {}
     Info_1:
       Name: stationeersplayercommunications.scenes
-      Dependencies:
-        Dependency_0: stationeersplayercommunications.assets
+      Dependencies: {}

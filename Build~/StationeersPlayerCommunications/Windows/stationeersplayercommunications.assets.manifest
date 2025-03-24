@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1732994354
+CRC: 4212296387
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b39bd869e0874937bfb4bce69d831b66
+    Hash: 39e0b698da5fad1e95aad8ecf2ba58b9
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 2367e5cfa33cf6f6d4930c2852e146b6
+    Hash: db22a6ed0ec88243d82aa0e5b54b0596
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -16,17 +16,23 @@ ClassTypes:
 - Class: 82
   Script: {instanceID: 0}
 - Class: 114
+  Script: {fileID: 11500000, guid: 17fba10354672b849ae92d505cd9c47c, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 09853e13a6428684c89d9a18dedef464, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 904f000e584d10244a182b6010988810, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f693e109811d8584dbc80219b425f617, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2dc6029c837721c45b05343960859ba3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 45cf1414de15984409d7dc31152a69c5, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 6a7809caee4a1fa44b539b054a2d4548, type: 3}
 - Class: 114
   Script: {fileID: 1200417347, guid: da8de3ecce08b7a469c6f2a86190a972, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 904f000e584d10244a182b6010988810, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 45cf1414de15984409d7dc31152a69c5, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 2dc6029c837721c45b05343960859ba3, type: 3}
+  Script: {fileID: 11500000, guid: f566bc3550848d746afa0e715d4b9d95, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers:
@@ -35,5 +41,6 @@ SerializeReferenceClassIdentifiers:
 Assets:
 - Assets/StationeersMods/Resources/ExportSettings.asset
 - Assets/Prefabs/HumanVoiceSource.prefab
+- Assets/Prefabs/PlayerCommunicationsManagerPrefab.prefab
 - Assets/Prefabs/VoiceTesting.prefab
 Dependencies: []

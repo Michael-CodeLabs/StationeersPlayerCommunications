@@ -25,7 +25,8 @@ public class StationeersPlayerCommunications : ModBehaviour
 
         VoiceDataManager.HumanVoicePrefab = contentHandler.prefabs.FirstOrDefault(prefab => prefab.name == "HumanVoiceSource");
 
-        InventoryManagerPatch.VoiceTestPrefab = contentHandler.prefabs.FirstOrDefault(prefab => prefab.name == "VoiceTesting");
+        //InventoryManagerPatch.VoiceTestPrefab = contentHandler.prefabs.FirstOrDefault(prefab => prefab.name == "VoiceTesting");
+        InventoryManagerPatch.PlayerCommunicationsManagerPrefab = contentHandler.prefabs.FirstOrDefault(prefab => prefab.name == "PlayerCommunicationsManagerPrefab");
 
         PrefabPatch.prefabs = contentHandler.prefabs;
         harmony.PatchAll();
