@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3229920105
+CRC: 1675239463
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 804d8ea8f1a14dcc11c857f95d2c5806
+    Hash: dbd274bfac30516d837eac7995d53228
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 5a53e622d0b2f3561dab024a01f6d3b0
+    Hash: 7cf11c1252755614dacf7d1883d0a633
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -23,11 +23,21 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 81
   Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
 - Class: 89
   Script: {instanceID: 0}
 - Class: 104
   Script: {instanceID: 0}
 - Class: 108
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 09853e13a6428684c89d9a18dedef464, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6a7809caee4a1fa44b539b054a2d4548, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2dc6029c837721c45b05343960859ba3, type: 3}
+- Class: 115
   Script: {instanceID: 0}
 - Class: 157
   Script: {instanceID: 0}
@@ -36,4 +46,5 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Scenes/StationeersPlayerCommunicationsScene.unity
-Dependencies: []
+Dependencies:
+- F:/Unity/StationeersPlayerCommunications/Temp/StationeersPlayerCommunications/Windows/stationeersplayercommunications.assets
