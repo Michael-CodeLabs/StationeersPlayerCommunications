@@ -7,7 +7,7 @@ namespace BrainClock.PlayerComms
 {
     public interface IAudioStreamReceiver
     {
-        void RecieveAudioStreamData(byte[] data, int length);
+        void ReceiveAudioStreamData(byte[] data, int length);
 
         void ReceiveAudioStreamData(MemoryStream stream, int length);
     }

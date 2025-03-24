@@ -80,7 +80,7 @@ namespace BrainClock.PlayerComms
                 {
                     var bytes = new System.ArraySegment<byte>(voiceStream.GetBuffer(), 0, compressedRead);
                     if (audioStreamReceiver != null)
-                        audioStreamReceiver.RecieveAudioStreamData(bytes.Array, compressedRead);
+                        audioStreamReceiver.ReceiveAudioStreamData(bytes.Array, compressedRead);
                 }
 
             }

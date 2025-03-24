@@ -51,7 +51,7 @@ namespace BrainClock.PlayerComms
         /// </summary>
         /// <param name="data"></param>
         /// <param name="length"></param>
-        public void RecieveAudioStreamData(byte[] data, int length)
+        public void ReceiveAudioStreamData(byte[] data, int length)
         {
             if (data == null || length == 0)
                 return;
