@@ -28,8 +28,22 @@ namespace BrainClock.PlayerComms
         // Start is called before the first frame update
         void Start()
         {
+
+            // Attach to the right Audio mixer
+            // Too Early to do it here for now, 
+            //audioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("Interface"));
+
+            Instance = this;
+            //Initialize();
+
+            Debug.Log($"VoicePlayback Started.");
+        }
+
+        public void Initialize()
+        {
             uncompressedStream = new MemoryStream();
             compressedStream = new MemoryStream();
+
 
             int optimalRate = (int)SteamUser.OptimalSampleRate;
 
@@ -41,13 +55,7 @@ namespace BrainClock.PlayerComms
             audioSource.loop = true;
             audioSource.Play();
 
-            // Attach to the right Audio mixer
-            // Too Early to do it here for now, 
-            //audioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("Interface"));
 
-            Instance = this;
-
-            Debug.Log($"VoicePlayback Started.");
         }
 
         public void SendVoiceRecording(byte[] compressed, int length)

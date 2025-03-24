@@ -8,6 +8,7 @@ using Assets.Scripts.Networking;
 using Steamworks;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.XR;
 
 // Some code from https://github.com/Facepunch/Facepunch.Steamworks/issues/261
 
@@ -78,6 +79,7 @@ namespace BrainClock.PlayerComms
                 {
                     // Make sure Steam is intialized to operate Asynchronously
                     SteamClient.Init(AppId, true);
+                    Debug.Log("SteamAPI initialized");
                 }
                 else
                 {
@@ -90,6 +92,11 @@ namespace BrainClock.PlayerComms
             _WasRecording = SteamUser.VoiceRecord;
 
             voiceStream = new MemoryStream();
+
+            // Send to playback for testing
+            if (playBack != null)
+                playBack.Initialize();
+
 
             // Enable recording?
             if (EnableOnStart)
@@ -115,8 +122,8 @@ namespace BrainClock.PlayerComms
                 Debug.Log($"Captured {bytes.Count} bytes from audio voice");
 
                 // Send to playback for testing
-                //if (playBack != null)
-                //    playBack.SendVoiceRecording(bytes.Array, compressedRead);
+                if (playBack != null)
+                    playBack.SendVoiceRecording(bytes.Array, compressedRead);
 
                 // Send audio only if we have a human character spawned                
                 if (NetworkManager.IsActive && InventoryManager.ParentHuman != null)
