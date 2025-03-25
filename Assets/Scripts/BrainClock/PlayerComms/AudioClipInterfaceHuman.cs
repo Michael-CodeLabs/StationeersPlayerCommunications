@@ -115,7 +115,15 @@ namespace BrainClock.PlayerComms
 
             // If we can hear our own audio, we need to give it our own Human referenceId
             if (InventoryManager.ParentHuman)
+            {
+                if (referenceId == InventoryManager.ParentHuman.ReferenceId)
+                {
+                    Debug.Log("Received Audio for unknown referenceId, ignoring");
+                    return;
+                }
+                // Otherwise assign the audio as our 
                 referenceId = (referenceId < 1 && HearOwnAudio) ? InventoryManager.ParentHuman.ReferenceId : referenceId;
+            }
 
             if (referenceId < 1)
             {

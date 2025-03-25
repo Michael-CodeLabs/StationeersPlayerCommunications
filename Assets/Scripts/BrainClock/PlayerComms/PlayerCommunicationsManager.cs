@@ -88,11 +88,13 @@ namespace BrainClock.PlayerComms
                 float volume = 1;
                 int flags = 0;
                 if (InventoryManager.ParentHuman)
+                {
                     if (InventoryManager.ParentHuman.HasInternals && InventoryManager.ParentHuman.InternalsOn)
                     {
-                        volume = 0.7f;
+                        volume = 0.8f;
                         flags = 1;
                     }
+                }
                 audioDataReceiver.ReceiveAudioData(-1, data, length, volume, flags);
             }
         }

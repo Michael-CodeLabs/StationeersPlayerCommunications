@@ -32,10 +32,8 @@ namespace BrainClock.PlayerComms
     {
         private IAudioStreamReceiver[] audioStreamReceivers = new IAudioStreamReceiver[0];
 
-        private float volume = 0.123f;
-        private int flags = -1;
-
-        public List<MonoBehaviour> monoBehaviours = new List<MonoBehaviour>();
+        private float volume = 0;
+        private int flags = 0;
 
         public void ReceiveAudioData(long referenceId, byte[] data, int length, float volume, int flags)
         {

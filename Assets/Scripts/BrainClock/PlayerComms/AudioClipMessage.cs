@@ -59,7 +59,8 @@ namespace BrainClock.PlayerComms
                 Debug.Log("+ re-sending AudioClip to clients now");
                 //TODO send to all clients except the origin (to save bandwith).
                 this.SendToClients();
-                //TODO Send to the manager if it is not our audio.
+                if (Application.platform != RuntimePlatform.WindowsServer)
+                    SendAudioDataToManager();
             }
 
             // Note, we are getting audio from everyone, including ourselves
