@@ -238,7 +238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!169 &217996034
 AudioLowPassFilter:
   m_ObjectHideFlags: 0
@@ -386,12 +386,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f693e109811d8584dbc80219b425f617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioReceiver: {fileID: 217996033}
+  AudioReceiver: {fileID: 0}
   IsReady: 0
-  MinimumBuffer: 0
-  MaximumBuffer: 2147483647
   voiceCaptureMode: 0
-  UseStream: 1
+  UseStream: 0
 --- !u!114 &217996040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,7 +450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &327050126
 Transform:
   m_ObjectHideFlags: 0
@@ -480,12 +478,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f693e109811d8584dbc80219b425f617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioReceiver: {fileID: 327050121}
+  AudioReceiver: {fileID: 0}
   IsReady: 0
-  MinimumBuffer: 0
-  MaximumBuffer: 2147483647
   voiceCaptureMode: 0
-  UseStream: 1
+  UseStream: 0
 --- !u!82 &327050128
 AudioSource:
   m_ObjectHideFlags: 0

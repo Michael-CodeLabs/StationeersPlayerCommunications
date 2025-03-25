@@ -29,9 +29,17 @@ namespace BrainClock.PlayerComms
                 SteamVoiceRecorder.enabled = true;
                 AudioStreamToAudioClip.enabled = true;
 
+                SteamVoiceRecorder.Initialize(true);
+
                 // Enable audio recording
                 SteamUser.VoiceRecord = true;
             }
+        }
+
+        private void OnDestroy()
+        {
+            SteamUser.VoiceRecord = false;
+            SteamClient.Shutdown();
         }
 
     }
