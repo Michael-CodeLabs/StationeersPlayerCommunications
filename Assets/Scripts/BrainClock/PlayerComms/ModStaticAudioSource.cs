@@ -5,6 +5,7 @@ using Audio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 namespace BrainClock.PlayerComms
 {
@@ -65,13 +66,25 @@ namespace BrainClock.PlayerComms
         private void Start()
         {
             Debug.Log("ModStaticAudioSource.Start()");
-            //GameAudioSource.Init((IAudioParent)transform.parent);
-            GameAudioSource.Init((IAudioParent)null);
+            try
+            {
+                GameAudioSource.Init((IAudioParent)transform.parent);
+            }
+            catch
+            {
+                Debug.Log("GameAudioSource.Init failed");
+            }
+
+            GameAudioSource.AudioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("External"));
+
+            //GameAudioSource.Init((IAudioParent)null);
+
             GameAudioSource.CurrentMixerGroupNameHash = UnityEngine.Animator.StringToHash("External");
             GameAudioSource.SetSpatialBlend(1);
             GameAudioSource.ManageOcclusion(true);
             GameAudioSource.CalculateAndSetAtmosphericVolume(true);
             GameAudioSource.SetEnabled(true);
+            this.SetEnable(true);
             
             Debug.Log("GameAudioSource setup");
             Singleton<AudioManager>.Instance.AddPlayingAudioSource(GameAudioSource);

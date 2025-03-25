@@ -57,7 +57,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 30
+  MaxDistance: 20
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -92,7 +92,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904f000e584d10244a182b6010988810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameObject: {fileID: 0}
+  GameObject: {fileID: 8517613730600658599}
   Transform: {fileID: 2830203303106531276}
   GameAudioSource:
     Name: HumanVoice
@@ -208,8 +208,6 @@ MonoBehaviour:
     ExternalMixerGroupHash: -1591426066
     VacuumMixerGroupHash: -710576460
     OccludedMixerGroupHash: -1140213991
-  monoBehaviours:
-  - {fileID: 0}
 --- !u!114 &8520541031216260294
 MonoBehaviour:
   m_ObjectHideFlags: 0
