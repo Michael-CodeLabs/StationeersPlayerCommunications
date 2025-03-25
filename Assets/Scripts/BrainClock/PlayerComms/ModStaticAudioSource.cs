@@ -2,6 +2,7 @@ using Assets.Scripts.Objects.Entities;
 using Assets.Scripts.Sound;
 using Assets.Scripts.Util;
 using Audio;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -68,16 +69,16 @@ namespace BrainClock.PlayerComms
             Debug.Log("ModStaticAudioSource.Start()");
             try
             {
-                GameAudioSource.Init((IAudioParent)transform.parent);
+                Debug.Log($"transform.parent {transform.parent}");
+                IAudioParent audioparent = transform.parent.GetComponent<Human>() as IAudioParent;
+                GameAudioSource.Init((IAudioParent)audioparent);
             }
-            catch
+            catch (Exception ex)
             {
-                Debug.Log("GameAudioSource.Init failed");
+                Debug.Log("GameAudioSource.Init failed " + ex.ToString());
             }
 
             GameAudioSource.AudioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("External"));
-
-            //GameAudioSource.Init((IAudioParent)null);
 
             GameAudioSource.CurrentMixerGroupNameHash = UnityEngine.Animator.StringToHash("External");
             GameAudioSource.SetSpatialBlend(1);
