@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2965906715786255748}
   - component: {fileID: 1532860131109236498}
   - component: {fileID: 431182552646830928}
+  - component: {fileID: 2830797067383826387}
   m_Layer: 0
   m_Name: PlayerCommunicationsManagerPrefab
   m_TagString: Untagged
@@ -47,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voiceRecorder: {fileID: 1532860131109236498}
-  audioStreamReceiver: []
+  networkStreamReceiver: {fileID: 2830797067383826387}
   CaptureOnWorldStart: 1
 --- !u!114 &1532860131109236498
 MonoBehaviour:
@@ -79,3 +80,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinimumMessageSize: 1
   MaximumMessageSize: 1000
+--- !u!114 &2830797067383826387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2254027799377473201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c6e33b04fe28624c9be1681f4e3d126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReceiveOwnAudio: 1

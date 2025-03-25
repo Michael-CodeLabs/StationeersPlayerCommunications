@@ -59,7 +59,9 @@ namespace Assets.Scripts.Networking
                 {
                     Debug.Log("+ Message bytes sent to playback (Not Dedicated Server)");
                     //VoicePlayback.Instance.SendVoiceRecording(Message, Length);
-                    VoiceDataManager.Instance.SendVoiceRecording(HumanId, Message, Length);
+                    //VoiceDataManager.Instance.SendVoiceRecording(HumanId, Message, Length);
+                    if (PlayerCommunicationsManager.Instance?.networkStreamReceiver != null)
+                        PlayerCommunicationsManager.Instance?.networkStreamReceiver.ReceiveVoiceRecording(HumanId, Message, Length, VolumeMultiplier, HasHelmet);
                 }
             }
             else
@@ -67,7 +69,7 @@ namespace Assets.Scripts.Networking
                 if (NetworkManager.IsClient)
                 {
                     Debug.Log("+ this is the Client recieving voice from server");
-                    if (HumanId == InventoryManager.ParentHuman.ReferenceId)
+                    if (HumanId == InventoryManager.ParentHuman.ReferenceId && PlayerCommunicationsManager.Instance?.networkStreamReceiver?.ReceiveOwnAudio != true)
                     {
                         Debug.Log("+ Ignoring own VoiceMessage");
                     }
@@ -75,7 +77,9 @@ namespace Assets.Scripts.Networking
                     {
                         Debug.Log("+ Message bytes sent to playback");
                         //VoicePlayback.Instance.SendVoiceRecording(Message, Length);
-                        VoiceDataManager.Instance.SendVoiceRecording(HumanId, Message, Length);
+                        //VoiceDataManager.Instance.SendVoiceRecording(HumanId, Message, Length);
+                        if (PlayerCommunicationsManager.Instance?.networkStreamReceiver != null)
+                            PlayerCommunicationsManager.Instance.networkStreamReceiver.ReceiveVoiceRecording(HumanId, Message, Length, VolumeMultiplier, HasHelmet);
                     }
                 }
                 else
@@ -83,29 +87,6 @@ namespace Assets.Scripts.Networking
                     Debug.Log("+ I'm not an this is the Client recieving voice from server");
                 }
             }
-
-            /*
-            Debug.Log("start -----------");
-            foreach(Human human in Human.AllHumans)
-            {
-                Debug.Log($"* Human {human.name} {human.CustomName} {human.ReferenceId} at {human.Position} ");
-            }
-            Debug.Log("end -----------");
-            */
-
-            /*
-             
-             
-            if (NetworkManager.IsServer)
-                NetworkServer.SendToClients<VoiceMessage>((MessageBase<VoiceMessage>)this, NetworkChannel.GeneralTraffic, -1L);
-
-            Human human = Assets.Scripts.Objects.Thing.Find<Human>(this.HumanId);
-            if (!(bool)((UnityEngine.Object)human) || !(bool)((UnityEngine.Object)InventoryManager.Parent) || InventoryManager.Parent.ReferenceId == this.HumanId)
-                return;
-
-            // If not us, then send the audio?
-            //human.SendAudioData(this audio data);
-            */
         }
 
         public override void Deserialize(RocketBinaryReader reader)

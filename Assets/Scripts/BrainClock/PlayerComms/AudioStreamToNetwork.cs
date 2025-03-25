@@ -20,7 +20,7 @@ namespace BrainClock.PlayerComms
     public class AudioStreamToNetwork : MonoBehaviour, IAudioStreamReceiver
     {
         private Queue<byte> _audioBuffer;
-
+        [Header("Network Packet")]
         [Tooltip("Minimum buffer size before sending the capture audio stream")]
         public int MinimumMessageSize = 1;
 

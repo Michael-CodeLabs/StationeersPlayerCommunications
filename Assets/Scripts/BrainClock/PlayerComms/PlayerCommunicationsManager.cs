@@ -14,15 +14,29 @@ namespace BrainClock.PlayerComms
     /// <summary>
     /// We are only using the Singleton of the ManagerBase
     /// </summary>
-    public class PlayerCommunicationsManager : MonoBehaviour //: Singleton<PlayerCommunicationsManager>
+    public class PlayerCommunicationsManager : MonoBehaviour
     {
         public SteamVoiceRecorder voiceRecorder;
-        public List<GameObject> audioStreamReceiver = new List<GameObject>();
+        public NetworkToAudioStream networkStreamReceiver;
 
         public bool CaptureOnWorldStart = true;
 
         // Stationeers AppId
         private uint AppId = 544550U;
+
+        public static PlayerCommunicationsManager Instance;
+
+        [Header("Spawning Prefabs")]
+        public GameObject HumanVoicePrefab;
+        public GameObject RadioPrefab;
+
+        private void Awake()
+        {
+            // Initialize Instance
+            Instance = this;
+
+            //GameManager.OnGameStateChange += new GameManager.Event(NetworkManager.GameManagerOnOnGameStateChange);
+        }
 
         // Start is called before the first frame update
         void Start()
