@@ -1,22 +1,36 @@
 ManifestFileVersion: 0
-CRC: 1737986447
+CRC: 2238989990
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ef3c07cc08ea46bf7702d93eac51262b
+    Hash: e3dcab2c881d82ad3d967bfa033ba1db
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 4f9aa7237932a63d045c38c0caa7b6b8
+    Hash: 2e386cccc33634a90267de1eeb7e111c
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
 - Class: 4
   Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 54
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
 - Class: 82
   Script: {instanceID: 0}
-- Class: 114
-  Script: {fileID: 11500000, guid: 17fba10354672b849ae92d505cd9c47c, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 09853e13a6428684c89d9a18dedef464, type: 3}
 - Class: 114
@@ -26,6 +40,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 2dc6029c837721c45b05343960859ba3, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 80c2b0bd94ed745439100ce30c89eb08, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 45cf1414de15984409d7dc31152a69c5, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 6a7809caee4a1fa44b539b054a2d4548, type: 3}
@@ -34,14 +50,132 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: f566bc3550848d746afa0e715d4b9d95, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 17fba10354672b849ae92d505cd9c47c, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 7c6e33b04fe28624c9be1681f4e3d126, type: 3}
 - Class: 115
   Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers:
 - AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.GridSystem.Grid3
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.ColorSwatch
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.IndestructableDamageState
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.Interactable
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.Item/DecayMixture
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.Slot
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.ToolUse
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Sound.GameAudioClipsData
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Sound.GameAudioEvent
+- AssemblyName: Assembly-CSharp
   ClassName: Assets.Scripts.Sound.GameAudioSource
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Sound.SoundEffectCondition
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Alcohol
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Astroloy
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Biomass
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Carbon
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Cobalt
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Cocoa
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.ColorBlue
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.ColorGreen
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.ColorOrange
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.ColorRed
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.ColorYellow
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Constantan
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Copper
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Corn
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Egg
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Electrum
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Fenoxitone
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Flour
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Gold
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Hastelloy
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Hydrocarbon
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Inconel
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Invar
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Iron
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Lead
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Milk
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Mushroom
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Nickel
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Oil
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Plastic
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Potato
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Pumpkin
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.ReagentMixture
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Rice
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.SalicylicAcid
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Silicon
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Silver
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Solder
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Soy
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Steel
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Stellite
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Sugar
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Tomato
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Uranium
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Waspaloy
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Wheat
 Assets:
+- Assets/Prefabs/Radio.prefab
 - Assets/StationeersMods/Resources/ExportSettings.asset
+- Assets/Prefabs/RadioBlueprint.prefab
 - Assets/Prefabs/HumanVoiceSource.prefab
 - Assets/Prefabs/PlayerCommunicationsManagerPrefab.prefab
 - Assets/Prefabs/VoiceTesting.prefab

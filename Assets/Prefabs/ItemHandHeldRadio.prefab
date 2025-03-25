@@ -1,0 +1,687 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4135681439915110508
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Name
+      value: RadioBody
+      objectReference: {fileID: 0}
+    - target: {fileID: -7640558969779515294, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Name
+      value: Clip
+      objectReference: {fileID: 0}
+    - target: {fileID: -7146521406498821007, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Name
+      value: PTT
+      objectReference: {fileID: 0}
+    - target: {fileID: -6093592463355912122, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1fff9aa1d0c0ae947b5e5bc588def591, type: 2}
+    - target: {fileID: -4683669308469848369, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1fff9aa1d0c0ae947b5e5bc588def591, type: 2}
+    - target: {fileID: -1806680513116206669, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1fff9aa1d0c0ae947b5e5bc588def591, type: 2}
+    - target: {fileID: -1647091994730602164, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cab5615c3f50a146996353e7a9098fe, type: 2}
+    - target: {fileID: -1599826595754709761, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Name
+      value: BatteryCover
+      objectReference: {fileID: 0}
+    - target: {fileID: -1461304994638716399, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1fff9aa1d0c0ae947b5e5bc588def591, type: 2}
+    - target: {fileID: -1120989108687609925, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cab5615c3f50a146996353e7a9098fe, type: 2}
+    - target: {fileID: -804731622281664130, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cab5615c3f50a146996353e7a9098fe, type: 2}
+    - target: {fileID: -678588488315902003, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1fff9aa1d0c0ae947b5e5bc588def591, type: 2}
+    - target: {fileID: -678588488315902003, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1fff9aa1d0c0ae947b5e5bc588def591, type: 2}
+    - target: {fileID: -516098083770646512, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Name
+      value: Antenna
+      objectReference: {fileID: 0}
+    - target: {fileID: -466329591000292508, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Name
+      value: BatteryPins
+      objectReference: {fileID: 0}
+    - target: {fileID: -208595431880416365, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Name
+      value: ChannelButtons
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Name
+      value: ItemHandHeldRadio
+      objectReference: {fileID: 0}
+    - target: {fileID: 5236874837855961770, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cab5615c3f50a146996353e7a9098fe, type: 2}
+    - target: {fileID: 6745302439343835087, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 751b006cfe1dae2469228de92dd461d0, type: 2}
+    - target: {fileID: 8416272007918961125, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Name
+      value: VolumeKnob
+      objectReference: {fileID: 0}
+    - target: {fileID: 8821623529969584324, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      propertyPath: m_Name
+      value: BatterySlot
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2542759562956966129}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1261113534353122108}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5106868535559107707}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1234956907775456177}
+    - targetCorrespondingSourceObject: {fileID: 8821623529969584324, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7242052368144721964}
+  m_SourcePrefab: {fileID: 100100000, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+--- !u!1 &3865651481132518717 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+  m_PrefabInstance: {fileID: 4135681439915110508}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &2542759562956966129
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3865651481132518717}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1261113534353122108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3865651481132518717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c2b0bd94ed745439100ce30c89eb08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _referenceId: 0
+  _dlcType: 0
+  switchOnOff: {fileID: 0}
+  activateButton: {fileID: 0}
+  leverAnimationComponent: {fileID: 0}
+  SuppressSound: 1
+  Forward: {x: 0, y: 0, z: 0}
+  HideInStationpedia: 0
+  CurrentPingMesh: {fileID: 0}
+  IsEmergency: 0
+  PrefabName: ItemHandHeldRadio
+  PrefabHash: -6932594
+  ThingTransform: {fileID: 4534664296439584647}
+  Slots:
+  - StringKey: Battery
+    StringHash: 529780018
+    Type: 14
+    SpecificTypePrefabHash: -1
+    NewType1: 0
+    NewType2: 0
+    Location: {fileID: 4534664296439584647}
+    Parent: {fileID: 1261113534353122108}
+    EntityControlMode: 0
+    UseInternalAtmosphere: 0
+    RealWorldScale: 1
+    ScaleMultiplier: 0
+    OccupantCastsShadows: 0
+    HidesOccupant: 0
+    IsHiddenInSeat: 0
+    IsInteractable: 1
+    IsSwappable: 1
+    AllowDragging: 0
+    IsLocked: 0
+    Action: 0
+    Collider: {fileID: 7242052368144721964}
+    Size: {x: 0, y: 0, z: 0}
+  Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  SurfaceArea: 0
+  SurfaceAreaScale: 1
+  BoundsOffset: {x: 0, y: 0, z: 0}
+  IgnoreSave: 0
+  generateTerrain: 1
+  WillSave: 1
+  Rotation: {x: 0, y: 0, z: 0, w: 0}
+  CanFrustumCull: 0
+  ThermodynamicsScale: 0.1
+  SolarHeatingScale: 0.1
+  WeatherDamageScale: 1
+  shatterTemperature: 1
+  flashpointTemperature: -1
+  autoignitionTemperature: -1
+  BurnTime: 5
+  ThingHealth: 100
+  EnergyReleasedWhenBurned: 100000
+  _customName: 
+  OwnerClientId: 0
+  PaintableMaterial: {fileID: 2100000, guid: 1fff9aa1d0c0ae947b5e5bc588def591, type: 2}
+  CustomColor:
+    Name: 
+    Bit: 0
+    StringKey: 0
+    Normal: {fileID: 0}
+    Emissive: {fileID: 0}
+    Cutable: {fileID: 0}
+    Light: {r: 1, g: 1, b: 1, a: 1}
+    Color: {r: 1, g: 1, b: 1, a: 1}
+  Interactables: []
+  AudioEvents: []
+  AudioSources: []
+  BaseAnimator: {fileID: 0}
+  IsCursor: 0
+  Blueprint: {fileID: 4316807548058694518, guid: a7e9a4e118cda4149a9a0f8752bf451e, type: 3}
+  Wireframe: {fileID: 0}
+  lodFlares: []
+  IsCustomThing: 0
+  ThumbnailOffset: {x: 0, y: 0, z: 0}
+  ThumbnailRotation: {x: 0, y: 0, z: 0, w: 0}
+  Thumbnail: {fileID: 21300000, guid: 39280fa319b5cb94aa0bcc1df110ff35, type: 3}
+  Thumbnails: []
+  IsEntity: 0
+  _isOccluded: 0
+  HasRunOnAtmospherics: 0
+  MaterialChanger: {fileID: 0}
+  AnimComponents: []
+  LocalGrid:
+    x: 0
+    y: 0
+    z: 0
+  Lights: []
+  Renderers: []
+  RocketRenderers: []
+  HasErrorState: 0
+  HasPowerState: 0
+  HasActivateState: 0
+  HasLockState: 0
+  HasOnOffState: 0
+  HasModeState: 0
+  HasOpenState: 0
+  HasImportState: 0
+  HasExportState: 0
+  HasExport2State: 0
+  HasButton1State: 0
+  HasButton2State: 0
+  HasButton3State: 0
+  HasColorState: 0
+  HasAccessState: 0
+  _staticColliders: []
+  _dynamicColliders: []
+  _selfColliders: []
+  IsUpdateEachFrame: 0
+  IsUpdateAudio: 0
+  IsUpdate100MS: 0
+  IsUpdate1000MS: 0
+  CanPickup: 1
+  DestroyChildrenOnDead: 1
+  EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  DiffuseIndex: 0
+  SmoothnessIndex: 0
+  SortingClass: 0
+  RecipeTier: 1
+  CollisionSound: 0
+  SlotWearAction: 0
+  SlotType: 0
+  SlotType1: 0
+  SlotType2: 0
+  DeleteOnDestroyed: 1
+  UsingSound: 
+  UseCompleteSound: 
+  HasLight: 0
+  IsSmall: 0
+  FastSpeed: 5
+  RigidBody: {fileID: 2542759562956966129}
+  WorldCenterOfMass: {x: 0, y: 0, z: 0}
+  GripType: 2
+  CastAnimation: 0
+  AtmosphereDampeningScale: 1
+  AttackWithEvent: 1
+  CenterOfMassOffset: {x: 0, y: 0, z: 0}
+  AtmosControl: 1
+  OnConveyor: 0
+  IsWatched: 0
+  TradeValue: -1
+  PlayerSellScale: 1
+  ExitTool:
+    ToolEntry: {fileID: 0}
+    ToolEntry2: {fileID: 0}
+    EntryTime: 2
+    EntryQuantity: 0
+    EntryQuantity2: 0
+    ToolUseType: 0
+    ToolExit: {fileID: 0}
+    ExitTime: 2
+    ExitQuantity: 0
+  ImpactForceThreshhold: 5
+  SizeMultiplier: 0.1
+  ImpactAudioCoolDown: 0
+  YHeight: 0
+  IsOutOfBounds: 0
+  RelativeVelocity: {x: 0, y: 0, z: 0}
+  Orientation: 0
+  ForceKinematicDistance: 0.01
+  IsForceKinematic: 0
+  AddExtraGravity: 1
+  _isBuoyant: 1
+  IsKinematic: 0
+  ChildSlotOffset: {x: 0, y: 0, z: 0}
+  ChildSlotOffsetPosition: {x: 0, y: 0, z: 0}
+  ReplacementTool: {fileID: 0}
+  InventoryScale: 0.5
+  LocalOffSetInHand: {x: -0.015, y: -0.003, z: 0}
+  LocalRotationInHand: {x: 25, y: -225, z: -81}
+  PrecisionIk: 0
+  CreatedReagentMixture:
+    Flour:
+      ReagentId: 0
+      _quantity: 0
+    Milk:
+      ReagentId: 1
+      _quantity: 0
+    Egg:
+      ReagentId: 2
+      _quantity: 0
+    Iron:
+      ReagentId: 3
+      _quantity: 0
+    Gold:
+      ReagentId: 4
+      _quantity: 0
+    Carbon:
+      ReagentId: 5
+      _quantity: 0
+    Uranium:
+      ReagentId: 6
+      _quantity: 0
+    Copper:
+      ReagentId: 7
+      _quantity: 0
+    Steel:
+      ReagentId: 8
+      _quantity: 0
+    Hydrocarbon:
+      ReagentId: 9
+      _quantity: 0
+    Silver:
+      ReagentId: 10
+      _quantity: 0
+    Nickel:
+      ReagentId: 11
+      _quantity: 0
+    Lead:
+      ReagentId: 12
+      _quantity: 0
+    Electrum:
+      ReagentId: 13
+      _quantity: 0
+    Invar:
+      ReagentId: 14
+      _quantity: 0
+    Constantan:
+      ReagentId: 15
+      _quantity: 0
+    Solder:
+      ReagentId: 16
+      _quantity: 0
+    Plastic:
+      ReagentId: 17
+      _quantity: 0
+    Silicon:
+      ReagentId: 18
+      _quantity: 0
+    SalicylicAcid:
+      ReagentId: 19
+      _quantity: 0
+    Alcohol:
+      ReagentId: 20
+      _quantity: 0
+    Oil:
+      ReagentId: 21
+      _quantity: 0
+    Potato:
+      ReagentId: 22
+      _quantity: 0
+    Tomato:
+      ReagentId: 23
+      _quantity: 0
+    Fenoxitone:
+      ReagentId: 24
+      _quantity: 0
+    ColorRed:
+      ReagentId: 25
+      _quantity: 0
+    ColorGreen:
+      ReagentId: 26
+      _quantity: 0
+    ColorBlue:
+      ReagentId: 27
+      _quantity: 0
+    ColorYellow:
+      ReagentId: 28
+      _quantity: 0
+    ColorOrange:
+      ReagentId: 29
+      _quantity: 0
+    Pumpkin:
+      ReagentId: 30
+      _quantity: 0
+    Rice:
+      ReagentId: 31
+      _quantity: 0
+    Waspaloy:
+      ReagentId: 32
+      _quantity: 0
+    Stellite:
+      ReagentId: 33
+      _quantity: 0
+    Inconel:
+      ReagentId: 34
+      _quantity: 0
+    Hastelloy:
+      ReagentId: 35
+      _quantity: 0
+    Astroloy:
+      ReagentId: 36
+      _quantity: 0
+    Cobalt:
+      ReagentId: 37
+      _quantity: 0
+    Corn:
+      ReagentId: 38
+      _quantity: 0
+    Wheat:
+      ReagentId: 39
+      _quantity: 0
+    Biomass:
+      ReagentId: 40
+      _quantity: 0
+    Soy:
+      ReagentId: 41
+      _quantity: 0
+    Mushroom:
+      ReagentId: 42
+      _quantity: 0
+    Sugar:
+      ReagentId: 43
+      _quantity: 0
+    Cocoa:
+      ReagentId: 44
+      _quantity: 0
+  AllowSelfUse: 0
+  AllowForwardCursor: 0
+  TraderUniqueIdentifierRatio: 0
+  CanDecay: 0
+  DecayRate: 0.00018
+  IsDecayed: 0
+  TemperatureDecayRateMultiplier: 1
+  PressureDecayRateMultiplier: 1
+  TemperatureDecayRateMultiplierCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.2
+      inSlope: -0.0040807934
+      outSlope: -0.0040807934
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.50074965
+    - serializedVersion: 3
+      time: 1
+      value: 1.8
+      inSlope: 0.0016072573
+      outSlope: 0.0016072573
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.49901164
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  NutritionDecayRateCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.333333
+    - serializedVersion: 3
+      time: 0.1
+      value: 0.1
+      inSlope: 0.00993201
+      outSlope: 0.9197401
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.4321137
+      outWeight: 0.07177715
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.3
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  PressureDecayRateMultiplierCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 5
+      inSlope: -12.372469
+      outSlope: -12.372469
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.33333334
+      outWeight: 0.027380947
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.008049617
+      outSlope: 0.008049617
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.6991061
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  GasesDecayMultiplier:
+  - Gas: 1
+    DecayRateMultiplier: 1.5
+  - Gas: 2
+    DecayRateMultiplier: 0.6
+  - Gas: 4
+    DecayRateMultiplier: 0.8
+  - Gas: 16
+    DecayRateMultiplier: 3
+  - Gas: 64
+    DecayRateMultiplier: 1.5
+  - Gas: 1024
+    DecayRateMultiplier: 2
+  DecayedFoodPrefab: {fileID: 0}
+  manuallyAuthoredToolSpeedOffset: 0
+  UsedPowerPassive: 0
+  UsedPowerActive: 0
+--- !u!65 &5106868535559107707
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3865651481132518717}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.09418607, y: 0.3525484, z: 0.19537562}
+  m_Center: {x: -0.0024010781, y: 0.072399184, z: 0.0008982271}
+--- !u!65 &1234956907775456177
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3865651481132518717}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.039664924, y: 0.2018179, z: 0.04490532}
+  m_Center: {x: -0.00011502206, y: 0.35233968, z: -0.0502003}
+--- !u!4 &4534664296439584647 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+  m_PrefabInstance: {fileID: 4135681439915110508}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4830206838026827944 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8821623529969584324, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+  m_PrefabInstance: {fileID: 4135681439915110508}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7242052368144721964
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4830206838026827944}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.04495979, y: 0.16074212, z: 0.11227368}
+  m_Center: {x: 0.05379038, y: -0.0000031366947, z: -0.028719604}
