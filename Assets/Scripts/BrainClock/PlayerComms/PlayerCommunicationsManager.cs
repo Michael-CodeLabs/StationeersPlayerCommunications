@@ -1,5 +1,6 @@
 using Assets.Scripts;
 using Assets.Scripts.GridSystem;
+using Assets.Scripts.Inventory;
 using Assets.Scripts.Networking;
 using Assets.Scripts.Util;
 using RootMotion;
@@ -81,7 +82,14 @@ namespace BrainClock.PlayerComms
 
             foreach (IAudioDataReceiver audioDataReceiver in audioDataReceivers)
             {
-                audioDataReceiver.ReceiveAudioData(-1, data, length, 1, 0);
+                // Add Audio Effects.
+                // TODO: this will apply to all audios, should only be considered
+                // for human voice instead.
+                float volume = 1;
+                if (InventoryManager.ParentHuman)
+                    if (InventoryManager.ParentHuman.HasInternals && InventoryManager.ParentHuman.InternalsOn)
+                        volume = 0.7f;
+                audioDataReceiver.ReceiveAudioData(-1, data, length, volume, 0);
             }
         }
 

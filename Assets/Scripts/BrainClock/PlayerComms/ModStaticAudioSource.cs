@@ -32,6 +32,11 @@ namespace BrainClock.PlayerComms
     {
         private IAudioStreamReceiver[] audioStreamReceivers = new IAudioStreamReceiver[0];
 
+        private float volume = 1;
+        private int flags = 0;
+
+        public List<MonoBehaviour> monoBehaviours = new List<MonoBehaviour>();
+
         public void ReceiveAudioData(long referenceId, byte[] data, int length, float volume, int flags)
         {
             Debug.Log("ModStaticAudioSource.ReceiveAudioData()");
@@ -41,6 +46,19 @@ namespace BrainClock.PlayerComms
                 {
                     audioStreamReceiver.ReceiveAudioStreamData(data, length);
                 }
+            }
+
+            // Adjust audio settings
+            if (volume != this.volume)
+            {
+                volume = this.volume;
+                GameAudioSource.SourceVolume = volume;
+            }
+
+            if (flags != this.flags)
+            {
+                flags = this.flags;
+                // Enable/Disable the audio effects
             }
         }
 
