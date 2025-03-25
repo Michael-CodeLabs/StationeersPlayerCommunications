@@ -32,8 +32,8 @@ namespace BrainClock.PlayerComms
     {
         private IAudioStreamReceiver[] audioStreamReceivers = new IAudioStreamReceiver[0];
 
-        private float volume = 1;
-        private int flags = 0;
+        private float volume = 0.123f;
+        private int flags = -1;
 
         public List<MonoBehaviour> monoBehaviours = new List<MonoBehaviour>();
 
@@ -49,15 +49,17 @@ namespace BrainClock.PlayerComms
             }
 
             // Adjust audio settings
-            if (volume != this.volume)
+            if (this.volume != volume)
             {
-                volume = this.volume;
-                GameAudioSource.SourceVolume = volume;
+                this.volume = volume;
+                GameAudioSource.SourceVolume = this.volume;
             }
 
-            if (flags != this.flags)
+            if (this.flags != flags)
             {
-                flags = this.flags;
+                this.flags = flags;
+                gameObject.GetComponent<AudioLowPassFilter>().enabled = (this.flags == 1);
+                gameObject.GetComponent<AudioReverbFilter>().enabled = (this.flags == 1);
                 // Enable/Disable the audio effects
             }
         }

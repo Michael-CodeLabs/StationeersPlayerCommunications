@@ -78,7 +78,7 @@ namespace BrainClock.PlayerComms
         public void ReceiveAudioStreamData(byte[] data, int length)
         {
             if (!InGame)
-                return; 
+                return;
 
             foreach (IAudioDataReceiver audioDataReceiver in audioDataReceivers)
             {
@@ -86,10 +86,14 @@ namespace BrainClock.PlayerComms
                 // TODO: this will apply to all audios, should only be considered
                 // for human voice instead.
                 float volume = 1;
+                int flags = 0;
                 if (InventoryManager.ParentHuman)
                     if (InventoryManager.ParentHuman.HasInternals && InventoryManager.ParentHuman.InternalsOn)
+                    {
                         volume = 0.7f;
-                audioDataReceiver.ReceiveAudioData(-1, data, length, volume, 0);
+                        flags = 1;
+                    }
+                audioDataReceiver.ReceiveAudioData(-1, data, length, volume, flags);
             }
         }
 
