@@ -24,21 +24,11 @@ namespace BrainClock.PlayerComms
                 // Make sure Steam is intialized to operate Asynchronously
                 SteamClient.Init(AppId, true);
                 Debug.Log("SteamAPI initialized");
-
-                // Initialize our components (they need Steam initialized)
-                SteamVoiceRecorder.enabled = true;
-                AudioStreamToAudioClip.enabled = true;
-
-                SteamVoiceRecorder.Initialize(true);
-
-                // Enable audio recording
-                SteamUser.VoiceRecord = true;
             }
         }
 
         private void OnDestroy()
         {
-            SteamUser.VoiceRecord = false;
             SteamClient.Shutdown();
         }
 

@@ -60,8 +60,8 @@ namespace Assets.Scripts.Networking
                     Debug.Log("+ Message bytes sent to playback (Not Dedicated Server)");
                     //VoicePlayback.Instance.SendVoiceRecording(Message, Length);
                     //VoiceDataManager.Instance.SendVoiceRecording(HumanId, Message, Length);
-                    if (PlayerCommunicationsManager.Instance?.networkStreamReceiver != null)
-                        PlayerCommunicationsManager.Instance?.networkStreamReceiver.ReceiveVoiceRecording(HumanId, Message, Length, VolumeMultiplier, HasHelmet);
+                    //if (PlayerCommunicationsManager.Instance?.networkStreamReceiver != null)
+                    //    PlayerCommunicationsManager.Instance?.networkStreamReceiver.ReceiveVoiceRecording(HumanId, Message, Length, VolumeMultiplier, HasHelmet);
                 }
             }
             else
@@ -69,7 +69,7 @@ namespace Assets.Scripts.Networking
                 if (NetworkManager.IsClient)
                 {
                     Debug.Log("+ this is the Client recieving voice from server");
-                    if (HumanId == InventoryManager.ParentHuman.ReferenceId && PlayerCommunicationsManager.Instance?.networkStreamReceiver?.ReceiveOwnAudio != true)
+                    if (HumanId == InventoryManager.ParentHuman.ReferenceId)
                     {
                         Debug.Log("+ Ignoring own VoiceMessage");
                     }
@@ -78,8 +78,8 @@ namespace Assets.Scripts.Networking
                         Debug.Log("+ Message bytes sent to playback");
                         //VoicePlayback.Instance.SendVoiceRecording(Message, Length);
                         //VoiceDataManager.Instance.SendVoiceRecording(HumanId, Message, Length);
-                        if (PlayerCommunicationsManager.Instance?.networkStreamReceiver != null)
-                            PlayerCommunicationsManager.Instance.networkStreamReceiver.ReceiveVoiceRecording(HumanId, Message, Length, VolumeMultiplier, HasHelmet);
+                        //if (PlayerCommunicationsManager.Instance?.networkStreamReceiver != null)
+                        //    PlayerCommunicationsManager.Instance.networkStreamReceiver.ReceiveVoiceRecording(HumanId, Message, Length, VolumeMultiplier, HasHelmet);
                     }
                 }
                 else

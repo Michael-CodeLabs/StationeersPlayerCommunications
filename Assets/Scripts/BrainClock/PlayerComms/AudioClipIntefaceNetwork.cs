@@ -43,6 +43,10 @@ namespace BrainClock.PlayerComms
         /// </summary>
         private Queue<byte> _audioBuffer;
 
+        private void Awake()
+        {
+            _audioBuffer = new Queue<byte>();
+        }
 
         // Start is called before the first frame update
         void Start()
@@ -77,6 +81,16 @@ namespace BrainClock.PlayerComms
         {
             if (!isReady)
                 return;
+
+            Debug.Log("AudioClipIntefaceNetwork.ReceiveAudioData()");
+
+            if (!NetworkManager.IsActive)
+                return;
+            Debug.Log("AudioClipIntefaceNetwork.ReceiveAudioData() network is active");
+
+            if (!InventoryManager.ParentHuman)
+                return;
+            Debug.Log("AudioClipIntefaceNetwork.ReceiveAudioData() parent human is around");
 
             long humanReferenceId = InventoryManager.ParentHuman.ReferenceId;
 
@@ -157,8 +171,7 @@ namespace BrainClock.PlayerComms
         private void HandleWorldStarted()
         {
             Console.WriteLine("AudioClipIntefaceNetwork.HandleWOrldStart()");
-            if (NetworkManager.IsActive)
-                isReady = true;
+            isReady = true;
         }
 
         /// <summary>
@@ -168,6 +181,7 @@ namespace BrainClock.PlayerComms
         {
             Console.WriteLine("AudioClipIntefaceNetwork.HandleWorldExit()");
             isReady = false;
+            _audioBuffer = new Queue<byte>();
         }
 
         /// <summary>

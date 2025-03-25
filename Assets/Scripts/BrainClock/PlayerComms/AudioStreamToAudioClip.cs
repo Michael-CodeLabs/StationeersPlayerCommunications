@@ -24,7 +24,12 @@ namespace BrainClock.PlayerComms
         private int dataPosition;
         private int dataReceived;
 
-        private int dataRate;
+        [Tooltip("Steam AppId you want to initialize")]
+        public uint AppId = 0;
+
+        public int dataRate;
+
+        public bool IsReady = false;
 
         private void Awake()
         {
@@ -35,6 +40,17 @@ namespace BrainClock.PlayerComms
         // Start is called before the first frame update
         void Start()
         {
+            // Try to initialize Steam if not done already.
+            if (!SteamClient.IsValid)
+                SteamClient.Init(AppId, true);
+
+            if (!SteamClient.IsValid)
+                return;
+
+            Debug.Log("AudioStreamToAudioClip.Start() Steam is valid");
+
+            IsReady = true;
+
             dataRate = (int)SteamUser.OptimalSampleRate;
 
             audioclipBufferSize = dataRate * 5;

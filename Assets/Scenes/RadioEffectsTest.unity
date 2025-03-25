@@ -367,13 +367,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 217996033}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ecdc8334da7363f4d9c811ed1dfb8c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AudioSource: {fileID: 217996037}
   AudioClipName: HumanVoiceRecording
+  AppId: 544550
+  dataRate: 0
+  IsReady: 0
 --- !u!114 &217996039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,13 +384,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 217996033}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f693e109811d8584dbc80219b425f617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AudioReceiver: {fileID: 0}
   IsReady: 0
+  VoiceRecordEnabled: 1
+  AppId: 544550
   voiceCaptureMode: 0
   UseStream: 0
 --- !u!114 &217996040
@@ -473,13 +478,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327050121}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f693e109811d8584dbc80219b425f617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AudioReceiver: {fileID: 0}
   IsReady: 0
+  VoiceRecordEnabled: 1
+  AppId: 544550
   voiceCaptureMode: 0
   UseStream: 0
 --- !u!82 &327050128
@@ -585,13 +592,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327050121}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ecdc8334da7363f4d9c811ed1dfb8c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AudioSource: {fileID: 327050128}
   AudioClipName: HumanVoiceRecording
+  AppId: 544550
+  dataRate: 0
+  IsReady: 0
 --- !u!114 &327050130
 MonoBehaviour:
   m_ObjectHideFlags: 0

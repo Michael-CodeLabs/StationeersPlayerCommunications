@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2028284103
+CRC: 2458938415
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 5b6bb8358457ac329eb7ff5c6a9edb3d
+    Hash: 401b3f662d84d9fa02090ba35f75c460
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 298ce64e5e71fef8b3fc5874044e9ef1
+    Hash: d49d97e56e9503ff535011534a6733ed
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -46,9 +46,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: f693e109811d8584dbc80219b425f617, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 80c2b0bd94ed745439100ce30c89eb08, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 153b67040cca0f645863a6b3fe954721, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 242404325a0d36146b52a0e60f9b20d9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 80c2b0bd94ed745439100ce30c89eb08, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 157
@@ -67,5 +69,6 @@ SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Scenes/StationeersPlayerCommunicationsScene.unity
 - Assets/Scenes/RadioEffectsTest.unity
+- Assets/Scenes/ManagerTestingTemp.unity
 Dependencies:
-- C:/Users/Moe/Documents/CSHARP/StationeersPlayerCommunications/Temp/StationeersPlayerCommunications/Windows/stationeersplayercommunications.assets
+- F:/Unity/StationeersPlayerCommunications/Temp/StationeersPlayerCommunications/Windows/stationeersplayercommunications.assets

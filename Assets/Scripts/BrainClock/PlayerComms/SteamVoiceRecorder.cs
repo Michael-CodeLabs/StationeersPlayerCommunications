@@ -1,7 +1,6 @@
 using Steamworks;
 using System.IO;
 using UnityEngine;
-using static UI.ConfirmationPanel;
 
 namespace BrainClock.PlayerComms
 {
@@ -25,7 +24,10 @@ namespace BrainClock.PlayerComms
         private IAudioStreamReceiver[] audioStreamReceivers;
 
         public bool IsReady = false;
-        private bool VoiceRecordEnabled = false;
+        public bool VoiceRecordEnabled = true;
+
+        [Tooltip("Steam AppId you want to initialize")]
+        public uint AppId = 0;
 
         // Stream to store the audio data
         [Tooltip("Audio capture method")]
@@ -47,30 +49,35 @@ namespace BrainClock.PlayerComms
         // Start is called before the first frame update
         void Start()
         {
+            // Try to initialize Steam if not done already.
+            if (!SteamClient.IsValid)
+                SteamClient.Init(AppId, true);
 
-        }
+            if (!SteamClient.IsValid)
+                return;
+            Debug.Log("SteamVoiceRecorder: Steam is valid");
 
-        public void Initialize(bool startVoiceCapture)
-        {
-            IsReady = false;
+            IsReady = true;
 
             // Do we have anyone to send data to?
             audioStreamReceivers = AudioReceiver.GetComponents<IAudioStreamReceiver>();
             if (audioStreamReceivers != null && audioStreamReceivers.Length > 0)
                 IsReady = true;
+            
+            Debug.Log("PlayerCommunicationsManager.HandleWorldStarted() is ready");
 
             // Create a new Stream for voice capture
             voiceStream = new MemoryStream();
 
-            VoiceRecordEnabled = startVoiceCapture;
             SteamUser.VoiceRecord = VoiceRecordEnabled;
         }
+
+
         public void Shutdown()
         {
             SteamUser.VoiceRecord = false;
             voiceStream = null;
         }
-
 
 
         private void FixedUpdate()

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Assets.Scripts.Inventory;
 using Assets.Scripts.Objects.Entities;
 using Assets.Scripts.Networking;
+using Assets.Scripts.Objects;
 
 namespace BrainClock.PlayerComms
 {
@@ -37,7 +38,7 @@ namespace BrainClock.PlayerComms
         /// <summary>
         /// List of know humans in the world
         /// </summary>
-        private Dictionary<long, IAudioDataReceiver> HumanAudioDataReceivers;
+        private Dictionary<long, IAudioDataReceiver> HumanAudioDataReceivers = new Dictionary<long, IAudioDataReceiver>();
 
         /// <summary>
         /// Whether our own audio must be feed into our Human character.
@@ -80,12 +81,21 @@ namespace BrainClock.PlayerComms
             if (HumanAudioPrefab == null)
                 return;
 
-            GameObject gameObject = UnityEngine.Object.Instantiate(HumanAudioPrefab, entity.transform);
-            if (gameObject != null)
+            /*
+            GameObject newGameObject = UnityEngine.Object.Instantiate(HumanAudioPrefab, entity.transform);
+            if (newGameObject == null)
+            {
+                Debug.Log("Object not instanced correctly");
                 return;
+            }
 
-            IAudioDataReceiver audioDataReceiver = gameObject.GetComponent<IAudioDataReceiver>();
+            Debug.Log($"AudioClipInterfaceHuman.OnHumanCreated() Prefab spawned!");
+            IAudioDataReceiver audioDataReceiver = newGameObject.GetComponent<IAudioDataReceiver>();
+            */
+
+            IAudioDataReceiver audioDataReceiver = UnityEngine.Object.Instantiate(HumanAudioPrefab, entity.transform).GetComponent<IAudioDataReceiver>();
             HumanAudioDataReceivers.Add(entity.ReferenceId, audioDataReceiver);
+            Debug.Log($"AudioClipInterfaceHuman.OnHumanCreated() Saved {entity.ReferenceId} {audioDataReceiver}");
         }
 
         /// <summary>
@@ -104,18 +114,45 @@ namespace BrainClock.PlayerComms
             Debug.Log($"AudioClipInterfaceHuman.ReceiveAudioData()");
 
             // If we can hear our own audio, we need to give it our own Human referenceId
-            referenceId = (referenceId < 1 && HearOwnAudio) ? InventoryManager.ParentHuman.ReferenceId : referenceId;
+            if (InventoryManager.ParentHuman)
+                referenceId = (referenceId < 1 && HearOwnAudio) ? InventoryManager.ParentHuman.ReferenceId : referenceId;
+
             if (referenceId < 1)
             {
                 Debug.Log("Received Audio for unknown referenceId, ignoring");
                 return;
             }
 
-            IAudioDataReceiver humanAudioReceiver = HumanAudioDataReceivers.GetValueOrDefault(referenceId);
+            //IAudioDataReceiver humanAudioReceiver = HumanAudioDataReceivers.GetValueOrDefault(referenceId);
+            //if (humanAudioReceiver == null)
+            IAudioDataReceiver humanAudioReceiver;
+            if (!HumanAudioDataReceivers.TryGetValue(referenceId, out humanAudioReceiver))
+            {
+                Debug.Log($"No saved human audio receiver for {referenceId}, searching in Humans");
+                Human theHuman = null;
+                foreach (Human human in Human.AllHumans){
+                    if (human.ReferenceId == referenceId)
+                    {
+                        Debug.Log("Found our human");
+                        theHuman = human;
+                    }
+                }
+
+                if (theHuman)
+                {
+                    OnHumanCreated(theHuman.AsEntity);
+                    humanAudioReceiver = HumanAudioDataReceivers.GetValueOrDefault(referenceId);
+                }
+                else
+                {
+                    return;
+                }
+            }
+
             if (humanAudioReceiver == null)
                 return;
 
-            // APPLY SOUND TO THE human
+            // Apply the human custom receiver
             humanAudioReceiver.ReceiveAudioData(referenceId, data, length, volume, flags);
         }
 
@@ -126,7 +163,7 @@ namespace BrainClock.PlayerComms
         private void HandleWorldStarted()
         {
             Console.WriteLine("AudioClipInterfaceHuman.HandleWOrldStart()");
-            HumanAudioDataReceivers = new Dictionary<long, IAudioDataReceiver>();
+            //HumanAudioDataReceivers = new Dictionary<long, IAudioDataReceiver>();
         }
 
         /// <summary>
@@ -135,7 +172,7 @@ namespace BrainClock.PlayerComms
         private void HandleWorldExit()
         {
             Console.WriteLine("AudioClipInterfaceHuman.HandleWorldExit()");
-            HumanAudioDataReceivers = null;
+            HumanAudioDataReceivers = new Dictionary<long, IAudioDataReceiver>(); 
         }
 
         /// <summary>

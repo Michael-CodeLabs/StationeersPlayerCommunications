@@ -35,13 +35,15 @@ namespace BrainClock.PlayerComms
         {
             string result = "Message not sent";
 
-            VoiceMessage voiceMessage = new VoiceMessage();
+            AudioClipMessage voiceMessage = new AudioClipMessage();
 
             long referenceId = InventoryManager.ParentHuman.ReferenceId;
-            voiceMessage.HumanId = InventoryManager.ParentHuman.ReferenceId;
+            voiceMessage.referenceId = InventoryManager.ParentHuman.ReferenceId;
             voiceMessage.Length = 4;
             byte[] byteArray = { 10, 20, 30, 40 };
             voiceMessage.Message = byteArray;
+            voiceMessage.Volume = 1;
+            voiceMessage.Flags = 0;
 
             if (NetworkManager.IsClient)
             {

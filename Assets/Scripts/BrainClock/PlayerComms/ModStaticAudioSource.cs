@@ -1,4 +1,7 @@
+using Assets.Scripts.Objects.Entities;
 using Assets.Scripts.Sound;
+using Assets.Scripts.Util;
+using Audio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,7 +28,41 @@ namespace BrainClock.PlayerComms
         Mixer: Menu -  -583559763
     */
 
-    public class ModStaticAudioSource : StaticAudioSource
+    public class ModStaticAudioSource : StaticAudioSource, IAudioDataReceiver
     {
+        private IAudioStreamReceiver[] audioStreamReceivers = new IAudioStreamReceiver[0];
+
+        public void ReceiveAudioData(long referenceId, byte[] data, int length, float volume, int flags)
+        {
+            Debug.Log("ModStaticAudioSource.ReceiveAudioData()");
+            if (audioStreamReceivers != null)
+            {
+                foreach (IAudioStreamReceiver audioStreamReceiver in audioStreamReceivers)
+                {
+                    audioStreamReceiver.ReceiveAudioStreamData(data, length);
+                }
+            }
+        }
+
+        private void Start()
+        {
+            Debug.Log("ModStaticAudioSource.Start()");
+            //GameAudioSource.Init((IAudioParent)transform.parent);
+            GameAudioSource.Init((IAudioParent)null);
+            GameAudioSource.CurrentMixerGroupNameHash = UnityEngine.Animator.StringToHash("External");
+            GameAudioSource.SetSpatialBlend(1);
+            GameAudioSource.ManageOcclusion(true);
+            GameAudioSource.CalculateAndSetAtmosphericVolume(true);
+            GameAudioSource.SetEnabled(true);
+            
+            Debug.Log("GameAudioSource setup");
+            Singleton<AudioManager>.Instance.AddPlayingAudioSource(GameAudioSource);
+
+
+            // Find and cache the audio receivers
+            audioStreamReceivers = GetComponents<IAudioStreamReceiver>();
+        }
+
+
     }
 }

@@ -65,7 +65,9 @@ namespace BrainClock.PlayerComms
             };
 
             // Add extra allowed message types here
-            allowedOnClient.Add(typeof(VoiceMessage));  // Example custom message
+            //allowedOnClient.Add(typeof(VoiceMessage));  // Example custom message
+            allowedOnClient.Add(typeof(AudioClipMessage));  // Example custom message
+
 
             if (!isServer && !allowedOnClient.Contains(messageSerialisable.GetType()))
             {

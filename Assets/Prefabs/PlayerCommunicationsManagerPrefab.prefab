@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5030836582707470948}
   - component: {fileID: 2965906715786255748}
   - component: {fileID: 1532860131109236498}
-  - component: {fileID: 431182552646830928}
-  - component: {fileID: 2830797067383826387}
+  - component: {fileID: 1478760234394598285}
+  - component: {fileID: 4022589116369715774}
   m_Layer: 0
   m_Name: PlayerCommunicationsManagerPrefab
   m_TagString: Untagged
@@ -47,9 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f566bc3550848d746afa0e715d4b9d95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  voiceRecorder: {fileID: 1532860131109236498}
-  networkStreamReceiver: {fileID: 2830797067383826387}
-  CaptureOnWorldStart: 1
 --- !u!114 &1532860131109236498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,9 +61,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioReceiver: {fileID: 2254027799377473201}
   IsReady: 0
+  VoiceRecordEnabled: 1
+  AppId: 544550
   voiceCaptureMode: 0
   UseStream: 0
---- !u!114 &431182552646830928
+--- !u!114 &1478760234394598285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,12 +74,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2254027799377473201}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17fba10354672b849ae92d505cd9c47c, type: 3}
+  m_Script: {fileID: 11500000, guid: c2a44fd38254e29479eac4b7892cdd4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumMessageSize: 1
   MaximumMessageSize: 1000
---- !u!114 &2830797067383826387
+--- !u!114 &4022589116369715774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,7 +88,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2254027799377473201}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c6e33b04fe28624c9be1681f4e3d126, type: 3}
+  m_Script: {fileID: 11500000, guid: a81a99bde4704004b93965978fe4c3c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReceiveOwnAudio: 1
+  HumanAudioPrefab: {fileID: 8517613730600658599, guid: a5a2074b2c9f3ab4eac97397ad0c68ed, type: 3}
+  HearOwnAudio: 0

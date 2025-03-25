@@ -33,8 +33,8 @@ public class StationeersPlayerCommunications : ModBehaviour
         UnityEngine.Debug.Log("StationeersPlayerCommunications Loaded with " + contentHandler.prefabs.Count + " prefab(s)");
 
         // Adding custom message type
-        Debug.Log("MessageFactoryInjector injectiong VoiceMessage");
-        MessageFactoryInjector.InjectCustomMessageType(typeof(VoiceMessage));
+        Debug.Log("MessageFactoryInjector injecting AudioClipMessage");
+        MessageFactoryInjector.InjectCustomMessageType(typeof(AudioClipMessage));
 
     }
 }
