@@ -92,9 +92,7 @@ namespace BrainClock.PlayerComms
                     {
                         // Adjust volume to the internal pressure (Note, it will still use the External mixer)
                         // TODO FIX AND RELOCATE THIS CORRECTLY
-                        float val = (InventoryManager.ParentHuman.BreathingAtmosphere.PressureGassesAndLiquids / new PressurekPa(3.0)).ToFloat();
-                        volume = InventoryManager.ParentHuman.BreathingAtmosphere != null ? Mathf.Clamp01(val) : 0.0f;
-
+                        volume = InventoryManager.ParentHuman.BreathingAtmosphere != null ? Mathf.Clamp01((InventoryManager.ParentHuman.BreathingAtmosphere.PressureGassesAndLiquids / new PressurekPa(3.0)).ToFloat()) : 0.0f;
                         flags = 1;
                     }
                 }
