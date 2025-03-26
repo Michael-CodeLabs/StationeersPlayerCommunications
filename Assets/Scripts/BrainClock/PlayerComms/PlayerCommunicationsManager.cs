@@ -1,7 +1,9 @@
 using Assets.Scripts;
+using Assets.Scripts.Atmospherics;
 using Assets.Scripts.GridSystem;
 using Assets.Scripts.Inventory;
 using Assets.Scripts.Networking;
+using Assets.Scripts.Sound;
 using Assets.Scripts.Util;
 using RootMotion;
 using Steamworks;
@@ -54,9 +56,6 @@ namespace BrainClock.PlayerComms
         private void HandleWorldStarted()
         {
             Console.WriteLine("World has started.. Setting up Voice capture");
-
-            Debug.Log("PlayerCommunicationsManager.HandleWorldStarted() Checking steam...");
-
             InGame = true;
         }
 
@@ -91,7 +90,11 @@ namespace BrainClock.PlayerComms
                 {
                     if (InventoryManager.ParentHuman.HasInternals && InventoryManager.ParentHuman.InternalsOn)
                     {
-                        volume = 0.8f;
+                        // Adjust volume to the internal pressure (Note, it will still use the External mixer)
+                        // TODO FIX AND RELOCATE THIS CORRECTLY
+                        float val = (InventoryManager.ParentHuman.BreathingAtmosphere.PressureGassesAndLiquids / new PressurekPa(3.0)).ToFloat();
+                        volume = InventoryManager.ParentHuman.BreathingAtmosphere != null ? Mathf.Clamp01(val) : 0.0f;
+
                         flags = 1;
                     }
                 }
