@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1532860131109236498}
   - component: {fileID: 1478760234394598285}
   - component: {fileID: 4022589116369715774}
+  - component: {fileID: 156911544261497105}
   m_Layer: 0
   m_Name: PlayerCommunicationsManagerPrefab
   m_TagString: Untagged
@@ -93,3 +94,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HumanAudioPrefab: {fileID: 8517613730600658599, guid: a5a2074b2c9f3ab4eac97397ad0c68ed, type: 3}
   HearOwnAudio: 0
+--- !u!114 &156911544261497105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2254027799377473201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eafac14d1ad90a24394da61c9e7535a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RadioAudioPrefab: {fileID: 0}

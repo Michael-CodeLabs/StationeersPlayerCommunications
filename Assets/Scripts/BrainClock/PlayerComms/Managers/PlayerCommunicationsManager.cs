@@ -1,18 +1,8 @@
-using Assets.Scripts;
-using Assets.Scripts.Atmospherics;
-using Assets.Scripts.GridSystem;
-using Assets.Scripts.Inventory;
-using Assets.Scripts.Networking;
-using Assets.Scripts.Sound;
-using Assets.Scripts.Util;
-using RootMotion;
-using Steamworks;
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Inventory;
+using Assets.Scripts.Atmospherics;
 using System.IO;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace BrainClock.PlayerComms
 {
