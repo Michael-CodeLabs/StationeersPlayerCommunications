@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Assets.Scripts;
 using Assets.Scripts.Objects.Items;
 using UnityEngine;
+using Assets.Scripts.Objects;
 
 namespace BrainClock.PlayerComms
 {
@@ -39,6 +40,49 @@ namespace BrainClock.PlayerComms
             this.CustomColor = GameManager.GetColorSwatch("ColorBlue");
             this.PaintableMaterial = this.CustomColor.Normal;
         }
+
+
+
+        public void SendStartTransmission()
+        {
+            //OnServer.PlayClip(this.ReferenceId, CursorManager.CursorHit.point, true);
+        }
+
+        public void SendEndTransmission()
+        {
+            //OnServer.PlayClip(this.ReferenceId, CursorManager.CursorHit.point, true);
+        }
+
+        public override void OnPrimaryUseStart()
+        {
+            base.OnPrimaryUseStart();
+            if (this.Activate == 1)
+                return;
+            this.SendStartTransmission();
+            // Interaction disabled until it is setup
+            //Thing.Interact(this.InteractActivate, 1);
+        }
+
+        public override void OnPrimaryUseEnd()
+        {
+            base.OnPrimaryUseEnd();
+            this.SendEndTransmission();
+            // Interaction disabled until it is setup
+            //Thing.Interact(this.InteractActivate, 0);
+        }
+
+        /*
+        public override void OnPowerTick()
+        {
+            // This function will only remove passive power when activated, 
+            // needs to be update to remove passive power all the time it is 
+            // powered and remove active power when activated
+            base.OnPowerTick();
+            if (this.Activate != 1 || this.Battery == null)
+                return;
+            this.Battery.PowerStored -= this.UsedPowerPassive;
+        }
+        */
 
         public override void OnDestroy()
         {
