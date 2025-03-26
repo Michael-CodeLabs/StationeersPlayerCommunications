@@ -75,8 +75,14 @@ namespace BrainClock.PlayerComms
             {
             }
 
-            RadioThings.Add(radio.ReferenceId, radio);
-            Debug.Log($"AudioClipInterfaceHuman.OnRadioCreated() Saved {radio.ReferenceId} {radio}");
+            bool added = RadioThings.TryAdd(radio.ReferenceId, radio);
+            if (added)
+            {
+                Debug.Log($"AudioClipInterfaceHuman.OnRadioCreated() Saved {radio.ReferenceId} {radio}");
+            } else
+            {
+                Debug.Log("Radio referenceId already exists!");
+            }
         }
 
 
