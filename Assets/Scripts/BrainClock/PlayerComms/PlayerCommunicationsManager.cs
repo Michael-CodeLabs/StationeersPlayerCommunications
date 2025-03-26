@@ -79,6 +79,17 @@ namespace BrainClock.PlayerComms
             if (!InGame)
                 return;
 
+            /* Disabled for now
+            if (!NetworkManager.IsActive || InventoryManager.ParentHuman == null)
+                return;
+
+            if (!InventoryManager.ParentHuman.isActiveAndEnabled)
+                return;
+
+            if (InventoryManager.ParentHuman.IsUnresponsive || InventoryManager.ParentHuman.IsSleeping)
+                return;
+            */
+
             foreach (IAudioDataReceiver audioDataReceiver in audioDataReceivers)
             {
                 // Add Audio Effects.
