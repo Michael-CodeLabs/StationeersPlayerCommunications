@@ -99,7 +99,33 @@ namespace BrainClock.PlayerComms
             if (!isReady) 
                 return;
 
-            Debug.Log($"AudioClipInterfaceRadio.ReceiveAudioData()");
+            Debug.Log($"AudioClipInterfaceRadio.ReceiveAudioData() referenceId {referenceId}");
+
+            // We are not accepting audio from no source, we need the source to find the radio being used.
+            if (referenceId < 1)
+            {
+                if (InventoryManager.ParentHuman != null)
+                    referenceId = InventoryManager.ParentHuman.ReferenceId;
+                else
+                {
+                    Debug.Log("Can't find human referenceId, returning");
+                    return;
+                }
+            }
+
+            Debug.Log($"AudioClipInterfaceRadio.ReceiveAudioData() continuing with {referenceId}");
+
+            foreach (Human human in Human.AllHumans)
+            {
+                if (human.ReferenceId == referenceId)
+                {
+                    if ((human.LeftHandSlot.Get()?.Activate < 1) && (human.RightHandSlot.Get()?.Activate < 1))
+                    {
+                        Debug.Log("Human doesn't have anything activated on any hands.");
+                        return;
+                    }
+                }
+            }
 
             /* This is US talking locally on a hosted session, there will no network traffic
             if (referenceId < 1)
@@ -118,41 +144,6 @@ namespace BrainClock.PlayerComms
                 receiver.ReceiveAudioData(-1, data, length, volume, flags);
             }
 
-
-
-            /*
-            //IAudioDataReceiver humanAudioReceiver = HumanAudioDataReceivers.GetValueOrDefault(referenceId);
-            //if (humanAudioReceiver == null)
-            IAudioDataReceiver humanAudioReceiver;
-            if (!HumanAudioDataReceivers.TryGetValue(referenceId, out humanAudioReceiver))
-            {
-                Debug.Log($"No saved human audio receiver for {referenceId}, searching in Humans");
-                Human theHuman = null;
-                foreach (Human human in Human.AllHumans){
-                    if (human.ReferenceId == referenceId)
-                    {
-                        Debug.Log("Found our human");
-                        theHuman = human;
-                    }
-                }
-
-                if (theHuman)
-                {
-                    OnHumanCreated(theHuman.AsEntity);
-                    humanAudioReceiver = HumanAudioDataReceivers.GetValueOrDefault(referenceId);
-                }
-                else
-                {
-                    return;
-                }
-            }
-
-            if (humanAudioReceiver == null)
-                return;
-
-            // Apply the human custom receiver
-            humanAudioReceiver.ReceiveAudioData(referenceId, data, length, volume, flags);
-            */
         }
 
 

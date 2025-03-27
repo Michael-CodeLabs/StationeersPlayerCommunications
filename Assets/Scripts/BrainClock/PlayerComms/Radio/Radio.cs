@@ -245,6 +245,13 @@ namespace BrainClock.PlayerComms
 
         private void FixedUpdate()
         {
+            Human human = InventoryManager.ParentHuman;
+            if (human == null)
+                return;
+
+            if (human.RightHandSlot.Get() != this && human.LeftHandSlot.Get() != this)
+                return;
+
             if (KeyManager.GetMouse("Primary") && !_primaryKey)
             {
                 _primaryKey = true;
