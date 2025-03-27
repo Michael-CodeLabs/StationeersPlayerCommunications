@@ -10,6 +10,7 @@ using Assets.Scripts.Objects.Entities;
 using Assets.Scripts.Sound;
 using Audio;
 using Util;
+using Assets.Scripts.Util;
 
 namespace BrainClock.PlayerComms
 {
@@ -65,6 +66,9 @@ namespace BrainClock.PlayerComms
             AudioSources[1].ManageOcclusion(true);
             AudioSources[1].CalculateAndSetAtmosphericVolume(true);
             AudioSources[1].SetEnabled(true);
+            // Force Adding to thread because the game won't do it unless we 'Play' an audio
+            Singleton<AudioManager>.Instance.AddPlayingAudioSource(AudioSources[1]);
+
 
             // Setting up channel from Mode.
             Debug.Log("Setting up channel from Mode.");
