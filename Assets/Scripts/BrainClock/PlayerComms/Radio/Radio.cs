@@ -105,6 +105,11 @@ namespace BrainClock.PlayerComms
             // Trigger event when a new radio is created
             OnRadioCreated?.Invoke(this);
 
+            SetupGameAudioSource();
+        }
+
+        public void SetupGameAudioSource()
+        {
             // Setting up Speaker GameAudioSource
             Debug.Log("Setting up Speaker GameAudioSource");
             AudioSources[1].AudioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("External"));
@@ -119,7 +124,6 @@ namespace BrainClock.PlayerComms
             AudioSources[1].SourceVolume = 1;
             // Force Adding to thread because the game won't do it unless we 'Play' an audio
             Singleton<AudioManager>.Instance.AddPlayingAudioSource(AudioSources[1]);
-
         }
 
         public override void OnInteractableUpdated(Interactable interactable)

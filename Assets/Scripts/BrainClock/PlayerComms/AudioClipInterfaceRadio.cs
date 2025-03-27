@@ -163,6 +163,18 @@ namespace BrainClock.PlayerComms
         {
             Console.WriteLine("AudioClipInterfaceRadio.HandleWOrldStart()");
             //HumanAudioDataReceivers = new Dictionary<long, IAudioDataReceiver>();
+            foreach(Radio radio in RadioThings)
+            {
+                try
+                {
+                    radio.SetupGameAudioSource();
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Exception running SetupGameAudioSource");
+                }
+            }
+
         }
 
         /// <summary>
