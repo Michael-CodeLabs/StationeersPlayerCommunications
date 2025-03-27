@@ -60,12 +60,14 @@ namespace BrainClock.PlayerComms
             Debug.Log("Setting up Speaker GameAudioSource");
             AudioSources[1].AudioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("External"));
             AudioSources[1].AudioSource.loop = true;
+            AudioSources[1].AudioSource.volume = 1;
             AudioSources[1].AudioSource.Play();
             AudioSources[1].CurrentMixerGroupNameHash = UnityEngine.Animator.StringToHash("External"); 
             AudioSources[1].SetSpatialBlend(1);
             AudioSources[1].ManageOcclusion(true);
             AudioSources[1].CalculateAndSetAtmosphericVolume(true);
             AudioSources[1].SetEnabled(true);
+            AudioSources[1].SourceVolume = 1;
             // Force Adding to thread because the game won't do it unless we 'Play' an audio
             Singleton<AudioManager>.Instance.AddPlayingAudioSource(AudioSources[1]);
 

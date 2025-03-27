@@ -1550,7 +1550,7 @@ MonoBehaviour:
     AudioSource: {fileID: 2130879300931552284}
     LowPassFilter: {fileID: 0}
     HighPassFilter: {fileID: 0}
-    SourceVolume: 0
+    SourceVolume: 1
     SourcePitch: 0
     SpatialCurve:
       serializedVersion: 2
