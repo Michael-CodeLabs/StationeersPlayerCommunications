@@ -28,7 +28,29 @@ namespace BrainClock.PlayerComms
         // Define events for subscription
         public static event Action<Radio> OnRadioCreated;
         public static event Action<Radio> OnRadioDestroyed;
-        public int Channel;
+
+        [Header("Radio")]
+        public int Channels = 1;
+        public float Range = 200;
+        public Collider PushToTalk;
+        public Collider ChannelUp;
+        public Collider ChannelDown;
+        public Collider VolumenUp;
+        public Collider VolumenDown;
+
+        private int _currentChannel;
+
+        public int Channel
+        {
+            get
+            {
+                return _currentChannel;
+            }
+            set
+            {
+                _currentChannel = value;
+            }
+        }
 
         public override void Awake()
         {

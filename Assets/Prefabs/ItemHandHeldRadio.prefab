@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 1808339279818501521}
   - component: {fileID: 6292553629378074184}
   - component: {fileID: 2089305059714010826}
+  - component: {fileID: 889092854574297999}
   m_Layer: 0
   m_Name: PTT
   m_TagString: Untagged
@@ -298,6 +299,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &889092854574297999
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267220558297522572}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.039325, y: 0.01512499, z: 0.0529375}
+  m_Center: {x: 0, y: -0.107437484, z: 0.16249998}
 --- !u!1 &2132096859927191968
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,7 +1008,7 @@ Transform:
   m_GameObject: {fileID: 6493288628103453251}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.061, y: -0.052, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1444,7 +1466,73 @@ MonoBehaviour:
     Layer: 0
     CanKeyInteract: 1
     KeyMap: 
-    AssociatedAudioEvents: []
+    AssociatedAudioEvents:
+    - Name: activating
+      NameHash: 2091903378
+      Channel: 1
+      Parent: {fileID: 5817560575543436827}
+      ClipsData:
+        Name: activating
+        ChannelName: 
+        Looping: 1
+        LoopingOneShots: 0
+        RandomStartTime: 0
+        RandomPitch: 0
+        RandomPitchRangeHigh: 1.2
+        RandomPitchRangeLow: 0.8
+        Delay: 0
+        FadeIn: 0
+        FadeOut: 0
+        FadeDown: 0
+        FadeDownTime: 5
+        FadeDownTarget: 0.5
+        FadePitch: 0
+        FadeInTime: 0.2
+        FadeOutTime: 0.2
+        Clips: []
+        Concurrencies: []
+        ConcurrencyIds: 
+        NameHash: 2091903378
+        SoundAlert: 0
+      StopIfInvalid: 0
+      Conditions:
+      - Type: 42
+        Value: 1
+      - Type: 31
+        Value: 1
+      BuildStateConditions: 
+    - Name: activating
+      NameHash: 2091903378
+      Channel: 1
+      Parent: {fileID: 5817560575543436827}
+      ClipsData:
+        Name: activating
+        ChannelName: 
+        Looping: 1
+        LoopingOneShots: 0
+        RandomStartTime: 0
+        RandomPitch: 0
+        RandomPitchRangeHigh: 1.2
+        RandomPitchRangeLow: 0.8
+        Delay: 0
+        FadeIn: 0
+        FadeOut: 0
+        FadeDown: 0
+        FadeDownTime: 5
+        FadeDownTarget: 0.5
+        FadePitch: 0
+        FadeInTime: 0.2
+        FadeOutTime: 0.2
+        Clips: []
+        Concurrencies: []
+        ConcurrencyIds: 
+        NameHash: 2091903378
+        SoundAlert: 0
+      StopIfInvalid: 0
+      Conditions:
+      - Type: 42
+        Value: 1
+      BuildStateConditions: 
     ActionName: 
     _state: 0
   - StringKey: Button2
@@ -1461,7 +1549,42 @@ MonoBehaviour:
     Layer: 0
     CanKeyInteract: 1
     KeyMap: 
-    AssociatedAudioEvents: []
+    AssociatedAudioEvents:
+    - Name: activating
+      NameHash: 2091903378
+      Channel: 0
+      Parent: {fileID: 5817560575543436827}
+      ClipsData:
+        Name: activating
+        ChannelName: 
+        Looping: 0
+        LoopingOneShots: 1
+        RandomStartTime: 0
+        RandomPitch: 0
+        RandomPitchRangeHigh: 1.2
+        RandomPitchRangeLow: 0.8
+        Delay: 0
+        FadeIn: 0
+        FadeOut: 0
+        FadeDown: 0
+        FadeDownTime: 5
+        FadeDownTarget: 0.5
+        FadePitch: 0
+        FadeInTime: 0.2
+        FadeOutTime: 0.2
+        Clips:
+        - {fileID: 8300000, guid: 9890d56162bba0d4aab3ec155b108785, type: 3}
+        Concurrencies: []
+        ConcurrencyIds: 
+        NameHash: 2091903378
+        SoundAlert: 0
+      StopIfInvalid: 0
+      Conditions:
+      - Type: 42
+        Value: 1
+      - Type: 32
+        Value: 1
+      BuildStateConditions: 
     ActionName: 
     _state: 0
   - StringKey: Mode
@@ -1477,6 +1600,23 @@ MonoBehaviour:
     JoinInProgressSync: 1
     Layer: 0
     CanKeyInteract: 0
+    KeyMap: 
+    AssociatedAudioEvents: []
+    ActionName: 
+    _state: 0
+  - StringKey: Activate
+    StringHash: 1326475003
+    Parent: {fileID: 5817560575543436827}
+    Collider: {fileID: 889092854574297999}
+    FakeCollider: {fileID: 0}
+    Bounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    Action: 41
+    Animator: {fileID: 0}
+    JoinInProgressSync: 0
+    Layer: 0
+    CanKeyInteract: 1
     KeyMap: 
     AssociatedAudioEvents: []
     ActionName: 
@@ -1629,7 +1769,7 @@ MonoBehaviour:
   RocketRenderers: []
   HasErrorState: 1
   HasPowerState: 1
-  HasActivateState: 0
+  HasActivateState: 1
   HasLockState: 0
   HasOnOffState: 1
   HasModeState: 1
@@ -1955,7 +2095,13 @@ MonoBehaviour:
   manuallyAuthoredToolSpeedOffset: 0
   UsedPowerPassive: 10
   UsedPowerActive: 100
-  Channel: 0
+  Channels: 16
+  Range: 200
+  PushToTalk: {fileID: 889092854574297999}
+  ChannelUp: {fileID: 6477597438788679583}
+  ChannelDown: {fileID: 5239398439370770275}
+  VolumenUp: {fileID: 0}
+  VolumenDown: {fileID: 0}
 --- !u!65 &3820930944913580880
 BoxCollider:
   m_ObjectHideFlags: 0
