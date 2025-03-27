@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &295749288489028272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6789051024233932545}
+  m_Layer: 0
+  m_Name: PTTButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6789051024233932545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295749288489028272}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1808339279818501521}
+  m_Father: {fileID: 694331462924560736}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &439382073597665914
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,12 +274,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1267220558297522572}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: -0.0002, y: -0.0003, z: -0.0003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 694331462924560736}
+  m_Father: {fileID: 6789051024233932545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6292553629378074184
 MeshFilter:
@@ -1266,7 +1298,6 @@ Transform:
   - {fileID: 4797190780114530955}
   - {fileID: 8883629717106929488}
   - {fileID: 5487091355676592580}
-  - {fileID: 1808339279818501521}
   - {fileID: 5991894922252836959}
   - {fileID: 2442429312191298193}
   - {fileID: 7573878227938060389}
@@ -1274,6 +1305,7 @@ Transform:
   - {fileID: 5372819954653987878}
   - {fileID: 2956961091233536827}
   - {fileID: 2758068081387251907}
+  - {fileID: 6789051024233932545}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8710015913221887796
@@ -1469,7 +1501,7 @@ MonoBehaviour:
     AssociatedAudioEvents:
     - Name: activating
       NameHash: 2091903378
-      Channel: 1
+      Channel: 0
       Parent: {fileID: 5817560575543436827}
       ClipsData:
         Name: activating
@@ -1489,7 +1521,8 @@ MonoBehaviour:
         FadePitch: 0
         FadeInTime: 0.2
         FadeOutTime: 0.2
-        Clips: []
+        Clips:
+        - {fileID: 8300000, guid: 9890d56162bba0d4aab3ec155b108785, type: 3}
         Concurrencies: []
         ConcurrencyIds: 
         NameHash: 2091903378
@@ -1614,9 +1647,9 @@ MonoBehaviour:
       m_Extent: {x: 0, y: 0, z: 0}
     Action: 41
     Animator: {fileID: 0}
-    JoinInProgressSync: 0
+    JoinInProgressSync: 1
     Layer: 0
-    CanKeyInteract: 1
+    CanKeyInteract: 0
     KeyMap: 
     AssociatedAudioEvents: []
     ActionName: 

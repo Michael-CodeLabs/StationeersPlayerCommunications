@@ -11,6 +11,9 @@ using Assets.Scripts.Sound;
 using Audio;
 using Util;
 using Assets.Scripts.Util;
+using static Assets.Scripts.Objects.Thing;
+using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 
 namespace BrainClock.PlayerComms
 {
@@ -40,6 +43,8 @@ namespace BrainClock.PlayerComms
 
         private int _currentChannel;
 
+        private bool _primaryKey = false;
+        private bool _isActive = false;
         public int Channel
         {
             get
@@ -58,9 +63,9 @@ namespace BrainClock.PlayerComms
             Debug.Log("Radio.Start()");
             try
             {
-                Debug.Log($"transform.parent {transform.parent}");
-                IAudioParent audioparent = transform.parent.GetComponent<Thing>() as IAudioParent;
-                AudioSources[1].Init((IAudioParent)audioparent);
+                //Debug.Log($"transform.parent {transform.parent}");
+                //IAudioParent audioparent = transform.parent.GetComponent<Thing>() as IAudioParent;
+                //AudioSources[1].Init((IAudioParent)audioparent);
             }
             catch (Exception ex)
             {
@@ -75,28 +80,13 @@ namespace BrainClock.PlayerComms
 
             AllRadios.Add(this);
 
-            // Trigger event when a new radio is created
-            OnRadioCreated?.Invoke(this);
 
-            // Setting up Speaker GameAudioSource
-            Debug.Log("Setting up Speaker GameAudioSource");
-            AudioSources[1].AudioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("External"));
-            AudioSources[1].AudioSource.loop = true;
-            AudioSources[1].AudioSource.volume = 1;
-            AudioSources[1].AudioSource.Play();
-            AudioSources[1].CurrentMixerGroupNameHash = UnityEngine.Animator.StringToHash("External"); 
-            AudioSources[1].SetSpatialBlend(1);
-            AudioSources[1].ManageOcclusion(true);
-            AudioSources[1].CalculateAndSetAtmosphericVolume(true);
-            AudioSources[1].SetEnabled(true);
-            AudioSources[1].SourceVolume = 1;
-            // Force Adding to thread because the game won't do it unless we 'Play' an audio
-            Singleton<AudioManager>.Instance.AddPlayingAudioSource(AudioSources[1]);
 
 
             // Setting up channel from Mode.
             Debug.Log("Setting up channel from Mode.");
             Channel = Mode;
+
         }
 
         /// <summary>
@@ -112,15 +102,37 @@ namespace BrainClock.PlayerComms
 
             audioStreamReceivers = GetComponents<IAudioStreamReceiver>();
 
+            // Trigger event when a new radio is created
+            OnRadioCreated?.Invoke(this);
+
+            // Setting up Speaker GameAudioSource
+            Debug.Log("Setting up Speaker GameAudioSource");
+            AudioSources[1].AudioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("External"));
+            AudioSources[1].AudioSource.loop = true;
+            AudioSources[1].AudioSource.volume = 1;
+            AudioSources[1].AudioSource.Play();
+            AudioSources[1].CurrentMixerGroupNameHash = UnityEngine.Animator.StringToHash("External");
+            AudioSources[1].SetSpatialBlend(1);
+            AudioSources[1].ManageOcclusion(true);
+            AudioSources[1].CalculateAndSetAtmosphericVolume(true);
+            AudioSources[1].SetEnabled(true);
+            AudioSources[1].SourceVolume = 1;
+            // Force Adding to thread because the game won't do it unless we 'Play' an audio
+            Singleton<AudioManager>.Instance.AddPlayingAudioSource(AudioSources[1]);
+
         }
 
         public override void OnInteractableUpdated(Interactable interactable)
         {
             base.OnInteractableUpdated(interactable);
             this.CheckError();
+            if (interactable.Action == InteractableType.Activate)
+            {
+                Debug.Log($"{Time.timeSinceLevelLoad} OnInteractableUpdated ACTIVATE type ++++ {interactable.State}");
+            }
             if (interactable.Action != InteractableType.OnOff || !this.OnOff)
                 return;
-            //this.InputHandling();
+            //this.InputHandling(); 
         }
 
         public override Assets.Scripts.Objects.Thing.DelayedActionInstance InteractWith(Interactable interactable, Interaction interaction, bool doAction = true)
@@ -128,7 +140,7 @@ namespace BrainClock.PlayerComms
             if (interactable.Action == InteractableType.Button1)
             {
                 if (!doAction)
-                    return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("Set");
+                    return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("CH-");
                 if (Channel < 7)
                 {
                     Debug.Log("[Radio] Increasing Channel number");
@@ -139,7 +151,7 @@ namespace BrainClock.PlayerComms
             if (interactable.Action == InteractableType.Button2)
             {
                 if (!doAction)
-                    return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("Set");
+                    return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("CH+");
                 if (Channel > 0)
                 {
                     Debug.Log("[Radio] Decreasing Channel number");
@@ -147,6 +159,14 @@ namespace BrainClock.PlayerComms
                     OnServer.Interact(this.InteractMode, Channel, false);
                 }
             }
+            /*
+            if (interactable.Action == InteractableType.Activate)
+            {
+                if (!doAction)
+                    return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("Activate");
+                OnServer.Interact(this.InteractActivate, interactable.State == 1 ? 0 : 1, false);
+            }
+            */
             return base.InteractWith(interactable, interaction, doAction);
         }
 
@@ -177,6 +197,25 @@ namespace BrainClock.PlayerComms
             }
         }
 
+        public override bool IsOperable
+        {
+            get
+            {
+                //if (this.OnOff && this.Powered)
+                if (this.Powered)
+                   return true;
+                return false;
+            }
+        }
+
+        public bool IsAvailable()
+        {
+            //if (this.IsOperable && this.OnOff)
+            //    return this.Powered;
+            return true;
+        }
+
+        /*
         private bool InUse
         {
             get
@@ -187,33 +226,66 @@ namespace BrainClock.PlayerComms
                 return (activeHandSlot != null ? activeHandSlot.Get() : null) == this;
             }
         }
+        */
 
-        public void SendStartTransmission()
+
+        public override void OnUsePrimary(Vector3 targetLocation, Quaternion targetRotation, ulong steamId, bool authoringMode)
         {
-            //OnServer.PlayClip(this.ReferenceId, CursorManager.CursorHit.point, true);
+            Debug.Log("******** Using Primary!");
+            base.OnUsePrimary(targetLocation, targetRotation, steamId, authoringMode);
+            //if (!this.OnOff || !this.Powered)
+            //    return;
+            this.UseRadio().Forget();
         }
 
-        public void SendEndTransmission()
+        private void FixedUpdate()
         {
-            //OnServer.PlayClip(this.ReferenceId, CursorManager.CursorHit.point, true);
+            if (KeyManager.GetMouse("Primary") && !_primaryKey)
+            {
+                _primaryKey = true;
+                this.UseRadio().Forget();
+            }
+        }
+
+        private async UniTaskVoid UseRadio()
+        {
+            Radio radio = this;
+
+            // Can't use the radio if not powered.
+            if (!Powered)
+            {
+                _primaryKey = false;
+                return;
+            }
+
+            Thing.Interact(radio.InteractActivate, 1);
+            //OnServer.Interact(this.InteractActivate, 1, false);
+
+            while (KeyManager.GetMouse("Primary") && !KeyManager.GetButton(KeyMap.SwapHands))// && (radio.OnOff && radio.Powered))
+                await UniTask.NextFrame();
+
+            Thing.Interact(radio.InteractActivate, 0);
+            //OnServer.Interact(this.InteractActivate, 0, false);
+            //miningDrill._drillInUse = false;
+            _primaryKey = false;
         }
 
         public override void OnPrimaryUseStart()
         {
+            Debug.Log("---------OnPrimaryUseStart()");
             base.OnPrimaryUseStart();
             if (this.Activate == 1)
                 return;
-            this.SendStartTransmission();
             // Interaction disabled until it is setup
-            //Thing.Interact(this.InteractActivate, 1);
+            Thing.Interact(this.InteractActivate, 1);
         }
 
         public override void OnPrimaryUseEnd()
         {
+            Debug.Log("---------OnPrimaryUseEnd()");
             base.OnPrimaryUseEnd();
-            this.SendEndTransmission();
             // Interaction disabled until it is setup
-            //Thing.Interact(this.InteractActivate, 0);
+            Thing.Interact(this.InteractActivate, 0);
         }
 
         /*
@@ -241,6 +313,10 @@ namespace BrainClock.PlayerComms
         public void ReceiveAudioData(long referenceId, byte[] data, int length, float volume, int flags)
         {
             Debug.Log("Radio.ReceiveAudioStreamData()");
+
+            if (!this.Powered || this.Activate != 0)
+                return;
+
             if (audioStreamReceivers != null)
             {
                 foreach (IAudioStreamReceiver audioStreamReceiver in audioStreamReceivers)
