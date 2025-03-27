@@ -1024,6 +1024,7 @@ GameObject:
   - component: {fileID: 2130879300931552284}
   - component: {fileID: 4329530903260662299}
   - component: {fileID: 7118539503028382551}
+  - component: {fileID: 3547864001529104315}
   m_Layer: 0
   m_Name: Speaker
   m_TagString: Untagged
@@ -1186,6 +1187,100 @@ AudioHighPassFilter:
   m_Enabled: 1
   m_CutoffFrequency: 1000
   m_HighpassResonanceQ: 7
+--- !u!114 &3547864001529104315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6493288628103453251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e950d997e252d545bc991ddb5e2f2b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameObject: {fileID: 8957088002191714690}
+  Transform: {fileID: 694331462924560736}
+  GameAudioSource:
+    Name: SpeakerAudioSource
+    ParentPooledAudioSource: {fileID: 0}
+    ParentStaticAudioSource: {fileID: 0}
+    AudioSource: {fileID: 2130879300931552284}
+    LowPassFilter: {fileID: 0}
+    HighPassFilter: {fileID: 0}
+    SourceVolume: 1
+    SourcePitch: 1
+    SpatialCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.0041656494
+        value: 0.9056587
+        inSlope: -0.19915305
+        outSlope: -0.19915305
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.48004523
+      - serializedVersion: 3
+        time: 0.49370188
+        value: 0.70719075
+        inSlope: -0.90331614
+        outSlope: -0.90331614
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9916687
+        value: 0.009433746
+        inSlope: -1.4012119
+        outSlope: -1.4012119
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ReverbCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -0.0041656494
+        value: 0.7806587
+        inSlope: -2.120029
+        outSlope: -2.120029
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.2057779
+        value: 0.33557233
+        inSlope: -1.2675107
+        outSlope: -1.2675107
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9916687
+        value: 0.009433746
+        inSlope: -0.41499224
+        outSlope: -0.41499224
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    OcclusionType: 0
+    LocalMixerGroupHash: -1929936868
+    ExternalMixerGroupHash: -1591426066
+    VacuumMixerGroupHash: -710576460
+    OccludedMixerGroupHash: -1140213991
 --- !u!1 &7548768812231045290
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,7 +1640,7 @@ MonoBehaviour:
       BuildStateConditions: 
     - Name: activating
       NameHash: 2091903378
-      Channel: 1
+      Channel: 0
       Parent: {fileID: 5817560575543436827}
       ClipsData:
         Name: activating
@@ -1669,67 +1764,6 @@ MonoBehaviour:
     ParentPooledAudioSource: {fileID: 0}
     ParentStaticAudioSource: {fileID: 0}
     AudioSource: {fileID: 1509213354270370273}
-    LowPassFilter: {fileID: 0}
-    HighPassFilter: {fileID: 0}
-    SourceVolume: 1
-    SourcePitch: 1
-    SpatialCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: -1.0078921
-        outSlope: -1.0078921
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.9874878
-        value: 0.0047187805
-        inSlope: -1.0078921
-        outSlope: -1.0078921
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    ReverbCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: -0.99292374
-        outSlope: -0.99292374
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 0.0070762634
-        inSlope: -0.99292374
-        outSlope: -0.99292374
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    OcclusionType: 0
-    LocalMixerGroupHash: -1929936868
-    ExternalMixerGroupHash: -1591426066
-    VacuumMixerGroupHash: -710576460
-    OccludedMixerGroupHash: -1140213991
-  - Name: Speaker
-    ParentPooledAudioSource: {fileID: 0}
-    ParentStaticAudioSource: {fileID: 0}
-    AudioSource: {fileID: 2130879300931552284}
     LowPassFilter: {fileID: 0}
     HighPassFilter: {fileID: 0}
     SourceVolume: 1
@@ -2137,6 +2171,7 @@ MonoBehaviour:
   manuallyAuthoredToolSpeedOffset: 0
   UsedPowerPassive: 10
   UsedPowerActive: 100
+  SpeakerAudioSource: {fileID: 3547864001529104315}
   Channels: 16
   Range: 200
   PushToTalk: {fileID: 889092854574297999}

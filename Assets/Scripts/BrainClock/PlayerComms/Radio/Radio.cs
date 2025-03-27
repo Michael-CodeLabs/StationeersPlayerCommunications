@@ -28,12 +28,13 @@ namespace BrainClock.PlayerComms
         // List of all spawned radios 
         public static List<Radio> AllRadios = new List<Radio>();
 
-        // Define events for subscription
+        // Define events for subscription 
         public static event Action<Radio> OnRadioCreated;
         public static event Action<Radio> OnRadioDestroyed;
 
         [Header("Radio")]
-        public int Channels = 1;
+        public StaticAudioSource SpeakerAudioSource;
+        public int Channels = 1; 
         public float Range = 200;
         public Collider PushToTalk;
         public Collider ChannelUp;
@@ -63,9 +64,9 @@ namespace BrainClock.PlayerComms
             Debug.Log("Radio.Start()");
             try
             {
-                //Debug.Log($"transform.parent {transform.parent}");
-                //IAudioParent audioparent = transform.parent.GetComponent<Thing>() as IAudioParent;
-                //AudioSources[1].Init((IAudioParent)audioparent);
+                Debug.Log($"transform.parent {transform}");
+                IAudioParent audioparent = transform.GetComponent<Thing>() as IAudioParent;
+                SpeakerAudioSource.GameAudioSource.Init((IAudioParent)audioparent);
             }
             catch (Exception ex)
             {
@@ -112,18 +113,18 @@ namespace BrainClock.PlayerComms
         {
             // Setting up Speaker GameAudioSource
             Debug.Log("Setting up Speaker GameAudioSource");
-            AudioSources[1].AudioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("External"));
-            AudioSources[1].AudioSource.loop = true;
-            AudioSources[1].AudioSource.volume = 1;
-            AudioSources[1].AudioSource.Play();
-            AudioSources[1].CurrentMixerGroupNameHash = UnityEngine.Animator.StringToHash("External");
-            AudioSources[1].SetSpatialBlend(1);
-            AudioSources[1].ManageOcclusion(true);
-            AudioSources[1].CalculateAndSetAtmosphericVolume(true);
-            AudioSources[1].SetEnabled(true);
-            AudioSources[1].SourceVolume = 1;
+            SpeakerAudioSource.GameAudioSource.AudioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("External"));
+            SpeakerAudioSource.GameAudioSource.AudioSource.loop = true;
+            SpeakerAudioSource.GameAudioSource.AudioSource.volume = 1;
+            SpeakerAudioSource.GameAudioSource.AudioSource.Play();
+            SpeakerAudioSource.GameAudioSource.CurrentMixerGroupNameHash = UnityEngine.Animator.StringToHash("External");
+            SpeakerAudioSource.GameAudioSource.SetSpatialBlend(1);
+            SpeakerAudioSource.GameAudioSource.ManageOcclusion(true);
+            SpeakerAudioSource.GameAudioSource.CalculateAndSetAtmosphericVolume(true);
+            SpeakerAudioSource.GameAudioSource.SetEnabled(true);
+            SpeakerAudioSource.GameAudioSource.SourceVolume = 1;
             // Force Adding to thread because the game won't do it unless we 'Play' an audio
-            Singleton<AudioManager>.Instance.AddPlayingAudioSource(AudioSources[1]);
+            Singleton<AudioManager>.Instance.AddPlayingAudioSource(SpeakerAudioSource.GameAudioSource);
         }
 
         public override void OnInteractableUpdated(Interactable interactable)
@@ -316,7 +317,7 @@ namespace BrainClock.PlayerComms
 
         public void ReceiveAudioData(long referenceId, byte[] data, int length, float volume, int flags)
         {
-            Debug.Log("Radio.ReceiveAudioStreamData()");
+            Debug.Log("Radio.ReceiveAudioStreamData()"); 
 
             if (!this.Powered || this.Activate != 0)
                 return;
@@ -325,6 +326,15 @@ namespace BrainClock.PlayerComms
             {
                 foreach (IAudioStreamReceiver audioStreamReceiver in audioStreamReceivers)
                 {
+                    /*
+                    StaticAudioSource staticAudioSource = audioStreamReceiver as StaticAudioSource;
+                    if (staticAudioSource != null)
+                    {
+                        if (staticAudioSource.GameAudioSource.SqDistanceFromListener == null)
+                            Singleton<AudioManager>.Instance.AddPlayingAudioSource(SpeakerAudioSource.GameAudioSource);
+                    }
+                    ]*/
+
                     audioStreamReceiver.ReceiveAudioStreamData(data, length);
                 }
             }
