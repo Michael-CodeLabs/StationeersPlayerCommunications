@@ -39,7 +39,7 @@ namespace BrainClock.PlayerComms
         /// <summary>
         /// List of know Radios in the world
         /// </summary>
-        private Dictionary<long, Radio> RadioThings = new Dictionary<long, Radio>();
+        private List<Radio> RadioThings = new List<Radio>();
 
         /// <summary>
         /// For those cases where we should not run.
@@ -75,21 +75,15 @@ namespace BrainClock.PlayerComms
             {
             }
 
-            bool added = RadioThings.TryAdd(radio.ReferenceId, radio);
-            if (added)
-            {
-                Debug.Log($"AudioClipInterfaceHuman.OnRadioCreated() Saved {radio.ReferenceId} {radio}");
-            } else
-            {
-                Debug.Log("Radio referenceId already exists!");
-            }
+            RadioThings.Add(radio);
+            Debug.Log($"AudioClipInterfaceHuman.OnRadioCreated() Saved {radio}");
         }
 
 
         private void OnRadioDestroyed(Radio radio)
         {
             Debug.Log($"AudioClipInterfaceHuman.OnRadioDestroyed() removing {radio.ReferenceId}");
-            RadioThings.Remove(radio.ReferenceId);
+            RadioThings.Remove(radio);
         }
 
         /// <summary>
@@ -107,11 +101,24 @@ namespace BrainClock.PlayerComms
 
             Debug.Log($"AudioClipInterfaceRadio.ReceiveAudioData()");
 
+            /* This is US talking locally on a hosted session, there will no network traffic
             if (referenceId < 1)
             {
                 Debug.Log("Received Audio for unknown referenceId, ignoring");
                 return;
             }
+            */
+
+            foreach(Radio radio in RadioThings)
+            {
+                Debug.Log($"Radio {radio.ReferenceId}");
+
+                IAudioDataReceiver receiver = radio as IAudioDataReceiver;
+                Debug.Log($"Receiver {receiver}");
+                receiver.ReceiveAudioData(-1, data, length, volume, flags);
+            }
+
+
 
             /*
             //IAudioDataReceiver humanAudioReceiver = HumanAudioDataReceivers.GetValueOrDefault(referenceId);
@@ -164,7 +171,7 @@ namespace BrainClock.PlayerComms
         private void HandleWorldExit()
         {
             Console.WriteLine("AudioClipInterfaceRadio.HandleWorldExit()");
-            RadioThings = new Dictionary<long, Radio>(); 
+            RadioThings = new List<Radio>(); 
         }
 
         /// <summary>

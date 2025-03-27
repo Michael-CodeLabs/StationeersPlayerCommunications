@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2909520961
+CRC: 3847018793
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3dfed7a5877750185347e1c6659c0799
+    Hash: 2d27b0a2239195d369cc8ed31ccb563c
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 32e5da37be04ed5f20baa053e6981bd4
+    Hash: e33f3829b4c29e0636b7afd39516ea35
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -49,9 +49,13 @@ ClassTypes:
   Script: {fileID: 1200417347, guid: da8de3ecce08b7a469c6f2a86190a972, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: eafac14d1ad90a24394da61c9e7535a2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 74fa0aca90c33d64d8ddb2fb94f83404, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 164
+  Script: {instanceID: 0}
+- Class: 165
   Script: {instanceID: 0}
 - Class: 169
   Script: {instanceID: 0}
@@ -64,6 +68,8 @@ SerializeReferenceClassIdentifiers:
   ClassName: Assets.Scripts.Objects.ColorSwatch
 - AssemblyName: Assembly-CSharp
   ClassName: Assets.Scripts.Objects.IndestructableDamageState
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.Interactable
 - AssemblyName: Assembly-CSharp
   ClassName: Assets.Scripts.Objects.Item/DecayMixture
 - AssemblyName: Assembly-CSharp
