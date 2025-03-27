@@ -249,9 +249,10 @@ namespace BrainClock.PlayerComms
             if (human == null)
                 return;
 
-            if (human.RightHandSlot.Get() != this && human.LeftHandSlot.Get() != this)
+            if (human.RightHandSlot.Get() as Radio != this && human.LeftHandSlot.Get() as Radio != this)
                 return;
 
+            Debug.Log($"Human is holding this radio {ReferenceId}");
             if (KeyManager.GetMouse("Primary") && !_primaryKey)
             {
                 _primaryKey = true;

@@ -6,6 +6,7 @@ using Assets.Scripts.Objects.Entities;
 using Assets.Scripts.Networking;
 using Assets.Scripts.Objects;
 using static Assets.Scripts.Networking.NetworkUpdateType.Thing;
+using Assets.Scripts;
 
 namespace BrainClock.PlayerComms
 {
@@ -101,6 +102,10 @@ namespace BrainClock.PlayerComms
 
             Debug.Log($"AudioClipInterfaceRadio.ReceiveAudioData() referenceId {referenceId}");
 
+            // This is to prevent client's echo
+            if (referenceId < 1 && NetworkManager.IsClient)
+                return;
+
             // We are not accepting audio from no source, we need the source to find the radio being used.
             if (referenceId < 1)
             {
@@ -114,17 +119,25 @@ namespace BrainClock.PlayerComms
             }
 
             Debug.Log($"AudioClipInterfaceRadio.ReceiveAudioData() continuing with {referenceId}");
-
+            bool send = false;
             foreach (Human human in Human.AllHumans)
             {
                 if (human.ReferenceId == referenceId)
                 {
-                    if ((human.LeftHandSlot.Get()?.Activate < 1) && (human.RightHandSlot.Get()?.Activate < 1))
+                    Radio lh = human.LeftHandSlot.Get() as Radio;
+                    Radio rh = human.RightHandSlot.Get() as Radio;
+                    if ((lh != null && lh.Activate > 0) || (rh != null && rh.Activate > 0))
                     {
-                        Debug.Log("Human doesn't have anything activated on any hands.");
-                        return;
+                        Debug.Log($"SEND THIS Audio FROM referenceId {referenceId}");
+                        send = true;
                     }
                 }
+            }
+
+            if (!send)
+            {
+                Debug.Log("No human detected with an active tool in hand");
+                return;
             }
 
             /* This is US talking locally on a hosted session, there will no network traffic
@@ -135,13 +148,13 @@ namespace BrainClock.PlayerComms
             }
             */
 
-            foreach(Radio radio in RadioThings)
+            foreach (Radio radio in RadioThings)
             {
                 Debug.Log($"Radio {radio.ReferenceId}");
 
                 IAudioDataReceiver receiver = radio as IAudioDataReceiver;
                 Debug.Log($"Receiver {receiver}");
-                receiver.ReceiveAudioData(-1, data, length, volume, flags);
+                receiver.ReceiveAudioData(referenceId, data, length, volume, flags);
             }
 
         }
