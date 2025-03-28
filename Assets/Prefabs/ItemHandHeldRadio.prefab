@@ -1664,7 +1664,7 @@ MonoBehaviour:
     RealWorldScale: 1
     ScaleMultiplier: 0
     OccupantCastsShadows: 0
-    HidesOccupant: 0
+    HidesOccupant: 1
     IsHiddenInSeat: 0
     IsInteractable: 1
     IsSwappable: 1
