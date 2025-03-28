@@ -73,11 +73,11 @@ MonoBehaviour:
   - name: On
     Id: 1
     materials:
-    - {fileID: 2100000, guid: 69a1b01afebf8c14ead25a564925c5a4, type: 2}
-  - name: Error
+    - {fileID: 2100000, guid: 039738c4dcc52c44b828989bb034ca8f, type: 2}
+  - name: Busy
     Id: 2
     materials:
-    - {fileID: 2100000, guid: 2a36e2fe952e5194f8702342d2130a1e, type: 2}
+    - {fileID: 2100000, guid: 7966e47971a5fce4f8913a3cf6d66f1b, type: 2}
   renderer: {fileID: 2089305059714010826}
 --- !u!1 &439382073597665914
 GameObject:

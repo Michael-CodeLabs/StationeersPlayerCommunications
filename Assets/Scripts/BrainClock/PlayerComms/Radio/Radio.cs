@@ -165,7 +165,7 @@ namespace BrainClock.PlayerComms
             // Visually update PTT button
             UpdatePushToTalkButton();
 
-
+            // Visual
             CheckError();
 
 
@@ -423,6 +423,7 @@ namespace BrainClock.PlayerComms
             else
             {
                 // Setting Knob value
+                pushToTalk.MaterialChanger.ChangeState(Activate);
                 pushToTalk.RefreshState();
             }
         }
