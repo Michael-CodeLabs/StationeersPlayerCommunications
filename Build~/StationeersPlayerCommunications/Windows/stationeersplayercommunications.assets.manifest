@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3842857419
+CRC: 3479068145
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 74c7fb37d3909d474441fb3d8981012b
+    Hash: 80f738d941be90eea1cd664a18f823da
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 35ff81108a85bb5501c2f213826cac8e
+    Hash: e8a8c49884386e3f22d8ae84a015c4f8
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -76,6 +76,8 @@ SerializeReferenceClassIdentifiers:
   ClassName: Assets.Scripts.Objects.Interactable
 - AssemblyName: Assembly-CSharp
   ClassName: Assets.Scripts.Objects.Item/DecayMixture
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.Pipes.Knob
 - AssemblyName: Assembly-CSharp
   ClassName: Assets.Scripts.Objects.Slot
 - AssemblyName: Assembly-CSharp

@@ -14,6 +14,9 @@ using Assets.Scripts.Util;
 using static Assets.Scripts.Objects.Thing;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
+using Assets.Scripts.Objects.Pipes;
+using Assets.Scripts.Objects.Electrical;
+using System.Threading;
 
 namespace BrainClock.PlayerComms
 {
@@ -39,8 +42,11 @@ namespace BrainClock.PlayerComms
         public Collider PushToTalk;
         public Collider ChannelUp;
         public Collider ChannelDown;
-        public Collider VolumenUp;
-        public Collider VolumenDown;
+
+        [Header("Controls")]
+        [SerializeField] private Knob knobVolumen;
+
+
 
         private int _currentChannel;
 
@@ -88,6 +94,9 @@ namespace BrainClock.PlayerComms
             Debug.Log("Setting up channel from Mode.");
             Channel = Mode;
 
+            // Initialize Volumen Knob
+            knobVolumen.Initialize(this);
+
         }
 
         /// <summary>
@@ -130,7 +139,13 @@ namespace BrainClock.PlayerComms
         public override void OnInteractableUpdated(Interactable interactable)
         {
             base.OnInteractableUpdated(interactable);
-            this.CheckError();
+            
+            // Visually update knob
+            UpdateKnobVolumen();
+
+            CheckError();
+
+
             if (interactable.Action == InteractableType.Activate)
             {
                 Debug.Log($"{Time.timeSinceLevelLoad} OnInteractableUpdated ACTIVATE type ++++ {interactable.State}");
@@ -322,6 +337,30 @@ namespace BrainClock.PlayerComms
             // Trigger event when a radio is destroyed
             OnRadioDestroyed?.Invoke(this);
         }
+
+        #region knob Volumen control
+        /// <summary>
+        /// Knob/Volume is controlled through Button3 and Button4
+        /// </summary>
+        private void UpdateKnobVolumen()
+        {
+            if (!GameManager.IsMainThread)
+                this.UpdateKnobVolumenFromThread().Forget();
+            else
+            {
+                // Setting Knob value
+                knobVolumen.SetKnob(Mode, Channels, 0).Forget();
+            }
+        }
+
+        private async UniTaskVoid UpdateKnobVolumenFromThread()
+        {
+            Radio radio = this;
+            await UniTask.SwitchToMainThread(new CancellationToken());
+            radio.UpdateKnobVolumen();
+        }
+        #endregion
+
 
         public void ReceiveAudioData(long referenceId, byte[] data, int length, float volume, int flags)
         {
