@@ -120,6 +120,8 @@ namespace BrainClock.PlayerComms
 
             Debug.Log($"AudioClipInterfaceRadio.ReceiveAudioData() continuing with {referenceId}");
             bool send = false;
+            int emittingChannel = -1;
+            Transform emittingTransform = null;
             foreach (Human human in Human.AllHumans)
             {
                 if (human.ReferenceId == referenceId)
@@ -128,6 +130,20 @@ namespace BrainClock.PlayerComms
                     Radio rh = human.RightHandSlot.Get() as Radio;
                     if ((lh != null && lh.Activate > 0) || (rh != null && rh.Activate > 0))
                     {
+                        if (lh!= null)
+                        {
+                            if (lh.Activate > 0)
+                            {
+                                emittingChannel = lh.Channel;
+                                emittingTransform = human.transform;
+                            }
+                            if (rh.Activate > 0)
+                            {
+                                emittingChannel = rh.Channel;
+                                emittingTransform = human.transform;
+                            }
+                        }
+
                         Debug.Log($"SEND THIS Audio FROM referenceId {referenceId}");
                         send = true;
                     }
@@ -151,10 +167,13 @@ namespace BrainClock.PlayerComms
             foreach (Radio radio in RadioThings)
             {
                 Debug.Log($"Radio {radio.ReferenceId}");
-
-                IAudioDataReceiver receiver = radio as IAudioDataReceiver;
-                Debug.Log($"Receiver {receiver}");
-                receiver.ReceiveAudioData(referenceId, data, length, volume, flags);
+                // Alternatively find channel through Radio.AllChannels
+                if (radio.Channel == emittingChannel)
+                {
+                    IAudioDataReceiver receiver = radio as IAudioDataReceiver;
+                    Debug.Log($"Receiver {receiver}");
+                    receiver.ReceiveAudioData(referenceId, data, length, volume, flags);
+                }
             }
 
         }

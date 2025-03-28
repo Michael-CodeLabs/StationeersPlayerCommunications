@@ -188,11 +188,6 @@ namespace BrainClock.PlayerComms
             // Visually update PTT button
             UpdatePushToTalkButton();
 
-            // Visual
-            //UpdateChannelBusy();
-            //CheckError();
-
-
             if (interactable.Action == InteractableType.Activate)
             {
                 Debug.Log($"{Time.timeSinceLevelLoad} OnInteractableUpdated ACTIVATE type ++++ {interactable.State}");
@@ -212,7 +207,7 @@ namespace BrainClock.PlayerComms
                 if (Channel < Channels)
                 {
                     if (!doAction)
-                        return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("CH-");
+                        return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("CH+");
 
                     Channel++;
                     OnServer.Interact(this.InteractMode, Channel, false); 
@@ -225,7 +220,7 @@ namespace BrainClock.PlayerComms
                 if (Channel > 0)
                 {
                     if (!doAction)
-                        return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("CH+");
+                        return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("CH-");
 
                     Channel--;
                     OnServer.Interact(this.InteractMode, Channel, false);
@@ -283,24 +278,13 @@ namespace BrainClock.PlayerComms
             long referenceId;
             if (AllChannels.TryGetValue(Channel, out referenceId))
             {
-                Debug.Log($"Trying Channel {Channel} {ReferenceId}, got {referenceId}");
-
                 if (referenceId > 0 && referenceId != ReferenceId)
-                {
-                    Debug.Log($"So set Orange material");
                     pushToTalk.MaterialChanger.ChangeState(2);
-                }
                 else
-                {
-                    Debug.Log($"So set state based on state");
                     pushToTalk.MaterialChanger.ChangeState(Activate);
-                }
             }
             else
-            {
-                Debug.Log($"No Channel found, so set based on state");
                 pushToTalk.MaterialChanger.ChangeState(Activate);
-            }
             
         }
 
@@ -331,14 +315,7 @@ namespace BrainClock.PlayerComms
                 return true;
             return false;
         }
-
-        public bool IsAvailable()
-        {
-            //if (this.IsOperable && this.OnOff)
-            //    return this.Powered;
-            return true;
-        }
-
+                
         /*
         private bool InUse
         {
@@ -528,22 +505,11 @@ namespace BrainClock.PlayerComms
 
             if (!this.Powered || this.Activate != 0)
                 return;
-
             
-
             if (audioStreamReceivers != null)
             {
                 foreach (IAudioStreamReceiver audioStreamReceiver in audioStreamReceivers)
                 {
-                    /*
-                    StaticAudioSource staticAudioSource = audioStreamReceiver as StaticAudioSource;
-                    if (staticAudioSource != null)
-                    {
-                        if (staticAudioSource.GameAudioSource.SqDistanceFromListener == null)
-                            Singleton<AudioManager>.Instance.AddPlayingAudioSource(SpeakerAudioSource.GameAudioSource);
-                    }
-                    ]*/
-
                     audioStreamReceiver.ReceiveAudioStreamData(data, length);
                 }
             }
