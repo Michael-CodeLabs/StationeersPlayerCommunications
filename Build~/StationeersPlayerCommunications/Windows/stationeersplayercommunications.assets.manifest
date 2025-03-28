@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3479068145
+CRC: 2385373244
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 80f738d941be90eea1cd664a18f823da
+    Hash: e19d5191e091c0b9bd786762ecb0397a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: e8a8c49884386e3f22d8ae84a015c4f8
+    Hash: 8238422bed5d623501f63854a58f0395
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -55,6 +55,10 @@ ClassTypes:
   Script: {fileID: 11500000, guid: ecdc8334da7363f4d9c811ed1dfb8c63, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 6e950d997e252d545bc991ddb5e2f2b3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2500a43fdc788ba41b80c30759130a34, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: bbac9049f00f2c84ba30c2f07f3f75d9, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 164
@@ -90,6 +94,8 @@ SerializeReferenceClassIdentifiers:
   ClassName: Assets.Scripts.Sound.GameAudioSource
 - AssemblyName: Assembly-CSharp
   ClassName: Assets.Scripts.Sound.SoundEffectCondition
+- AssemblyName: Assembly-CSharp
+  ClassName: Effects.MaterialAnimState
 - AssemblyName: Assembly-CSharp
   ClassName: Reagents.Alcohol
 - AssemblyName: Assembly-CSharp

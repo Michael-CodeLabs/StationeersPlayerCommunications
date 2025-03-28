@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6789051024233932545}
+  - component: {fileID: 3540650492433926002}
+  - component: {fileID: 3414812927019581940}
   m_Layer: 0
   m_Name: PTTButton
   m_TagString: Untagged
@@ -32,6 +34,51 @@ Transform:
   - {fileID: 1808339279818501521}
   m_Father: {fileID: 694331462924560736}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3540650492433926002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295749288489028272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2500a43fdc788ba41b80c30759130a34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialChanger: {fileID: 3414812927019581940}
+  buttonTransform: {fileID: 1808339279818501521}
+  parentThing: {fileID: 5817560575543436827}
+  activate0Position: {x: 0, y: 0, z: 0}
+  activate1Position: {x: 0, y: 0, z: -0.005}
+  interactionTrigger: {fileID: 889092854574297999}
+  buttonSpeed: 1
+--- !u!114 &3414812927019581940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295749288489028272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbac9049f00f2c84ba30c2f07f3f75d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  states:
+  - name: Off
+    Id: 0
+    materials:
+    - {fileID: 2100000, guid: 5cab5615c3f50a146996353e7a9098fe, type: 2}
+  - name: On
+    Id: 1
+    materials:
+    - {fileID: 2100000, guid: 69a1b01afebf8c14ead25a564925c5a4, type: 2}
+  - name: Error
+    Id: 2
+    materials:
+    - {fileID: 2100000, guid: 2a36e2fe952e5194f8702342d2130a1e, type: 2}
+  renderer: {fileID: 2089305059714010826}
 --- !u!1 &439382073597665914
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +322,7 @@ Transform:
   m_GameObject: {fileID: 1267220558297522572}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.0002, y: -0.0003, z: -0.0003}
+  m_LocalPosition: {x: -0.0002, y: -0.0003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2229,15 +2276,15 @@ MonoBehaviour:
   SpeakerAudioSource: {fileID: 3547864001529104315}
   Channels: 16
   Range: 200
-  PushToTalk: {fileID: 889092854574297999}
   ChannelUp: {fileID: 6477597438788679583}
   ChannelDown: {fileID: 5239398439370770275}
   knobVolumen:
-    KnobGameObject: {fileID: 0}
+    KnobGameObject: {fileID: 6397103683261333594}
     NeedleMinimum: 0
     NeedleMaximum: 240
     rotationAxis: {x: 0, y: 0, z: 1}
     _invertRotation: 0
+  pushToTalk: {fileID: 3540650492433926002}
 --- !u!65 &3820930944913580880
 BoxCollider:
   m_ObjectHideFlags: 0

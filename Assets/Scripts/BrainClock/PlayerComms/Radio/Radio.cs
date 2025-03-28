@@ -39,12 +39,12 @@ namespace BrainClock.PlayerComms
         public StaticAudioSource SpeakerAudioSource;
         public int Channels = 1; 
         public float Range = 200;
-        public Collider PushToTalk;
         public Collider ChannelUp;
         public Collider ChannelDown;
 
         [Header("Controls")]
         [SerializeField] private Knob knobVolumen;
+        [SerializeField] private ActivateButton pushToTalk;
 
 
 
@@ -142,6 +142,9 @@ namespace BrainClock.PlayerComms
             
             // Visually update knob
             UpdateKnobVolumen();
+
+            UpdatePushToTalkButton();
+
 
             CheckError();
 
@@ -360,6 +363,28 @@ namespace BrainClock.PlayerComms
             radio.UpdateKnobVolumen();
         }
         #endregion
+
+        #region PushToTalk button
+        private void UpdatePushToTalkButton()
+        {
+            if (!GameManager.IsMainThread)
+                this.UpdatePushToTalkButtonFromThread().Forget();
+            else
+            {
+                // Setting Knob value
+                pushToTalk.RefreshState();
+            }
+        }
+
+        private async UniTaskVoid UpdatePushToTalkButtonFromThread()
+        {
+            Radio radio = this;
+            await UniTask.SwitchToMainThread(new CancellationToken());
+            radio.UpdatePushToTalkButton();
+        }
+        #endregion
+
+
 
 
         public void ReceiveAudioData(long referenceId, byte[] data, int length, float volume, int flags)
