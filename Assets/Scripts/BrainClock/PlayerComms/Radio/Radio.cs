@@ -164,13 +164,17 @@ namespace BrainClock.PlayerComms
             // If a radio becomes active, mark that channel used by that reference Id.
             if (interactable.Action == InteractableType.Activate)
             {
+                Debug.Log($"Updating Channel status: {Channel} {ReferenceId} {interactable.State}");
                 long refid;
                 if (AllChannels.TryGetValue(Channel, out refid))
                 {
-                    AllChannels.Remove(Channel);
+                    AllChannels[Channel] = (interactable.State > 0) ? ReferenceId : 0;
                 }
-                Debug.Log($"Updating Channel status: {Channel} {interactable.State}");
-                AllChannels.Add(Channel, (interactable.State > 0) ? ReferenceId : 0);
+                else
+                {
+                    AllChannels.Add(Channel, (interactable.State > 0) ? ReferenceId : 0);
+                }
+                    
             }
 
 
@@ -185,7 +189,8 @@ namespace BrainClock.PlayerComms
             UpdatePushToTalkButton();
 
             // Visual
-            CheckError();
+            //UpdateChannelBusy();
+            //CheckError();
 
 
             if (interactable.Action == InteractableType.Activate)
@@ -278,9 +283,25 @@ namespace BrainClock.PlayerComms
             long referenceId;
             if (AllChannels.TryGetValue(Channel, out referenceId))
             {
+                Debug.Log($"Trying Channel {Channel} {ReferenceId}, got {referenceId}");
+
                 if (referenceId > 0 && referenceId != ReferenceId)
+                {
+                    Debug.Log($"So set Orange material");
                     pushToTalk.MaterialChanger.ChangeState(2);
+                }
+                else
+                {
+                    Debug.Log($"So set state based on state");
+                    pushToTalk.MaterialChanger.ChangeState(Activate);
+                }
             }
+            else
+            {
+                Debug.Log($"No Channel found, so set based on state");
+                pushToTalk.MaterialChanger.ChangeState(Activate);
+            }
+            
         }
 
         public void OnDocked()
@@ -343,6 +364,9 @@ namespace BrainClock.PlayerComms
 
         private void FixedUpdate()
         {
+            // Visual
+            UpdateChannelBusy();
+
             // Return if radio isn't used.
             Slot activeSlot = InventoryManager.ActiveHandSlot;
             if (activeSlot == null || activeSlot.Get() as Radio != this)
@@ -448,9 +472,6 @@ namespace BrainClock.PlayerComms
                 this.UpdatePushToTalkButtonFromThread().Forget();
             else
             {
-                // Setting Knob value
-                if (!IsChannelBusy())
-                    pushToTalk.MaterialChanger.ChangeState(Activate);
                 pushToTalk.RefreshState();
             }
         }
@@ -462,6 +483,35 @@ namespace BrainClock.PlayerComms
             radio.UpdatePushToTalkButton();
         }
         #endregion
+
+
+
+        private void UpdateChannelBusy()
+        {
+            if (!GameManager.IsMainThread)
+                this.UpdateUpdateChannelBusyFromThread().Forget();
+            else
+            {
+
+                long referenceId;
+                if (AllChannels.TryGetValue(Channel, out referenceId))
+                {
+                    if (referenceId > 0 && referenceId != ReferenceId)
+                        pushToTalk.MaterialChanger.ChangeState(2);
+                    else
+                        pushToTalk.MaterialChanger.ChangeState(Activate);
+                }
+                else
+                    pushToTalk.MaterialChanger.ChangeState(Activate);
+            }
+        }
+
+        private async UniTaskVoid UpdateUpdateChannelBusyFromThread()
+        {
+            Radio radio = this;
+            await UniTask.SwitchToMainThread(new CancellationToken());
+            radio.UpdatePushToTalkButton();
+        }
 
         public override StringBuilder GetExtendedText()
         {
