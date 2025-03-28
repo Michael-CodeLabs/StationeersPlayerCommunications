@@ -294,6 +294,40 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &960812346893330485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2464485658394299060}
+  m_Layer: 0
+  m_Name: Volumen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2464485658394299060
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960812346893330485}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.04368165, y: 0.14170404, z: -0.0389767}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8697108418899013424}
+  - {fileID: 3185845908940227583}
+  - {fileID: 5487091355676592580}
+  m_Father: {fileID: 694331462924560736}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1267220558297522572
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,12 +624,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2564017287933370894}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0008, y: 0.0158, z: -0.0044}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.042881653, y: 0.12579595, z: 0.0731767}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5487091355676592580}
+  m_Father: {fileID: 2464485658394299060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &386718085154807419
 BoxCollider:
@@ -1054,14 +1088,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6397103683261333594}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.2719, z: 0.05}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.04368165, y: 0.13019596, z: 0.088976696}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8697108418899013424}
-  - {fileID: 3185845908940227583}
-  m_Father: {fileID: 694331462924560736}
+  m_Children: []
+  m_Father: {fileID: 2464485658394299060}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &4683820957531127410
 MeshFilter:
@@ -1592,10 +1624,10 @@ Transform:
   - {fileID: 7573878227938060389}
   - {fileID: 5372819954653987878}
   - {fileID: 2758068081387251907}
-  - {fileID: 5487091355676592580}
   - {fileID: 8673748543693186541}
   - {fileID: 2956961091233536827}
   - {fileID: 6789051024233932545}
+  - {fileID: 2464485658394299060}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8710015913221887796
@@ -1927,15 +1959,15 @@ MonoBehaviour:
     AssociatedAudioEvents: []
     ActionName: 
     _state: 0
-  - StringKey: Button3
-    StringHash: -96600646
+  - StringKey: V-
+    StringHash: -387468200
     Parent: {fileID: 5817560575543436827}
     Collider: {fileID: 5526969822761278837}
     FakeCollider: {fileID: 0}
     Bounds:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 0, y: 0, z: 0}
-    Action: 33
+    Action: 34
     Animator: {fileID: 0}
     JoinInProgressSync: 1
     Layer: 0
@@ -1944,15 +1976,15 @@ MonoBehaviour:
     AssociatedAudioEvents: []
     ActionName: 
     _state: 0
-  - StringKey: Button4
-    StringHash: 1683580953
+  - StringKey: V+
+    StringHash: 25432429
     Parent: {fileID: 5817560575543436827}
     Collider: {fileID: 386718085154807419}
     FakeCollider: {fileID: 0}
     Bounds:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 0, y: 0, z: 0}
-    Action: 34
+    Action: 35
     Animator: {fileID: 0}
     JoinInProgressSync: 1
     Layer: 0
@@ -1978,6 +2010,23 @@ MonoBehaviour:
     AssociatedAudioEvents: []
     ActionName: 
     _state: 0
+  - StringKey: Button3
+    StringHash: -96600646
+    Parent: {fileID: 5817560575543436827}
+    Collider: {fileID: 0}
+    FakeCollider: {fileID: 0}
+    Bounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    Action: 33
+    Animator: {fileID: 0}
+    JoinInProgressSync: 1
+    Layer: 0
+    CanKeyInteract: 0
+    KeyMap: 
+    AssociatedAudioEvents: []
+    ActionName: 
+    _state: 5
   AudioEvents: []
   AudioSources:
   - Name: Interact1
@@ -2069,13 +2118,13 @@ MonoBehaviour:
   HasLockState: 0
   HasOnOffState: 1
   HasModeState: 1
-  HasOpenState: 1
+  HasOpenState: 0
   HasImportState: 0
   HasExportState: 0
   HasExport2State: 0
   HasButton1State: 0
   HasButton2State: 0
-  HasButton3State: 0
+  HasButton3State: 1
   HasColorState: 1
   HasAccessState: 0
   _staticColliders: []
@@ -2583,12 +2632,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9139324798296101396}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0008, y: -0.0142, z: -0.0044}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.042881653, y: 0.12579598, z: 0.1031767}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5487091355676592580}
+  m_Father: {fileID: 2464485658394299060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5526969822761278837
 BoxCollider:

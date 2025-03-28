@@ -105,9 +105,9 @@ namespace BrainClock.PlayerComms
 
 
             // Setting up channel from Mode.
-            Debug.Log("Setting up channel and volumen from Mode and Open states.");
-            Channel = InteractMode.State;
-            Volumen = InteractOpen.State;
+            Debug.Log("Setting up channel and volumen from Mode and Button3 states.");
+            Channel = Mode;
+            Volumen = Button3;
 
             // Initialize Volumen Knob
             knobVolumen.Initialize(this);
@@ -211,15 +211,15 @@ namespace BrainClock.PlayerComms
             }
 
             // TODO: these are mechanical buttons
-            if (interactable.Action == InteractableType.Button3)
+            if (interactable.Action == InteractableType.Button5)
             {
                 if (Volumen < _maxVolumenSteps)
                 {
                     if (!doAction)
-                        return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("V-");
+                        return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("V+");
 
                     Volumen++;
-                    OnServer.Interact(this.InteractOpen, Volumen, false);
+                    OnServer.Interact(this.InteractButton3, Volumen, false);
                 }
                 else
                     return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMax);
@@ -229,10 +229,10 @@ namespace BrainClock.PlayerComms
                 if (Volumen > 0)
                 {
                     if (!doAction)
-                        return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("V+");
+                        return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("V-");
 
                     Volumen--;
-                    OnServer.Interact(this.InteractOpen, Volumen, false);
+                    OnServer.Interact(this.InteractButton3, Volumen, false);
                 }
                 else
                     return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMin);
@@ -397,8 +397,10 @@ namespace BrainClock.PlayerComms
             else
             {
                 // Setting Knob value
-                knobVolumen.SetKnob(InteractOpen.State, _maxVolumenSteps, 0).Forget();
-                SpeakerAudioSource.GameAudioSource.SourceVolume = Volumen;
+                knobVolumen.SetKnob(Button3, _maxVolumenSteps, 0).Forget(); 
+                float vol = (float)Button3 * (1f / _maxVolumenSteps);
+                Debug.Log($"UpdaingKnobVolumen {Button3} {vol}");
+                SpeakerAudioSource.GameAudioSource.SourceVolume = vol;
             }
         }
 
