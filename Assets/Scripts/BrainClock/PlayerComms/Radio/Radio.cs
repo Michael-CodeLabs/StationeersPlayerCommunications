@@ -32,6 +32,7 @@ namespace BrainClock.PlayerComms
 
         // List of all spawned radios 
         public static List<Radio> AllRadios = new List<Radio>();
+        public static Dictionary<int, long> AllChannels = new Dictionary<int, long>();
 
         // Define events for subscription 
         public static event Action<Radio> OnRadioCreated;
@@ -160,6 +161,19 @@ namespace BrainClock.PlayerComms
         {
             base.OnInteractableUpdated(interactable);
 
+            // If a radio becomes active, mark that channel used by that reference Id.
+            if (interactable.Action == InteractableType.Activate)
+            {
+                long refid;
+                if (AllChannels.TryGetValue(Channel, out refid))
+                {
+                    AllChannels.Remove(Channel);
+                }
+                Debug.Log($"Updating Channel status: {Channel} {interactable.State}");
+                AllChannels.Add(Channel, (interactable.State > 0) ? ReferenceId : 0);
+            }
+
+
             // Update our states
             Channel = Mode;
             Volumen = Exporting;
@@ -260,18 +274,13 @@ namespace BrainClock.PlayerComms
         {
             if (!GameManager.RunSimulation)
                 return;
-            /*
-            if ((UnityEngine.Object)this.Cartridge == (UnityEngine.Object)null && this.Error == 0)
+
+            long referenceId;
+            if (AllChannels.TryGetValue(Channel, out referenceId))
             {
-                OnServer.Interact(this.InteractError, 1, false);
+                if (referenceId > 0 && referenceId != ReferenceId)
+                    pushToTalk.MaterialChanger.ChangeState(2);
             }
-            else
-            {
-                if (!(bool)((UnityEngine.Object)this.Cartridge) || this.Error != 1)
-                    return;
-                OnServer.Interact(this.InteractError, 0, false);
-            }
-            */
         }
 
         public void OnDocked()
@@ -292,6 +301,14 @@ namespace BrainClock.PlayerComms
                    return true;
                 return false;
             }
+        }
+
+        public bool IsChannelBusy()
+        {
+            long referenceId;
+            if (AllChannels.TryGetValue(Channel, out referenceId) && referenceId > 0)
+                return true;
+            return false;
         }
 
         public bool IsAvailable()
@@ -326,10 +343,16 @@ namespace BrainClock.PlayerComms
 
         private void FixedUpdate()
         {
+            // Return if radio isn't used.
             Slot activeSlot = InventoryManager.ActiveHandSlot;
             if (activeSlot == null || activeSlot.Get() as Radio != this)
                 return;
 
+            // Return if channel is busy
+            if (IsChannelBusy())
+                return;
+
+            // Only operate if everything is ok
             Debug.Log($"Human is holding this radio {ReferenceId}");
             if (KeyManager.GetMouse("Primary") && !_primaryKey && !KeyManager.GetButton(KeyMap.MouseControl))
             {
@@ -349,14 +372,15 @@ namespace BrainClock.PlayerComms
                 return;
             }
 
-            Thing.Interact(radio.InteractActivate, 1);
+            //Thing.Interact(radio.InteractActivate, 1);
+            OnServer.Interact(this.InteractActivate, 1, false);
             //OnServer.Interact(this.InteractActivate, 1, false);
 
-            while (KeyManager.GetMouse("Primary") && !KeyManager.GetButton(KeyMap.SwapHands))// && (radio.OnOff && radio.Powered))
+            while (KeyManager.GetMouse("Primary") && !KeyManager.GetButton(KeyMap.SwapHands) && Powered)
                 await UniTask.NextFrame();
 
-            Thing.Interact(radio.InteractActivate, 0);
-            //OnServer.Interact(this.InteractActivate, 0, false);
+            //Thing.Interact(radio.InteractActivate, 0);
+            OnServer.Interact(this.InteractActivate, 0, false);
             //miningDrill._drillInUse = false;
             _primaryKey = false;
         }
@@ -425,7 +449,8 @@ namespace BrainClock.PlayerComms
             else
             {
                 // Setting Knob value
-                pushToTalk.MaterialChanger.ChangeState(Activate);
+                if (!IsChannelBusy())
+                    pushToTalk.MaterialChanger.ChangeState(Activate);
                 pushToTalk.RefreshState();
             }
         }
