@@ -162,28 +162,46 @@ MonoBehaviour:
     AudioSource: {fileID: 7534122942922871630}
     LowPassFilter: {fileID: 0}
     HighPassFilter: {fileID: 0}
-    SourceVolume: 1
+    SourceVolume: 0.5
     SourcePitch: 1
     SpatialCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
-        inSlope: -1.006024
-        outSlope: -1.006024
-        tangentMode: 34
+        value: 0.9811325
+        inSlope: -0.09930661
+        outSlope: -0.09930661
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
+        outWeight: 0.5013737
+      - serializedVersion: 3
+        time: 0.40703288
+        value: 0.7920356
+        inSlope: -0.6957058
+        outSlope: -0.6957058
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.2140818
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.86335653
+        value: 0.120429024
+        inSlope: -1.1205367
+        outSlope: -1.1205367
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.21188882
+        outWeight: 1
       - serializedVersion: 3
         time: 0.9916687
         value: 0.002357483
-        inSlope: -1.006024
-        outSlope: -1.006024
-        tangentMode: 34
+        inSlope: -0.5345906
+        outSlope: -0.5345906
+        tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 1
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2

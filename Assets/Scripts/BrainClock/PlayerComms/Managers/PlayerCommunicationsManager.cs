@@ -85,7 +85,7 @@ namespace BrainClock.PlayerComms
                 // Add Audio Effects.
                 // TODO: this will apply to all audios, should only be considered
                 // for human voice instead.
-                float volume = 1;
+                float volume = 0.5f;
                 int flags = 0;
                 if (InventoryManager.ParentHuman)
                 {
@@ -93,7 +93,7 @@ namespace BrainClock.PlayerComms
                     {
                         // Adjust volume to the internal pressure (Note, it will still use the External mixer)
                         // TODO FIX AND RELOCATE THIS CORRECTLY
-                        volume = InventoryManager.ParentHuman.BreathingAtmosphere != null ? Mathf.Clamp01((InventoryManager.ParentHuman.BreathingAtmosphere.PressureGassesAndLiquids / new PressurekPa(3.0)).ToFloat()) : 0.0f;
+                        volume *= InventoryManager.ParentHuman.BreathingAtmosphere != null ? Mathf.Clamp01((InventoryManager.ParentHuman.BreathingAtmosphere.PressureGassesAndLiquids / new PressurekPa(3.0)).ToFloat()) : 0.0f;
                         flags = 1;
                     }
                 }
