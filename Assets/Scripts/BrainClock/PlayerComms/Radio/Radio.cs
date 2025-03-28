@@ -17,6 +17,7 @@ using JetBrains.Annotations;
 using Assets.Scripts.Objects.Pipes;
 using Assets.Scripts.Objects.Electrical;
 using System.Threading;
+using Assets.Scripts.Localization2;
 
 namespace BrainClock.PlayerComms
 {
@@ -160,27 +161,33 @@ namespace BrainClock.PlayerComms
 
         public override Assets.Scripts.Objects.Thing.DelayedActionInstance InteractWith(Interactable interactable, Interaction interaction, bool doAction = true)
         {
+
+            // TODO: these are not mechanical buttons, we should not allow interaction unless powered.
             if (interactable.Action == InteractableType.Button1)
             {
-                if (!doAction)
-                    return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("CH-");
-                if (Channel < 7)
+                if (Channel < Channels)
                 {
-                    Debug.Log("[Radio] Increasing Channel number");
+                    if (!doAction)
+                        return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("CH-");
+
                     Channel++;
-                    OnServer.Interact(this.InteractMode, Channel, false);
+                    OnServer.Interact(this.InteractMode, Channel, false); 
                 }
+                else
+                    return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMax);
             }
             if (interactable.Action == InteractableType.Button2)
             {
-                if (!doAction)
-                    return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("CH+");
                 if (Channel > 0)
                 {
-                    Debug.Log("[Radio] Decreasing Channel number");
+                    if (!doAction)
+                        return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("CH+");
+
                     Channel--;
                     OnServer.Interact(this.InteractMode, Channel, false);
                 }
+                else
+                    return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMin);
             }
             /*
             if (interactable.Action == InteractableType.Activate)
@@ -319,19 +326,6 @@ namespace BrainClock.PlayerComms
             Thing.Interact(this.InteractActivate, 0);
         }
 
-        /*
-        public override void OnPowerTick()
-        {
-            // This function will only remove passive power when activated, 
-            // needs to be update to remove passive power all the time it is 
-            // powered and remove active power when activated
-            base.OnPowerTick();
-            if (this.Activate != 1 || this.Battery == null)
-                return;
-            this.Battery.PowerStored -= this.UsedPowerPassive;
-        }
-        */
-
         public override void OnDestroy()
         {
             base.OnDestroy();
@@ -365,6 +359,9 @@ namespace BrainClock.PlayerComms
         #endregion
 
         #region PushToTalk button
+        /// <summary>
+        /// PTT Is controlled through Activate
+        /// </summary>
         private void UpdatePushToTalkButton()
         {
             if (!GameManager.IsMainThread)
@@ -382,6 +379,9 @@ namespace BrainClock.PlayerComms
             await UniTask.SwitchToMainThread(new CancellationToken());
             radio.UpdatePushToTalkButton();
         }
+
+        // TODO: Update Materials
+
         #endregion
 
 
