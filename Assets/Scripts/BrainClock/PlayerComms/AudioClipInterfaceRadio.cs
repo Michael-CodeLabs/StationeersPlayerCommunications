@@ -130,13 +130,16 @@ namespace BrainClock.PlayerComms
                     Radio rh = human.RightHandSlot.Get() as Radio;
                     if ((lh != null && lh.Activate > 0) || (rh != null && rh.Activate > 0))
                     {
-                        if (lh!= null)
+                        if (lh != null)
                         {
                             if (lh.Activate > 0)
                             {
                                 emittingChannel = lh.Channel;
                                 emittingTransform = human.transform;
                             }
+                        }
+                        if (rh != null)
+                        { 
                             if (rh.Activate > 0)
                             {
                                 emittingChannel = rh.Channel;
