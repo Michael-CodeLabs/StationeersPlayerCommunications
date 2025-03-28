@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 439382073597665914}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -184,7 +184,7 @@ MonoBehaviour:
   onPosition: {x: 6, y: 0, z: 0}
   off: {fileID: 2100000, guid: 5cab5615c3f50a146996353e7a9098fe, type: 2}
   on: {fileID: 2100000, guid: 69a1b01afebf8c14ead25a564925c5a4, type: 2}
-  onPowered: {fileID: 2100000, guid: 751b006cfe1dae2469228de92dd461d0, type: 2}
+  onPowered: {fileID: 2100000, guid: 039738c4dcc52c44b828989bb034ca8f, type: 2}
   error:
   - {fileID: 2100000, guid: 751b006cfe1dae2469228de92dd461d0, type: 2}
   - {fileID: 2100000, guid: 5cab5615c3f50a146996353e7a9098fe, type: 2}
@@ -645,7 +645,7 @@ Transform:
   m_GameObject: {fileID: 3032450001256483115}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1055,7 +1055,7 @@ Transform:
   m_GameObject: {fileID: 6397103683261333594}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0.2719, z: 0.05}
+  m_LocalPosition: {x: 0, y: 0.2719, z: 0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1587,14 +1587,14 @@ Transform:
   - {fileID: 4797190780114530955}
   - {fileID: 8883629717106929488}
   - {fileID: 3397928546719274760}
-  - {fileID: 5487091355676592580}
   - {fileID: 5991894922252836959}
   - {fileID: 2442429312191298193}
   - {fileID: 7573878227938060389}
-  - {fileID: 8673748543693186541}
   - {fileID: 5372819954653987878}
-  - {fileID: 2956961091233536827}
   - {fileID: 2758068081387251907}
+  - {fileID: 5487091355676592580}
+  - {fileID: 8673748543693186541}
+  - {fileID: 2956961091233536827}
   - {fileID: 6789051024233932545}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1927,6 +1927,40 @@ MonoBehaviour:
     AssociatedAudioEvents: []
     ActionName: 
     _state: 0
+  - StringKey: Button3
+    StringHash: -96600646
+    Parent: {fileID: 5817560575543436827}
+    Collider: {fileID: 5526969822761278837}
+    FakeCollider: {fileID: 0}
+    Bounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    Action: 33
+    Animator: {fileID: 0}
+    JoinInProgressSync: 1
+    Layer: 0
+    CanKeyInteract: 1
+    KeyMap: 
+    AssociatedAudioEvents: []
+    ActionName: 
+    _state: 0
+  - StringKey: Button4
+    StringHash: 1683580953
+    Parent: {fileID: 5817560575543436827}
+    Collider: {fileID: 386718085154807419}
+    FakeCollider: {fileID: 0}
+    Bounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    Action: 34
+    Animator: {fileID: 0}
+    JoinInProgressSync: 1
+    Layer: 0
+    CanKeyInteract: 1
+    KeyMap: 
+    AssociatedAudioEvents: []
+    ActionName: 
+    _state: 0
   - StringKey: Activate
     StringHash: 1326475003
     Parent: {fileID: 5817560575543436827}
@@ -2035,7 +2069,7 @@ MonoBehaviour:
   HasLockState: 0
   HasOnOffState: 1
   HasModeState: 1
-  HasOpenState: 0
+  HasOpenState: 1
   HasImportState: 0
   HasExportState: 0
   HasExport2State: 0

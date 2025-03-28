@@ -47,12 +47,10 @@ namespace BrainClock.PlayerComms
         [SerializeField] private Knob knobVolumen;
         [SerializeField] private ActivateButton pushToTalk;
 
-
-
-        private int _currentChannel;
-
         private bool _primaryKey = false;
         private bool _isActive = false;
+
+        private int _currentChannel;
         public int Channel
         {
             get
@@ -64,6 +62,21 @@ namespace BrainClock.PlayerComms
                 _currentChannel = value;
             }
         }
+
+        private int _maxVolumenSteps = 10;
+        private int _currentVolumen;
+        public int Volumen
+        {
+            get
+            {
+                return _currentVolumen;
+            }
+            set
+            {
+                _currentVolumen = value;
+            }
+        }
+
 
         public override void Awake()
         {
@@ -92,8 +105,9 @@ namespace BrainClock.PlayerComms
 
 
             // Setting up channel from Mode.
-            Debug.Log("Setting up channel from Mode.");
-            Channel = Mode;
+            Debug.Log("Setting up channel and volumen from Mode and Open states.");
+            Channel = InteractMode.State;
+            Volumen = InteractOpen.State;
 
             // Initialize Volumen Knob
             knobVolumen.Initialize(this);
@@ -137,13 +151,18 @@ namespace BrainClock.PlayerComms
             Singleton<AudioManager>.Instance.AddPlayingAudioSource(SpeakerAudioSource.GameAudioSource);
         }
 
+        /// <summary>
+        /// Used to Visual update different controls and also to track what radio channels are busy
+        /// </summary>
+        /// <param name="interactable"></param>
         public override void OnInteractableUpdated(Interactable interactable)
         {
             base.OnInteractableUpdated(interactable);
             
-            // Visually update knob
+            // Visually update volumen knob
             UpdateKnobVolumen();
 
+            // Visually update PTT button
             UpdatePushToTalkButton();
 
 
@@ -161,6 +180,7 @@ namespace BrainClock.PlayerComms
 
         public override Assets.Scripts.Objects.Thing.DelayedActionInstance InteractWith(Interactable interactable, Interaction interaction, bool doAction = true)
         {
+
 
             // TODO: these are not mechanical buttons, we should not allow interaction unless powered.
             if (interactable.Action == InteractableType.Button1)
@@ -189,7 +209,38 @@ namespace BrainClock.PlayerComms
                 else
                     return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMin);
             }
-            /*
+
+            // TODO: these are mechanical buttons
+            if (interactable.Action == InteractableType.Button3)
+            {
+                if (Volumen < _maxVolumenSteps)
+                {
+                    if (!doAction)
+                        return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("V-");
+
+                    Volumen++;
+                    OnServer.Interact(this.InteractOpen, Volumen, false);
+                }
+                else
+                    return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMax);
+            }
+            if (interactable.Action == InteractableType.Button4)
+            {
+                if (Volumen > 0)
+                {
+                    if (!doAction)
+                        return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("V+");
+
+                    Volumen--;
+                    OnServer.Interact(this.InteractOpen, Volumen, false);
+                }
+                else
+                    return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMin);
+            }
+
+            /* We keep the interactable Activate hidden so it can't be triggered through buttons because
+             * the mod requires someone to hold the radio in an active slot to use it.
+             * 
             if (interactable.Action == InteractableType.Activate)
             {
                 if (!doAction)
@@ -346,7 +397,8 @@ namespace BrainClock.PlayerComms
             else
             {
                 // Setting Knob value
-                knobVolumen.SetKnob(Mode, Channels, 0).Forget();
+                knobVolumen.SetKnob(InteractOpen.State, _maxVolumenSteps, 0).Forget();
+                SpeakerAudioSource.GameAudioSource.SourceVolume = Volumen;
             }
         }
 
@@ -393,6 +445,8 @@ namespace BrainClock.PlayerComms
 
             if (!this.Powered || this.Activate != 0)
                 return;
+
+            
 
             if (audioStreamReceivers != null)
             {
