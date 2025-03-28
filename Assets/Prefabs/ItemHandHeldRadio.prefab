@@ -1827,7 +1827,7 @@ MonoBehaviour:
       Parent: {fileID: 5817560575543436827}
       ClipsData:
         Name: activating
-        ChannelName: 
+        ChannelName: Interact1
         Looping: 1
         LoopingOneShots: 0
         RandomStartTime: 0
@@ -1862,7 +1862,7 @@ MonoBehaviour:
       Parent: {fileID: 5817560575543436827}
       ClipsData:
         Name: activating
-        ChannelName: 
+        ChannelName: activating1
         Looping: 1
         LoopingOneShots: 0
         RandomStartTime: 0
@@ -1878,7 +1878,8 @@ MonoBehaviour:
         FadePitch: 0
         FadeInTime: 0.2
         FadeOutTime: 0.2
-        Clips: []
+        Clips:
+        - {fileID: 8300000, guid: 9890d56162bba0d4aab3ec155b108785, type: 3}
         Concurrencies: []
         ConcurrencyIds: 
         NameHash: 2091903378
@@ -2010,23 +2011,40 @@ MonoBehaviour:
     AssociatedAudioEvents: []
     ActionName: 
     _state: 0
-  - StringKey: Button3
-    StringHash: -96600646
+  - StringKey: Exporting
+    StringHash: 278033278
     Parent: {fileID: 5817560575543436827}
     Collider: {fileID: 0}
     FakeCollider: {fileID: 0}
     Bounds:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 0, y: 0, z: 0}
-    Action: 33
+    Action: 40
     Animator: {fileID: 0}
     JoinInProgressSync: 1
-    Layer: 0
+    Layer: 1
     CanKeyInteract: 0
     KeyMap: 
     AssociatedAudioEvents: []
     ActionName: 
     _state: 5
+  - StringKey: Color
+    StringHash: -1483249683
+    Parent: {fileID: 5817560575543436827}
+    Collider: {fileID: 0}
+    FakeCollider: {fileID: 0}
+    Bounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    Action: 45
+    Animator: {fileID: 0}
+    JoinInProgressSync: 1
+    Layer: 1
+    CanKeyInteract: 0
+    KeyMap: 
+    AssociatedAudioEvents: []
+    ActionName: 
+    _state: 0
   AudioEvents: []
   AudioSources:
   - Name: Interact1
@@ -2119,12 +2137,12 @@ MonoBehaviour:
   HasOnOffState: 1
   HasModeState: 1
   HasOpenState: 0
-  HasImportState: 0
+  HasImportState: 1
   HasExportState: 0
   HasExport2State: 0
   HasButton1State: 0
   HasButton2State: 0
-  HasButton3State: 1
+  HasButton3State: 0
   HasColorState: 1
   HasAccessState: 0
   _staticColliders: []

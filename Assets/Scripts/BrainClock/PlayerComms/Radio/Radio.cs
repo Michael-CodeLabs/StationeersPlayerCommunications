@@ -105,9 +105,9 @@ namespace BrainClock.PlayerComms
 
 
             // Setting up channel from Mode.
-            Debug.Log("Setting up channel and volumen from Mode and Button3 states.");
+            Debug.Log("Setting up channel and volumen from Mode and Exporting states.");
             Channel = Mode;
-            Volumen = Button3;
+            Volumen = Exporting;
 
             // Initialize Volumen Knob
             knobVolumen.Initialize(this);
@@ -219,7 +219,7 @@ namespace BrainClock.PlayerComms
                         return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("V+");
 
                     Volumen++;
-                    OnServer.Interact(this.InteractButton3, Volumen, false);
+                    OnServer.Interact(this.InteractExport, Volumen, false);
                 }
                 else
                     return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMax);
@@ -232,7 +232,7 @@ namespace BrainClock.PlayerComms
                         return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("V-");
 
                     Volumen--;
-                    OnServer.Interact(this.InteractButton3, Volumen, false);
+                    OnServer.Interact(this.InteractExport, Volumen, false);
                 }
                 else
                     return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMin);
@@ -388,7 +388,7 @@ namespace BrainClock.PlayerComms
 
         #region knob Volumen control
         /// <summary>
-        /// Knob/Volume is controlled through Button3 and Button4
+        /// Knob/Volume is controlled through Button4 and Button5
         /// </summary>
         private void UpdateKnobVolumen()
         {
@@ -397,9 +397,9 @@ namespace BrainClock.PlayerComms
             else
             {
                 // Setting Knob value
-                knobVolumen.SetKnob(Button3, _maxVolumenSteps, 0).Forget(); 
-                float vol = (float)Button3 * (1f / _maxVolumenSteps);
-                Debug.Log($"UpdaingKnobVolumen {Button3} {vol}");
+                knobVolumen.SetKnob(Exporting, _maxVolumenSteps, 0).Forget(); 
+                float vol = (float)Exporting * (1f / _maxVolumenSteps);
+                Debug.Log($"UpdaingKnobVolumen {Exporting} {vol}");
                 SpeakerAudioSource.GameAudioSource.SourceVolume = vol;
             }
         }
