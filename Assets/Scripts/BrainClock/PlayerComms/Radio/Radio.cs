@@ -159,7 +159,11 @@ namespace BrainClock.PlayerComms
         public override void OnInteractableUpdated(Interactable interactable)
         {
             base.OnInteractableUpdated(interactable);
-            
+
+            // Update our states
+            Channel = Mode;
+            Volumen = Exporting;
+
             // Visually update volumen knob
             UpdateKnobVolumen();
 
