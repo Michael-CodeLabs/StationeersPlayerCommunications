@@ -18,6 +18,7 @@ using Assets.Scripts.Objects.Pipes;
 using Assets.Scripts.Objects.Electrical;
 using System.Threading;
 using Assets.Scripts.Localization2;
+using System.Text;
 
 namespace BrainClock.PlayerComms
 {
@@ -122,7 +123,7 @@ namespace BrainClock.PlayerComms
             Debug.Log($"Radio.Start {ReferenceId}");
             base.Start();
 
-            this.CustomColor = GameManager.GetColorSwatch("ColorBlue");
+            this.CustomColor = GameManager.GetColorSwatch("ColorOrange");
             this.PaintableMaterial = this.CustomColor.Normal;
 
             audioStreamReceivers = GetComponents<IAudioStreamReceiver>();
@@ -321,15 +322,12 @@ namespace BrainClock.PlayerComms
 
         private void FixedUpdate()
         {
-            Human human = InventoryManager.ParentHuman;
-            if (human == null)
-                return;
-
-            if (human.RightHandSlot.Get() as Radio != this && human.LeftHandSlot.Get() as Radio != this)
+            Slot activeSlot = InventoryManager.ActiveHandSlot;
+            if (activeSlot == null || activeSlot.Get() as Radio != this)
                 return;
 
             Debug.Log($"Human is holding this radio {ReferenceId}");
-            if (KeyManager.GetMouse("Primary") && !_primaryKey)
+            if (KeyManager.GetMouse("Primary") && !_primaryKey && !KeyManager.GetButton(KeyMap.MouseControl))
             {
                 _primaryKey = true;
                 this.UseRadio().Forget();
@@ -434,12 +432,15 @@ namespace BrainClock.PlayerComms
             await UniTask.SwitchToMainThread(new CancellationToken());
             radio.UpdatePushToTalkButton();
         }
-
-        // TODO: Update Materials
-
         #endregion
 
-
+        public override StringBuilder GetExtendedText()
+        {
+            StringBuilder extendedText = base.GetExtendedText();
+            extendedText.AppendLine("Volumen: " + (SpeakerAudioSource.GameAudioSource.SourceVolume * 100).ToString("0") + "%");
+            extendedText.AppendLine("Channel: " + (Channel).ToString());
+            return extendedText;
+        }
 
 
         public void ReceiveAudioData(long referenceId, byte[] data, int length, float volume, int flags)

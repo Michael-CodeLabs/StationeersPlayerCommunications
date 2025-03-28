@@ -52,7 +52,7 @@ MonoBehaviour:
   buttonTransform: {fileID: 1808339279818501521}
   parentThing: {fileID: 5817560575543436827}
   activate0Position: {x: 0, y: 0, z: 0}
-  activate1Position: {x: 0, y: 0, z: -0.005}
+  activate1Position: {x: 0, y: 0.005, z: 0}
   interactionTrigger: {fileID: 889092854574297999}
   buttonSpeed: 1
 --- !u!114 &3414812927019581940
