@@ -19,6 +19,7 @@ using Assets.Scripts.Objects.Electrical;
 using System.Threading;
 using Assets.Scripts.Localization2;
 using System.Text;
+using TMPro;
 
 namespace BrainClock.PlayerComms
 {
@@ -42,12 +43,12 @@ namespace BrainClock.PlayerComms
         public StaticAudioSource SpeakerAudioSource;
         public int Channels = 1; 
         public float Range = 200;
-        public Collider ChannelUp;
-        public Collider ChannelDown;
 
         [Header("Controls")]
         [SerializeField] private Knob knobVolumen;
         [SerializeField] private ActivateButton pushToTalk;
+        [SerializeField] private Canvas Screen;
+        [SerializeField] private TextMeshProUGUI ChannelIndicator;
 
         private bool _primaryKey = false;
         private bool _isActive = false;
@@ -181,6 +182,9 @@ namespace BrainClock.PlayerComms
             // Update our states
             Channel = Mode;
             Volumen = Exporting;
+
+            Screen.enabled = Powered;
+            ChannelIndicator.text = Channel.ToString();
 
             // Visually update volumen knob
             UpdateKnobVolumen();
