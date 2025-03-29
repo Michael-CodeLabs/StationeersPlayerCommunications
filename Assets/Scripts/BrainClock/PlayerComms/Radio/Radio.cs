@@ -210,7 +210,8 @@ namespace BrainClock.PlayerComms
                         return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("CH+");
 
                     Channel++;
-                    OnServer.Interact(this.InteractMode, Channel, false); 
+                    Thing.Interact(this.InteractMode, Channel);
+                    //OnServer.Interact(this.InteractMode, Channel, false); 
                 }
                 else
                     return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMax);
@@ -223,7 +224,8 @@ namespace BrainClock.PlayerComms
                         return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("CH-");
 
                     Channel--;
-                    OnServer.Interact(this.InteractMode, Channel, false);
+                    Thing.Interact(this.InteractMode, Channel);
+                    //OnServer.Interact(this.InteractMode, Channel, false);
                 }
                 else
                     return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMin);
@@ -238,7 +240,9 @@ namespace BrainClock.PlayerComms
                         return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("V+");
 
                     Volumen++;
-                    OnServer.Interact(this.InteractExport, Volumen, false);
+                    Thing.Interact(this.InteractExport, Volumen);
+                    //OnServer.Interact(this.InteractExport, Volumen, false);
+
                 }
                 else
                     return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMax);
@@ -251,7 +255,9 @@ namespace BrainClock.PlayerComms
                         return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("V-");
 
                     Volumen--;
-                    OnServer.Interact(this.InteractExport, Volumen, false);
+                    Thing.Interact(this.InteractExport, Volumen);
+                    //OnServer.Interact(this.InteractExport, Volumen, false);
+
                 }
                 else
                     return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMin);
@@ -373,16 +379,14 @@ namespace BrainClock.PlayerComms
                 return;
             }
 
-            //Thing.Interact(radio.InteractActivate, 1);
-            OnServer.Interact(this.InteractActivate, 1, false);
+            Thing.Interact(radio.InteractActivate, 1);
             //OnServer.Interact(this.InteractActivate, 1, false);
 
             while (KeyManager.GetMouse("Primary") && !KeyManager.GetButton(KeyMap.SwapHands) && Powered)
                 await UniTask.NextFrame();
 
-            //Thing.Interact(radio.InteractActivate, 0);
-            OnServer.Interact(this.InteractActivate, 0, false);
-            //miningDrill._drillInUse = false;
+            Thing.Interact(radio.InteractActivate, 0);
+            //OnServer.Interact(this.InteractActivate, 0, false);
             _primaryKey = false;
         }
 
