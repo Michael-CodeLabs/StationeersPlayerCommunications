@@ -1,7 +1,8 @@
 fileFormatVersion: 2
-guid: 39d86bf7dea32ef45927773460c45c40
-PrefabImporter:
+guid: 4c578fb4dc6b06a478ef4fe5fc8e43fa
+NativeFormatImporter:
   externalObjects: {}
+  mainObjectFileID: 11400000
   userData: 
   assetBundleName: stationeersplayercommunications
   assetBundleVariant: assets

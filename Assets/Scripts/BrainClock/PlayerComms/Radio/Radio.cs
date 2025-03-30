@@ -49,6 +49,7 @@ namespace BrainClock.PlayerComms
         [SerializeField] private ActivateButton pushToTalk;
         [SerializeField] private Canvas Screen;
         [SerializeField] private TextMeshProUGUI ChannelIndicator;
+        [SerializeField] private TextMeshProUGUI VolumeIndicator;
 
         private bool _primaryKey = false;
         private bool _isActive = false;
@@ -185,7 +186,8 @@ namespace BrainClock.PlayerComms
 
             Screen.enabled = Powered;
             ChannelIndicator.text = Channel.ToString();
-
+            VolumeIndicator.text = Volumen.ToString();
+            
             // Visually update volumen knob
             UpdateKnobVolumen();
 
