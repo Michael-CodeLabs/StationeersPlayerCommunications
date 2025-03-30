@@ -6,6 +6,7 @@ Player Communications adds immersive voice chat to Stationeers, allowing players
 - **Face-to-Face Voice Chat**: Voices are affected by environmental factors such as pressure, helmets, and world occlusion.
 - **Directional Audio**: When speaking face-to-face, players' voices are heard based on their position and orientation, adding realism to communication.
 - **Radio Communication**: Enables long-range communication between players.
+- **Radio Channels**: Up to 16 Radio Channels
 - **Steam Voice Integration**: Uses Steam's built-in voice chat system for reliable communication.
 
 ## Requirements
