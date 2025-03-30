@@ -1227,6 +1227,8 @@ MonoBehaviour:
   Screen: {fileID: 2304573064500005577}
   ChannelIndicator: {fileID: 4154357684959670824}
   VolumeIndicator: {fileID: 528795632811731101}
+  SignalTower: {fileID: 7071624555864312296}
+  BatteryIcon: {fileID: 4471148143376751568}
 --- !u!65 &1017782759748964819
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3647,6 +3649,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 71685ab45315bdd4297e2a801e2e145e, type: 3}
   m_PrefabInstance: {fileID: 3660824368341280385}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4471148143376751568 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 71685ab45315bdd4297e2a801e2e145e, type: 3}
+  m_PrefabInstance: {fileID: 3660824368341280385}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7989980303646389433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3727,6 +3734,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RadioTowerSignal
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 389d8f1c9d120a34d949e8944710b28a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6889793682134671817, guid: 389d8f1c9d120a34d949e8944710b28a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -3736,6 +3747,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 389d8f1c9d120a34d949e8944710b28a, type: 3}
+--- !u!1 &7071624555864312296 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 389d8f1c9d120a34d949e8944710b28a, type: 3}
+  m_PrefabInstance: {fileID: 7989980303646389433}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7595503005404271442 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 389d8f1c9d120a34d949e8944710b28a, type: 3}

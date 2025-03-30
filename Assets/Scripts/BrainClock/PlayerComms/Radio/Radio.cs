@@ -20,6 +20,7 @@ using System.Threading;
 using Assets.Scripts.Localization2;
 using System.Text;
 using TMPro;
+using Assets.Scripts.UI;
 
 namespace BrainClock.PlayerComms
 {
@@ -50,7 +51,8 @@ namespace BrainClock.PlayerComms
         [SerializeField] private Canvas Screen;
         [SerializeField] private TextMeshProUGUI ChannelIndicator;
         [SerializeField] private TextMeshProUGUI VolumeIndicator;
-
+        [SerializeField] private GameObject SignalTower;
+        [SerializeField] private GameObject BatteryIcon;
         private bool _primaryKey = false;
         private bool _isActive = false;
 
@@ -185,6 +187,8 @@ namespace BrainClock.PlayerComms
             Volumen = Exporting;
 
             Screen.enabled = Powered;
+            SignalTower.active = Powered;
+            BatteryIcon.active = Powered;
             ChannelIndicator.text = Channel.ToString();
             VolumeIndicator.text = Volumen.ToString();
             
