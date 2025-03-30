@@ -1023,23 +1023,6 @@ MonoBehaviour:
     AssociatedAudioEvents: []
     ActionName: 
     _state: 5
-  - StringKey: Color
-    StringHash: -1483249683
-    Parent: {fileID: 2892032943883829781}
-    Collider: {fileID: 0}
-    FakeCollider: {fileID: 0}
-    Bounds:
-      m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0, y: 0, z: 0}
-    Action: 45
-    Animator: {fileID: 0}
-    JoinInProgressSync: 1
-    Layer: 1
-    CanKeyInteract: 0
-    KeyMap: 
-    AssociatedAudioEvents: []
-    ActionName: 
-    _state: 0
   AudioEvents: []
   AudioSources:
   - Name: Interact1

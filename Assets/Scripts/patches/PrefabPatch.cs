@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using Assets.Scripts;
 using Assets.Scripts.Objects;
 using HarmonyLib;
 using StationeersMods.Interface;
@@ -23,6 +24,11 @@ namespace BrainClock.PlayerComms
                     // Additional patching goes here, like setting references to materials(colors) or tools from the game
                     if (thing != null)
                     {
+                        // Make it paintable and give it a default Orange Color
+                        thing.CustomColor = GameManager.GetColorSwatch("ColorOrange");
+                        thing.PaintableMaterial = thing.CustomColor.Normal;
+
+
                         Debug.Log(gameObject.name + " added to WorldManager");
                         WorldManager.Instance.SourcePrefabs.Add(thing);
                     }

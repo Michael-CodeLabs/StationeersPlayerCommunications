@@ -102,11 +102,6 @@ namespace BrainClock.PlayerComms
             // Force screen offline at spawn, it will be updated with the Powered interactable.
             Screen.enabled = false;
 
-            // Moved color setup to Awake so Deserialize can still change it.
-            // TODO: if this doesn't work, we'll move it to the PrefabPath stage.
-            CustomColor = GameManager.GetColorSwatch("ColorOrange");
-            PaintableMaterial = this.CustomColor.Normal;
-
             base.Awake();
 
             Debug.Log($"Radio.Awake {ReferenceId}");
@@ -184,7 +179,6 @@ namespace BrainClock.PlayerComms
                 {
                     AllChannels.Add(Channel, (interactable.State > 0) ? ReferenceId : 0);
                 }
-                    
             }
 
 
@@ -193,8 +187,9 @@ namespace BrainClock.PlayerComms
             Volumen = Exporting;
 
             Screen.enabled = Powered;
-            //SignalTower.active = Powered;
-            //BatteryIcon.active = Powered;
+            SignalTower.SetActive(Powered);
+            BatteryIcon.SetActive(Powered);
+
             ChannelIndicator.text = (Channel + 1).ToString();
             VolumeIndicator.text = Volumen.ToString();
             
@@ -323,7 +318,6 @@ namespace BrainClock.PlayerComms
         {
             get
             {
-                //if (this.OnOff && this.Powered)
                 if (this.Powered)
                    return true;
                 return false;
