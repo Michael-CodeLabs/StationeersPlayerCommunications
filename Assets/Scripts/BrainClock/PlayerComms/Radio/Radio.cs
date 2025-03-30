@@ -99,16 +99,17 @@ namespace BrainClock.PlayerComms
                 Debug.Log("Setting Speaker GameAudioSource.Init failed " + ex.ToString());
             }
 
+            // Force screen offline at spawn, it will be updated with the Powered interactable.
+            Screen.enabled = false;
 
+            // Moved color setup to Awake so Deserialize can still change it.
+            // TODO: if this doesn't work, we'll move it to the PrefabPath stage.
+            CustomColor = GameManager.GetColorSwatch("ColorOrange");
+            PaintableMaterial = this.CustomColor.Normal;
 
             base.Awake();
 
             Debug.Log($"Radio.Awake {ReferenceId}");
-
-            AllRadios.Add(this);
-
-
-
 
             // Setting up channel from Mode.
             Debug.Log("Setting up channel and volumen from Mode and Exporting states.");
@@ -128,15 +129,20 @@ namespace BrainClock.PlayerComms
             Debug.Log($"Radio.Start {ReferenceId}");
             base.Start();
 
-            this.CustomColor = GameManager.GetColorSwatch("ColorOrange");
-            this.PaintableMaterial = this.CustomColor.Normal;
-
             audioStreamReceivers = GetComponents<IAudioStreamReceiver>();
 
             // Trigger event when a new radio is created
             OnRadioCreated?.Invoke(this);
 
             SetupGameAudioSource();
+
+            // Force screen icons to be powered
+            SignalTower.SetActive(Powered);
+            BatteryIcon.SetActive(Powered);
+
+
+            // Moved to Start so it has a referenceId
+            AllRadios.Add(this);
         }
 
         public void SetupGameAudioSource()
@@ -187,9 +193,9 @@ namespace BrainClock.PlayerComms
             Volumen = Exporting;
 
             Screen.enabled = Powered;
-            SignalTower.active = Powered;
-            BatteryIcon.active = Powered;
-            ChannelIndicator.text = Channel.ToString();
+            //SignalTower.active = Powered;
+            //BatteryIcon.active = Powered;
+            ChannelIndicator.text = (Channel + 1).ToString();
             VolumeIndicator.text = Volumen.ToString();
             
             // Visually update volumen knob
@@ -214,7 +220,7 @@ namespace BrainClock.PlayerComms
             // TODO: these are not mechanical buttons, we should not allow interaction unless powered.
             if (interactable.Action == InteractableType.Button1)
             {
-                if (Channel < Channels)
+                if (Channel <= Channels)
                 {
                     if (!doAction)
                         return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("CH+");
@@ -507,8 +513,8 @@ namespace BrainClock.PlayerComms
         public override StringBuilder GetExtendedText()
         {
             StringBuilder extendedText = base.GetExtendedText();
-            extendedText.AppendLine("Volumen: " + (SpeakerAudioSource.GameAudioSource.SourceVolume * 100).ToString("0") + "%");
-            extendedText.AppendLine("Channel: " + (Channel).ToString());
+            extendedText.AppendLine("Volume: " + (SpeakerAudioSource.GameAudioSource.SourceVolume * 100).ToString("0") + "%");
+            extendedText.AppendLine("Channel: " + (Channel + 1).ToString());
             return extendedText;
         }
 

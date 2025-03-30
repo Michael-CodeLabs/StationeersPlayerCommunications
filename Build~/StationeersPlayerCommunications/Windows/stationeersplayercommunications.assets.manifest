@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 4259317999
+CRC: 1362559607
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ddb258e7276609db7e77b46f152402ad
+    Hash: 05f592d5dd7a45997003797204e982a4
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c5f9710e4f36312a2c267ba6e974ca89
+    Hash: d72cd2d5b4d55963381c54f87eb7c9fb
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -58,8 +58,6 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 80c2b0bd94ed745439100ce30c89eb08, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: bbac9049f00f2c84ba30c2f07f3f75d9, type: 3}
@@ -73,6 +71,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 6e950d997e252d545bc991ddb5e2f2b3, type: 3}
 - Class: 114
   Script: {fileID: 1200417347, guid: da8de3ecce08b7a469c6f2a86190a972, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 80c2b0bd94ed745439100ce30c89eb08, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -251,14 +251,15 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
-- Assets/Prefabs/ItemHandHeldRadio.prefab
 - Assets/StationeersMods/Resources/ExportSettings.asset
 - Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset
 - Assets/TextMesh Pro/Resources/TMP Settings.asset
 - Assets/Prefabs/RadioBlueprint.prefab
+- Assets/Prefabs/ItemHandHeldRadio.prefab
 - Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
 - Assets/Prefabs/HumanAudioSourcePrefab.prefab
 - Assets/Prefabs/PlayerCommunicationsManagerPrefab.prefab
 - Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
+- Assets/Fonts/DS-DIGI SDF.asset
 - Assets/TextMesh Pro/Resources/Style Sheets/Default Style Sheet.asset
 Dependencies: []
