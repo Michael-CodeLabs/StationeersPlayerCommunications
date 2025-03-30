@@ -1121,7 +1121,7 @@ MonoBehaviour:
   HasButton1State: 0
   HasButton2State: 0
   HasButton3State: 0
-  HasColorState: 1
+  HasColorState: 0
   HasAccessState: 0
   _staticColliders: []
   _dynamicColliders:

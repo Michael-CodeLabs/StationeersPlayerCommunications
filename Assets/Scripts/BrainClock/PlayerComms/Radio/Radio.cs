@@ -211,11 +211,10 @@ namespace BrainClock.PlayerComms
         public override Assets.Scripts.Objects.Thing.DelayedActionInstance InteractWith(Interactable interactable, Interaction interaction, bool doAction = true)
         {
 
-
             // TODO: these are not mechanical buttons, we should not allow interaction unless powered.
             if (interactable.Action == InteractableType.Button1)
             {
-                if (Channel <= Channels)
+                if (Channel < Channels - 1)
                 {
                     if (!doAction)
                         return Assets.Scripts.Objects.Thing.DelayedActionInstance.Success("CH+");
@@ -273,6 +272,12 @@ namespace BrainClock.PlayerComms
                 else
                     return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMin);
             }
+
+            if (interactable.Action == InteractableType.Color)
+            {
+                Debug.Log("TRYING COLOR INTERACTION --------------------");
+            }
+
 
             /* We keep the interactable Activate hidden so it can't be triggered through buttons because
              * the mod requires someone to hold the radio in an active slot to use it.
