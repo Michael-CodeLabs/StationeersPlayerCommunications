@@ -801,8 +801,8 @@ MonoBehaviour:
     AssociatedAudioEvents: []
     ActionName: 
     _state: 0
-  - StringKey: Button1
-    StringHash: 338926742
+  - StringKey: ChannelUp
+    StringHash: -505832083
     Parent: {fileID: 2892032943883829781}
     Collider: {fileID: 4066667581652399108}
     FakeCollider: {fileID: 0}
@@ -886,8 +886,8 @@ MonoBehaviour:
       BuildStateConditions: 
     ActionName: 
     _state: 0
-  - StringKey: Button2
-    StringHash: -1925526228
+  - StringKey: ChannelDown
+    StringHash: 715095788
     Parent: {fileID: 2892032943883829781}
     Collider: {fileID: 5513644301020446195}
     FakeCollider: {fileID: 0}
@@ -955,8 +955,8 @@ MonoBehaviour:
     AssociatedAudioEvents: []
     ActionName: 
     _state: 0
-  - StringKey: V-
-    StringHash: -387468200
+  - StringKey: VolumeDown
+    StringHash: -1786798380
     Parent: {fileID: 2892032943883829781}
     Collider: {fileID: 4019743560156957416}
     FakeCollider: {fileID: 0}
@@ -972,8 +972,8 @@ MonoBehaviour:
     AssociatedAudioEvents: []
     ActionName: 
     _state: 0
-  - StringKey: V+
-    StringHash: 25432429
+  - StringKey: VolumeUp
+    StringHash: -720877694
     Parent: {fileID: 2892032943883829781}
     Collider: {fileID: 4487750016732782374}
     FakeCollider: {fileID: 0}

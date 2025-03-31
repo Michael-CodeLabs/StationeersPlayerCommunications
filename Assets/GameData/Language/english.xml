@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Language xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Name>English</Name>
+    <Code>EN</Code>
+    <Font>font_english</Font>
+    <Things>
+		<RecordThing>
+			<Key>ItemHandHeldRadio</Key>
+			<Value>Radio</Value>
+			<Description />
+		</RecordThing>
+			</Things>
+		<Interactables>
+		<Record>
+			<Key>ChannelUp</Key>
+			<Value>Channel Up</Value>
+		</Record>
+		<Record>
+			<Key>ChannelDown</Key>
+			<Value>Channel Down</Value>
+		</Record>
+		<Record>
+			<Key>VolumeUp</Key>
+			<Value>Volume Up</Value>
+		</Record>
+		<Record>
+			<Key>VolumeDown</Key>
+			<Value>Volume Down</Value>
+		</Record>
+	</Interactables>
+</Language>

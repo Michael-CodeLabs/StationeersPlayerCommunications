@@ -485,9 +485,14 @@ namespace BrainClock.PlayerComms
         private void UpdateChannelBusy()
         {
             if (!GameManager.IsMainThread)
+            {
                 this.UpdateUpdateChannelBusyFromThread().Forget();
+            }
             else
             {
+                // Ensure the radio is powered before updating the material
+                if (!Powered)
+                    return;
 
                 long referenceId;
                 if (AllChannels.TryGetValue(Channel, out referenceId))
@@ -498,7 +503,9 @@ namespace BrainClock.PlayerComms
                         pushToTalk.MaterialChanger.ChangeState(Activate);
                 }
                 else
+                {
                     pushToTalk.MaterialChanger.ChangeState(Activate);
+                }
             }
         }
 
