@@ -49,6 +49,10 @@ namespace BrainClock.PlayerComms
         [SerializeField] private GameObject SignalTower;
         [SerializeField] private GameObject BatteryIcon;
 
+        [Header("UI")]
+        [SerializeField] private BatteryDisplay batteryDisplay;
+
+
         private bool _primaryKey = false;
 
         // Current channel of this radio
@@ -99,7 +103,7 @@ namespace BrainClock.PlayerComms
             Debug.Log("Radio.Start()");
             try
             {
-                IAudioParent audioparent = transform.GetComponent<Thing>() as IAudioParent;
+                IAudioParent audioparent = transform.GetComponent<Assets.Scripts.Objects.Thing>() as IAudioParent;
                 SpeakerAudioSource.GameAudioSource.Init((IAudioParent)audioparent);
             }
             catch (Exception ex)
@@ -318,7 +322,19 @@ namespace BrainClock.PlayerComms
                 return true;
             return false;
         }
-                
+
+        private void UpdateBatteryStatus()
+        {
+            IBatteryPowered batteryPowered = this as IBatteryPowered;
+            if (batteryPowered != null)
+            {
+                BatteryCell batteryCell = batteryPowered.Battery;
+
+                if (batteryCell != null)
+                    batteryDisplay.SetBatteryStatus(batteryCell.PowerRatio);
+            }
+
+        }                
 
         /// <summary>
         /// Check if the player wants to use the radio (using the mouse button).
@@ -327,6 +343,12 @@ namespace BrainClock.PlayerComms
         {
             // Visual update of the Activate button
             UpdateChannelBusy();
+
+            // Update Battery status
+            if (batteryDisplay != null)
+                UpdateBatteryStatus();
+
+            // TODO update booster status
 
             // Return if radio isn't used.
             Slot activeSlot = InventoryManager.ActiveHandSlot;
@@ -392,7 +414,7 @@ namespace BrainClock.PlayerComms
                 // Setting Knob value
                 knobVolume.SetKnob(Exporting, _maxVolumeSteps, 0).Forget(); 
                 float vol = (float)Exporting * (1f / _maxVolumeSteps);
-                Debug.Log($"UpdaingKnobVolume {Exporting} {vol}");
+                //Debug.Log($"UpdaingKnobVolume {Exporting} {vol}");
                 SpeakerAudioSource.GameAudioSource.SourceVolume = vol;
             }
         }
