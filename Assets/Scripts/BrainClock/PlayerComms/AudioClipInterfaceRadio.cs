@@ -7,6 +7,7 @@ using Assets.Scripts.Networking;
 using Assets.Scripts.Objects;
 using static Assets.Scripts.Networking.NetworkUpdateType.Thing;
 using Assets.Scripts;
+using Unity.Collections;
 
 namespace BrainClock.PlayerComms
 {
@@ -31,11 +32,10 @@ namespace BrainClock.PlayerComms
     {
 
         /// <summary>
-        /// Prefab to spawn with every Radio, contains a StaticAudioSource and
-        /// must implement IAudioDataReceiver too. Not needed if Radios include
-        /// an specific audiosource for this.
+        /// Applies a volume multiplier to all audios sent to radios
         /// </summary>
-        public GameObject RadioAudioPrefab;
+        [Tooltip("Apply this volume multiplier to all clips sent to radio entities")]
+        public float VolumeMultiplier = 1.0f;
 
         /// <summary>
         /// List of know Radios in the world
@@ -72,18 +72,12 @@ namespace BrainClock.PlayerComms
         /// <param name="entity"></param>
         private void OnRadioCreated(Radio radio)
         {
-            if (RadioAudioPrefab != null)
-            {
-            }
-
             RadioThings.Add(radio);
-            Debug.Log($"AudioClipInterfaceHuman.OnRadioCreated() Saved {radio}");
         }
 
 
         private void OnRadioDestroyed(Radio radio)
         {
-            Debug.Log($"AudioClipInterfaceHuman.OnRadioDestroyed() removing {radio.ReferenceId}");
             RadioThings.Remove(radio);
         }
 
@@ -100,7 +94,7 @@ namespace BrainClock.PlayerComms
             if (!isReady) 
                 return;
 
-            Debug.Log($"AudioClipInterfaceRadio.ReceiveAudioData() referenceId {referenceId}");
+            //Debug.Log($"AudioClipInterfaceRadio.ReceiveAudioData() referenceId {referenceId}");
 
             // This is to prevent client's echo
             if (referenceId < 1 && NetworkManager.IsClient)
@@ -113,12 +107,12 @@ namespace BrainClock.PlayerComms
                     referenceId = InventoryManager.ParentHuman.ReferenceId;
                 else
                 {
-                    Debug.Log("Can't find human referenceId, returning");
+                    //Debug.Log("Can't find human referenceId, returning");
                     return;
                 }
             }
 
-            Debug.Log($"AudioClipInterfaceRadio.ReceiveAudioData() continuing with {referenceId}");
+            //Debug.Log($"AudioClipInterfaceRadio.ReceiveAudioData() continuing with {referenceId}");
             bool send = false;
             int emittingChannel = -1;
             Transform emittingTransform = null;
@@ -147,7 +141,7 @@ namespace BrainClock.PlayerComms
                             }
                         }
 
-                        Debug.Log($"SEND THIS Audio FROM referenceId {referenceId}");
+                        //Debug.Log($"SEND THIS Audio FROM referenceId {referenceId}");
                         send = true;
                     }
                 }
@@ -155,7 +149,7 @@ namespace BrainClock.PlayerComms
 
             if (!send)
             {
-                Debug.Log("No human detected with an active tool in hand");
+                //Debug.Log("No human detected with an active tool in hand");
                 return;
             }
 
@@ -169,13 +163,13 @@ namespace BrainClock.PlayerComms
 
             foreach (Radio radio in RadioThings)
             {
-                Debug.Log($"Radio {radio.ReferenceId}");
+                //Debug.Log($"Radio {radio.ReferenceId}");
                 // Alternatively find channel through Radio.AllChannels
                 if (radio.Channel == emittingChannel)
                 {
                     IAudioDataReceiver receiver = radio as IAudioDataReceiver;
-                    Debug.Log($"Receiver {receiver}");
-                    receiver.ReceiveAudioData(referenceId, data, length, volume, flags);
+                    //Debug.Log($"Receiver {receiver}");
+                    receiver.ReceiveAudioData(referenceId, data, length, volume * VolumeMultiplier, flags);
                 }
             }
 
@@ -187,8 +181,7 @@ namespace BrainClock.PlayerComms
         /// </summary>
         private void HandleWorldStarted()
         {
-            Console.WriteLine("AudioClipInterfaceRadio.HandleWOrldStart()");
-            //HumanAudioDataReceivers = new Dictionary<long, IAudioDataReceiver>();
+            //Console.WriteLine("AudioClipInterfaceRadio.HandleWOrldStart()");
             foreach(Radio radio in RadioThings)
             {
                 try
@@ -208,7 +201,7 @@ namespace BrainClock.PlayerComms
         /// </summary>
         private void HandleWorldExit()
         {
-            Console.WriteLine("AudioClipInterfaceRadio.HandleWorldExit()");
+            //Console.WriteLine("AudioClipInterfaceRadio.HandleWorldExit()");
             RadioThings = new List<Radio>(); 
         }
 

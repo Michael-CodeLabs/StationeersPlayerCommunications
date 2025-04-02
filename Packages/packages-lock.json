@@ -93,6 +93,12 @@
       },
       "url": "https://packages.unity.com"
     },
+    "ilodev.stationeersmods.tools": {
+      "version": "file:C:/Users/ilo/Desktop/StationeersModsTools",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

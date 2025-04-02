@@ -36,10 +36,10 @@ namespace BrainClock.PlayerComms
 
         private float volume = 0;
         private int flags = 0;
+        public float VolumeMultiplier = 1.0f;
 
         public void ReceiveAudioData(long referenceId, byte[] data, int length, float volume, int flags)
         {
-            Debug.Log("ModStaticAudioSource.ReceiveAudioData()");
             if (audioStreamReceivers != null)
             {
                 foreach (IAudioStreamReceiver audioStreamReceiver in audioStreamReceivers)
@@ -49,9 +49,9 @@ namespace BrainClock.PlayerComms
             }
 
             // Adjust audio settings
-            if (this.volume != volume)
+            if (this.volume != volume * VolumeMultiplier)
             {
-                this.volume = volume;
+                this.volume = volume * VolumeMultiplier;
                 GameAudioSource.SourceVolume = this.volume;
             }
 
@@ -66,10 +66,10 @@ namespace BrainClock.PlayerComms
 
         private void Start()
         {
-            Debug.Log("ModStaticAudioSource.Start()");
+            //Debug.Log("ModStaticAudioSource.Start()");
             try
             {
-                Debug.Log($"transform.parent {transform.parent}");
+                //Debug.Log($"transform.parent {transform.parent}");
                 IAudioParent audioparent = transform.parent.GetComponent<Human>() as IAudioParent;
                 GameAudioSource.Init((IAudioParent)audioparent);
             }
@@ -87,7 +87,7 @@ namespace BrainClock.PlayerComms
             GameAudioSource.SetEnabled(true);
             this.SetEnable(true);
             
-            Debug.Log("GameAudioSource setup");
+            //Debug.Log("GameAudioSource added to the AudioManager");
             Singleton<AudioManager>.Instance.AddPlayingAudioSource(GameAudioSource);
 
 

@@ -3,6 +3,7 @@ using Assets.Scripts.Inventory;
 using Assets.Scripts.Atmospherics;
 using System.IO;
 using UnityEngine;
+using Assets.Scripts.Networking;
 
 namespace BrainClock.PlayerComms
 {
@@ -16,6 +17,13 @@ namespace BrainClock.PlayerComms
         private IAudioDataReceiver[] audioDataReceivers;
 
         private bool InGame= false;
+
+        [Tooltip("Allow recording voice while sleeping")]
+        public bool VoiceWhenSleeping;
+        [Tooltip("Allow recording voice while unconscious")]
+        public bool VoiceWhenUnresponsive;
+        [Tooltip("Average microphone volume multiplier")]
+        public float VoiceVolume = 0.5f;
 
         private void Awake()
         {
@@ -69,34 +77,34 @@ namespace BrainClock.PlayerComms
             if (!InGame)
                 return;
 
-            /* Disabled for now
             if (!NetworkManager.IsActive || InventoryManager.ParentHuman == null)
                 return;
 
-            if (!InventoryManager.ParentHuman.isActiveAndEnabled)
+            //if (!InventoryManager.ParentHuman.isActiveAndEnabled)
+            //    return;
+
+            if (InventoryManager.ParentHuman.IsSleeping && !VoiceWhenSleeping)
                 return;
 
-            if (InventoryManager.ParentHuman.IsUnresponsive || InventoryManager.ParentHuman.IsSleeping)
+            if (InventoryManager.ParentHuman.IsUnresponsive && !VoiceWhenUnresponsive)
                 return;
-            */
 
+            // Add Audio Effects.
+            // TODO: this will apply to all audios, should only be considered
+            // for human voice instead.
+
+            float volume = VoiceVolume;
+            int flags = 0;
+            if (InventoryManager.ParentHuman)
+            {
+                if (InventoryManager.ParentHuman.HasInternals && InventoryManager.ParentHuman.InternalsOn)
+                {
+                    volume = VoiceVolume * (InventoryManager.ParentHuman.BreathingAtmosphere != null ? Mathf.Clamp01((InventoryManager.ParentHuman.BreathingAtmosphere.PressureGassesAndLiquids / new PressurekPa(3.0)).ToFloat()) : 0.0f);
+                    flags = 1;
+                }
+            }
             foreach (IAudioDataReceiver audioDataReceiver in audioDataReceivers)
             {
-                // Add Audio Effects.
-                // TODO: this will apply to all audios, should only be considered
-                // for human voice instead.
-                float volume = 0.5f;
-                int flags = 0;
-                if (InventoryManager.ParentHuman)
-                {
-                    if (InventoryManager.ParentHuman.HasInternals && InventoryManager.ParentHuman.InternalsOn)
-                    {
-                        // Adjust volume to the internal pressure (Note, it will still use the External mixer)
-                        // TODO FIX AND RELOCATE THIS CORRECTLY
-                        volume *= InventoryManager.ParentHuman.BreathingAtmosphere != null ? Mathf.Clamp01((InventoryManager.ParentHuman.BreathingAtmosphere.PressureGassesAndLiquids / new PressurekPa(3.0)).ToFloat()) : 0.0f;
-                        flags = 1;
-                    }
-                }
                 audioDataReceiver.ReceiveAudioData(-1, data, length, volume, flags);
             }
         }
