@@ -323,17 +323,11 @@ namespace BrainClock.PlayerComms
             return false;
         }
 
+        
         private void UpdateBatteryStatus()
         {
-            IBatteryPowered batteryPowered = this as IBatteryPowered;
-            if (batteryPowered != null)
-            {
-                BatteryCell batteryCell = batteryPowered.Battery;
-
-                if (batteryCell != null)
-                    batteryDisplay.SetBatteryStatus(batteryCell.PowerRatio);
-            }
-
+            if (this.Battery != null && batteryDisplay.isActiveAndEnabled)
+                batteryDisplay.SetBatteryStatus(this.Battery.PowerRatio);
         }                
 
         /// <summary>
