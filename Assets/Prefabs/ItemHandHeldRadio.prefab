@@ -590,6 +590,7 @@ GameObject:
   - component: {fileID: 5555125874317318865}
   - component: {fileID: 431031231543879906}
   - component: {fileID: 6957274874509520689}
+  - component: {fileID: 2805595307338038762}
   m_Layer: 0
   m_Name: ItemHandHeldRadio
   m_TagString: Untagged
@@ -1088,14 +1089,15 @@ MonoBehaviour:
     OccludedMixerGroupHash: -1140213991
   BaseAnimator: {fileID: 0}
   IsCursor: 0
-  Blueprint: {fileID: 4316807548058694518, guid: a7e9a4e118cda4149a9a0f8752bf451e, type: 3}
+  Blueprint: {fileID: 8996241845298006948, guid: a7e9a4e118cda4149a9a0f8752bf451e, type: 3}
   Wireframe: {fileID: 0}
   lodFlares: []
   IsCustomThing: 0
   ThumbnailOffset: {x: 0, y: 0, z: 0}
   ThumbnailRotation: {x: 0, y: 0, z: 0, w: 0}
-  Thumbnail: {fileID: 21300000, guid: 39280fa319b5cb94aa0bcc1df110ff35, type: 3}
-  Thumbnails: []
+  Thumbnail: {fileID: 21300000, guid: 08f1ffd87e3d9aa44aa3d713906ce216, type: 3}
+  Thumbnails:
+  - {fileID: 21300000, guid: 945f3a7086b16054bb6add1d7bbac537, type: 3}
   IsEntity: 0
   _isOccluded: 0
   HasRunOnAtmospherics: 0
@@ -1607,6 +1609,14 @@ MonoBehaviour:
   AppId: 544550
   dataRate: 0
   IsReady: 0
+--- !u!33 &2805595307338038762
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2686529464066537426}
+  m_Mesh: {fileID: 2212009239438826721, guid: 5ffa866e3ea948f4a90a25862e157991, type: 3}
 --- !u!1 &3019975224369709953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1813,7 +1823,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4927817047500373416}
-  m_Mesh: {fileID: -5495902117074765545, guid: eb612cfa03a1d394a872f1bf641805df, type: 3}
+  m_Mesh: {fileID: -5495902117074765545, guid: 9438d0c3fb1be654ebb923ca663916bd, type: 3}
 --- !u!23 &3087895055779093074
 MeshRenderer:
   m_ObjectHideFlags: 0

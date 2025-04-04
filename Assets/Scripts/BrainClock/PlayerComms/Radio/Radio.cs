@@ -39,7 +39,6 @@ namespace BrainClock.PlayerComms
         public int Channels = 1; 
         public float Range = 200;
         private int _maxVolumeSteps = 10;
-
         [Header("Controls")]
         [SerializeField] private Knob knobVolume;
         [SerializeField] private ActivateButton pushToTalk;
@@ -327,7 +326,7 @@ namespace BrainClock.PlayerComms
         private void UpdateBatteryStatus()
         {
             if (this.Battery != null && batteryDisplay.isActiveAndEnabled)
-                batteryDisplay.SetBatteryStatus(this.Battery.PowerRatio);
+                batteryDisplay.SetBatteryStatus(this.Battery.CurrentPowerPercentage);
         }                
 
         /// <summary>

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3974717243237748263
+--- !u!1001 &8077341835903842037
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,60 +8,104 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 5ffa866e3ea948f4a90a25862e157991, type: 3}
+    - target: {fileID: -8679921383154817045, guid: d8d2de618832bc749b632491142db676, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5ffa866e3ea948f4a90a25862e157991, type: 3}
+    - target: {fileID: -8679921383154817045, guid: d8d2de618832bc749b632491142db676, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5ffa866e3ea948f4a90a25862e157991, type: 3}
+    - target: {fileID: -8679921383154817045, guid: d8d2de618832bc749b632491142db676, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5ffa866e3ea948f4a90a25862e157991, type: 3}
+    - target: {fileID: -8679921383154817045, guid: d8d2de618832bc749b632491142db676, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5ffa866e3ea948f4a90a25862e157991, type: 3}
+    - target: {fileID: -8679921383154817045, guid: d8d2de618832bc749b632491142db676, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5ffa866e3ea948f4a90a25862e157991, type: 3}
+    - target: {fileID: -8679921383154817045, guid: d8d2de618832bc749b632491142db676, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5ffa866e3ea948f4a90a25862e157991, type: 3}
+    - target: {fileID: -8679921383154817045, guid: d8d2de618832bc749b632491142db676, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5ffa866e3ea948f4a90a25862e157991, type: 3}
+    - target: {fileID: -8679921383154817045, guid: d8d2de618832bc749b632491142db676, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5ffa866e3ea948f4a90a25862e157991, type: 3}
+    - target: {fileID: -8679921383154817045, guid: d8d2de618832bc749b632491142db676, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5ffa866e3ea948f4a90a25862e157991, type: 3}
+    - target: {fileID: -8679921383154817045, guid: d8d2de618832bc749b632491142db676, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: 5ffa866e3ea948f4a90a25862e157991, type: 3}
+    - target: {fileID: -7511558181221131132, guid: d8d2de618832bc749b632491142db676, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 865e446407a936a4cae600f6fa6013b4, type: 2}
-    - target: {fileID: -7511558181221131132, guid: 5ffa866e3ea948f4a90a25862e157991, type: 3}
+      objectReference: {fileID: 2100000, guid: fe287787a203fdd4697f87582f4db396, type: 2}
+    - target: {fileID: -7511558181221131132, guid: d8d2de618832bc749b632491142db676, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 865e446407a936a4cae600f6fa6013b4, type: 2}
-    - target: {fileID: 919132149155446097, guid: 5ffa866e3ea948f4a90a25862e157991, type: 3}
+      objectReference: {fileID: 2100000, guid: fe287787a203fdd4697f87582f4db396, type: 2}
+    - target: {fileID: 919132149155446097, guid: d8d2de618832bc749b632491142db676, type: 3}
       propertyPath: m_Name
       value: RadioBlueprint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5ffa866e3ea948f4a90a25862e157991, type: 3}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d8d2de618832bc749b632491142db676, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7490779799195300825}
+  m_SourcePrefab: {fileID: 100100000, guid: d8d2de618832bc749b632491142db676, type: 3}
+--- !u!33 &4628883971885850299 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: -5754084199372789682, guid: d8d2de618832bc749b632491142db676, type: 3}
+  m_PrefabInstance: {fileID: 8077341835903842037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7483274195050277489 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: d8d2de618832bc749b632491142db676, type: 3}
+  m_PrefabInstance: {fileID: 8077341835903842037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8616163338076705054 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d8d2de618832bc749b632491142db676, type: 3}
+  m_PrefabInstance: {fileID: 8077341835903842037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8996241845298006948 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d8d2de618832bc749b632491142db676, type: 3}
+  m_PrefabInstance: {fileID: 8077341835903842037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7490779799195300825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8996241845298006948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3374434db935c847a6762f99837de18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WireframeEdges: []
+  BlueprintBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  BlueprintTransform: {fileID: 8616163338076705054}
+  BlueprintMeshFilter: {fileID: 4628883971885850299}
+  BlueprintRenderer: {fileID: 7483274195050277489}
+  LineMaterial: {fileID: 2100000, guid: 865e446407a936a4cae600f6fa6013b4, type: 2}
+  ShowTransformArrow: 1
