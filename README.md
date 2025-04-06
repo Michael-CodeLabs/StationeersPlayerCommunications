@@ -13,7 +13,8 @@ Player Communications adds immersive voice chat to Stationeers, allowing players
 
 ## Requirements
 To use this mod, you must have Steam initialized when launching the game.
-You must have StationeersMods and BepInEx installed. See https://jixxed.github.io/StationeersMods/
+You must have StationeersMods and BepInEx installed. 
+See https://jixxed.github.io/StationeersMods/
 
 ## Setup Instructions
 1. Open your **Steam Voice Settings**.
