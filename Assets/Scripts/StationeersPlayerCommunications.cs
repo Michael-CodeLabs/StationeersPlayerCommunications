@@ -40,6 +40,7 @@ public class StationeersPlayerCommunications : ModBehaviour
 
         // Add the content (Thing) prefabs to the game.
         PrefabPatch.prefabs = contentHandler.prefabs;
+        StationpediaPatches.prefabs = contentHandler.prefabs;
         harmony.PatchAll();
 
         UnityEngine.Debug.Log("+ Patching complete, setup finished");

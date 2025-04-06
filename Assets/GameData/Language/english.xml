@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Language xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <Name>English</Name>
-    <Code>EN</Code>
-    <Font>font_english</Font>
-    <Things>
+<Language
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>English</Name>
+	<Code>EN</Code>
+	<Font>font_english</Font>
+	<Things>
 		<RecordThing>
 			<Key>ItemHandHeldRadio</Key>
 			<Value>Radio</Value>
-			<Description />
+      <Description>A radio manufactured by {LINK:HeliCryo} used to communicate players when distance is a problem.</Description>
 		</RecordThing>
-			</Things>
-		<Interactables>
+	</Things>
+	<Interactables>
 		<Record>
 			<Key>ChannelUp</Key>
 			<Value>Channel Up</Value>
@@ -28,4 +30,18 @@
 			<Value>Volume Down</Value>
 		</Record>
 	</Interactables>
+	<Interface>
+		<Record>
+			<Key>HeliCryo</Key>
+			<Value>HelyCrio</Value>
+		</Record>
+		<Record>
+			<Key>HeliCryoTitle</Key>
+			<Value>Heli Cryo CO</Value>
+		</Record>
+		<Record>
+			<Key>HeliCryoDescription</Key>
+			<Value>HeliCryo makes stuff that works well.. too well.</Value>
+		</Record>
+	</Interface>
 </Language>
