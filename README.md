@@ -7,10 +7,13 @@ Player Communications adds immersive voice chat to Stationeers, allowing players
 - **Directional Audio**: When speaking face-to-face, players' voices are heard based on their position and orientation, adding realism to communication.
 - **Radio Communication**: Enables long-range communication between players.
 - **Radio Channels**: Up to 16 Radio Channels
+- **Radio Storage**: A Radio Storage in the Locker Kit.
+- **Radio Tower**: A Radio Tower to increase signal strength and Transmission/Reception distance.
 - **Steam Voice Integration**: Uses Steam's built-in voice chat system for reliable communication.
 
 ## Requirements
-To use this feature, you must have Steam initialized when launching the game.
+To use this mod, you must have Steam initialized when launching the game.
+You must have StationeersMods and BepInEx installed. See https://jixxed.github.io/StationeersMods/
 
 ## Setup Instructions
 1. Open your **Steam Voice Settings**.
