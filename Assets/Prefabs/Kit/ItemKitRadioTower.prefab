@@ -520,7 +520,7 @@ MonoBehaviour:
   quantity: 1
   MaxQuantity: 1
   Constructables:
-  - {fileID: 7401391876226941075, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+  - {fileID: 959803305475812401, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
 --- !u!65 &260151993581892764
 BoxCollider:
   m_ObjectHideFlags: 0

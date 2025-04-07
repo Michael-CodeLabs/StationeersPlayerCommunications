@@ -3608,15 +3608,15 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 71685ab45315bdd4297e2a801e2e145e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a47f96f0821706041815bb183ea44f34, type: 2}
+      objectReference: {fileID: 2100000, guid: 94d6e7fd0a09d7f499ddcc7871753480, type: 2}
     - target: {fileID: -7343331172465130696, guid: 71685ab45315bdd4297e2a801e2e145e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a47f96f0821706041815bb183ea44f34, type: 2}
+      objectReference: {fileID: 2100000, guid: 94d6e7fd0a09d7f499ddcc7871753480, type: 2}
     - target: {fileID: -6907323166211416895, guid: 71685ab45315bdd4297e2a801e2e145e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a47f96f0821706041815bb183ea44f34, type: 2}
+      objectReference: {fileID: 2100000, guid: 94d6e7fd0a09d7f499ddcc7871753480, type: 2}
     - target: {fileID: 919132149155446097, guid: 71685ab45315bdd4297e2a801e2e145e, type: 3}
       propertyPath: m_Name
       value: BatteryBody
@@ -3624,15 +3624,15 @@ PrefabInstance:
     - target: {fileID: 5039687269024256309, guid: 71685ab45315bdd4297e2a801e2e145e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a47f96f0821706041815bb183ea44f34, type: 2}
+      objectReference: {fileID: 2100000, guid: 94d6e7fd0a09d7f499ddcc7871753480, type: 2}
     - target: {fileID: 5325404870481453298, guid: 71685ab45315bdd4297e2a801e2e145e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a47f96f0821706041815bb183ea44f34, type: 2}
+      objectReference: {fileID: 2100000, guid: 94d6e7fd0a09d7f499ddcc7871753480, type: 2}
     - target: {fileID: 6289776048922875581, guid: 71685ab45315bdd4297e2a801e2e145e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a47f96f0821706041815bb183ea44f34, type: 2}
+      objectReference: {fileID: 2100000, guid: 94d6e7fd0a09d7f499ddcc7871753480, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3715,7 +3715,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 389d8f1c9d120a34d949e8944710b28a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0131
+      value: 0.0115
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 389d8f1c9d120a34d949e8944710b28a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3760,15 +3760,15 @@ PrefabInstance:
     - target: {fileID: -307868682032671549, guid: 389d8f1c9d120a34d949e8944710b28a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a47f96f0821706041815bb183ea44f34, type: 2}
+      objectReference: {fileID: 2100000, guid: 94d6e7fd0a09d7f499ddcc7871753480, type: 2}
     - target: {fileID: 623044252186788585, guid: 389d8f1c9d120a34d949e8944710b28a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a47f96f0821706041815bb183ea44f34, type: 2}
+      objectReference: {fileID: 2100000, guid: 94d6e7fd0a09d7f499ddcc7871753480, type: 2}
     - target: {fileID: 665546899849283148, guid: 389d8f1c9d120a34d949e8944710b28a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a47f96f0821706041815bb183ea44f34, type: 2}
+      objectReference: {fileID: 2100000, guid: 94d6e7fd0a09d7f499ddcc7871753480, type: 2}
     - target: {fileID: 919132149155446097, guid: 389d8f1c9d120a34d949e8944710b28a, type: 3}
       propertyPath: m_Name
       value: RadioTowerSignal
@@ -3780,7 +3780,7 @@ PrefabInstance:
     - target: {fileID: 6889793682134671817, guid: 389d8f1c9d120a34d949e8944710b28a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a47f96f0821706041815bb183ea44f34, type: 2}
+      objectReference: {fileID: 2100000, guid: 94d6e7fd0a09d7f499ddcc7871753480, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
