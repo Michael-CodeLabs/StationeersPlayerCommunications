@@ -1,104 +1,98 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8418292118112668045
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      propertyPath: m_Name
-      value: ItemKitRadioTower
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 31859834213261499}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7975217730580761600}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8158967000641997719}
-  m_SourcePrefab: {fileID: 100100000, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
---- !u!4 &8311799283832516198 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-  m_PrefabInstance: {fileID: 8418292118112668045}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8652155704693404892 stripped
+--- !u!1 &771494718561766359
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
-  m_PrefabInstance: {fileID: 8418292118112668045}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &31859834213261499
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 143894149719298413}
+  - component: {fileID: 3913889082308665032}
+  - component: {fileID: 1275673369984461314}
+  - component: {fileID: 8275214540766584752}
+  - component: {fileID: 2020970383460643595}
+  - component: {fileID: 260151993581892764}
+  m_Layer: 0
+  m_Name: ItemKitRadioTower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &143894149719298413
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771494718561766359}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3913889082308665032
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771494718561766359}
+  m_Mesh: {fileID: -2154597343404325760, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
+--- !u!23 &1275673369984461314
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771494718561766359}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: -6185372383968874695, guid: d8d193a6770160342ba23a231ca8d7b3, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &8275214540766584752
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8652155704693404892}
+  m_GameObject: {fileID: 771494718561766359}
   serializedVersion: 4
   m_Mass: 5
   m_Drag: 0
@@ -119,13 +113,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7975217730580761600
+--- !u!114 &2020970383460643595
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8652155704693404892}
+  m_GameObject: {fileID: 771494718561766359}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61e09f93fcb9a594eb7edd7e6f42bdfa, type: 3}
@@ -143,7 +137,7 @@ MonoBehaviour:
   IsEmergency: 0
   PrefabName: ItemKitRadioTower
   PrefabHash: 162469091
-  ThingTransform: {fileID: 8311799283832516198}
+  ThingTransform: {fileID: 143894149719298413}
   Slots: []
   Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -160,10 +154,10 @@ MonoBehaviour:
   SolarHeatingScale: 0.1
   WeatherDamageScale: 1
   shatterTemperature: 1
-  flashpointTemperature: -1
-  autoignitionTemperature: -1
-  BurnTime: 5
-  ThingHealth: 100
+  flashpointTemperature: 373.15
+  autoignitionTemperature: 573.15
+  BurnTime: 25
+  ThingHealth: 300
   EnergyReleasedWhenBurned: 100000
   _customName: 
   OwnerClientId: 0
@@ -237,12 +231,12 @@ MonoBehaviour:
   SlotType1: 0
   SlotType2: 0
   DeleteOnDestroyed: 1
-  UsingSound: 
-  UseCompleteSound: 
+  UsingSound: ItemKitConstructing
+  UseCompleteSound: ItemKitComplete
   HasLight: 0
   IsSmall: 0
   FastSpeed: 5
-  RigidBody: {fileID: 31859834213261499}
+  RigidBody: {fileID: 8275214540766584752}
   WorldCenterOfMass: {x: 0, y: 0, z: 0}
   GripType: 0
   CastAnimation: 0
@@ -252,7 +246,7 @@ MonoBehaviour:
   AtmosControl: 1
   OnConveyor: 0
   IsWatched: 0
-  TradeValue: -1
+  TradeValue: 150
   PlayerSellScale: 1
   ExitTool:
     ToolEntry: {fileID: 0}
@@ -525,14 +519,15 @@ MonoBehaviour:
   StackedGeneCollections: []
   quantity: 1
   MaxQuantity: 1
-  Constructables: []
---- !u!65 &8158967000641997719
+  Constructables:
+  - {fileID: 7401391876226941075, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+--- !u!65 &260151993581892764
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8652155704693404892}
+  m_GameObject: {fileID: 771494718561766359}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

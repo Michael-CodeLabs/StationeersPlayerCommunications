@@ -1,11 +1,11 @@
-using Assets.Scripts.Objects;
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace BrainClock.PlayerComms
 {
-    public class Tower : SmallGrid
+    public class Tower : LargeElectrical
     {
 
     }
