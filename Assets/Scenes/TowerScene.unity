@@ -431,11 +431,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1679638986209350961, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5811527332951291070, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+    - target: {fileID: 3798145889175014698, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -479,17 +475,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6286442877158920017, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6446763299941352612, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
       propertyPath: m_Name
       value: StructureRadioTower
-      objectReference: {fileID: 0}
-    - target: {fileID: 8961854633990184197, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
