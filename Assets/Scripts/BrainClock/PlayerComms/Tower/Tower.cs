@@ -56,8 +56,8 @@ namespace BrainClock.PlayerComms
 
             if (BuildStates.Count > 1)
             {
-                BuildStates[2].Tool.ToolEntry = ItemPlasticSheets;
-                BuildStates[2].Tool.ToolEntry2 = ItemScrewdriver;
+                BuildStates[2].Tool.ToolEntry = ItemScrewdriver;
+                BuildStates[2].Tool.ToolEntry2 = ItemPlasticSheets;
             }
 
             if (BuildStates.Count > 2)
