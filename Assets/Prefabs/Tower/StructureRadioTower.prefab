@@ -2090,7 +2090,7 @@ GameObject:
   - component: {fileID: 2724561613707400767}
   - component: {fileID: 4487845550468269091}
   m_Layer: 0
-  m_Name: BrokenState1
+  m_Name: BrokenState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2150,7 +2150,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: fe287787a203fdd4697f87582f4db396, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3389,13 +3389,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5699653155551860928}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.005001831, y: -0.0000007659638, z: -0.012499999}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 889483715395043058}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &4715140187870369713
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3579,7 +3579,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -4363,7 +4363,7 @@ MonoBehaviour:
   IsUpdateAudio: 0
   IsUpdate100MS: 0
   IsUpdate1000MS: 0
-  CanPickup: 0
+  CanPickup: 1
   DestroyChildrenOnDead: 1
   EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   DiffuseIndex: 0
@@ -4585,202 +4585,7 @@ MonoBehaviour:
       mesh: {fileID: 0}
       materials: []
       shadowMode: 0
-  BrokenBuildStates:
-  - BuildState:
-      Thumbnail: {fileID: 0}
-      DamagedBuildState: 1
-      BlockAir: 0
-      AlwaysBlockAir: 0
-      BlockLight: 0
-      BlockGravity: 0
-      RenderMode: 1
-      Visualizer: {fileID: 2724561613707400767}
-      StateMeshes: []
-      RendererInstance:
-        Parent: {fileID: 9122435193557797377}
-        UnityRenderer: {fileID: 2724561613707400767}
-        _rocketRenderer: {fileID: 0}
-        DefaultMode: 1
-        MeshFilter: {fileID: 6952961238292675088}
-        BaseLayer: 0
-        _enabled: 0
-        _visible: 1
-      TemperatureRadiationFactor: 0
-      Tool:
-        ToolEntry: {fileID: 0}
-        ToolEntry2: {fileID: 0}
-        EntryTime: 0
-        EntryQuantity: 0
-        EntryQuantity2: 0
-        ToolUseType: 0
-        ToolExit: {fileID: 0}
-        ExitTime: 0
-        ExitQuantity: 0
-      ColliderMode: 1
-      Colliders: []
-      LinkedGameObjects:
-      - {fileID: 8889748807489788426}
-      - {fileID: 5057149509848312163}
-      - {fileID: 8421120114761200027}
-      - {fileID: 1104920352473693989}
-      - {fileID: 144232094700822321}
-      - {fileID: 3276919099739649271}
-      - {fileID: 2498673789437847947}
-      - {fileID: 5699653155551860928}
-      - {fileID: 5208623225579855877}
-      - {fileID: 8175426898899616850}
-      - {fileID: 6061781216009263466}
-      CanManufacture: 0
-      ManufactureDat:
-        MachinesTier: 0
-        BuildTimeMultiplier: 0
-        ItemSpawnMultiplier: 0
-        EnergyCostMultiplier: 0
-        MaterialCostMultiplier: 0
-      InteractableParent: {fileID: 6446763299941352612}
-      Interactables: []
-      initialDrawData:
-        mesh: {fileID: 0}
-        materials: []
-        shadowMode: 0
-    BrokenPieces: []
-    TotalReagentMixture:
-      Flour:
-        ReagentId: 0
-        _quantity: 0
-      Milk:
-        ReagentId: 0
-        _quantity: 0
-      Egg:
-        ReagentId: 0
-        _quantity: 0
-      Iron:
-        ReagentId: 0
-        _quantity: 0
-      Gold:
-        ReagentId: 0
-        _quantity: 0
-      Carbon:
-        ReagentId: 0
-        _quantity: 0
-      Uranium:
-        ReagentId: 0
-        _quantity: 0
-      Copper:
-        ReagentId: 0
-        _quantity: 0
-      Steel:
-        ReagentId: 0
-        _quantity: 0
-      Hydrocarbon:
-        ReagentId: 0
-        _quantity: 0
-      Silver:
-        ReagentId: 0
-        _quantity: 0
-      Nickel:
-        ReagentId: 0
-        _quantity: 0
-      Lead:
-        ReagentId: 0
-        _quantity: 0
-      Electrum:
-        ReagentId: 0
-        _quantity: 0
-      Invar:
-        ReagentId: 0
-        _quantity: 0
-      Constantan:
-        ReagentId: 0
-        _quantity: 0
-      Solder:
-        ReagentId: 0
-        _quantity: 0
-      Plastic:
-        ReagentId: 0
-        _quantity: 0
-      Silicon:
-        ReagentId: 0
-        _quantity: 0
-      SalicylicAcid:
-        ReagentId: 0
-        _quantity: 0
-      Alcohol:
-        ReagentId: 0
-        _quantity: 0
-      Oil:
-        ReagentId: 0
-        _quantity: 0
-      Potato:
-        ReagentId: 0
-        _quantity: 0
-      Tomato:
-        ReagentId: 0
-        _quantity: 0
-      Fenoxitone:
-        ReagentId: 0
-        _quantity: 0
-      ColorRed:
-        ReagentId: 0
-        _quantity: 0
-      ColorGreen:
-        ReagentId: 0
-        _quantity: 0
-      ColorBlue:
-        ReagentId: 0
-        _quantity: 0
-      ColorYellow:
-        ReagentId: 0
-        _quantity: 0
-      ColorOrange:
-        ReagentId: 0
-        _quantity: 0
-      Pumpkin:
-        ReagentId: 0
-        _quantity: 0
-      Rice:
-        ReagentId: 0
-        _quantity: 0
-      Waspaloy:
-        ReagentId: 0
-        _quantity: 0
-      Stellite:
-        ReagentId: 0
-        _quantity: 0
-      Inconel:
-        ReagentId: 0
-        _quantity: 0
-      Hastelloy:
-        ReagentId: 0
-        _quantity: 0
-      Astroloy:
-        ReagentId: 0
-        _quantity: 0
-      Cobalt:
-        ReagentId: 0
-        _quantity: 0
-      Corn:
-        ReagentId: 0
-        _quantity: 0
-      Wheat:
-        ReagentId: 0
-        _quantity: 0
-      Biomass:
-        ReagentId: 0
-        _quantity: 0
-      Soy:
-        ReagentId: 0
-        _quantity: 0
-      Mushroom:
-        ReagentId: 0
-        _quantity: 0
-      Sugar:
-        ReagentId: 0
-        _quantity: 0
-      Cocoa:
-        ReagentId: 0
-        _quantity: 0
-    HasBroken: 0
+  BrokenBuildStates: []
   RepairTools:
     ToolEntry: {fileID: 0}
     ToolEntry2: {fileID: 0}
@@ -5504,7 +5309,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7879709919484020599}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5556,7 +5361,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -6224,13 +6029,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8421120114761200027}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00000010677015, y: 0.7071068, z: 0.7071067, w: 4.886013e-15}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: -0.004998169, y: -0.0000007659568, z: -0.012499999}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 889483715395043058}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 180}
 --- !u!33 &8598817630387283019
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -1,19 +1,18 @@
 using Assets.Scripts;
 using Assets.Scripts.Objects;
-using Assets.Scripts.Objects.Structures;
-using Assets.Scripts.Util;
-using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace BrainClock.PlayerComms
 {
     public class Tower : LargeElectrical
-    {
-        //Assign Tools
+    {        
         public override void Start()
         {
             base.Start();
+
+            //AssignTools
             AssignToolExit();
             AssignToolEntry();
             AssignToolRepair();
@@ -74,6 +73,7 @@ namespace BrainClock.PlayerComms
                 BuildStates[3].Tool.ToolEntry2 = ItemCableCoilHeavy;
             }
         }
+
         private void AssignToolRepair()
         {
             var ItemSteelSheets = Prefab.Find<Item>("ItemSteelSheets");
