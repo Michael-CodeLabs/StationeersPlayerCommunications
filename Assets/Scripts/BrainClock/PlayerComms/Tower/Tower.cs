@@ -1,90 +1,211 @@
 using Assets.Scripts;
+using Assets.Scripts.Networking;
+using Assets.Scripts.Networks;
 using Assets.Scripts.Objects;
+using Assets.Scripts.Objects.Electrical;
+using Assets.Scripts.Objects.Items;
+using Assets.Scripts.Objects.Motherboards;
+using Assets.Scripts.Objects.Pipes;
+using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace BrainClock.PlayerComms
 {
-    public class Tower : LargeElectrical
-    {        
+    public class Tower : LargeElectrical, ISetable, ILogicable, IReferencable
+    {
+        // Sets Modestrings to the TowerModeStrings enum
+        public static string[] TowerModeString = Enum.GetNames(typeof(TowerMode));
+        public override string[] ModeStrings => TowerModeString;
+
+        //Reference to Tower ToolAssigner Class
+        private ToolAssigner _toolAssigner;
+        
+        // Global registeration so radios or a manager can iterate over all towers.
+        public static List<Tower> AllTowers = new();
+        public static Dictionary<int, long> TowerModes = new Dictionary<int, long>();
+
+        //Add Events later ** **
+
+        [Header("Tower")]
+        public float DefaultSignal = 250;
+        public float MaximumSignal = 1000;
+        public float PowerScale = 15f;
+        public int TowerMode = 0;
+
+        // Needed for ISetable
+        private float _setting;
+        [ByteArraySync]
+        public double Setting
+        {
+            get
+            {
+                return _setting;
+            }
+            set
+            {
+                _setting = Mathf.Clamp((float)value, 0f, MaximumSignal);
+                if (NetworkManager.IsServer)
+                {
+                    base.NetworkUpdateFlags |= 256;
+                }
+                _setting = (float)value;
+            }
+        }
+
+        //LogicTypes ReadWrite HashSet
+        private static readonly HashSet<LogicType> ReadLogicTypes = new()
+        {
+            LogicType.Power,
+            LogicType.Setting,
+            LogicType.Error,
+            LogicType.RequiredPower,
+            LogicType.ReferenceId,
+            LogicType.PrefabHash,
+            LogicType.NameHash,
+            LogicType.Lock,
+            LogicType.On,
+            LogicType.Mode // 0 Transmit // 1 Recive | Maybe? (Not really needed as this adds too much to work on, but would be nice to have. Mode 3 could be both 0 and 1 combined.
+        };
+
+        private static readonly HashSet<LogicType> WriteLogicTypes = new()
+        {
+            LogicType.Setting,
+            LogicType.Lock,
+            LogicType.On,
+            LogicType.Mode // 0 Transmit // 1 Recive
+        };
+        
+        // Can Logic Read Write
+        public override bool CanLogicRead(LogicType logicType)
+        {
+            return ReadLogicTypes.Contains(logicType) || base.CanLogicRead(logicType);
+        }
+        public override bool CanLogicWrite(LogicType logicType)
+        {
+            return WriteLogicTypes.Contains(logicType) || base.CanLogicWrite(logicType);
+        }
+
+        //Handle Setting change
+        public override double GetLogicValue(LogicType logictype)
+        {
+            if (logictype == LogicType.Setting)
+            {
+                return Setting;
+            }
+            return base.GetLogicValue(logictype);
+        }
+
+        public override void SetLogicValue(LogicType logicType, double value)
+        {
+            base.SetLogicValue(logicType, value);
+            if (logicType == LogicType.Setting)
+            {
+                Setting = Mathf.Clamp((float)value, 0f, MaximumSignal);
+            }
+        }
+        //Update Dedicated Server
+        public virtual void OnSettingChanged()
+        {
+            if (NetworkManager.IsServer)
+            {
+                base.NetworkUpdateFlags |= 256;
+            }
+        }
+
+        //Serialize - Deserialize On Join
+        public override void SerializeOnJoin(RocketBinaryWriter writer)
+        {
+            base.SerializeOnJoin(writer);
+            writer.WriteDouble(Setting);
+        }
+        public override void DeserializeOnJoin(RocketBinaryReader reader)
+        {
+            base.DeserializeOnJoin(reader);
+            Setting = reader.ReadDouble();
+        }
+
+        // Serialize - Deserialze On World Save
+        public override ThingSaveData SerializeSave()
+        {
+            ThingSaveData savedData = new LogicBaseSaveData();
+            InitialiseSaveData(ref savedData);
+            return savedData;
+        }
+
+        public override void DeserializeSave(ThingSaveData savedData)
+        {
+            base.DeserializeSave(savedData);
+            if (savedData is LogicBaseSaveData logicBaseSaveData)
+            {
+                Setting = logicBaseSaveData.Setting;
+            }
+        }
+
+        // Initalise Save Data
+        protected override void InitialiseSaveData(ref ThingSaveData savedData)
+        {
+            base.InitialiseSaveData(ref savedData);
+            if (savedData is LogicBaseSaveData logicBaseSaveData)
+            {
+                logicBaseSaveData.Setting = Setting;
+            }
+        }
+
+        //Process Setting Updates on dedicated servers? (Might be completly useless in this code?)
+        public override void BuildUpdate(RocketBinaryWriter writer, ushort networkUpdateType)
+        {
+            base.BuildUpdate(writer, networkUpdateType);
+            if (Thing.IsNetworkUpdateRequired(256u, networkUpdateType))
+            {
+                writer.WriteDouble(Setting);
+            }
+        }
+
+        public override void ProcessUpdate(RocketBinaryReader reader, ushort networkUpdateType)
+        {
+            base.ProcessUpdate(reader, networkUpdateType);
+            if (Thing.IsNetworkUpdateRequired(256u, networkUpdateType))
+            {
+                Setting = reader.ReadDouble();
+            }
+        }
+
+        //Scale Power With Setting
+        public override float GetUsedPower(CableNetwork cableNetwork)
+        {
+
+            if (!OnOff || cableNetwork != base.PowerCableNetwork || base.PowerCableNetwork == null)
+            {
+                return 0f;
+            }
+            return UsedPower + PowerScale * _setting;
+        }
+
+        public override void Awake()
+        {
+
+            //Assign Default Signal
+            Setting = DefaultSignal;
+            Debug.Log("Set Tower Default Signal strength to " + Setting);
+            base.Awake();
+        }
         public override void Start()
         {
             base.Start();
 
-            //AssignTools
-            AssignToolExit();
-            AssignToolEntry();
-            AssignToolRepair();
+
+            //Setting = DefaultSignalStrength;
+            _toolAssigner = new ToolAssigner(this);
+            _toolAssigner.AssignAllTools();
+
+            //Add towers to AllTower list
+            AllTowers.Add(this);
         }
-
-        private void AssignToolExit()
+        public override void OnDestroy()
         {
-            var ItemAngleGrinder = Prefab.Find<Item>("ItemAngleGrinder");
-            var ItemDrill = Prefab.Find<Item>("ItemDrill");
-            var ItemWireCutters = Prefab.Find<Item>("ItemWireCutters");
-            var ItemScrewdriver = Prefab.Find<Item>("ItemScrewdriver");
-            var ItemCrowbar = Prefab.Find<Item>("ItemCrowbar");
-
-            if (BuildStates == null) return;
-
-            if (BuildStates.Count > 0)
-                BuildStates[0].Tool.ToolExit = ItemAngleGrinder;
-            if (BuildStates.Count > 1)
-                BuildStates[1].Tool.ToolExit = ItemCrowbar;
-            if (BuildStates.Count > 2)
-                BuildStates[2].Tool.ToolExit = ItemDrill;
-            if (BuildStates.Count > 3)
-                BuildStates[3].Tool.ToolExit = ItemWireCutters;
-
-            if (BrokenBuildStates != null)
-            {
-                BrokenBuildStates[0].BuildState.Tool.ToolExit = ItemAngleGrinder;
-            }
-        }
-
-        private void AssignToolEntry()
-        {
-            var ItemWeldingTorch = Prefab.Find<Item>("ItemWeldingTorch");
-            var ItemArcWelder = Prefab.Find<Item>("ItemArcWelder");
-            var ItemScrewdriver = Prefab.Find<Item>("ItemScrewdriver");
-            var ItemDrill = Prefab.Find<Item>("ItemDrill");
-            var ItemSteelSheets = Prefab.Find<Item>("ItemSteelSheets");
-            var ItemPlasticSheets = Prefab.Find<Item>("ItemPlasticSheets");
-            var ItemCableCoilHeavy = Prefab.Find<Item>("ItemCableCoilHeavy");
-
-            if (BuildStates == null) return;
-
-            if (BuildStates.Count > 0)
-            {
-                BuildStates[1].Tool.ToolEntry = ItemWeldingTorch != null ? ItemWeldingTorch : ItemArcWelder;
-                BuildStates[1].Tool.ToolEntry2 = ItemSteelSheets;
-            }
-
-            if (BuildStates.Count > 1)
-            {
-                BuildStates[2].Tool.ToolEntry = ItemDrill;
-                BuildStates[2].Tool.ToolEntry2 = ItemPlasticSheets;
-            }
-
-            if (BuildStates.Count > 2)
-            {
-                BuildStates[3].Tool.ToolEntry = ItemScrewdriver;
-                BuildStates[3].Tool.ToolEntry2 = ItemCableCoilHeavy;
-            }
-        }
-
-        private void AssignToolRepair()
-        {
-            var ItemSteelSheets = Prefab.Find<Item>("ItemSteelSheets");
-            var ItemWeldingTorch = Prefab.Find<Item>("ItemWeldingTorch");
-            var ItemArcWelder = Prefab.Find<Item>("ItemArcWelder");
-
-            if (BuildStates != null)
-            {
-                RepairTools.ToolEntry = ItemWeldingTorch != null ? ItemWeldingTorch : ItemArcWelder;
-                RepairTools.ToolEntry2 = ItemSteelSheets;
-            }
+            base.OnDestroy();
+            AllTowers.Remove(this);
         }
     }
 }
