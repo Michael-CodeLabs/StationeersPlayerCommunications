@@ -45,18 +45,22 @@ namespace BrainClock.PlayerComms
         void Awake()
         {
             _radios = new List<Radio>();
-        }
-
-        private void Start()
-        {
             if (rangeZone == null)
                 rangeZone = this.gameObject.GetComponent<SphereCollider>();
             rangeZone.isTrigger = true;
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void Start()
         {
-            Radio radio = collision.gameObject.GetComponent<Radio>();
+            //if (rangeZone == null)
+            //    rangeZone = this.gameObject.GetComponent<SphereCollider>();
+            //rangeZone.isTrigger = true;
+        }
+
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Radio radio = other.gameObject.GetComponent<Radio>();
             if (radio != null)
             {
                 Debug.Log($"{this.name} + Adding radio {radio.name}, in range");
@@ -64,15 +68,16 @@ namespace BrainClock.PlayerComms
             }
         }
 
-        private void OnCollisionExit(Collision collision)
+        private void OnTriggerExit(Collider other)
         {
-            Radio radio = collision.gameObject.GetComponent<Radio>();
+            Radio radio = other.gameObject.GetComponent<Radio>();
             if (radio != null)
             {
                 Debug.Log($"{this.name} - Removing radio {radio.name}, not in range");
                 _radios.Remove(radio);
             }
         }
+
 
     }
 }
