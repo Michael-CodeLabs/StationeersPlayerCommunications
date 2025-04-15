@@ -1509,7 +1509,7 @@ MonoBehaviour:
   UsedPowerActive: 100
   SpeakerAudioSource: {fileID: 4759559812049139909}
   Channels: 16
-  Range: 10
+  Range: 100
   RangeController: {fileID: 5715219108913881827}
   knobVolume:
     KnobGameObject: {fileID: 6250170657620246711}

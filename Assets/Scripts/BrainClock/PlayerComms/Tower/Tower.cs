@@ -222,7 +222,7 @@ namespace BrainClock.PlayerComms
 
         public override void Update1000MS(float deltaTime)
         {
-            Debug.Log("Tower calculating intruders()");
+            //Debug.Log("Tower calculating intruders()");
             base.Update1000MS(deltaTime);
             if (RangeController != null)
                 RangeController.CalculateIntruders();
