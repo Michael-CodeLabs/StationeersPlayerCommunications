@@ -1323,7 +1323,7 @@ MonoBehaviour:
   RangeDefault: 250
   RangeMax: 1000
   PowerScale: 15
-  RadioRangeController: {fileID: 4928382796035644935}
+  RangeController: {fileID: 4928382796035644935}
 --- !u!1 &1381410343327116154
 GameObject:
   m_ObjectHideFlags: 0
@@ -4373,7 +4373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0591a03adaac44992e02a2195a9340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangeZone: {fileID: 3428882448696939150}
+  ParentThing: {fileID: 0}
 --- !u!1 &7775770339999102464
 GameObject:
   m_ObjectHideFlags: 0
