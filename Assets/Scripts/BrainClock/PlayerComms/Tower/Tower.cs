@@ -32,7 +32,7 @@ namespace BrainClock.PlayerComms
         public float RangeDefault = 250;
         public float RangeMax = 1000;
         public float PowerScale = 15f;
-        public RadioRangeController RadioRangeController;
+        public RadioRangeController RangeController;
 
 
         // Needed for ISetable
@@ -53,8 +53,8 @@ namespace BrainClock.PlayerComms
                 }
                 _setting = (float)value;
 
-                if (RadioRangeController != null)
-                    RadioRangeController.Range = _setting;
+                if (RangeController != null)
+                    RangeController.Range = _setting;
 
             }
         }
@@ -211,13 +211,21 @@ namespace BrainClock.PlayerComms
             AllTowers.Add(this);
 
             // Adjust range to default for now
-            if (RadioRangeController != null)
-                RadioRangeController.Range = (float)Setting;
+            if (RangeController != null)
+                RangeController.Range = (float)Setting;
         }
         public override void OnDestroy()
         {
             base.OnDestroy();
             AllTowers.Remove(this);
+        }
+
+        public override void Update1000MS(float deltaTime)
+        {
+            Debug.Log("Tower calculating intruders()");
+            base.Update1000MS(deltaTime);
+            if (RangeController != null)
+                RangeController.CalculateIntruders();
         }
     }
 }

@@ -338,7 +338,14 @@ namespace BrainClock.PlayerComms
         {
             if (this.Battery != null && batteryDisplay.isActiveAndEnabled)
                 batteryDisplay.SetBatteryStatus(this.Battery.CurrentPowerPercentage);
-        }                
+        }
+
+        public override void Update1000MS(float deltaTime)
+        {
+            base.Update1000MS(deltaTime);
+            if (RangeController != null)
+                RangeController.CalculateIntruders();
+        }
 
         /// <summary>
         /// Check if the player wants to use the radio (using the mouse button).

@@ -10,9 +10,13 @@ namespace BrainClock.PlayerComms
     /// Radio elements inside this zone.
     /// </summary>
 
-    [RequireComponent(typeof(SphereCollider))]
     public class RadioRangeController : MonoBehaviour
     {
+
+        [Tooltip("Owner radio of this range controller")]
+        public Assets.Scripts.Objects.Thing ParentThing;
+
+        float _range = 0f;
 
         /// <summary>
         /// Returns a list of radios inside the range zone.
@@ -27,17 +31,44 @@ namespace BrainClock.PlayerComms
         /// </summary>
         public float Range
         {
-            get { return rangeZone != null ? rangeZone.radius : 0f; }
+            get { return _range; }
             set {
-                if (rangeZone != null)
-                    rangeZone.radius = value;
-                else
-                    Debug.LogWarning("Trying to set Range, but rangeZone is null."); 
+                _range = value;
+                CalculateIntruders();
             }
         }
 
-        [SerializeField]
-        private SphereCollider rangeZone;
+        /// <summary>
+        /// Recalculate the radios within the range area
+        /// </summary>
+        public void CalculateIntruders()
+        {
+            foreach (Radio radio in Radio.AllRadios)
+            {
+                if (radio.GetAsThing == ParentThing)
+                    continue;
+
+                float sqrDistance = (transform.position - radio.transform.position).sqrMagnitude;
+                if (sqrDistance < _range * _range)
+                {
+                    if (!_radios.Contains(radio))
+                    {
+                        _radios.Add(radio);
+                        // Trigger radio added
+                    }
+                }
+                else
+                {
+                    if (_radios.Contains(radio))
+                    {
+                        _radios.Remove(radio);
+                        // Trigger radio added
+                    }
+                }
+            }
+        }
+
+
 
         private List<Radio> _radios;
 
@@ -45,39 +76,8 @@ namespace BrainClock.PlayerComms
         void Awake()
         {
             _radios = new List<Radio>();
-            if (rangeZone == null)
-                rangeZone = this.gameObject.GetComponent<SphereCollider>();
-            rangeZone.isTrigger = true;
+            CalculateIntruders();
         }
-
-        private void Start()
-        {
-            //if (rangeZone == null)
-            //    rangeZone = this.gameObject.GetComponent<SphereCollider>();
-            //rangeZone.isTrigger = true;
-        }
-
-
-        private void OnTriggerEnter(Collider other)
-        {
-            Radio radio = other.gameObject.GetComponent<Radio>();
-            if (radio != null)
-            {
-                Debug.Log($"{this.name} + Adding radio {radio.name}, in range");
-                _radios.Add(radio);
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            Radio radio = other.gameObject.GetComponent<Radio>();
-            if (radio != null)
-            {
-                Debug.Log($"{this.name} - Removing radio {radio.name}, not in range");
-                _radios.Remove(radio);
-            }
-        }
-
 
     }
 }
