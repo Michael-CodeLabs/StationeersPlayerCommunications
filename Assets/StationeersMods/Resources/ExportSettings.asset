@@ -15,7 +15,7 @@ MonoBehaviour:
   _author: TBD
   _description: Adds player's voice to Stationeers.
   _name: StationeersPlayerCommunications
-  _outputDirectory: C:/Users/Moe/Documents/My Games/Stationeers/mods
+  _outputDirectory: F:/Unity/StationeersPlayerCommunications/Build~
   _stationeersDirectory: C:/Program Files (x86)/Steam/steamapps/common/Stationeers
   _stationeersArguments: 
   _version: 0.001

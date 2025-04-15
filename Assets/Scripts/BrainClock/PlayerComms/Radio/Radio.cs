@@ -38,8 +38,6 @@ namespace BrainClock.PlayerComms
         public StaticAudioSource SpeakerAudioSource;
         public int Channels = 1; 
         private int _maxVolumeSteps = 10;
-
-
         [Tooltip("Radius of sphere for signal range. Requires a RadioRangeController to work")]
         public float Range = 200;
         [Tooltip("If not assigned, all radios will receive all audio. If assigned, only radios within this range will receive the audio")]

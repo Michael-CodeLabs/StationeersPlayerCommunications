@@ -28,10 +28,12 @@ namespace BrainClock.PlayerComms
         //Add Events later ** **
 
         [Header("Tower")]
-        public float DefaultSignal = 250;
-        public float MaximumSignal = 1000;
+        public TowerMode TowerMode = TowerMode.Default;
+        public float RangeDefault = 250;
+        public float RangeMax = 1000;
         public float PowerScale = 15f;
-        public int TowerMode = 0;
+        public RadioRangeController RadioRangeController;
+
 
         // Needed for ISetable
         private float _setting;
@@ -44,12 +46,16 @@ namespace BrainClock.PlayerComms
             }
             set
             {
-                _setting = Mathf.Clamp((float)value, 0f, MaximumSignal);
+                _setting = Mathf.Clamp((float)value, 0f, RangeMax);
                 if (NetworkManager.IsServer)
                 {
                     base.NetworkUpdateFlags |= 256;
                 }
                 _setting = (float)value;
+
+                if (RadioRangeController != null)
+                    RadioRangeController.Range = _setting;
+
             }
         }
 
@@ -65,7 +71,7 @@ namespace BrainClock.PlayerComms
             LogicType.NameHash,
             LogicType.Lock,
             LogicType.On,
-            LogicType.Mode // 0 Transmit // 1 Recive | Maybe? (Not really needed as this adds too much to work on, but would be nice to have. Mode 3 could be both 0 and 1 combined.
+            LogicType.Mode // 0 Default, 1 Transmit 2 Recive | Maybe? (Not really needed as this adds too much to work on, but would be nice to have. Mode 3 could be both 0 and 1 combined.
         };
 
         private static readonly HashSet<LogicType> WriteLogicTypes = new()
@@ -73,7 +79,7 @@ namespace BrainClock.PlayerComms
             LogicType.Setting,
             LogicType.Lock,
             LogicType.On,
-            LogicType.Mode // 0 Transmit // 1 Recive
+            LogicType.Mode // 0 Default // 1 Transmit // 2 Recive
         };
         
         // Can Logic Read Write
@@ -101,7 +107,7 @@ namespace BrainClock.PlayerComms
             base.SetLogicValue(logicType, value);
             if (logicType == LogicType.Setting)
             {
-                Setting = Mathf.Clamp((float)value, 0f, MaximumSignal);
+                Setting = Mathf.Clamp((float)value, 0f, RangeMax);
             }
         }
         //Update Dedicated Server
@@ -111,6 +117,8 @@ namespace BrainClock.PlayerComms
             {
                 base.NetworkUpdateFlags |= 256;
             }
+
+
         }
 
         //Serialize - Deserialize On Join
@@ -186,7 +194,7 @@ namespace BrainClock.PlayerComms
         {
 
             //Assign Default Signal
-            Setting = DefaultSignal;
+            Setting = RangeDefault;
             Debug.Log("Set Tower Default Signal strength to " + Setting);
             base.Awake();
         }
@@ -201,6 +209,10 @@ namespace BrainClock.PlayerComms
 
             //Add towers to AllTower list
             AllTowers.Add(this);
+
+            // Adjust range to default for now
+            if (RadioRangeController != null)
+                RadioRangeController.Range = RangeDefault;
         }
         public override void OnDestroy()
         {
