@@ -1,3 +1,4 @@
+using Genetics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,7 +36,9 @@ namespace BrainClock.PlayerComms
             }
         }
 
+        [SerializeField]
         private SphereCollider rangeZone;
+
         private List<Radio> _radios;
 
         // Start is called before the first frame update
@@ -46,7 +49,8 @@ namespace BrainClock.PlayerComms
 
         private void Start()
         {
-            rangeZone = GetComponent<SphereCollider>();
+            if (rangeZone == null)
+                rangeZone = this.gameObject.GetComponent<SphereCollider>();
             rangeZone.isTrigger = true;
         }
 
