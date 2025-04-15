@@ -336,7 +336,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0591a03adaac44992e02a2195a9340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParentThing: {fileID: 0}
+  ParentThing: {fileID: 2892032943883829781}
+  AntennaRangeMode: 0
 --- !u!1 &828336478673811580
 GameObject:
   m_ObjectHideFlags: 0

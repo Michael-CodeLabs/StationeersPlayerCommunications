@@ -34,6 +34,10 @@ namespace BrainClock.PlayerComms
         public static event Action<Radio> OnRadioCreated;
         public static event Action<Radio> OnRadioDestroyed;
 
+        // RadioTowers boost this radio
+        private List<Tower> _towersInRange = new List<Tower>();
+
+
         [Header("Radio")]
         public StaticAudioSource SpeakerAudioSource;
         public int Channels = 1; 
@@ -87,19 +91,23 @@ namespace BrainClock.PlayerComms
             }
         }
 
-
-        // TODO: There might be more than one booster, this code needs an upgrade
-        // Current booster of this radio
-        private int _boosterReferenceId = -1;
-
         public bool isBoosted
         {
             get
-            {
-                return _boosterReferenceId > 0;
+            {   // At least one of the tower needs to be turned on
+                bool result = false;
+                foreach (Tower tower in _towersInRange)
+                    result |= tower.Powered && tower.OnOff;
+                return result;
             }
         }
 
+        public List<Tower> TowersInRange
+        {
+            get { 
+                return _towersInRange; 
+            }
+        }
 
         public override void Awake()
         {
@@ -338,14 +346,40 @@ namespace BrainClock.PlayerComms
         {
             if (this.Battery != null && batteryDisplay.isActiveAndEnabled)
                 batteryDisplay.SetBatteryStatus(this.Battery.CurrentPowerPercentage);
+
+            this.SignalTower.SetActive(isBoosted);
+        }
+        private void UpdateBoosterStatus()
+        {
+            this.SignalTower.SetActive(isBoosted);
         }
 
+
+
+        // Update the radios within range for this radio
         public override void Update1000MS(float deltaTime)
         {
             base.Update1000MS(deltaTime);
             if (RangeController != null)
                 RangeController.CalculateIntruders();
         }
+
+
+        // Update the list of Towers we are within range
+        public void OnTowerInRadius(Tower tower)
+        {
+            if (!_towersInRange.Contains(tower))
+                _towersInRange.Add(tower);
+        }
+
+        // Update the list of Towers we are within range
+        public void OnTowerOutRadius(Tower tower)
+        {
+
+            if (_towersInRange.Contains(tower))
+                _towersInRange.Remove(tower);
+        }
+
 
         /// <summary>
         /// Check if the player wants to use the radio (using the mouse button).
@@ -360,9 +394,11 @@ namespace BrainClock.PlayerComms
                 UpdateBatteryStatus();
 
             // TODO update booster status
+            if (SignalTower != null)
+                UpdateBoosterStatus();
 
-            // Return if radio isn't used.
-            Slot activeSlot = InventoryManager.ActiveHandSlot;
+                // Return if radio isn't used.
+                Slot activeSlot = InventoryManager.ActiveHandSlot;
             if (activeSlot == null || activeSlot.Get() as Radio != this)
                 return;
 

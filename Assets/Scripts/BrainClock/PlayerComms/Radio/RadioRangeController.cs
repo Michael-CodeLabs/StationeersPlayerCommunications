@@ -10,11 +10,20 @@ namespace BrainClock.PlayerComms
     /// Radio elements inside this zone.
     /// </summary>
 
+    public enum RangeMode
+    {
+        Radio = 0,
+        Tower = 1
+    }
+
     public class RadioRangeController : MonoBehaviour
     {
 
+
+
         [Tooltip("Owner radio of this range controller")]
         public Assets.Scripts.Objects.Thing ParentThing;
+        public RangeMode AntennaRangeMode = RangeMode.Radio;
 
         float _range = 0f;
 
@@ -54,7 +63,8 @@ namespace BrainClock.PlayerComms
                     if (!_radios.Contains(radio))
                     {
                         _radios.Add(radio);
-                        // Trigger radio added
+                        if (AntennaRangeMode == RangeMode.Tower)
+                            radio.OnTowerInRadius(ParentThing as Tower);
                     }
                 }
                 else
@@ -62,7 +72,8 @@ namespace BrainClock.PlayerComms
                     if (_radios.Contains(radio))
                     {
                         _radios.Remove(radio);
-                        // Trigger radio added
+                        if (AntennaRangeMode == RangeMode.Tower)
+                            radio.OnTowerOutRadius(ParentThing as Tower);
                     }
                 }
             }

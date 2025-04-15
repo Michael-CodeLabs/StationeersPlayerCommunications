@@ -167,6 +167,16 @@ namespace BrainClock.PlayerComms
             // If the radio has a range controller, send audio only to the radios in its range.
             List<Radio> radios = (emittingRadio.RangeController == null) ? RadioThings : emittingRadio.RangeController.RadiosInRange;
 
+            // Add radios within influence of towers in range
+            foreach (Tower tower in emittingRadio.TowersInRange)
+            {
+                if (!tower.OnOff || !tower.Powered || tower.RangeController == null)
+                    continue;
+                foreach (Radio radio in tower.RangeController.RadiosInRange)
+                    if (!radios.Contains(radio))
+                        radios.Add(radio);
+            }
+
             foreach (Radio radio in radios)
             {
                 //Debug.Log($"Radio {radio.ReferenceId}");
