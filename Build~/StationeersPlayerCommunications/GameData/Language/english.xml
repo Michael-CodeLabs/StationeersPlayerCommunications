@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Language xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <Name>English</Name>
-    <Code>EN</Code>
-    <Font>font_english</Font>
-    <Things>
+<Language
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>English</Name>
+	<Code>EN</Code>
+	<Font>font_english</Font>
+	<Things>
 		<RecordThing>
 			<Key>ItemHandHeldRadio</Key>
 			<Value>Radio</Value>
-			<Description />
+			<Description>A radio manufactured by {LINK:CryoSurge} used to communicate players when distance is a problem.</Description>
 		</RecordThing>
-			</Things>
-		<Interactables>
+	</Things>
+	<Interactables>
 		<Record>
 			<Key>ChannelUp</Key>
 			<Value>Channel Up</Value>
@@ -28,4 +30,28 @@
 			<Value>Volume Down</Value>
 		</Record>
 	</Interactables>
+	<Interface>
+		<Record>
+			<Key>CryoSurge</Key>
+			<Value>CryoSurge</Value>
+		</Record>
+		<Record>
+			<Key>CryoSurgeTitle</Key>
+			<Value>CryoSurge Labs</Value>
+		</Record>
+		<Record>
+			<Key>CryoSurgeDescription</Key>
+			<Value>
+Founded in 2137 as an independent research division under the {LINK:ODA;Offworld Development Agency}'s Advanced Technologies Initiative, CryoSurge Labs is a cutting-edge scientific collective dedicated to pioneering communications, energy transfer, and industrial systems under extreme conditions.
+
+Specializing in technology that bridges the gap between theoretical research and field deployment, CryoSurge has become indispensable for operations where conventional systems fail. Their breakthroughs include nanocomposite thermal shielding for {LINK:ExMin;ExMin}'s deep-asteroid drills and fail-hardened circuit architectures used in {LINK:Sinotai;Sinotai}'s Venusian probes.
+
+The lab's most notable contribution is the CryoSurge's Communications Network (CSCN), A robust communications system using modular radio towers that has drawn both praise and legal challenges from {LINK:Hiiragi;Hiiragi} Where they sued to block PCN deployment, claiming it "violated spectrum laws." CryoSurge countered by licensing the tech to independent {LINK:Stationeers;Stationeers} divisions, ensuring adoption outside corporate channels. The case was quietly settled after {LINK:ODA;ODA} mediation.
+
+While maintaining formal ties with the {LINK:ODA;ODA}, CryoSurge operates with unusual autonomy, fostering a meritocratic culture that prioritizes results over bureaucracy. This approach has made them simultaneously revered by {LINK:Stationeers;Stationeers} for their practical innovations and viewed with suspicion by more traditional corporations.
+
+CryoSurge embodies its belief that true innovation demands risk. Their reputation is not without controversy. Whispers persist of a failed cooperative operation involving an unknown {LINK:Stationeers;Stationeers} Division which CryoSurge specifically selected to partake in a secret mission code named "Powered By Meth". This mission took off from Mimas to take place on Titan for extracting Liquid Methane which would later be sold to Traders to fund a project which the {LINK:ODA;ODA} stopped funding for unknown reasons. But CryoSurge claims that "What modern science claimed to be impossible, is no longer."
+			</Value>
+		</Record>
+	</Interface>
 </Language>

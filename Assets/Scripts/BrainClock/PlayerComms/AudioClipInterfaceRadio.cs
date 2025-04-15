@@ -116,6 +116,7 @@ namespace BrainClock.PlayerComms
             bool send = false;
             int emittingChannel = -1;
             Transform emittingTransform = null;
+            Radio emittingRadio = null;
             foreach (Human human in Human.AllHumans)
             {
                 if (human.ReferenceId == referenceId)
@@ -130,6 +131,7 @@ namespace BrainClock.PlayerComms
                             {
                                 emittingChannel = lh.Channel;
                                 emittingTransform = human.transform;
+                                emittingRadio = lh;
                             }
                         }
                         if (rh != null)
@@ -138,6 +140,7 @@ namespace BrainClock.PlayerComms
                             {
                                 emittingChannel = rh.Channel;
                                 emittingTransform = human.transform;
+                                emittingRadio = rh;
                             }
                         }
 
@@ -161,7 +164,10 @@ namespace BrainClock.PlayerComms
             }
             */
 
-            foreach (Radio radio in RadioThings)
+            // If the radio has a range controller, send audio only to the radios in its range.
+            List<Radio> radios = (emittingRadio.RangeController == null) ? RadioThings : emittingRadio.RangeController.RadiosInRange;
+
+            foreach (Radio radio in radios)
             {
                 //Debug.Log($"Radio {radio.ReferenceId}");
                 // Alternatively find channel through Radio.AllChannels

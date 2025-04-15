@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 4047463969
+CRC: 3414035059
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d8b3ab474c24b7dfc14dc5bff34c3907
+    Hash: f6a190b0a4c2435a31172484e05f201f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 91f9ae307ba6a49d68351e47dea439c7
+    Hash: 92e176484724b2b411dc0d3d2a94a782
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -29,6 +29,8 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 54
   Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
 - Class: 65
   Script: {instanceID: 0}
 - Class: 82
@@ -43,6 +45,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 74fa0aca90c33d64d8ddb2fb94f83404, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: ab2114bdc8544297b417dfefe9f1e410, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3b920699830da13499c5cc2c75badaa8, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: eafac14d1ad90a24394da61c9e7535a2, type: 3}
 - Class: 114
@@ -60,6 +64,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 80c2b0bd94ed745439100ce30c89eb08, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 61e09f93fcb9a594eb7edd7e6f42bdfa, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: bbac9049f00f2c84ba30c2f07f3f75d9, type: 3}
@@ -70,14 +76,26 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: d9afc50256fd6bc45a666b19e56cc926, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: e3374434db935c847a6762f99837de18, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: f566bc3550848d746afa0e715d4b9d95, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 6e950d997e252d545bc991ddb5e2f2b3, type: 3}
 - Class: 114
   Script: {fileID: 1200417347, guid: da8de3ecce08b7a469c6f2a86190a972, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c2292a1aa1f3b444a91a2486bb159e73, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b7927f37832355444b2adc6885c4b3e6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5b1c355250fc30e4692a8ec74b55609b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7e96eda4b72464340a06df4d0cec1cce, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
+  Script: {instanceID: 0}
+- Class: 135
   Script: {instanceID: 0}
 - Class: 164
   Script: {instanceID: 0}
@@ -97,7 +115,15 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: Assembly-CSharp
   ClassName: Assets.Scripts.GridSystem.Grid3
 - AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.BrokenBuildState
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.BuildState
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.BuildStateManufacturingDat
+- AssemblyName: Assembly-CSharp
   ClassName: Assets.Scripts.Objects.ColorSwatch
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.Connection
 - AssemblyName: Assembly-CSharp
   ClassName: Assets.Scripts.Objects.IndestructableDamageState
 - AssemblyName: Assembly-CSharp
@@ -109,7 +135,13 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: Assembly-CSharp
   ClassName: Assets.Scripts.Objects.Slot
 - AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.ThingRenderer
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.ToolBasic
+- AssemblyName: Assembly-CSharp
   ClassName: Assets.Scripts.Objects.ToolUse
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.UpgradePrefab
 - AssemblyName: Assembly-CSharp
   ClassName: Assets.Scripts.Sound.GameAudioClipsData
 - AssemblyName: Assembly-CSharp
@@ -212,6 +244,8 @@ SerializeReferenceClassIdentifiers:
   ClassName: Reagents.Waspaloy
 - AssemblyName: Assembly-CSharp
   ClassName: Reagents.Wheat
+- AssemblyName: Assembly-CSharp
+  ClassName: Rendering.DrawData
 - AssemblyName: Unity.TextMeshPro
   ClassName: TMPro.FaceInfo_Legacy
 - AssemblyName: Unity.TextMeshPro
@@ -253,14 +287,21 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
+- Assets/Prefabs/Kit/ItemKitRadioTowerBlueprint.prefab
+- Assets/Prefabs/Tower/StructureRadioTower.prefab
+- Assets/Prefabs/RadioStorage/StructureRadioStorageBlueprint.prefab
 - Assets/StationeersMods/Resources/ExportSettings.asset
 - Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset
 - Assets/TextMesh Pro/Resources/TMP Settings.asset
-- Assets/Prefabs/RadioBlueprint.prefab
-- Assets/Prefabs/ItemHandHeldRadio.prefab
+- Assets/Prefabs/Radios/RadioBlueprint.prefab
+- Assets/Prefabs/Radios/ItemHandHeldRadio.prefab
 - Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
-- Assets/Prefabs/HumanAudioSourcePrefab.prefab
-- Assets/Prefabs/PlayerCommunicationsManagerPrefab.prefab
+- Assets/Prefabs/Utils/HumanAudioSourcePrefab.prefab
+- Assets/Prefabs/Kit/ItemKitRadioTower.prefab
+- Assets/Prefabs/Tower/StructureRadioTowerBlueprint.prefab
+- Assets/Prefabs/Utils/PlayerCommunicationsManagerPrefab.prefab
+- Assets/Prefabs/Utils/CryoSurgeFaction.prefab
+- Assets/Prefabs/RadioStorage/StructureRadioStorage.prefab
 - Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
 - Assets/Fonts/DS-DIGI SDF.asset
 - Assets/TextMesh Pro/Resources/Style Sheets/Default Style Sheet.asset

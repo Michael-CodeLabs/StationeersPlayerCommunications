@@ -2,7 +2,8 @@ namespace BrainClock.PlayerComms
 {
     public enum TowerMode
     {
-        Receive = 0,
-        Transmit = 1
+        Default = 0,   // Receive and transmit boosting
+        Receive = 1,
+        Transmit = 2
     }
 }

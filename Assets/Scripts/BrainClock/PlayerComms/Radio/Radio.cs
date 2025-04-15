@@ -37,8 +37,14 @@ namespace BrainClock.PlayerComms
         [Header("Radio")]
         public StaticAudioSource SpeakerAudioSource;
         public int Channels = 1; 
-        public float Range = 200;
         private int _maxVolumeSteps = 10;
+
+
+        [Tooltip("Radius of sphere for signal range. Requires a RadioRangeController to work")]
+        public float Range = 200;
+        [Tooltip("If not assigned, all radios will receive all audio. If assigned, only radios within this range will receive the audio")]
+        public RadioRangeController RangeController;
+
         [Header("Controls")]
         [SerializeField] private Knob knobVolume;
         [SerializeField] private ActivateButton pushToTalk;
@@ -84,8 +90,10 @@ namespace BrainClock.PlayerComms
         }
 
 
+        // TODO: There might be more than one booster, this code needs an upgrade
         // Current booster of this radio
         private int _boosterReferenceId = -1;
+
         public bool isBoosted
         {
             get
@@ -124,6 +132,7 @@ namespace BrainClock.PlayerComms
             // Other components needing initialization can go here.
             // Initialize Volume Knob
             knobVolume.Initialize(this);
+
         }
 
         /// <summary>
@@ -147,6 +156,10 @@ namespace BrainClock.PlayerComms
             BatteryIcon.SetActive(Powered);
 
             AllRadios.Add(this);
+
+            // Setup radio range if range controller is available
+            if (RangeController != null)
+                RangeController.Range = Range;
         }
 
         public void SetupGameAudioSource()

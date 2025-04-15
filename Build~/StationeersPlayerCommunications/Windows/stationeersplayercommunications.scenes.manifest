@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3285585384
+CRC: 4163266662
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8455dc8398c5ba2b80e8eb87b1cefddc
+    Hash: df4d674eb8c5c245b4bd1db37a8b3f5b
   TypeTreeHash:
     serializedVersion: 2
-    Hash: d71e372151329171017529652e857890
+    Hash: 6aa5ba108979145f4a0f2cb4fded0060
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -29,6 +29,8 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 54
   Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
 - Class: 65
   Script: {instanceID: 0}
 - Class: 81
@@ -50,6 +52,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 74fa0aca90c33d64d8ddb2fb94f83404, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 3b920699830da13499c5cc2c75badaa8, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 2500a43fdc788ba41b80c30759130a34, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f693e109811d8584dbc80219b425f617, type: 3}
@@ -57,6 +61,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 80c2b0bd94ed745439100ce30c89eb08, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 61e09f93fcb9a594eb7edd7e6f42bdfa, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
 - Class: 114
@@ -66,10 +72,18 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 153b67040cca0f645863a6b3fe954721, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: e3374434db935c847a6762f99837de18, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 242404325a0d36146b52a0e60f9b20d9, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 6e950d997e252d545bc991ddb5e2f2b3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5b1c355250fc30e4692a8ec74b55609b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7e96eda4b72464340a06df4d0cec1cce, type: 3}
 - Class: 115
+  Script: {instanceID: 0}
+- Class: 135
   Script: {instanceID: 0}
 - Class: 157
   Script: {instanceID: 0}
@@ -93,6 +107,7 @@ SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Scenes/StationeersPlayerCommunicationsScene.unity
 - Assets/Scenes/RadioEffectsTest.unity
+- Assets/Scenes/TowerScene.unity
 - Assets/Scenes/ManagerTestingTemp.unity
 Dependencies:
 - F:/Unity/StationeersPlayerCommunications/Temp/StationeersPlayerCommunications/Windows/stationeersplayercommunications.assets
