@@ -26,22 +26,28 @@ namespace BrainClock.PlayerComms
         /// </summary>
         public float Range
         {
-            get { return rangeZone.radius; }
-            set {  rangeZone.radius = value; }
+            get { return rangeZone != null ? rangeZone.radius : 0f; }
+            set {
+                if (rangeZone != null)
+                    rangeZone.radius = value;
+                else
+                    Debug.LogWarning("Trying to set Range, but rangeZone is null."); 
+            }
         }
 
-        SphereCollider rangeZone;
-
-        List<Radio> _radios;
-
+        private SphereCollider rangeZone;
+        private List<Radio> _radios;
 
         // Start is called before the first frame update
         void Awake()
         {
             _radios = new List<Radio>();
+        }
+
+        private void Start()
+        {
             rangeZone = GetComponent<SphereCollider>();
             rangeZone.isTrigger = true;
-
         }
 
         private void OnCollisionEnter(Collision collision)

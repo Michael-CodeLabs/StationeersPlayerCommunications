@@ -212,7 +212,7 @@ namespace BrainClock.PlayerComms
 
             // Adjust range to default for now
             if (RadioRangeController != null)
-                RadioRangeController.Range = RangeDefault;
+                RadioRangeController.Range = (float)Setting;
         }
         public override void OnDestroy()
         {
