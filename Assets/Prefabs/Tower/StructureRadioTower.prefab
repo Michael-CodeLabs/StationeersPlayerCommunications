@@ -784,6 +784,23 @@ MonoBehaviour:
     AssociatedAudioEvents: []
     ActionName: 
     _state: 0
+  - StringKey: Powered
+    StringHash: 87111221
+    Parent: {fileID: 4966849676222148615}
+    Collider: {fileID: 0}
+    FakeCollider: {fileID: 0}
+    Bounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    Action: 42
+    Animator: {fileID: 0}
+    JoinInProgressSync: 1
+    Layer: 0
+    CanKeyInteract: 0
+    KeyMap: 
+    AssociatedAudioEvents: []
+    ActionName: 
+    _state: 0
   AudioEvents: []
   AudioSources: []
   BaseAnimator: {fileID: 0}

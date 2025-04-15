@@ -217,7 +217,7 @@ namespace BrainClock.PlayerComms
             Volume = Exporting;
 
             Screen.enabled = Powered;
-            SignalTower.SetActive(Powered);
+            SignalTower.SetActive(isBoosted);
             BatteryIcon.SetActive(Powered);
 
             ChannelIndicator.text = (Channel + 1).ToString();

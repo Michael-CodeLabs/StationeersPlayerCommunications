@@ -1,0 +1,11 @@
+ManifestFileVersion: 0
+CRC: 1282801688
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: stationeersplayercommunications.assets
+      Dependencies: {}
+    Info_1:
+      Name: stationeersplayercommunications.scenes
+      Dependencies:
+        Dependency_0: stationeersplayercommunications.assets

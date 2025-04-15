@@ -1,0 +1,310 @@
+ManifestFileVersion: 0
+CRC: 1729382135
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: ed4d079f65f91fb0784202aeeb12509c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 30eb2fc0715bad5854317e75186d1003
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 49
+  Script: {instanceID: 0}
+- Class: 54
+  Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c2292a1aa1f3b444a91a2486bb159e73, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ecdc8334da7363f4d9c811ed1dfb8c63, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 74fa0aca90c33d64d8ddb2fb94f83404, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ab2114bdc8544297b417dfefe9f1e410, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3b920699830da13499c5cc2c75badaa8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: eafac14d1ad90a24394da61c9e7535a2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 904f000e584d10244a182b6010988810, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2500a43fdc788ba41b80c30759130a34, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2705215ac5b84b70bacc50632be6e391, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 84a92b25f83d49b9bc132d206b370281, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f693e109811d8584dbc80219b425f617, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 80c2b0bd94ed745439100ce30c89eb08, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 61e09f93fcb9a594eb7edd7e6f42bdfa, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: bbac9049f00f2c84ba30c2f07f3f75d9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c2a44fd38254e29479eac4b7892cdd4c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a81a99bde4704004b93965978fe4c3c5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d9afc50256fd6bc45a666b19e56cc926, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b7927f37832355444b2adc6885c4b3e6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e3374434db935c847a6762f99837de18, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f566bc3550848d746afa0e715d4b9d95, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6e950d997e252d545bc991ddb5e2f2b3, type: 3}
+- Class: 114
+  Script: {fileID: 1200417347, guid: da8de3ecce08b7a469c6f2a86190a972, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5b1c355250fc30e4692a8ec74b55609b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7e96eda4b72464340a06df4d0cec1cce, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cf0591a03adaac44992e02a2195a9340, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 135
+  Script: {instanceID: 0}
+- Class: 164
+  Script: {instanceID: 0}
+- Class: 165
+  Script: {instanceID: 0}
+- Class: 169
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.GridSystem.Grid3
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.BrokenBuildState
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.BuildState
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.BuildStateManufacturingDat
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.ColorSwatch
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.Connection
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.IndestructableDamageState
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.Interactable
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.Item/DecayMixture
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.Pipes.Knob
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.Slot
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.ThingRenderer
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.ToolBasic
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.ToolUse
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Objects.UpgradePrefab
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Sound.GameAudioClipsData
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Sound.GameAudioEvent
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Sound.GameAudioSource
+- AssemblyName: Assembly-CSharp
+  ClassName: Assets.Scripts.Sound.SoundEffectCondition
+- AssemblyName: Assembly-CSharp
+  ClassName: Effects.MaterialAnimState
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Alcohol
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Astroloy
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Biomass
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Carbon
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Cobalt
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Cocoa
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.ColorBlue
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.ColorGreen
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.ColorOrange
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.ColorRed
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.ColorYellow
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Constantan
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Copper
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Corn
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Egg
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Electrum
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Fenoxitone
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Flour
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Gold
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Hastelloy
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Hydrocarbon
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Inconel
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Invar
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Iron
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Lead
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Milk
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Mushroom
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Nickel
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Oil
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Plastic
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Potato
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Pumpkin
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.ReagentMixture
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Rice
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.SalicylicAcid
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Silicon
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Silver
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Solder
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Soy
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Steel
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Stellite
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Sugar
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Tomato
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Uranium
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Waspaloy
+- AssemblyName: Assembly-CSharp
+  ClassName: Reagents.Wheat
+- AssemblyName: Assembly-CSharp
+  ClassName: Rendering.DrawData
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.FaceInfo_Legacy
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.FontAssetCreationSettings
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.KerningTable
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_Character
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_FontFeatureTable
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_FontWeightPair
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_GlyphAdjustmentRecord
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_GlyphPairAdjustmentRecord
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_GlyphValueRecord
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_Sprite
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_SpriteCharacter
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_SpriteGlyph
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_Style
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.VertexGradient
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.FaceInfo
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.Glyph
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.GlyphMetrics
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.GlyphRect
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+Assets:
+- Assets/Prefabs/Kit/ItemKitRadioTowerBlueprint.prefab
+- Assets/Prefabs/Tower/StructureRadioTower.prefab
+- Assets/Prefabs/RadioStorage/StructureRadioStorageBlueprint.prefab
+- Assets/StationeersMods/Resources/ExportSettings.asset
+- Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset
+- Assets/TextMesh Pro/Resources/TMP Settings.asset
+- Assets/Prefabs/Radios/RadioBlueprint.prefab
+- Assets/Prefabs/Radios/ItemHandHeldRadio.prefab
+- Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+- Assets/Prefabs/Utils/HumanAudioSourcePrefab.prefab
+- Assets/Prefabs/Kit/ItemKitRadioTower.prefab
+- Assets/Prefabs/Tower/StructureRadioTowerBlueprint.prefab
+- Assets/Prefabs/Utils/PlayerCommunicationsManagerPrefab.prefab
+- Assets/Prefabs/Utils/CryoSurgeFaction.prefab
+- Assets/Prefabs/RadioStorage/StructureRadioStorage.prefab
+- Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
+- Assets/Fonts/DS-DIGI SDF.asset
+- Assets/TextMesh Pro/Resources/Style Sheets/Default Style Sheet.asset
+Dependencies: []
