@@ -1,3 +1,4 @@
+using Assets.Scripts.Objects;
 using Genetics;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace BrainClock.PlayerComms
         [Tooltip("Owner radio of this range controller")]
         public Assets.Scripts.Objects.Thing ParentThing;
         public RangeMode AntennaRangeMode = RangeMode.Radio;
-
+        public bool Ready = false;
         float _range = 0f;
 
         /// <summary>
@@ -50,7 +51,7 @@ namespace BrainClock.PlayerComms
         /// </summary>
         public void CalculateIntruders()
         {
-            if (!this.enabled)
+            if (!Ready)
                 return;
 
             foreach (Radio radio in Radio.AllRadios)
@@ -86,6 +87,7 @@ namespace BrainClock.PlayerComms
         void Start()
         {
             _radios = new List<Radio>();
+            Ready = true;
             CalculateIntruders();
         }
 
