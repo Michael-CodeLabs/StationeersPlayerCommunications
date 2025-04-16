@@ -97,7 +97,7 @@ namespace BrainClock.PlayerComms
             {   // At least one of the tower needs to be turned on
                 bool result = false;
                 foreach (Tower tower in _towersInRange)
-                    result |= tower.Powered && tower.OnOff;
+                    result |= tower.enabled && tower.Powered && tower.OnOff;
                 return result;
             }
         }

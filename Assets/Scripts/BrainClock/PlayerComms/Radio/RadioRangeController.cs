@@ -19,8 +19,6 @@ namespace BrainClock.PlayerComms
     public class RadioRangeController : MonoBehaviour
     {
 
-
-
         [Tooltip("Owner radio of this range controller")]
         public Assets.Scripts.Objects.Thing ParentThing;
         public RangeMode AntennaRangeMode = RangeMode.Radio;
@@ -52,6 +50,9 @@ namespace BrainClock.PlayerComms
         /// </summary>
         public void CalculateIntruders()
         {
+            if (!this.enabled)
+                return;
+
             foreach (Radio radio in Radio.AllRadios)
             {
                 if (radio.GetAsThing == ParentThing)
@@ -79,12 +80,10 @@ namespace BrainClock.PlayerComms
             }
         }
 
-
-
         private List<Radio> _radios;
 
         // Start is called before the first frame update
-        void Awake()
+        void Start()
         {
             _radios = new List<Radio>();
             CalculateIntruders();
