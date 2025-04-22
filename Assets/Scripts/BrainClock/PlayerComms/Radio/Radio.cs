@@ -59,7 +59,7 @@ namespace BrainClock.PlayerComms
         [Header("UI")]
         [SerializeField] private BatteryDisplay batteryDisplay;
 
-
+        public static bool RadioIsActivating;
         private bool _primaryKey = false;
 
         // Current channel of this radio
@@ -217,7 +217,7 @@ namespace BrainClock.PlayerComms
             Volume = Exporting;
 
             Screen.enabled = Powered;
-            SignalTower.SetActive(isBoosted);
+            SignalTower.SetActive(isBoosted && Powered);
             BatteryIcon.SetActive(Powered);
 
             ChannelIndicator.text = (Channel + 1).ToString();
@@ -410,6 +410,7 @@ namespace BrainClock.PlayerComms
             //Debug.Log($"Human is holding this radio {ReferenceId}");
             if (KeyManager.GetMouse("Primary") && !_primaryKey && !KeyManager.GetButton(KeyMap.MouseControl))
             {
+               Radio.RadioIsActivating = true;
                 _primaryKey = true;
                 this.UseRadio().Forget();
             }
@@ -437,6 +438,7 @@ namespace BrainClock.PlayerComms
             // TODO: Add audio effect here
             Thing.Interact(radio.InteractActivate, 0);
             _primaryKey = false;
+            Radio.RadioIsActivating = false;
         }
 
         public override void OnDestroy()

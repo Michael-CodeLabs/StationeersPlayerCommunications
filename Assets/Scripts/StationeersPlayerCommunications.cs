@@ -1,3 +1,5 @@
+using BepInEx;
+using BepInEx.Configuration;
 using HarmonyLib;
 using System.Linq;
 using UnityEngine;
@@ -11,16 +13,22 @@ public class StationeersPlayerCommunications : ModBehaviour
     /// StationeersMods/BepinEx ModBehaviour to handle the mod initialization.
     /// </summary>
     /// <param name="contentHandler">Contains the assets of the mod package</param>
+  
+    public static KeyCode PushToTalk;
+
+    public static ConfigEntry<bool> TransmissionModeConfig; // true = PushToTalk
+
     public override void OnLoaded(ContentHandler contentHandler)
     {
-        UnityEngine.Debug.Log("StationeersPlayerCommunications setup");
-        
-        // Configuration setup.
-        // configBool = Config.Bind("Input",
-        //     "Boolean",
-        //     true,
-        //     "Boolean description");
-        
+        Debug.Log("StationeersPlayerCommunications Loaded!");
+
+        // Bind the config
+        TransmissionModeConfig = Config.Bind(
+            "Player Communications",
+            "TransmissionMode",
+            true, // default: PushToTalk
+            "Sets the voice transmission mode. True = Push To Talk, False = Continuous.");
+
         Harmony harmony = new Harmony("StationeersPlayerCommunications");
 
         // The InventoryManager patch will spawn our main Manager into the 
@@ -28,6 +36,7 @@ public class StationeersPlayerCommunications : ModBehaviour
         // after the game has loaded all files/resources and will survive 
         // between games.
         Debug.Log("+ Queueing the spawn of managers");
+
         var targetPrefab = contentHandler.prefabs.FirstOrDefault(prefab => prefab.name == "PlayerCommunicationsManagerPrefab");
         InventoryManagerPatch.PlayerCommunicationsManagerPrefab = targetPrefab;
 
@@ -35,6 +44,7 @@ public class StationeersPlayerCommunications : ModBehaviour
         // needs to be added to the factory in two lookup tables, and because
         // this message type needs to be processed in the client to it also 
         // needs an additional injection in the Network process() handler.
+
         Debug.Log("+ Injecting network messages");
         MessageFactoryInjector.InjectCustomMessageType(typeof(AudioClipMessage));
 
@@ -43,6 +53,13 @@ public class StationeersPlayerCommunications : ModBehaviour
         StationpediaPatches.prefabs = contentHandler.prefabs;
         harmony.PatchAll();
 
-        UnityEngine.Debug.Log("+ Patching complete, setup finished");
+        Debug.Log("+ Patching complete, setup finished");
+
+        KeyManager.OnControlsChanged += ControlsChangedEvent;
+    }
+
+    private static void ControlsChangedEvent()
+    {
+        PushToTalk = KeyManager.GetKey("Push To Talk");
     }
 }
