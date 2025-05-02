@@ -59,6 +59,9 @@ namespace BrainClock.PlayerComms
         [Header("UI")]
         [SerializeField] private BatteryDisplay batteryDisplay;
 
+        [Header("Audio Clips")]
+        public AudioClip IncomingTransmissionClip;
+
         public static bool RadioIsActivating;
         private bool _primaryKey = false;
 
@@ -311,7 +314,6 @@ namespace BrainClock.PlayerComms
             }
             else
                 pushToTalk.MaterialChanger.ChangeState(Activate);
-            
         }
 
         public void OnDocked()
@@ -347,11 +349,11 @@ namespace BrainClock.PlayerComms
             if (this.Battery != null && batteryDisplay.isActiveAndEnabled)
                 batteryDisplay.SetBatteryStatus(this.Battery.CurrentPowerPercentage);
 
-            this.SignalTower.SetActive(isBoosted);
+            this.SignalTower.SetActive(isBoosted && Powered);
         }
         private void UpdateBoosterStatus()
         {
-            this.SignalTower.SetActive(isBoosted);
+            this.SignalTower.SetActive(isBoosted && Powered);
         }
 
 
@@ -428,7 +430,9 @@ namespace BrainClock.PlayerComms
             }
 
             // Start using the radio
-            // TODO: Add audio effect here
+            // Done: Add audio effect here
+            IncomingTransmission();
+
             Thing.Interact(radio.InteractActivate, 1);
 
             while (KeyManager.GetMouse("Primary") && !KeyManager.GetButton(KeyMap.SwapHands) && Powered)
@@ -510,7 +514,10 @@ namespace BrainClock.PlayerComms
             {
                 // Ensure the radio is powered before updating the material
                 if (!Powered)
+                {
+                    pushToTalk.MaterialChanger.ChangeState(0);
                     return;
+                }
 
                 long referenceId;
                 if (AllChannels.TryGetValue(Channel, out referenceId))
@@ -543,7 +550,21 @@ namespace BrainClock.PlayerComms
             return extendedText;
         }
 
+        private void IncomingTransmission()
+        {
+            foreach (Radio other in AllRadios)
+            {
+                if (other == this || !other.Powered)
+                    continue;
 
+                if (other.Channel == this.Channel && other.SpeakerAudioSource != null)
+                {
+                    var source = other.SpeakerAudioSource.GameAudioSource.AudioSource;
+                    source.PlayOneShot(IncomingTransmissionClip);
+                }
+            }
+        }
+ 
         /// <summary>
         /// Populate audio to all receiver components
         /// </summary>

@@ -177,7 +177,7 @@ MonoBehaviour:
   BaseAnimator: {fileID: 0}
   IsCursor: 0
   Blueprint: {fileID: 6377484147780392248, guid: 7471b90f8d8a7cf468a9150add26582a, type: 3}
-  Wireframe: {fileID: 0}
+  Wireframe: {fileID: 2878479223845957864, guid: 7471b90f8d8a7cf468a9150add26582a, type: 3}
   lodFlares: []
   IsCustomThing: 0
   ThumbnailOffset: {x: 0, y: 0, z: 0}

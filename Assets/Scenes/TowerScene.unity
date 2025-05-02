@@ -374,6 +374,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2878479223845957864, guid: 7471b90f8d8a7cf468a9150add26582a, type: 3}
+      propertyPath: WireframeEdges.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6037832484426796930, guid: 7471b90f8d8a7cf468a9150add26582a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -495,6 +499,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2179924084467174611, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+      propertyPath: m_Volume
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
       propertyPath: GridSize
       value: 1
@@ -514,6 +522,10 @@ PrefabInstance:
     - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
       propertyPath: BoundsGridRatio
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+      propertyPath: AudioEvents.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
       propertyPath: BuildStates.Array.data[0].Visualizer
@@ -639,6 +651,42 @@ PrefabInstance:
       propertyPath: BrokenBuildStates.Array.data[0].BuildState.Colliders.Array.data[0]
       value: 
       objectReference: {fileID: 6031488435632051582, guid: c9e86898270bc5b4eabdd21bdc2c2d83, type: 3}
+    - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+      propertyPath: AudioSources.Array.data[0].SpatialCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+      propertyPath: AudioSources.Array.data[0].ReverbCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+      propertyPath: AudioSources.Array.data[0].ReverbCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+      propertyPath: AudioSources.Array.data[0].SpatialCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+      propertyPath: AudioSources.Array.data[0].SpatialCurve.m_Curve.Array.data[1].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+      propertyPath: AudioSources.Array.data[0].SpatialCurve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+      propertyPath: AudioSources.Array.data[0].SpatialCurve.m_Curve.Array.data[1].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+      propertyPath: AudioSources.Array.data[0].SpatialCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+      propertyPath: AudioSources.Array.data[0].SpatialCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
       propertyPath: BrokenBuildStates.Array.data[0].BuildState.LinkedGameObjects.Array.data[0]
       value: 
