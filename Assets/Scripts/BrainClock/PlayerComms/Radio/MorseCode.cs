@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BrainClock.PlayerComms
 {
-    public class MorseCode : StaticAudioSource
+    public class MorseCode : ModStaticAudioSource
     {
         public AudioClip stuckOnTitanClip;
         public AudioClip baseFailureClip;

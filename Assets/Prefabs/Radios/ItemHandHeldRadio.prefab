@@ -1237,7 +1237,100 @@ MonoBehaviour:
     AssociatedAudioEvents: []
     ActionName: 
     _state: 5
-  AudioEvents: []
+  AudioEvents:
+  - Name: BaseFailure
+    NameHash: -102118816
+    Channel: 0
+    Parent: {fileID: 2892032943883829781}
+    ClipsData:
+      Name: BaseFailure
+      ChannelName: 
+      Looping: 0
+      LoopingOneShots: 0
+      RandomStartTime: 0
+      RandomPitch: 0
+      RandomPitchRangeHigh: 0
+      RandomPitchRangeLow: 0
+      Delay: 0
+      FadeIn: 0
+      FadeOut: 0
+      FadeDown: 0
+      FadeDownTime: 0
+      FadeDownTarget: 0
+      FadePitch: 0
+      FadeInTime: 0
+      FadeOutTime: 0
+      Clips:
+      - {fileID: 8300000, guid: e91a2432b2d2ec8428f99c462841da1e, type: 3}
+      Concurrencies: []
+      ConcurrencyIds: 
+      NameHash: -102118816
+      SoundAlert: 0
+    StopIfInvalid: 0
+    Conditions: []
+    BuildStateConditions: 
+  - Name: LOWO2
+    NameHash: 1318268993
+    Channel: 0
+    Parent: {fileID: 2892032943883829781}
+    ClipsData:
+      Name: LOWO2
+      ChannelName: 
+      Looping: 0
+      LoopingOneShots: 0
+      RandomStartTime: 0
+      RandomPitch: 0
+      RandomPitchRangeHigh: 0
+      RandomPitchRangeLow: 0
+      Delay: 0
+      FadeIn: 0
+      FadeOut: 0
+      FadeDown: 0
+      FadeDownTime: 0
+      FadeDownTarget: 0
+      FadePitch: 0
+      FadeInTime: 0
+      FadeOutTime: 0
+      Clips:
+      - {fileID: 8300000, guid: bb9c8f98bc0bc1549ad6169d6094a5d4, type: 3}
+      Concurrencies: []
+      ConcurrencyIds: 
+      NameHash: 1318268993
+      SoundAlert: 0
+    StopIfInvalid: 0
+    Conditions: []
+    BuildStateConditions: 
+  - Name: morseStuckOnTitan
+    NameHash: 1192423714
+    Channel: 0
+    Parent: {fileID: 2892032943883829781}
+    ClipsData:
+      Name: morseStuckOnTitan
+      ChannelName: 
+      Looping: 0
+      LoopingOneShots: 0
+      RandomStartTime: 0
+      RandomPitch: 0
+      RandomPitchRangeHigh: 0
+      RandomPitchRangeLow: 0
+      Delay: 0
+      FadeIn: 0
+      FadeOut: 0
+      FadeDown: 0
+      FadeDownTime: 0
+      FadeDownTarget: 0
+      FadePitch: 0
+      FadeInTime: 0
+      FadeOutTime: 0
+      Clips:
+      - {fileID: 8300000, guid: da425b0cca86d4241a6a0a21357249f4, type: 3}
+      Concurrencies: []
+      ConcurrencyIds: 
+      NameHash: 1192423714
+      SoundAlert: 0
+    StopIfInvalid: 0
+    Conditions: []
+    BuildStateConditions: 
   AudioSources:
   - Name: Interact1
     ParentPooledAudioSource: {fileID: 0}
@@ -3597,7 +3690,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0.00223732
-      value: 0.72335434
+      value: 0.20304489
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -3606,7 +3699,7 @@ AudioSource:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.42272985
-      value: 0.59257436
+      value: 0.07226491
       inSlope: -0.77236265
       outSlope: -0.77236265
       tangentMode: 0
@@ -3722,10 +3815,10 @@ MonoBehaviour:
   GameAudioSource:
     Name: MorseCodeSpeaker
     ParentPooledAudioSource: {fileID: 0}
-    ParentStaticAudioSource: {fileID: 0}
+    ParentStaticAudioSource: {fileID: 826638555136256577}
     AudioSource: {fileID: 4252627623051091902}
-    LowPassFilter: {fileID: 0}
-    HighPassFilter: {fileID: 0}
+    LowPassFilter: {fileID: 1633730957257074146}
+    HighPassFilter: {fileID: 3748318757906051388}
     SourceVolume: 0.3
     SourcePitch: 1
     SpatialCurve:
@@ -3799,6 +3892,7 @@ MonoBehaviour:
     ExternalMixerGroupHash: -1591426066
     VacuumMixerGroupHash: -710576460
     OccludedMixerGroupHash: -1140213991
+  VolumeMultiplier: 1
   stuckOnTitanClip: {fileID: 8300000, guid: da425b0cca86d4241a6a0a21357249f4, type: 3}
   baseFailureClip: {fileID: 8300000, guid: e91a2432b2d2ec8428f99c462841da1e, type: 3}
   lowO2Clip: {fileID: 8300000, guid: bb9c8f98bc0bc1549ad6169d6094a5d4, type: 3}
