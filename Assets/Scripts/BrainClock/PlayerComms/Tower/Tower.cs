@@ -34,7 +34,6 @@ namespace BrainClock.PlayerComms
         public float PowerScale = 15f;
         public RadioRangeController RangeController;
 
-
         // Needed for ISetable
         private float _setting;
         [ByteArraySync]

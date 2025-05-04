@@ -906,9 +906,9 @@ MonoBehaviour:
   SolarHeatingScale: 0.1
   WeatherDamageScale: 1
   shatterTemperature: 1
-  flashpointTemperature: 373.15
-  autoignitionTemperature: 573.15
-  BurnTime: 40
+  flashpointTemperature: 1110.15
+  autoignitionTemperature: 1573.15
+  BurnTime: 70
   ThingHealth: 2000
   EnergyReleasedWhenBurned: 100000
   _customName: 
@@ -1098,7 +1098,7 @@ MonoBehaviour:
   IsCustomThing: 0
   ThumbnailOffset: {x: 0, y: 0, z: 0}
   ThumbnailRotation: {x: 0, y: 0, z: 0, w: 0}
-  Thumbnail: {fileID: 21300000, guid: 065b7d4a6d65aaa41bbaf3efdd15f899, type: 3}
+  Thumbnail: {fileID: 21300000, guid: 200b18c19786cca429b298b3de70af54, type: 3}
   Thumbnails: []
   IsEntity: 0
   _isOccluded: 0
@@ -1117,7 +1117,7 @@ MonoBehaviour:
   HasActivateState: 0
   HasLockState: 1
   HasOnOffState: 1
-  HasModeState: 1
+  HasModeState: 0
   HasOpenState: 0
   HasImportState: 0
   HasExportState: 0
@@ -1143,7 +1143,7 @@ MonoBehaviour:
   maxPressureDelta: -1
   BuildingTip: Requires a frame to be constructed
   BuildStates:
-  - Thumbnail: {fileID: 0}
+  - Thumbnail: {fileID: 21300000, guid: 7b8b0f497efff0d48927bbb51cc482e7, type: 3}
     DamagedBuildState: 0
     BlockAir: 0
     AlwaysBlockAir: 0
@@ -1193,7 +1193,7 @@ MonoBehaviour:
       mesh: {fileID: 0}
       materials: []
       shadowMode: 0
-  - Thumbnail: {fileID: 0}
+  - Thumbnail: {fileID: 21300000, guid: 6d348d76861d40146952a7657309f718, type: 3}
     DamagedBuildState: 0
     BlockAir: 0
     AlwaysBlockAir: 0
@@ -1244,7 +1244,7 @@ MonoBehaviour:
       mesh: {fileID: 0}
       materials: []
       shadowMode: 0
-  - Thumbnail: {fileID: 0}
+  - Thumbnail: {fileID: 21300000, guid: d97e2125dde90364581017714d6c1494, type: 3}
     DamagedBuildState: 0
     BlockAir: 0
     AlwaysBlockAir: 0
@@ -1294,7 +1294,7 @@ MonoBehaviour:
       mesh: {fileID: 0}
       materials: []
       shadowMode: 0
-  - Thumbnail: {fileID: 0}
+  - Thumbnail: {fileID: 21300000, guid: 200b18c19786cca429b298b3de70af54, type: 3}
     DamagedBuildState: 0
     BlockAir: 0
     AlwaysBlockAir: 0
@@ -1347,7 +1347,7 @@ MonoBehaviour:
       shadowMode: 0
   BrokenBuildStates:
   - BuildState:
-      Thumbnail: {fileID: 0}
+      Thumbnail: {fileID: 21300000, guid: 81f4fbcaa332652418f8bc6e0bfac39b, type: 3}
       DamagedBuildState: 1
       BlockAir: 0
       AlwaysBlockAir: 0
@@ -1418,26 +1418,26 @@ MonoBehaviour:
         ReagentId: 0
         _quantity: 0
       Copper:
-        ReagentId: 0
-        _quantity: 0
+        ReagentId: 7
+        _quantity: 10
       Steel:
-        ReagentId: 0
-        _quantity: 0
+        ReagentId: 8
+        _quantity: 18
       Hydrocarbon:
         ReagentId: 0
         _quantity: 0
       Silver:
-        ReagentId: 0
-        _quantity: 0
+        ReagentId: 10
+        _quantity: 6
       Nickel:
-        ReagentId: 0
-        _quantity: 0
+        ReagentId: 11
+        _quantity: 12
       Lead:
         ReagentId: 0
         _quantity: 0
       Electrum:
-        ReagentId: 0
-        _quantity: 0
+        ReagentId: 13
+        _quantity: 7
       Invar:
         ReagentId: 0
         _quantity: 0
@@ -1451,8 +1451,8 @@ MonoBehaviour:
         ReagentId: 0
         _quantity: 0
       Silicon:
-        ReagentId: 0
-        _quantity: 0
+        ReagentId: 18
+        _quantity: 13
       SalicylicAcid:
         ReagentId: 0
         _quantity: 0
@@ -1588,7 +1588,7 @@ MonoBehaviour:
   OpenEnds:
   - ConnectionType: 2
     Transform: {fileID: 7532211035325306461}
-    Collider: {fileID: 5675897086477545638}
+    Collider: {fileID: 3511224815561463499}
     ConnectionRole: 1
     HelperRenderer: {fileID: 0}
     Parent: {fileID: 4966849676222148615}
@@ -1602,7 +1602,7 @@ MonoBehaviour:
       z: 0
   - ConnectionType: 4
     Transform: {fileID: 4618101705954246413}
-    Collider: {fileID: 690188669096937116}
+    Collider: {fileID: 4888984963984531725}
     ConnectionRole: 2
     HelperRenderer: {fileID: 0}
     Parent: {fileID: 4966849676222148615}

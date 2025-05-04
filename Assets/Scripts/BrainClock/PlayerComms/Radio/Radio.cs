@@ -1,20 +1,20 @@
+using Assets.Scripts;
+using Assets.Scripts.Inventory;
+using Assets.Scripts.Localization2;
+using Assets.Scripts.Objects;
+using Assets.Scripts.Objects.Items;
+using Assets.Scripts.Objects.Pipes;
+using Assets.Scripts.Sound;
+using Assets.Scripts.UI;
+using Assets.Scripts.Util;
+using Audio;
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
-using Assets.Scripts;
-using Assets.Scripts.Objects.Items;
-using UnityEngine;
-using Assets.Scripts.Objects;
-using Assets.Scripts.Inventory;
-using Assets.Scripts.Sound;
-using Audio;
-using Assets.Scripts.Util;
-using Cysharp.Threading.Tasks;
-using Assets.Scripts.Objects.Pipes;
-using System.Threading;
-using Assets.Scripts.Localization2;
 using System.Text;
+using System.Threading;
 using TMPro;
-using Assets.Scripts.UI;
+using UnityEngine;
 
 namespace BrainClock.PlayerComms
 {
@@ -37,10 +37,15 @@ namespace BrainClock.PlayerComms
         // RadioTowers boost this radio
         private List<Tower> _towersInRange = new List<Tower>();
 
+        //MorseAssigner
+        [SerializeField] private MorseCode _morseCode;
+        private bool _playingMorseLoop = false;
+
+        [SerializeField] private AudioSource MorseAudioSource;
 
         [Header("Radio")]
         public StaticAudioSource SpeakerAudioSource;
-        public int Channels = 1; 
+        public int Channels = 1;
         private int _maxVolumeSteps = 10;
         [Tooltip("Radius of sphere for signal range. Requires a RadioRangeController to work")]
         public float Range = 200;
@@ -79,7 +84,7 @@ namespace BrainClock.PlayerComms
             }
         }
 
-        
+
         // Current Volume of this radio
         private int _currentVolume;
         public int Volume
@@ -107,8 +112,9 @@ namespace BrainClock.PlayerComms
 
         public List<Tower> TowersInRange
         {
-            get { 
-                return _towersInRange; 
+            get
+            {
+                return _towersInRange;
             }
         }
 
@@ -130,13 +136,14 @@ namespace BrainClock.PlayerComms
             // Force screen offline at spawn, it will be updated with the Powered interactable.
             Screen.enabled = false;
 
-            
+
             base.Awake();
 
             // Setting up channel from Mode and Volume from Exporting states.
             Channel = Mode;
             Volume = Exporting;
 
+            //TryGetComponent(out _morseCode);
 
             // Other components needing initialization can go here.
             // Initialize Volume Knob
@@ -225,7 +232,7 @@ namespace BrainClock.PlayerComms
 
             ChannelIndicator.text = (Channel + 1).ToString();
             VolumeIndicator.text = Volume.ToString();
-            
+
             // Visually update Volume knob
             UpdateKnobVolume();
 
@@ -330,7 +337,7 @@ namespace BrainClock.PlayerComms
             get
             {
                 if (this.Powered)
-                   return true;
+                    return true;
                 return false;
             }
         }
@@ -343,7 +350,7 @@ namespace BrainClock.PlayerComms
             return false;
         }
 
-        
+
         private void UpdateBatteryStatus()
         {
             if (this.Battery != null && batteryDisplay.isActiveAndEnabled)
@@ -364,6 +371,17 @@ namespace BrainClock.PlayerComms
             base.Update1000MS(deltaTime);
             if (RangeController != null)
                 RangeController.CalculateIntruders();
+
+            if (_playingMorseLoop && Channel != 15 || !Powered)
+            {
+                _playingMorseLoop = false;
+                MorseAudioSource.Stop();
+            }
+
+            if (Channel == 15 && Powered && !_playingMorseLoop)
+            {
+                StartMorseLoop().Forget();
+            };
         }
 
 
@@ -399,8 +417,19 @@ namespace BrainClock.PlayerComms
             if (SignalTower != null)
                 UpdateBoosterStatus();
 
-                // Return if radio isn't used.
-                Slot activeSlot = InventoryManager.ActiveHandSlot;
+            // Update Error Status <-- Used for associated audio events for On Off.
+            if (this.Battery != null && this.Battery.PowerRatio >= 0.1f)
+            {
+                this.Error = 0;
+            }
+            else
+            {
+                this.Error = 1;
+            }
+            ;
+
+            // Return if radio isn't used.
+            Slot activeSlot = InventoryManager.ActiveHandSlot;
             if (activeSlot == null || activeSlot.Get() as Radio != this)
                 return;
 
@@ -412,7 +441,7 @@ namespace BrainClock.PlayerComms
             //Debug.Log($"Human is holding this radio {ReferenceId}");
             if (KeyManager.GetMouse("Primary") && !_primaryKey && !KeyManager.GetButton(KeyMap.MouseControl))
             {
-               Radio.RadioIsActivating = true;
+                Radio.RadioIsActivating = true;
                 _primaryKey = true;
                 this.UseRadio().Forget();
             }
@@ -465,7 +494,7 @@ namespace BrainClock.PlayerComms
             else
             {
                 // Setting Knob value
-                knobVolume.SetKnob(Exporting, _maxVolumeSteps, 0).Forget(); 
+                knobVolume.SetKnob(Exporting, _maxVolumeSteps, 0).Forget();
                 float vol = (float)Exporting * (1f / _maxVolumeSteps);
                 //Debug.Log($"UpdaingKnobVolume {Exporting} {vol}");
                 SpeakerAudioSource.GameAudioSource.SourceVolume = vol;
@@ -564,7 +593,23 @@ namespace BrainClock.PlayerComms
                 }
             }
         }
- 
+
+        private async UniTaskVoid StartMorseLoop()
+        {
+            _playingMorseLoop = true;
+
+                while (this.Channel == 15 && Powered && !MorseAudioSource.isPlaying)
+                {
+                    _morseCode.PlayMorse();
+
+                    while (MorseAudioSource.isPlaying && this.Channel == 15 && Powered)
+                        await UniTask.Yield();
+
+                    await UniTask.Delay(1000);
+                }
+                _playingMorseLoop = false;
+            }
+
         /// <summary>
         /// Populate audio to all receiver components
         /// </summary>
@@ -579,7 +624,7 @@ namespace BrainClock.PlayerComms
 
             if (!this.Powered || this.Activate != 0)
                 return;
-            
+
             if (audioStreamReceivers != null)
             {
                 foreach (IAudioStreamReceiver audioStreamReceiver in audioStreamReceivers)
