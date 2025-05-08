@@ -17,7 +17,7 @@ Material:
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -30,7 +30,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.107
+    - _Alpha: 1
     - _Brightness: 6
     - _BumpScale: 1
     - _ColorMask: 15
@@ -43,7 +43,7 @@ Material:
     - _DistortionSpeed: 2
     - _DstBlend: 0
     - _FlickerSpeed: 1.59
-    - _FresnelPower: 10
+    - _FresnelPower: 0.1
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
@@ -60,7 +60,7 @@ Material:
     - _Parallax: 0.02
     - _RandomValue: 0
     - _Scale: 1
-    - _ScanEnabled: 0.152
+    - _ScanEnabled: 0.51
     - _ScanLineTileAmount: 4
     - _ScanSpeed: 0.35
     - _ScanTiling: 196
@@ -82,7 +82,7 @@ Material:
     - _Direction: {r: 0.1, g: 0.1, b: 0.1, a: 0.1}
     - _Emission: {r: 1, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 0, g: 0.114498615, b: 1, a: 1}
+    - _FresnelColor: {r: 0, g: 0, b: 0, a: 0}
     - _MainColor: {r: 0.011263967, g: 1, b: 0, a: 1}
     - _NightVisionColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

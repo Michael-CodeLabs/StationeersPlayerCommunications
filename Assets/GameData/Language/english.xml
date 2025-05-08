@@ -9,10 +9,38 @@
 		<RecordThing>
 			<Key>ItemHandHeldRadio</Key>
 			<Value>Radio</Value>
-			<Description>A radio manufactured by {LINK:CryoSurge} used to communicate players when distance is a problem.</Description>
+			<Description>The {LINK:CryoSurge;CryoSurge} Hand-Held Radio offers a solution to the problem of long distance communications.
+Any radio's boosted by a {THING:StructureRadioTower} will be able to transmit &amp; receive on the same channel even if they're on a different world, universe or galaxy.
+Radio passive power usage: 10W
+Radio active power usage : 100W
+	</Description>
+		</RecordThing>
+			<RecordThing>
+			<Key>StructureRadioTower</Key>
+			<Value>Radio Tower</Value>
+			<Description>The {LINK:CryoSurge;CryoSurge} Radio Tower offers a solution to the problem of even longer distance communications.
+Any radio's in the signal range of a Tower will be boosted &amp; will be able to transmit &amp; receive on the same channel even if they're on a different world, universe or galaxy.
+
+Tower passive power usage: 200W
+Tower active power usage : Effected by signal (Setting). 1 Setting = 15W.
+	</Description>
+		</RecordThing>
+			<RecordThing>
+			<Key>StructureRadioStorage</Key>
+			<Value>Radio Storage</Value>
+			<Description>The {LINK:CryoSurge;CryoSurge} Radio Storage offers a place to safely hold your Hand-Held Radio in place.
+The Radio will still function as a receiver while its in the radio slot but has to be taken out to transmit, we recommend the radio be equipped with a wireless battery.
+	</Description>
+		</RecordThing>
+	
+				<RecordThing>
+			<Key>ItemKitRadioTower</Key>
+			<Value>Radio Tower Kit</Value>
+			<Description>Its long &amp; big</Description>
 		</RecordThing>
 	</Things>
 	<Interactables>
+		<!--Radio-->
 		<Record>
 			<Key>ChannelUp</Key>
 			<Value>Channel Up</Value>
@@ -30,6 +58,13 @@
 			<Value>Volume Down</Value>
 		</Record>
 	</Interactables>
+		<!--RadioStorage-->
+		<Slots>
+		<Record>
+			<Key>RadioSlot</Key>
+			<Value>Radio Slot</Value>
+		</Record>
+		</Slots>
 	<Interface>
 		<Record>
 			<Key>CryoSurge</Key>
@@ -53,5 +88,13 @@ While maintaining formal ties with the {LINK:ODA;ODA}, CryoSurge operates with u
 CryoSurge embodies its belief that true innovation demands risk. Their reputation is not without controversy. Whispers persist of a failed cooperative operation involving an unknown {LINK:Stationeers;Stationeers} Division which CryoSurge specifically selected to partake in a secret mission code named "Powered By Meth". This mission took off from Mimas to take place on Titan for extracting Liquid Methane which would later be sold to Traders to fund the project which the {LINK:ODA;ODA} suddenly stopped funding for unknown reasons. But CryoSurge claims that "What modern science claimed to be impossible, is no longer."
 			</Value>
 		</Record>
+	<Record>
+      <Key>ConnectionInput</Key>
+      <Value>Power</Value>
+    </Record>
+    <Record>
+      <Key>ConnectionInput2</Key>
+      <Value>Data</Value>
+    </Record>
 	</Interface>
 </Language>

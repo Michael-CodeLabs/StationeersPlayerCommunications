@@ -525,7 +525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
       propertyPath: BoundsGridRatio
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
       propertyPath: AudioEvents.Array.size

@@ -102,10 +102,19 @@ namespace BrainClock.PlayerComms
         public bool isBoosted
         {
             get
-            {   // At least one of the tower needs to be turned on
+            {
+                // At least one of the tower needs to be turned on
                 bool result = false;
-                foreach (Tower tower in _towersInRange)
+                for (int i = _towersInRange.Count - 1; i >= 0; i--)
+                {
+                    Tower tower = _towersInRange[i];
+                    if (tower == null)
+                    {
+                        _towersInRange.RemoveAt(i);
+                        continue;
+                    }
                     result |= tower.enabled && tower.Powered && tower.OnOff;
+                }
                 return result;
             }
         }
@@ -143,7 +152,6 @@ namespace BrainClock.PlayerComms
             Channel = Mode;
             Volume = Exporting;
 
-            //TryGetComponent(out _morseCode);
 
             // Other components needing initialization can go here.
             // Initialize Volume Knob
@@ -272,7 +280,12 @@ namespace BrainClock.PlayerComms
                     }
                     else
                         return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMin);
-                }
+                };
+
+                if (Channel == 15 && Powered && !_playingMorseLoop)
+                {
+                    StartMorseLoop().Forget();
+                };
             }
 
             // Volume Knob buttons, can be interacted if the device is offline.
@@ -369,32 +382,38 @@ namespace BrainClock.PlayerComms
         public override void Update1000MS(float deltaTime)
         {
             base.Update1000MS(deltaTime);
-            if (RangeController != null)
-                RangeController.CalculateIntruders();
 
-            if (_playingMorseLoop && Channel != 15 || !Powered)
+            // Clean up null towers
+            for (int i = _towersInRange.Count - 1; i >= 0; i--)
             {
-                _playingMorseLoop = false;
-                MorseAudioSource.Stop();
+                if (_towersInRange[i] == null)
+                {
+                    _towersInRange.RemoveAt(i);
+                }
             }
 
-            if (Channel == 15 && Powered && !_playingMorseLoop)
+            if (Channel != 15 || !Powered)
             {
-                StartMorseLoop().Forget();
+                MorseAudioSource.Stop();
+                _playingMorseLoop = false;
             };
-        }
 
+            if (RangeController != null)
+                RangeController.CalculateIntruders();
+        }
 
         // Update the list of Towers we are within range
         public void OnTowerInRadius(Tower tower)
         {
+            if (tower == null) return;
+
             if (!_towersInRange.Contains(tower))
                 _towersInRange.Add(tower);
         }
 
-        // Update the list of Towers we are within range
         public void OnTowerOutRadius(Tower tower)
         {
+            if (tower == null) return;
 
             if (_towersInRange.Contains(tower))
                 _towersInRange.Remove(tower);
@@ -418,7 +437,7 @@ namespace BrainClock.PlayerComms
                 UpdateBoosterStatus();
 
             // Update Error Status <-- Used for associated audio events for On Off.
-            if (this.Battery != null && this.Battery.PowerRatio >= 0.1f)
+            if (this.Battery != null && this.Battery.PowerRatio >= 0.01f)
             {
                 this.Error = 0;
             }
@@ -498,6 +517,7 @@ namespace BrainClock.PlayerComms
                 float vol = (float)Exporting * (1f / _maxVolumeSteps);
                 //Debug.Log($"UpdaingKnobVolume {Exporting} {vol}");
                 SpeakerAudioSource.GameAudioSource.SourceVolume = vol;
+                MorseAudioSource.volume = vol;
             }
         }
 
@@ -605,7 +625,7 @@ namespace BrainClock.PlayerComms
                     while (MorseAudioSource.isPlaying && this.Channel == 15 && Powered)
                         await UniTask.Yield();
 
-                    await UniTask.Delay(1000);
+                    await UniTask.Delay(7000);
                 }
                 _playingMorseLoop = false;
             }

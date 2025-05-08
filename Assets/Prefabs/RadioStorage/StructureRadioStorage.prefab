@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1205525022345454623}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5, y: 0.49999997, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: -0.092, z: 0.015}
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: -0.18, z: -0.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1762040669150427220}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
 --- !u!65 &4881275843680703674
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51,8 +51,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.042231396, y: 0.3927812, z: 0.6032003}
-  m_Center: {x: -0.2031743, y: 0.005201785, z: 0.08271986}
+  m_Size: {x: 0.11782867, y: 0.46169865, z: 0.62615824}
+  m_Center: {x: -0.26220134, y: -0.003748037, z: 0.17339635}
 --- !u!1 &1282248346622432830
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1387062556177261294}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000000026692545, y: -0.70710677, z: -0.000000026692543, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -220,9 +220,9 @@ MonoBehaviour:
     Collider: {fileID: 4881275843680703674}
     Size: {x: 0.3, y: 0.3, z: 0.09}
   Bounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  SurfaceArea: 0
+    m_Center: {x: 0, y: -0.000000059604645, z: 0.11144761}
+    m_Extent: {x: 0.25, y: 0.32971394, z: 0.111447684}
+  SurfaceArea: 1.17629
   SurfaceAreaScale: 1
   BoundsOffset: {x: 0, y: 0, z: 0}
   IgnoreSave: 0
@@ -258,8 +258,8 @@ MonoBehaviour:
     Collider: {fileID: 4881275843680703674}
     FakeCollider: {fileID: 0}
     Bounds:
-      m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0, y: 0, z: 0}
+      m_Center: {x: -0.3, y: 0, z: 0.2}
+      m_Extent: {x: 0.05, y: 0.2, z: 0.3}
     Action: 1
     Animator: {fileID: 0}
     JoinInProgressSync: 0
@@ -279,7 +279,7 @@ MonoBehaviour:
   IsCustomThing: 0
   ThumbnailOffset: {x: 0, y: 0, z: 0}
   ThumbnailRotation: {x: 0, y: 0, z: 0, w: 0}
-  Thumbnail: {fileID: 21300000, guid: 7e1fd318e1591ef41ad8a3e4dfecc471, type: 3}
+  Thumbnail: {fileID: 21300000, guid: 2414b2f9c1982e84b9116a03ca585193, type: 3}
   Thumbnails: []
   IsEntity: 0
   _isOccluded: 0
@@ -404,8 +404,8 @@ MonoBehaviour:
   BoundsGridExtraForward: 0
   BoundsForward: 0
   DualRegisterGridScale: 1
-  RotationAxis: 6
-  AllowedRotations: 4
+  RotationAxis: 4
+  AllowedRotations: -1
   CustomNavMeshFilter: {fileID: 0}
   blockingGrids: []
   RegisteredLocalGrid:

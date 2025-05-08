@@ -837,6 +837,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1844310063705163525}
   - component: {fileID: 4966849676222148615}
+  - component: {fileID: 7924616653725997657}
   m_Layer: 0
   m_Name: StructureRadioTower
   m_TagString: Untagged
@@ -892,10 +893,10 @@ MonoBehaviour:
   ThingTransform: {fileID: 1844310063705163525}
   Slots: []
   Bounds:
-    m_Center: {x: 0, y: 13.695412, z: 0.0000015}
-    m_Extent: {x: 2.051639, y: 13.747116, z: 2.0516396}
-  SurfaceArea: 290.96
-  SurfaceAreaScale: 0.6
+    m_Center: {x: 0.100670815, y: 13.695411, z: 0.75582695}
+    m_Extent: {x: 2.6182334, y: 13.747116, z: 2.807465}
+  SurfaceArea: 655.5065
+  SurfaceAreaScale: 1
   BoundsOffset: {x: 0, y: 0, z: 0}
   IgnoreSave: 0
   generateTerrain: 1
@@ -930,8 +931,8 @@ MonoBehaviour:
     Collider: {fileID: 5379840408815187910}
     FakeCollider: {fileID: 0}
     Bounds:
-      m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0, y: 0, z: 0}
+      m_Center: {x: 0, y: 0, z: 0.001}
+      m_Extent: {x: 0.001, y: 0.0012, z: -0.0011}
     Action: 36
     Animator: {fileID: 0}
     JoinInProgressSync: 1
@@ -1092,8 +1093,8 @@ MonoBehaviour:
     OccludedMixerGroupHash: -1140213991
   BaseAnimator: {fileID: 0}
   IsCursor: 0
-  Blueprint: {fileID: 4415256294036756824, guid: f87e7ddfd55c2e9459108519b2f8fd0e, type: 3}
-  Wireframe: {fileID: 531660262043942994, guid: f87e7ddfd55c2e9459108519b2f8fd0e, type: 3}
+  Blueprint: {fileID: 5843669822746256882, guid: f87e7ddfd55c2e9459108519b2f8fd0e, type: 3}
+  Wireframe: {fileID: 6261956246317258948, guid: f87e7ddfd55c2e9459108519b2f8fd0e, type: 3}
   lodFlares: []
   IsCustomThing: 0
   ThumbnailOffset: {x: 0, y: 0, z: 0}
@@ -1546,24 +1547,24 @@ MonoBehaviour:
       EntryQuantity: 0
       EntryQuantity2: 0
     Prefab: {fileID: 0}
-  GridSize: 1
-  GridOffset: 0.5
+  GridSize: 0.5
+  GridOffset: 0.25
   _useAxisIndependentGridSnapping: 0
   _gridSize3d: {x: 0, y: 0, z: 0}
   _gridOffset3d: {x: 0, y: 0, z: 0}
   PlacementType: 0
   SelectionDisplay: 0
-  StructureCollisionType: 2
+  StructureCollisionType: 0
   AllowMounting: 0
   UseCellPosition: 0
-  BoundsGridRatio: 0.5
-  BoundsGridShiftForward: 0
+  BoundsGridRatio: 0.2
+  BoundsGridShiftForward: -0.35
   BoundsGridShiftSide: 0
-  BoundsGridExtraHeight: 0
+  BoundsGridExtraHeight: 3.9
   BoundsGridAddHeight: 0
   BoundsGridAddBottom: 0
-  BoundsGridExtraWidth: 0
-  BoundsGridExtraForward: 0
+  BoundsGridExtraWidth: 1
+  BoundsGridExtraForward: 1
   BoundsForward: 0
   DualRegisterGridScale: 1
   RotationAxis: 2
@@ -1589,7 +1590,7 @@ MonoBehaviour:
   - ConnectionType: 2
     Transform: {fileID: 7532211035325306461}
     Collider: {fileID: 3511224815561463499}
-    ConnectionRole: 1
+    ConnectionRole: 0
     HelperRenderer: {fileID: 0}
     Parent: {fileID: 4966849676222148615}
     LocalGrid:
@@ -1603,7 +1604,7 @@ MonoBehaviour:
   - ConnectionType: 4
     Transform: {fileID: 4618101705954246413}
     Collider: {fileID: 4888984963984531725}
-    ConnectionRole: 2
+    ConnectionRole: 0
     HelperRenderer: {fileID: 0}
     Parent: {fileID: 4966849676222148615}
     LocalGrid:
@@ -1628,6 +1629,27 @@ MonoBehaviour:
   RangeMax: 1000
   PowerScale: 15
   RangeController: {fileID: 4928382796035644935}
+--- !u!65 &7924616653725997657
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356602286836768191}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.01255, z: 0}
 --- !u!1 &1381410343327116154
 GameObject:
   m_ObjectHideFlags: 0

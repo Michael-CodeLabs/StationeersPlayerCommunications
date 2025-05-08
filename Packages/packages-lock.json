@@ -94,10 +94,11 @@
       "url": "https://packages.unity.com"
     },
     "ilodev.stationeersmods.tools": {
-      "version": "file:C:/Users/ilo/Desktop/StationeersModsTools",
+      "version": "https://github.com/ilodev/StationeersModdingTools.git",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "e6fe020fa20b8e2deee776a731af3401e1e9fc6a"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
