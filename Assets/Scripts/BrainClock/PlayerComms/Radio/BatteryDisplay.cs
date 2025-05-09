@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 namespace BrainClock.PlayerComms
 {
     public class BatteryDisplay : MonoBehaviour
@@ -12,13 +9,13 @@ namespace BrainClock.PlayerComms
         public GameObject Battery80;
         public GameObject Battery100;
 
-        public void SetBatteryStatus(float batteryCharge)
+        public void SetBatteryStatus(float PowerRatio)
         {
-            Battery20.SetActive(batteryCharge > 0.0f);
-            Battery40.SetActive(batteryCharge > 0.2f);
-            Battery60.SetActive(batteryCharge > 0.4f);
-            Battery80.SetActive(batteryCharge > 0.6f);
-            Battery100.SetActive(batteryCharge > 0.8f);
+            Battery20.SetActive(PowerRatio > 0.2f);
+            Battery40.SetActive(PowerRatio > 0.4f);
+            Battery60.SetActive(PowerRatio > 0.6f);
+            Battery80.SetActive(PowerRatio > 0.8f);
+            Battery100.SetActive(PowerRatio > 0.9f);
         }
 
     }

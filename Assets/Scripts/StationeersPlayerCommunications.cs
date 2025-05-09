@@ -15,6 +15,7 @@ public class StationeersPlayerCommunications : ModBehaviour
     /// <param name="contentHandler">Contains the assets of the mod package</param>
   
     public static KeyCode PushToTalk;
+    public static KeyCode VoiceStrength;
 
     public static ConfigEntry<bool> TransmissionModeConfig; // true = PushToTalk
 
@@ -47,7 +48,7 @@ public class StationeersPlayerCommunications : ModBehaviour
 
         Debug.Log("+ Injecting network messages");
         MessageFactoryInjector.InjectCustomMessageType(typeof(AudioClipMessage));
-
+        //MessageFactoryInjector.InjectCustomMessageType(typeof(IncomingTransmissionMessage));
         // Add the content (Thing) prefabs to the game.
         PrefabPatch.prefabs = contentHandler.prefabs;
         StationpediaPatches.prefabs = contentHandler.prefabs;
@@ -61,5 +62,6 @@ public class StationeersPlayerCommunications : ModBehaviour
     private static void ControlsChangedEvent()
     {
         PushToTalk = KeyManager.GetKey("Push To Talk");
+        VoiceStrength = KeyManager.GetKey("Voice Strength");
     }
 }

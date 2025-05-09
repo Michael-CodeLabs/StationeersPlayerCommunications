@@ -16,6 +16,7 @@ namespace BrainClock.PlayerComms
                 KeyManager.AddGroupLookup(controlsGroup9);
 
                 PlayerCommsKeybinds.AddKey("Push To Talk", KeyCode.B, controlsGroup9, false);
+                PlayerCommsKeybinds.AddKey("Voice Strength", KeyCode.Semicolon, controlsGroup9, false);
                 ControlsAssignment.RefreshState();
             }
 

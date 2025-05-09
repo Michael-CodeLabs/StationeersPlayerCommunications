@@ -1,6 +1,7 @@
 using Assets.Scripts.Inventory;
 using Assets.Scripts.Networking;
 using Assets.Scripts.Objects.Entities;
+using System;
 using UnityEngine;
 
 namespace BrainClock.PlayerComms
@@ -9,13 +10,22 @@ namespace BrainClock.PlayerComms
     {
         public long referenceId { get; set; }
 
-        public int Length { get; set; }
+    public int Length { get; set; }
 
         public byte[] Message { get; set; }
 
         public float Volume { get; set; }
 
         public int Flags { get; set; }
+
+        [Flags]
+        public enum AudioFlags
+        {
+            None = 0,
+            VoiceWhisper = 1 << 0,
+            VoiceNormal = 1 << 1,
+            VoiceShout = 1 << 2,
+        }
 
         public AudioClipMessage() { }
 
@@ -78,9 +88,9 @@ namespace BrainClock.PlayerComms
         {
             //Debug.Log("AudioClipMessage.SendAudioDataToManager");
 
-            if (PlayerCommunicationsManager.Instance) 
+            if (PlayerCommunicationsManager.Instance)
             {
-                foreach(IAudioDataReceiver receiver in PlayerCommunicationsManager.Instance.GetComponents<IAudioDataReceiver>())
+                foreach (IAudioDataReceiver receiver in PlayerCommunicationsManager.Instance.GetComponents<IAudioDataReceiver>())
                 {
                     receiver.ReceiveAudioData(referenceId, Message, Length, Volume, Flags);
                 }
@@ -95,4 +105,6 @@ namespace BrainClock.PlayerComms
             Debug.Log($"AudioClipMessage.Debug - Id: {this.referenceId} {this.Message.Length} {this.Flags}");
         }
     }
+
+
 }

@@ -2,99 +2,86 @@ using Assets.Scripts.Objects.Entities;
 using Assets.Scripts.Sound;
 using Assets.Scripts.Util;
 using Audio;
+using BrainClock.PlayerComms;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Util;
+using static BrainClock.PlayerComms.AudioClipMessage;
 
-namespace BrainClock.PlayerComms
+public class ModStaticAudioSource : StaticAudioSource, IAudioDataReceiver, IAudioDistanceAdjustable
 {
+    private IAudioStreamReceiver[] audioStreamReceivers = new IAudioStreamReceiver[0];
 
-    /*  Game defined audio mixers
-        Mixer: Master -  715499232
-        Mixer: World -  -71942585
-        Mixer: LocalPlayerInternal -  755418609
-        Mixer: LocalPlayerInternalNoFx -  1539486488
-        Mixer: LocalPlayer -  -1929936868
-        Mixer: External -  -1591426066
-        Mixer: Occluded -  -1140213991
-        Mixer: OccludedStorm -  -1699109206
-        Mixer: Vacuum -  -710576460
-        Mixer: HelmetClosed -  944442496
-        Mixer: HelmetFX -  -992743594
-        Mixer: Silent -  1006664890
-        Mixer: System -  -824109891
-        Mixer: Interface -  -1241158018
-        Mixer: Music -  210963790
-        Mixer: Menu -  -583559763
-    */
+    private float volume = 0;
+    private int flags = 0;
+    public float VolumeMultiplier = 1.0f;
 
-    public class ModStaticAudioSource : StaticAudioSource, IAudioDataReceiver
+    public void ReceiveAudioData(long referenceId, byte[] data, int length, float volume, int flags)
     {
-        private IAudioStreamReceiver[] audioStreamReceivers = new IAudioStreamReceiver[0];
-
-        private float volume = 0;
-        private int flags = 0;
-        public float VolumeMultiplier = 1.0f;
-
-        public void ReceiveAudioData(long referenceId, byte[] data, int length, float volume, int flags)
+        foreach (IAudioStreamReceiver receiver in audioStreamReceivers)
         {
-            if (audioStreamReceivers != null)
-            {
-                foreach (IAudioStreamReceiver audioStreamReceiver in audioStreamReceivers)
-                {
-                    audioStreamReceiver.ReceiveAudioStreamData(data, length);
-                }
-            }
-
-            // Adjust audio settings
-            if (this.volume != volume * VolumeMultiplier)
-            {
-                this.volume = volume * VolumeMultiplier;
-                GameAudioSource.SourceVolume = this.volume;
-            }
-
-            if (this.flags != flags)
-            {
-                this.flags = flags;
-                gameObject.GetComponent<AudioLowPassFilter>().enabled = (this.flags == 1);
-                gameObject.GetComponent<AudioReverbFilter>().enabled = (this.flags == 1);
-                // Enable/Disable the audio effects
-            }
+            receiver.ReceiveAudioStreamData(data, length);
         }
 
-        private void Start()
+        float newVolume = volume * VolumeMultiplier;
+        if (!Mathf.Approximately(this.volume, newVolume))
         {
-            //Debug.Log("ModStaticAudioSource.Start()");
-            try
-            {
-                //Debug.Log($"transform.parent {transform.parent}");
-                IAudioParent audioparent = transform.parent.GetComponent<Human>() as IAudioParent;
-                GameAudioSource.Init((IAudioParent)audioparent);
-            }
-            catch (Exception ex)
-            {
-                Debug.Log("GameAudioSource.Init failed " + ex.ToString());
-            }
-
-            GameAudioSource.AudioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("External"));
-
-            GameAudioSource.CurrentMixerGroupNameHash = UnityEngine.Animator.StringToHash("External");
-            GameAudioSource.SetSpatialBlend(1);
-            GameAudioSource.ManageOcclusion(true);
-            GameAudioSource.CalculateAndSetAtmosphericVolume(true);
-            GameAudioSource.SetEnabled(true);
-            this.SetEnable(true);
-            
-            //Debug.Log("GameAudioSource added to the AudioManager");
-            Singleton<AudioManager>.Instance.AddPlayingAudioSource(GameAudioSource);
-
-
-            // Find and cache the audio receivers
-            audioStreamReceivers = GetComponents<IAudioStreamReceiver>();
+            this.volume = newVolume;
+            GameAudioSource.SourceVolume = this.volume;
         }
 
+        if (this.flags != flags)
+        {
+            this.flags = flags;
 
+            // Apply internals audio effects
+            bool hasInternals = (flags & 1) != 0;
+            GetComponent<AudioLowPassFilter>().enabled = hasInternals;
+            GetComponent<AudioReverbFilter>().enabled = hasInternals;
+
+            // Adjust distance based on voice flags
+            SetVoiceModeDistance(flags);
+        }
+    }
+
+    private void Start()
+    {
+        try
+        {
+            IAudioParent audioparent = transform.parent.GetComponent<Human>() as IAudioParent;
+            GameAudioSource.Init(audioparent);
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("GameAudioSource.Init failed " + ex);
+        }
+
+        GameAudioSource.AudioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(Animator.StringToHash("External"));
+        GameAudioSource.CurrentMixerGroupNameHash = Animator.StringToHash("External");
+        GameAudioSource.SetSpatialBlend(1);
+        GameAudioSource.ManageOcclusion(true);
+        GameAudioSource.CalculateAndSetAtmosphericVolume(true);
+        GameAudioSource.SetEnabled(true);
+        this.SetEnable(true);
+
+        Singleton<AudioManager>.Instance.AddPlayingAudioSource(GameAudioSource);
+
+        audioStreamReceivers = GetComponents<IAudioStreamReceiver>();
+    }
+
+    public void SetVoiceModeDistance(int flags)
+    {
+        if (GameAudioSource?.AudioSource == null) return;
+
+        AudioFlags voiceFlag = (AudioFlags)(flags & (int)(AudioFlags.VoiceWhisper | AudioFlags.VoiceNormal | AudioFlags.VoiceShout));
+        float distance = voiceFlag switch
+        {
+            AudioFlags.VoiceWhisper => 5f,
+            AudioFlags.VoiceShout => 80f,
+            AudioFlags.VoiceNormal => 20f,
+            _ => 20f // fallback
+        };
+
+        GameAudioSource.AudioSource.maxDistance = distance;
     }
 }

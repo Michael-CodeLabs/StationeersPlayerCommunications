@@ -659,7 +659,6 @@ GameObject:
   - component: {fileID: 5555125874317318865}
   - component: {fileID: 431031231543879906}
   - component: {fileID: 6957274874509520689}
-  - component: {fileID: 2805595307338038762}
   m_Layer: 0
   m_Name: ItemHandHeldRadio
   m_TagString: Untagged
@@ -869,10 +868,10 @@ MonoBehaviour:
         SoundAlert: 0
       StopIfInvalid: 0
       Conditions:
-      - Type: 36
-        Value: 1
       - Type: 43
         Value: 0
+      - Type: 36
+        Value: 1
       BuildStateConditions: 
     - Name: OnOffAudio
       NameHash: -1049443016
@@ -904,9 +903,9 @@ MonoBehaviour:
         SoundAlert: 0
       StopIfInvalid: 0
       Conditions:
-      - Type: 36
-        Value: 0
       - Type: 43
+        Value: 0
+      - Type: 36
         Value: 0
       BuildStateConditions: 
     ActionName: 
@@ -1237,6 +1236,23 @@ MonoBehaviour:
     AssociatedAudioEvents: []
     ActionName: 
     _state: 5
+  - StringKey: HasBattery
+    StringHash: -2048966918
+    Parent: {fileID: 2892032943883829781}
+    Collider: {fileID: 0}
+    FakeCollider: {fileID: 0}
+    Bounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    Action: 44
+    Animator: {fileID: 0}
+    JoinInProgressSync: 1
+    Layer: 1
+    CanKeyInteract: 0
+    KeyMap: 
+    AssociatedAudioEvents: []
+    ActionName: 
+    _state: 0
   AudioEvents:
   - Name: BaseFailure
     NameHash: -102118816
@@ -2052,14 +2068,6 @@ MonoBehaviour:
   AppId: 544550
   dataRate: 0
   IsReady: 0
---- !u!33 &2805595307338038762
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2686529464066537426}
-  m_Mesh: {fileID: 2212009239438826721, guid: 5ffa866e3ea948f4a90a25862e157991, type: 3}
 --- !u!1 &3019975224369709953
 GameObject:
   m_ObjectHideFlags: 0
@@ -2329,7 +2337,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.013888889
+      value: 0.008333334
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2901,7 +2909,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 0
   MinDistance: 1
-  MaxDistance: 15
+  MaxDistance: 25
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -3679,7 +3687,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 0
   MinDistance: 1
-  MaxDistance: 15
+  MaxDistance: 25
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -3948,8 +3956,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 0
-  MinDistance: 1
-  MaxDistance: 4
+  MinDistance: 0.1
+  MaxDistance: 1
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -3999,7 +4007,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.041666668
+      value: 0.008333334
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -4635,6 +4643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9afc50256fd6bc45a666b19e56cc926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BatteryBody: {fileID: 783526608630663353}
   Battery20: {fileID: 5675207604028854988}
   Battery40: {fileID: 6904461592447222334}
   Battery60: {fileID: 5241461997755655468}

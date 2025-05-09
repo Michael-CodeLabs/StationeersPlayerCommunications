@@ -40,7 +40,7 @@ namespace BrainClock.PlayerComms
         //MorseAssigner
         [SerializeField] private MorseCode _morseCode;
         private bool _playingMorseLoop = false;
-
+        private bool _PlayedClip = false;
         [SerializeField] private AudioSource MorseAudioSource;
 
         [Header("Radio")]
@@ -184,6 +184,8 @@ namespace BrainClock.PlayerComms
             // Setup radio range if range controller is available
             if (RangeController != null)
                 RangeController.Range = Range;
+
+            UpdateAudioMaxDistance();
         }
 
         public void SetupGameAudioSource()
@@ -280,12 +282,14 @@ namespace BrainClock.PlayerComms
                     }
                     else
                         return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMin);
-                };
+                }
+                ;
 
                 if (Channel == 15 && Powered && !_playingMorseLoop)
                 {
                     StartMorseLoop().Forget();
-                };
+                }
+                ;
             }
 
             // Volume Knob buttons, can be interacted if the device is offline.
@@ -314,6 +318,7 @@ namespace BrainClock.PlayerComms
                 }
                 else
                     return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMin);
+                UpdateAudioMaxDistance();
             }
 
             return base.InteractWith(interactable, interaction, doAction);
@@ -367,9 +372,20 @@ namespace BrainClock.PlayerComms
         private void UpdateBatteryStatus()
         {
             if (this.Battery != null && batteryDisplay.isActiveAndEnabled)
-                batteryDisplay.SetBatteryStatus(this.Battery.CurrentPowerPercentage);
+                batteryDisplay.SetBatteryStatus(this.Battery.PowerRatio);
 
             this.SignalTower.SetActive(isBoosted && Powered);
+
+            // Update Error Status <-- Used for associated audio events for On Off.
+            foreach (Radio radio in AllRadios)
+            {
+                if (radio != null && radio.Battery != null && radio.Battery.PowerRatio >= 0.01f)
+                {
+                    radio.Error = 0;
+                }
+                else
+                    radio.Error = 1;
+            }
         }
         private void UpdateBoosterStatus()
         {
@@ -396,7 +412,8 @@ namespace BrainClock.PlayerComms
             {
                 MorseAudioSource.Stop();
                 _playingMorseLoop = false;
-            };
+            }
+            ;
 
             if (RangeController != null)
                 RangeController.CalculateIntruders();
@@ -436,16 +453,6 @@ namespace BrainClock.PlayerComms
             if (SignalTower != null)
                 UpdateBoosterStatus();
 
-            // Update Error Status <-- Used for associated audio events for On Off.
-            if (this.Battery != null && this.Battery.PowerRatio >= 0.01f)
-            {
-                this.Error = 0;
-            }
-            else
-            {
-                this.Error = 1;
-            }
-            ;
 
             // Return if radio isn't used.
             Slot activeSlot = InventoryManager.ActiveHandSlot;
@@ -469,7 +476,6 @@ namespace BrainClock.PlayerComms
         private async UniTaskVoid UseRadio()
         {
             Radio radio = this;
-
             // Can't use the radio if not powered.
             if (!Powered)
             {
@@ -479,15 +485,12 @@ namespace BrainClock.PlayerComms
 
             // Start using the radio
             // Done: Add audio effect here
-            IncomingTransmission();
-
             Thing.Interact(radio.InteractActivate, 1);
 
             while (KeyManager.GetMouse("Primary") && !KeyManager.GetButton(KeyMap.SwapHands) && Powered)
                 await UniTask.NextFrame();
 
             // Stop using the radio
-            // TODO: Add audio effect here
             Thing.Interact(radio.InteractActivate, 0);
             _primaryKey = false;
             Radio.RadioIsActivating = false;
@@ -497,6 +500,7 @@ namespace BrainClock.PlayerComms
         {
             base.OnDestroy();
             AllRadios.Remove(this);
+            AllChannels.Remove(Channel);
 
             // Trigger event when a radio is destroyed
             OnRadioDestroyed?.Invoke(this);
@@ -558,28 +562,29 @@ namespace BrainClock.PlayerComms
             if (!GameManager.IsMainThread)
             {
                 this.UpdateUpdateChannelBusyFromThread().Forget();
+                return;
+            }
+
+            if (!Powered)
+            {
+                pushToTalk.MaterialChanger.ChangeState(0);
+                return;
+            }
+
+            if (AllChannels.TryGetValue(Channel, out var refId) && refId > 0 && refId != ReferenceId)
+            {
+                pushToTalk.MaterialChanger.ChangeState(2); // Busy
+
+                if (!_PlayedClip)
+                {
+                    SpeakerAudioSource.GameAudioSource.AudioSource.PlayOneShot(IncomingTransmissionClip);
+                    _PlayedClip = true;
+                }
             }
             else
             {
-                // Ensure the radio is powered before updating the material
-                if (!Powered)
-                {
-                    pushToTalk.MaterialChanger.ChangeState(0);
-                    return;
-                }
-
-                long referenceId;
-                if (AllChannels.TryGetValue(Channel, out referenceId))
-                {
-                    if (referenceId > 0 && referenceId != ReferenceId)
-                        pushToTalk.MaterialChanger.ChangeState(2); // Set as busy
-                    else
-                        pushToTalk.MaterialChanger.ChangeState(Activate);
-                }
-                else
-                {
-                    pushToTalk.MaterialChanger.ChangeState(Activate);
-                }
+                pushToTalk.MaterialChanger.ChangeState(Activate);
+                _PlayedClip = false;
             }
         }
 
@@ -598,37 +603,33 @@ namespace BrainClock.PlayerComms
             extendedText.AppendLine("Boosted: " + isBoosted.ToString());
             return extendedText;
         }
-
-        private void IncomingTransmission()
-        {
-            foreach (Radio other in AllRadios)
-            {
-                if (other == this || !other.Powered)
-                    continue;
-
-                if (other.Channel == this.Channel && other.SpeakerAudioSource != null)
-                {
-                    var source = other.SpeakerAudioSource.GameAudioSource.AudioSource;
-                    source.PlayOneShot(IncomingTransmissionClip);
-                }
-            }
-        }
-
         private async UniTaskVoid StartMorseLoop()
         {
             _playingMorseLoop = true;
 
-                while (this.Channel == 15 && Powered && !MorseAudioSource.isPlaying)
-                {
-                    _morseCode.PlayMorse();
+            while (this.Channel == 15 && Powered && !MorseAudioSource.isPlaying)
+            {
+                _morseCode.PlayMorse();
 
-                    while (MorseAudioSource.isPlaying && this.Channel == 15 && Powered)
-                        await UniTask.Yield();
+                while (MorseAudioSource.isPlaying && this.Channel == 15 && Powered)
+                    await UniTask.Yield();
 
-                    await UniTask.Delay(7000);
-                }
-                _playingMorseLoop = false;
+                await UniTask.Delay(7000);
             }
+            _playingMorseLoop = false;
+        }
+
+        public void UpdateAudioMaxDistance()
+        {
+            _ = this;
+            float maxDistance = RocketMath.PiOverTwo * 2 * Volume;
+
+            if (SpeakerAudioSource != null)
+                SpeakerAudioSource.GameAudioSource.maxDistance = maxDistance;
+
+            if (MorseAudioSource != null)
+                MorseAudioSource.maxDistance = maxDistance;
+        }
 
         /// <summary>
         /// Populate audio to all receiver components

@@ -235,6 +235,7 @@ MonoBehaviour:
     ExternalMixerGroupHash: -1591426066
     VacuumMixerGroupHash: -710576460
     OccludedMixerGroupHash: -1140213991
+  VolumeMultiplier: 1
 --- !u!114 &8520541031216260294
 MonoBehaviour:
   m_ObjectHideFlags: 0

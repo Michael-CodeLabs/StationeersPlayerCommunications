@@ -1,10 +1,11 @@
-using UnityEngine;
-using System;
-using System.Collections.Generic;
 using Assets.Scripts.Inventory;
-using Assets.Scripts.Objects.Entities;
 using Assets.Scripts.Networking;
 using Assets.Scripts.Objects;
+using Assets.Scripts.Objects.Entities;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using static BrainClock.PlayerComms.AudioClipMessage;
 
 namespace BrainClock.PlayerComms
 {
@@ -169,6 +170,31 @@ namespace BrainClock.PlayerComms
 
             // Apply the human custom receiver
             humanAudioReceiver.ReceiveAudioData(referenceId, data, length, volume * VolumeMultiplier, flags);
+
+            // Adjust maxDistance based on flags (voice mode)
+            if (humanAudioReceiver is MonoBehaviour receiverMono)
+            {
+                var audioSource = receiverMono.GetComponent<AudioSource>();
+                if (audioSource != null)
+                {
+                    var mode = (AudioFlags)flags;
+                    switch (mode)
+                    {
+                        case AudioFlags.VoiceWhisper:
+                            audioSource.maxDistance = 5f;
+                            break;
+                        case AudioFlags.VoiceNormal:
+                            audioSource.maxDistance = 20f;
+                            break;
+                        case AudioFlags.VoiceShout:
+                            audioSource.maxDistance = 40f;
+                            break;
+                        default:
+                            audioSource.maxDistance = 20f;
+                            break;
+                    }
+                }
+            }
         }
 
 
