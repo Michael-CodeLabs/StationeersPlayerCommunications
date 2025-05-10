@@ -659,6 +659,7 @@ GameObject:
   - component: {fileID: 5555125874317318865}
   - component: {fileID: 431031231543879906}
   - component: {fileID: 6957274874509520689}
+  - component: {fileID: 7551623317392405018}
   m_Layer: 0
   m_Name: ItemHandHeldRadio
   m_TagString: Untagged
@@ -837,77 +838,7 @@ MonoBehaviour:
     Layer: 0
     CanKeyInteract: 1
     KeyMap: 
-    AssociatedAudioEvents:
-    - Name: OnOffAudio
-      NameHash: -1049443016
-      Channel: 0
-      Parent: {fileID: 2892032943883829781}
-      ClipsData:
-        Name: RadioOn
-        ChannelName: 
-        Looping: 0
-        LoopingOneShots: 0
-        RandomStartTime: 0
-        RandomPitch: 0
-        RandomPitchRangeHigh: 0
-        RandomPitchRangeLow: 0
-        Delay: 0
-        FadeIn: 0
-        FadeOut: 0
-        FadeDown: 0
-        FadeDownTime: 0
-        FadeDownTarget: 0
-        FadePitch: 0
-        FadeInTime: 0
-        FadeOutTime: 0
-        Clips:
-        - {fileID: 8300000, guid: 43ffd8b942680e642be25fe4424655d5, type: 3}
-        Concurrencies: []
-        ConcurrencyIds: 
-        NameHash: 1584529811
-        SoundAlert: 0
-      StopIfInvalid: 0
-      Conditions:
-      - Type: 43
-        Value: 0
-      - Type: 36
-        Value: 1
-      BuildStateConditions: 
-    - Name: OnOffAudio
-      NameHash: -1049443016
-      Channel: 0
-      Parent: {fileID: 2892032943883829781}
-      ClipsData:
-        Name: RadioOff
-        ChannelName: 
-        Looping: 0
-        LoopingOneShots: 0
-        RandomStartTime: 0
-        RandomPitch: 0
-        RandomPitchRangeHigh: 0
-        RandomPitchRangeLow: 0
-        Delay: 0
-        FadeIn: 0
-        FadeOut: 0
-        FadeDown: 0
-        FadeDownTime: 0
-        FadeDownTarget: 0
-        FadePitch: 0
-        FadeInTime: 0
-        FadeOutTime: 0
-        Clips:
-        - {fileID: 8300000, guid: bdc1389defef0bf4e8b127ef10ba5e57, type: 3}
-        Concurrencies: []
-        ConcurrencyIds: 
-        NameHash: -682487529
-        SoundAlert: 0
-      StopIfInvalid: 0
-      Conditions:
-      - Type: 43
-        Value: 0
-      - Type: 36
-        Value: 0
-      BuildStateConditions: 
+    AssociatedAudioEvents: []
     ActionName: 
     _state: 0
   - StringKey: Powered
@@ -1236,23 +1167,6 @@ MonoBehaviour:
     AssociatedAudioEvents: []
     ActionName: 
     _state: 5
-  - StringKey: HasBattery
-    StringHash: -2048966918
-    Parent: {fileID: 2892032943883829781}
-    Collider: {fileID: 0}
-    FakeCollider: {fileID: 0}
-    Bounds:
-      m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0, y: 0, z: 0}
-    Action: 44
-    Animator: {fileID: 0}
-    JoinInProgressSync: 1
-    Layer: 1
-    CanKeyInteract: 0
-    KeyMap: 
-    AssociatedAudioEvents: []
-    ActionName: 
-    _state: 0
   AudioEvents:
   - Name: BaseFailure
     NameHash: -102118816
@@ -1913,6 +1827,8 @@ MonoBehaviour:
   BatteryIcon: {fileID: 783526608630663353}
   batteryDisplay: {fileID: 3232317844169058720}
   IncomingTransmissionClip: {fileID: 8300000, guid: 3a33ce787df90eb438046b253d70676c, type: 3}
+  OnRadioClip: {fileID: 8300000, guid: 43ffd8b942680e642be25fe4424655d5, type: 3}
+  OffRadioClip: {fileID: 8300000, guid: bdc1389defef0bf4e8b127ef10ba5e57, type: 3}
 --- !u!65 &3245312114357494934
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2068,6 +1984,27 @@ MonoBehaviour:
   AppId: 544550
   dataRate: 0
   IsReady: 0
+--- !u!95 &7551623317392405018
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2686529464066537426}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c3075aac52f75bc43a8899e754d6c13d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3019975224369709953
 GameObject:
   m_ObjectHideFlags: 0
@@ -4551,7 +4488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 71685ab45315bdd4297e2a801e2e145e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.00147
+      value: 0.00122
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 71685ab45315bdd4297e2a801e2e145e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4643,7 +4580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9afc50256fd6bc45a666b19e56cc926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BatteryBody: {fileID: 783526608630663353}
   Battery20: {fileID: 5675207604028854988}
   Battery40: {fileID: 6904461592447222334}
   Battery60: {fileID: 5241461997755655468}

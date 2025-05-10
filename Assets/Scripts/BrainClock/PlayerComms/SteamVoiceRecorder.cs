@@ -1,4 +1,4 @@
-using Steamworks;
+ï»¿using Steamworks;
 using System;
 using System.IO;
 using UnityEngine;
@@ -137,7 +137,7 @@ namespace BrainClock.PlayerComms
 
             if (Radio.RadioIsActivating)
             {
-                //Debug.Log("[SteamVoiceRecorder] Radio is activating — bypassing Push to Talk key.");
+                //Debug.Log("[SteamVoiceRecorder] Radio is activating ï¿½ bypassing Push to Talk key.");
                 return true;
             }
 

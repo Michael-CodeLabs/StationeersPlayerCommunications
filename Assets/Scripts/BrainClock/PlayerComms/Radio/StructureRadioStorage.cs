@@ -39,7 +39,7 @@ namespace BrainClock.PlayerComms
             if ((object)newChild != null)
             {
                 newChild.ThingTransformLocalRotation = Quaternion.Euler(ChildRotation + newChild.ChildSlotOffset);
-                newChild.ThingTransformLocalPosition = newChild.ChildSlotOffsetPosition + new Vector3(0f,0.09f,0f);
+                newChild.ThingTransformLocalPosition = newChild.ChildSlotOffsetPosition + new Vector3(0f, 0.09f, 0f);
             }
         }
     }

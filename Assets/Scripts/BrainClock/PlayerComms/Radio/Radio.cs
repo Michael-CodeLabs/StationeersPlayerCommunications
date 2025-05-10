@@ -33,7 +33,7 @@ namespace BrainClock.PlayerComms
         // Define events for subscription 
         public static event Action<Radio> OnRadioCreated;
         public static event Action<Radio> OnRadioDestroyed;
-
+        private static InventoryManager.Mode CurrentMode => InventoryManager.CurrentMode;
         // RadioTowers boost this radio
         private List<Tower> _towersInRange = new List<Tower>();
 
@@ -66,7 +66,8 @@ namespace BrainClock.PlayerComms
 
         [Header("Audio Clips")]
         public AudioClip IncomingTransmissionClip;
-
+        public AudioClip OnRadioClip;
+        public AudioClip OffRadioClip;
         public static bool RadioIsActivating;
         private bool _primaryKey = false;
 
@@ -216,6 +217,7 @@ namespace BrainClock.PlayerComms
         {
             base.OnInteractableUpdated(interactable);
 
+
             // If a radio becomes active, mark that channel used by that reference Id.
             if (interactable.Action == InteractableType.Activate)
             {
@@ -229,8 +231,13 @@ namespace BrainClock.PlayerComms
                 {
                     AllChannels.Add(Channel, (interactable.State > 0) ? ReferenceId : 0);
                 }
+
             }
 
+            if (interactable.Action == InteractableType.OnOff && this.Battery != null && !this.Battery.IsEmpty)
+            {
+                SpeakerAudioSource.GameAudioSource.AudioSource.PlayOneShot(OnOff ? OnRadioClip : OffRadioClip, 2f);
+            }
 
             // Update our states
             Channel = Mode;
@@ -255,7 +262,7 @@ namespace BrainClock.PlayerComms
 
             // These are the channel buttons, can only be interacted if the device is Online
             // TODO: Should this buttons have a visual effect?
-            if (Powered)
+            if (Powered && CurrentMode != InventoryManager.Mode.PrecisionPlacement)
             {
                 if (interactable.Action == InteractableType.Button1)
                 {
@@ -372,20 +379,10 @@ namespace BrainClock.PlayerComms
         private void UpdateBatteryStatus()
         {
             if (this.Battery != null && batteryDisplay.isActiveAndEnabled)
-                batteryDisplay.SetBatteryStatus(this.Battery.PowerRatio);
+                batteryDisplay.SetBatteryStatus(Battery.CurrentPowerPercentage);
 
             this.SignalTower.SetActive(isBoosted && Powered);
 
-            // Update Error Status <-- Used for associated audio events for On Off.
-            foreach (Radio radio in AllRadios)
-            {
-                if (radio != null && radio.Battery != null && radio.Battery.PowerRatio >= 0.01f)
-                {
-                    radio.Error = 0;
-                }
-                else
-                    radio.Error = 1;
-            }
         }
         private void UpdateBoosterStatus()
         {
@@ -453,6 +450,8 @@ namespace BrainClock.PlayerComms
             if (SignalTower != null)
                 UpdateBoosterStatus();
 
+            if (CurrentMode == InventoryManager.Mode.PrecisionPlacement)
+                return;
 
             // Return if radio isn't used.
             Slot activeSlot = InventoryManager.ActiveHandSlot;
