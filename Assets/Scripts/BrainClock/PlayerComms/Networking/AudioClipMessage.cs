@@ -1,6 +1,4 @@
-using Assets.Scripts.Inventory;
 using Assets.Scripts.Networking;
-using Assets.Scripts.Objects.Entities;
 using System;
 using UnityEngine;
 

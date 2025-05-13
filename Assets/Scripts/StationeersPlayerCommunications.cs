@@ -51,6 +51,7 @@ public class StationeersPlayerCommunications : ModBehaviour
 
         Debug.Log("+ Injecting network messages");
         MessageFactoryInjector.InjectCustomMessageType(typeof(AudioClipMessage));
+        //MessageFactoryInjector.InjectCustomMessageType(typeof(MorsePlayMessage));
         //MessageFactoryInjector.InjectCustomMessageType(typeof(IncomingTransmissionMessage));
         // Add the content (Thing) prefabs to the game.
         PrefabPatch.prefabs = contentHandler.prefabs;

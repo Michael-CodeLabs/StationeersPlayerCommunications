@@ -24,7 +24,7 @@ namespace BrainClock.PlayerComms
         public Assets.Scripts.Objects.Thing ParentThing;
         public RangeMode AntennaRangeMode = RangeMode.Radio;
         public bool Ready = false;
-        float _range = 0f;
+        public float _range = 0f;
 
         /// <summary>
         /// Returns a list of radios inside the range zone.

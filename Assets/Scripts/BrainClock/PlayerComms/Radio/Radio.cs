@@ -2,6 +2,7 @@ using Assets.Scripts;
 using Assets.Scripts.GridSystem;
 using Assets.Scripts.Inventory;
 using Assets.Scripts.Localization2;
+using Assets.Scripts.Networking;
 using Assets.Scripts.Objects;
 using Assets.Scripts.Objects.Items;
 using Assets.Scripts.Objects.Pipes;
@@ -38,10 +39,10 @@ namespace BrainClock.PlayerComms
 
         private static InventoryManager.Mode CurrentMode => InventoryManager.CurrentMode;
         // RadioTowers boost this radio
-        private List<Tower> _towersInRange = new List<Tower>();
+        public List<Tower> _towersInRange = new List<Tower>();
 
         //MorseAssigner
-        [SerializeField] private MorseCode _morseCode;
+        [SerializeField] public MorseCode _morseCode;
         private bool _playingMorseLoop = false;
         private bool _PlayedClip = false;
         //[SerializeField] private AudioSource MorseAudioSource;
@@ -51,8 +52,7 @@ namespace BrainClock.PlayerComms
         public StaticAudioSource MorseAudioSource;
         public int Channels = 1;
         private int _maxVolumeSteps = 10;
-        private bool Initalized;
-        private bool Ready;
+
         [Tooltip("Radius of sphere for signal range. Requires a RadioRangeController to work")]
         public float Range = 200;
         [Tooltip("If not assigned, all radios will receive all audio. If assigned, only radios within this range will receive the audio")]
@@ -62,10 +62,6 @@ namespace BrainClock.PlayerComms
         [SerializeField] private Knob knobVolume;
         [SerializeField] private ActivateButton pushToTalk;
         [SerializeField] private Canvas Screen;
-        [SerializeField] private GameObject ScreenBackground;
-        [SerializeField] private GameObject Logo;
-        [SerializeField] private GameObject ChannelGroup;
-        [SerializeField] private GameObject VolumeGroup;
         [SerializeField] private TextMeshProUGUI ChannelIndicator;
         [SerializeField] private TextMeshProUGUI VolumeIndicator;
         [SerializeField] private GameObject SignalTower;
@@ -74,6 +70,7 @@ namespace BrainClock.PlayerComms
         [Header("UI")]
         [SerializeField] private BatteryDisplay batteryDisplay;
         private float currentTime;
+
         #region Input Timing Control
         // Channel/volume change rate limiting
         private float channelChangeCooldown = 0.25f;
@@ -196,8 +193,8 @@ namespace BrainClock.PlayerComms
             SetupGameAudioSource();
 
             // Force all screen icons to use the Powered state.
-            this.SignalTower.SetActive(Powered && Ready);
-            this.BatteryIcon.SetActive(Powered && Ready);
+            this.SignalTower.SetActive(Powered );
+            this.BatteryIcon.SetActive(Powered );
 
             AllRadios.Add(this);
 
@@ -226,6 +223,7 @@ namespace BrainClock.PlayerComms
 
             // Force Adding to thread because the game won't do it unless we 'Play' an audio
             Singleton<AudioManager>.Instance.AddPlayingAudioSource(SpeakerAudioSource.GameAudioSource);
+
         }
 
         /// <summary>
@@ -262,8 +260,8 @@ namespace BrainClock.PlayerComms
             Volume = Exporting;
 
             Screen.enabled = Powered;
-            SignalTower.SetActive(isBoosted && Powered && Ready);
-            BatteryIcon.SetActive(Powered && Ready);
+            SignalTower.SetActive(isBoosted && Powered );
+            BatteryIcon.SetActive(Powered );
 
             ChannelIndicator.text = (Channel + 1).ToString();
             VolumeIndicator.text = Volume.ToString();
@@ -280,7 +278,7 @@ namespace BrainClock.PlayerComms
 
             // These are the channel buttons, can only be interacted if the device is Online
             // TODO: Should this buttons have a visual effect?
-            if (this.Powered && CurrentMode != InventoryManager.Mode.PrecisionPlacement && this.Ready && !Stationpedia.IsOpen && GameManager.GameState != GameState.Paused)
+            if (this.Powered && CurrentMode != InventoryManager.Mode.PrecisionPlacement && !Stationpedia.IsOpen && GameManager.GameState != GameState.Paused)
             {
                 if (interactable.Action == InteractableType.Button1)
                 {
@@ -310,7 +308,7 @@ namespace BrainClock.PlayerComms
                 }
                 ;
 
-                if (this.Channel == 15 && this.Powered && !this._playingMorseLoop && this.Ready)
+                if (this.Channel == 15 && this.Powered && !this._playingMorseLoop)
                 {
                     StartMorseLoop().Forget();
                 }
@@ -401,12 +399,12 @@ namespace BrainClock.PlayerComms
                     radio.batteryDisplay.SetBatteryStatus(radio.Battery.PowerRatio);
             }
 
-            this.SignalTower.SetActive(isBoosted && Powered && Ready);
+            this.SignalTower.SetActive(isBoosted && Powered );
         }
 
         private void UpdateBoosterStatus()
         {
-            this.SignalTower.SetActive(isBoosted && Powered && Ready);
+            this.SignalTower.SetActive(isBoosted && Powered );
         }
 
         // Update the radios within range for this radio
@@ -456,7 +454,6 @@ namespace BrainClock.PlayerComms
         /// </summary>
         private void FixedUpdate()
         {
-            currentTime = Time.time;
 
             // Visual update of the Activate button
             UpdateChannelBusy();
@@ -466,7 +463,7 @@ namespace BrainClock.PlayerComms
                 UpdateBoosterStatus();
 
             // Update Battery status && Display Logo
-            if (this.Powered && this.Ready)
+            if (this.Powered)
                 UpdateBatteryStatus();
 
             // Return if radio isn't used.
@@ -481,17 +478,6 @@ namespace BrainClock.PlayerComms
             if (CurrentMode == InventoryManager.Mode.PrecisionPlacement || Stationpedia.IsOpen || GameManager.GameState == GameState.Paused)
                 return;
 
-            if (this.OnOff)
-            {
-                if (this.Powered)
-                {
-                    this.UpdateLogo().Forget();
-                    this.Initalized = true;
-                }
-                else 
-                {this.Initalized = false;
-                 this.Ready = false; }
-            }
             // Only operate if everything is ok
             //Debug.Log($"Human is holding this radio {ReferenceId}");
             if (KeyManager.GetMouse("Primary") && !_primaryKey && !KeyManager.GetButton(KeyMap.MouseControl))
@@ -624,31 +610,6 @@ namespace BrainClock.PlayerComms
         #endregion
 
 
-        private async UniTaskVoid UpdateLogo()
-        {
-            if (!GameManager.RunSimulation)
-                return;
-
-            if (this.Initalized)
-                return;
-
-            this.Logo.SetActive(true);
-            this.ScreenBackground.SetActive(false);
-            this.ChannelGroup.SetActive(false);
-            this.VolumeGroup.SetActive(false);
-            this.SignalTower.SetActive(false);
-            this.BatteryIcon.SetActive(false);
-            await UniTask.Delay(2000);
-
-            this.Logo.SetActive(false);
-            this.ScreenBackground.SetActive(true);
-            this.ChannelGroup.SetActive(true);
-            this.VolumeGroup.SetActive(true);
-            this.SignalTower.SetActive(true);
-            this.BatteryIcon.SetActive(true);
-            this.Ready = true;
-        }
-
         private void UpdateChannelBusy()
         {
             if (!GameManager.IsMainThread)
@@ -660,7 +621,6 @@ namespace BrainClock.PlayerComms
             if (!Powered)
             {
                 pushToTalk.MaterialChanger.ChangeState(0);
-                this.Ready = false;
                 return;
             }
 
@@ -700,17 +660,33 @@ namespace BrainClock.PlayerComms
         {
             this._playingMorseLoop = true;
 
-            while (this.Channel == 15 && this.Powered && !this.MorseAudioSource.GameAudioSource.AudioSource.isPlaying && this.Ready)
+            while (this.Channel == 15 && this.Powered && !this.MorseAudioSource.GameAudioSource.AudioSource.isPlaying)
             {
                 _morseCode.PlayMorse(isBoosted);
 
-                while (this.MorseAudioSource.GameAudioSource.AudioSource.isPlaying && this.Channel == 15 && this.Powered && this.Ready)
+                //if (NetworkManager.IsServer)
+                //{
+                //    new MorsePlayMessage(this.ReferenceId, this.isBoosted).SendToClients();
+                //}
+
+                while (this.MorseAudioSource.GameAudioSource.AudioSource.isPlaying &&
+                       this.Channel == 15 && this.Powered)
+                {
                     await UniTask.Yield();
+                }
 
                 await UniTask.Delay(7000);
             }
+
             this._playingMorseLoop = false;
         }
+
+
+        public void PlayMorseFromNetwork(bool isBoosted)
+        {
+            _morseCode.PlayMorse(isBoosted);
+        }
+
 
         public void UpdateAudioMaxDistance()
         {

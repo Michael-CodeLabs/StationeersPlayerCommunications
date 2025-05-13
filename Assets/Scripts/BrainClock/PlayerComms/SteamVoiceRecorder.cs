@@ -1,11 +1,7 @@
-﻿using Assets.Scripts;
-using Assets.Scripts.Networking;
-using Steamworks;
+﻿using Steamworks;
 using System;
 using System.IO;
 using UnityEngine;
-using System.Reflection;
-using System.Collections.Generic;
 
 namespace BrainClock.PlayerComms
 {

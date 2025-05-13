@@ -658,7 +658,6 @@ GameObject:
   - component: {fileID: 5555125874317318865}
   - component: {fileID: 431031231543879906}
   - component: {fileID: 6957274874509520689}
-  - component: {fileID: 5177770279334857450}
   m_Layer: 0
   m_Name: ItemHandHeldRadio
   m_TagString: Untagged
@@ -1877,23 +1876,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioSource: {fileID: 5369754807496448651}
   AudioClipName: SpeakerVoice
-  AppId: 544550
-  dataRate: 0
-  IsReady: 0
---- !u!114 &5177770279334857450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2686529464066537426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecdc8334da7363f4d9c811ed1dfb8c63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AudioSource: {fileID: 4252627623051091902}
-  AudioClipName: MorseVoice
   AppId: 544550
   dataRate: 0
   IsReady: 0
