@@ -339,6 +339,7 @@ MonoBehaviour:
   ParentThing: {fileID: 2892032943883829781}
   AntennaRangeMode: 0
   Ready: 0
+  _range: 0
 --- !u!1 &828336478673811580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1163,23 +1164,6 @@ MonoBehaviour:
     AssociatedAudioEvents: []
     ActionName: 
     _state: 5
-  - StringKey: PowerRatio
-    StringHash: 456562476
-    Parent: {fileID: 2892032943883829781}
-    Collider: {fileID: 0}
-    FakeCollider: {fileID: 0}
-    Bounds:
-      m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0, y: 0, z: 0}
-    Action: 44
-    Animator: {fileID: 0}
-    JoinInProgressSync: 1
-    Layer: 1
-    CanKeyInteract: 0
-    KeyMap: 
-    AssociatedAudioEvents: []
-    ActionName: 
-    _state: 0
   AudioEvents:
   - Name: BaseFailure
     NameHash: -102118816
@@ -1698,6 +1682,7 @@ MonoBehaviour:
   manuallyAuthoredToolSpeedOffset: 0
   UsedPowerPassive: 10
   UsedPowerActive: 100
+  _towersInRange: []
   _morseCode: {fileID: 826638555136256577}
   SpeakerAudioSource: {fileID: 4759559812049139909}
   MorseAudioSource: {fileID: 826638555136256577}
@@ -1712,10 +1697,6 @@ MonoBehaviour:
     _invertRotation: 0
   pushToTalk: {fileID: 5504706022559997934}
   Screen: {fileID: 5288052786191045011}
-  ScreenBackground: {fileID: 6882703343421874581}
-  Logo: {fileID: 5359352366307368702}
-  ChannelGroup: {fileID: 6265345663942969787}
-  VolumeGroup: {fileID: 7782994025907314377}
   ChannelIndicator: {fileID: 7638000827655610959}
   VolumeIndicator: {fileID: 666166204296869984}
   SignalTower: {fileID: 7064134811930801948}

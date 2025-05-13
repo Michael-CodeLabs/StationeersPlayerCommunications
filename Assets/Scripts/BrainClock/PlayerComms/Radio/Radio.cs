@@ -4,7 +4,9 @@ using Assets.Scripts.Inventory;
 using Assets.Scripts.Localization2;
 using Assets.Scripts.Networking;
 using Assets.Scripts.Objects;
+using Assets.Scripts.Objects.Electrical;
 using Assets.Scripts.Objects.Items;
+using Assets.Scripts.Objects.Motherboards;
 using Assets.Scripts.Objects.Pipes;
 using Assets.Scripts.Sound;
 using Assets.Scripts.UI;
@@ -24,7 +26,7 @@ namespace BrainClock.PlayerComms
     /// <summary>
     /// Class for basic radio communications
     /// </summary>
-    public class Radio : PowerTool, IAudioDataReceiver
+    public class Radio : PowerTool, IAudioDataReceiver, ISetable
     {
         // Cached list of audio receivers in this Radio
         private IAudioStreamReceiver[] audioStreamReceivers = new IAudioStreamReceiver[0];
@@ -144,6 +146,106 @@ namespace BrainClock.PlayerComms
             }
         }
 
+        // Needed for ISetable
+        private float _setting;
+        [ByteArraySync]
+        public double Setting
+        {
+            get
+            {
+                return _setting;
+            }
+            set
+            {
+                if (NetworkManager.IsServer)
+                {
+                    base.NetworkUpdateFlags |= 256;
+                }
+                _setting = (float)value;
+            }
+        }
+
+        //Handle Setting change
+        public override double GetLogicValue(LogicType logictype)
+        {
+            if (logictype == LogicType.Setting)
+            {
+                return Setting;
+            }
+            return base.GetLogicValue(logictype);
+        }
+
+        public override void SetLogicValue(LogicType logicType, double value)
+        {
+            base.SetLogicValue(logicType, value);
+        }
+        //Update Dedicated Server
+        public virtual void OnSettingChanged()
+        {
+            if (NetworkManager.IsServer)
+            {
+                base.NetworkUpdateFlags |= 256;
+            }
+        }
+
+        //Serialize - Deserialize On Join
+        public override void SerializeOnJoin(RocketBinaryWriter writer)
+        {
+            base.SerializeOnJoin(writer);
+            writer.WriteDouble(Setting);
+        }
+        public override void DeserializeOnJoin(RocketBinaryReader reader)
+        {
+            base.DeserializeOnJoin(reader);
+            Setting = reader.ReadDouble();
+        }
+
+        // Serialize - Deserialze On World Save
+        public override ThingSaveData SerializeSave()
+        {
+            ThingSaveData savedData = new LogicBaseSaveData();
+            InitialiseSaveData(ref savedData);
+            return savedData;
+        }
+
+        public override void DeserializeSave(ThingSaveData savedData)
+        {
+            base.DeserializeSave(savedData);
+            if (savedData is LogicBaseSaveData logicBaseSaveData)
+            {
+                Setting = logicBaseSaveData.Setting;
+            }
+        }
+
+        // Initalise Save Data
+        protected override void InitialiseSaveData(ref ThingSaveData savedData)
+        {
+            base.InitialiseSaveData(ref savedData);
+            if (savedData is LogicBaseSaveData logicBaseSaveData)
+            {
+                logicBaseSaveData.Setting = Setting;
+            }
+        }
+
+        //Process Setting Updates on dedicated servers? (Might be completly useless in this code?)
+        public override void BuildUpdate(RocketBinaryWriter writer, ushort networkUpdateType)
+        {
+            base.BuildUpdate(writer, networkUpdateType);
+            if (Thing.IsNetworkUpdateRequired(256u, networkUpdateType))
+            {
+                writer.WriteDouble(Setting);
+            }
+        }
+
+        public override void ProcessUpdate(RocketBinaryReader reader, ushort networkUpdateType)
+        {
+            base.ProcessUpdate(reader, networkUpdateType);
+            if (Thing.IsNetworkUpdateRequired(256u, networkUpdateType))
+            {
+                Setting = reader.ReadDouble();
+            }
+        }
+
         public override void Awake()
         {
             // Basic setup of speaker gameaudio. We need to initialize the GameAudioSource
@@ -193,8 +295,8 @@ namespace BrainClock.PlayerComms
             SetupGameAudioSource();
 
             // Force all screen icons to use the Powered state.
-            this.SignalTower.SetActive(Powered );
-            this.BatteryIcon.SetActive(Powered );
+            this.SignalTower.SetActive(Powered);
+            this.BatteryIcon.SetActive(Powered);
 
             AllRadios.Add(this);
 
@@ -260,8 +362,8 @@ namespace BrainClock.PlayerComms
             Volume = Exporting;
 
             Screen.enabled = Powered;
-            SignalTower.SetActive(isBoosted && Powered );
-            BatteryIcon.SetActive(Powered );
+            SignalTower.SetActive(isBoosted && Powered);
+            BatteryIcon.SetActive(Powered);
 
             ChannelIndicator.text = (Channel + 1).ToString();
             VolumeIndicator.text = Volume.ToString();
@@ -393,18 +495,15 @@ namespace BrainClock.PlayerComms
 
         private void UpdateBatteryStatus()
         {
-            foreach (Radio radio in AllRadios)
-            {
-                if (radio.Battery != null && radio.batteryDisplay.isActiveAndEnabled)
-                    radio.batteryDisplay.SetBatteryStatus(radio.Battery.PowerRatio);
-            }
-
-            this.SignalTower.SetActive(isBoosted && Powered );
+            if (Battery != null && batteryDisplay.isActiveAndEnabled)
+                _setting = this.Battery.PowerRatio;
+            batteryDisplay.SetBatteryStatus(_setting);
+            this.SignalTower.SetActive(isBoosted && Powered);
         }
 
         private void UpdateBoosterStatus()
         {
-            this.SignalTower.SetActive(isBoosted && Powered );
+            this.SignalTower.SetActive(isBoosted && Powered);
         }
 
         // Update the radios within range for this radio
