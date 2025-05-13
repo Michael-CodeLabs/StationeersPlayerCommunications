@@ -154,10 +154,10 @@ MonoBehaviour:
   SolarHeatingScale: 0.1
   WeatherDamageScale: 1
   shatterTemperature: 1
-  flashpointTemperature: 373.15
-  autoignitionTemperature: 573.15
-  BurnTime: 25
-  ThingHealth: 300
+  flashpointTemperature: 1110.15
+  autoignitionTemperature: 1573.15
+  BurnTime: 60
+  ThingHealth: 1000
   EnergyReleasedWhenBurned: 100000
   _customName: 
   OwnerClientId: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
   AtmosControl: 1
   OnConveyor: 0
   IsWatched: 0
-  TradeValue: 150
+  TradeValue: 300
   PlayerSellScale: 1
   ExitTool:
     ToolEntry: {fileID: 0}
@@ -292,7 +292,7 @@ MonoBehaviour:
       _quantity: 0
     Gold:
       ReagentId: 4
-      _quantity: 0
+      _quantity: 7
     Carbon:
       ReagentId: 5
       _quantity: 0
@@ -301,25 +301,25 @@ MonoBehaviour:
       _quantity: 0
     Copper:
       ReagentId: 7
-      _quantity: 0
+      _quantity: 10
     Steel:
       ReagentId: 8
-      _quantity: 0
+      _quantity: 25
     Hydrocarbon:
       ReagentId: 9
       _quantity: 0
     Silver:
       ReagentId: 10
-      _quantity: 0
+      _quantity: 3
     Nickel:
       ReagentId: 11
-      _quantity: 0
+      _quantity: 3
     Lead:
       ReagentId: 12
       _quantity: 0
     Electrum:
       ReagentId: 13
-      _quantity: 0
+      _quantity: 3
     Invar:
       ReagentId: 14
       _quantity: 0
@@ -334,7 +334,7 @@ MonoBehaviour:
       _quantity: 0
     Silicon:
       ReagentId: 18
-      _quantity: 0
+      _quantity: 15
     SalicylicAcid:
       ReagentId: 19
       _quantity: 0

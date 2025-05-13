@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <ElectronicsPrinterRecipes>
+        <RecipeData>
+            <PrefabName>ItemKitRadioTower</PrefabName>
+            <Recipe>
+                <Time>60</Time>
+                <Energy>3000</Energy>
+                <Silicon>20</Silicon>
+                <Steel>30</Steel>
+                <Electrum>5</Electrum>
+				<Copper>15</Copper>
+				<Gold>10</Gold>
+				<Nickel>5</Nickel>
+				<Silver>3</Silver>
+            </Recipe>
+        </RecipeData>
+    </ElectronicsPrinterRecipes>
+</GameData>

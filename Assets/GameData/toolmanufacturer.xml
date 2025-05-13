@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<ToolManufactoryRecipes>
+		<RecipeData>
+			<PrefabName>ItemHandHeldRadio</PrefabName>
+			<Recipe>
+				<Time>60</Time>
+				<Energy>1000</Energy>
+				<Electrum>10</Electrum>
+				<Copper>15</Copper>
+				<Steel>10</Steel>
+				<Solder>5</Solder>
+				<Silicon>15</Silicon>
+			</Recipe>
+			<RecipeTier>TierTwo</RecipeTier>
+		</RecipeData>
+	</ToolManufactoryRecipes>
+</GameData>

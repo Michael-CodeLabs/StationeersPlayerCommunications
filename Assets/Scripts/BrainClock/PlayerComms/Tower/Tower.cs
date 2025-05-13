@@ -54,7 +54,6 @@ namespace BrainClock.PlayerComms
 
                 if (RangeController != null)
                     RangeController.Range = _setting;
-
             }
         }
 

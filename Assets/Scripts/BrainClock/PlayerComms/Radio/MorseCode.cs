@@ -6,32 +6,52 @@ namespace BrainClock.PlayerComms
 {
     public class MorseCode : ModStaticAudioSource
     {
+        public AudioClip Static;
         public AudioClip stuckOnTitanClip;
         public AudioClip baseFailureClip;
         public AudioClip lowO2Clip;
 
         private static byte PlayCounter = 0;
 
-        public void PlayMorse()
+        public void PlayMorse(bool IsBoosted)
         {
             if (!GameManager.RunSimulation || GameAudioSource?.AudioSource == null)
                 return;
 
-            switch (PlayCounter % 3)
-            {
-                case 0:
-                    GameAudioSource.AudioSource.clip = stuckOnTitanClip;
-                    break;
-                case 1:
-                    GameAudioSource.AudioSource.clip = baseFailureClip;
-                    break;
-                case 2:
-                    GameAudioSource.AudioSource.clip = lowO2Clip;
-                    break;
-            }
+            var source = GameAudioSource.AudioSource;
 
-            GameAudioSource.AudioSource.Play();
-            PlayCounter++;
+            if (!IsBoosted)
+            {
+                if (!source.isPlaying)
+                {
+                    source.clip = Static;
+                    source.loop = true;
+                    source.Play();
+                }
+            }
+            else if (IsBoosted)
+            {
+                if (source.clip == Static)
+                    source.Stop();
+
+                source.loop = false;
+
+                switch (PlayCounter % 3)
+                {
+                    case 0:
+                        source.clip = stuckOnTitanClip;
+                        break;
+                    case 1:
+                        source.clip = baseFailureClip;
+                        break;
+                    case 2:
+                        source.clip = lowO2Clip;
+                        break;
+                }
+
+                source.Play();
+                PlayCounter++;
+            }
         }
     }
 }

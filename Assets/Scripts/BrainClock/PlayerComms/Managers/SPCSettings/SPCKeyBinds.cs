@@ -17,6 +17,10 @@ namespace BrainClock.PlayerComms
 
                 PlayerCommsKeybinds.AddKey("Push To Talk", KeyCode.B, controlsGroup9, false);
                 PlayerCommsKeybinds.AddKey("Voice Strength", KeyCode.Semicolon, controlsGroup9, false);
+                PlayerCommsKeybinds.AddKey("Radio Volume Down", KeyCode.DownArrow, controlsGroup9, false);
+                PlayerCommsKeybinds.AddKey("Radio Volume Up", KeyCode.UpArrow, controlsGroup9, false);
+                PlayerCommsKeybinds.AddKey("Radio Channel Down", KeyCode.LeftArrow, controlsGroup9, false);
+                PlayerCommsKeybinds.AddKey("Radio Channel Up", KeyCode.RightArrow, controlsGroup9, false);
                 ControlsAssignment.RefreshState();
             }
 

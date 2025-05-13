@@ -109,6 +109,21 @@ namespace BrainClock.PlayerComms
                 return;
 
             float volume = VoiceVolume;
+            switch (currentVoiceMode)
+            {
+                case VoiceMode.Whisper:
+                    volume *= 0.3f; // Whisper volume
+                    break;
+
+                case VoiceMode.Normal:
+                    volume *= 1.0f; // Normal volume
+                    break;
+
+                case VoiceMode.Shout:
+                    volume *= 1.5f; // Shout volume
+                    break;
+            }
+
             int flags = 0;
 
             if (InventoryManager.ParentHuman)

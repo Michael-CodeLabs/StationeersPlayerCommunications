@@ -1,36 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetadata xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Name>StationeersPlayerCommunications [StationeersMods]</Name>
-  <Author>Example</Author>
-  <Version>0.2.5116.23239.1</Version>
-  <!-- Steam description using steam styling tags for Steam workshop page -->
-  <Description>[h1]StationeersPlayerCommunications[/h1]
-    [b]WARNING:[/b] This is a StationeersMods Plugin Mod. It requires Bepinex to be installed with the StationeersMods plugin.
-    See: https://jixxed.github.io/StationeersMods/
-    Description for StationeersPlayerCommunications
-  </Description>
-  <!-- Ingame Description using TMP tags for Workshop menu -->
-  <InGameDescription>
-    <![CDATA[<size="30"><color=#ffa500> StationeersPlayerCommunications </color></size>
-<b>WARNING:</b> <color=#ff0000>This is a StationeersMods Plugin Mod. It requires Bepinex to be installed with the StationeersMods plugin.</color>
-See: https://jixxed.github.io/StationeersMods/
-Description for StationeersPlayerCommunications
+	<Name>Player Communications</Name>
+	<Author>lorexcold</Author>
+	<Version>1.0.0</Version>
+	<Description>
+		[h1]Player Communications[/h1]
+		[b]WARNING:[/b] This is a Stationeers Launchpad Plugin Mod. It requires Bepinex to be installed with the Stationeers Launchpad plugin.
+		Installation Guide: github.com/StationeersLaunchPad/StationeersLaunchPad
+
+		Player Communications adds immersive directional voice chat to Stationeers, allowing players to communicate using voice chat whether it be face-to-face or over long distances using radios.
+
+		[h2]Features[/h2]
+		[list]
+		[*]Face-to-Face Voice Chat: Voices are affected by environmental factors such as pressure, helmets, and world occlusion.
+		[*]Directional Audio: When speaking face-to-face, voices are heard based on their position and orientation.
+		[*]Radio Communication: Enables long-range communication between players.
+		[*]Radio Talk Over Protection: Only 1 transmitter is allowed on a channel at a time.
+		[*]Radio Channels: Up to 16 Radio Channels.
+		[*]Radio Storage: A Radio Storage in the Locker Kit.
+		[*]Radio Tower: A Radio Tower to increase signal strength and transmission/reception distance.
+		[*]Steam Voice Integration: Uses Steam's built-in voice chat system.
+		[*]Custom Key Binds: Custom Keybinds in the controls settings under Player Communications.
+		[*]Transmission modes: PTT &amp; Continuous transmission (change in workshop without restart).
+		[*]Custom Lore: New entry in the factions page with custom lore.
+		[/list]
+
+		[h2]Notes[/h2]
+		[list]
+		[*]Helmets, atmospheric pressure, and objects affect voice transmission.
+		[*]Voices are directional for face-to-face communication.
+		[*]Configure your microphone in Steam before launching.
+		[*]Dedicated Server Compatible
+		[*]Radio tower base power usage is 200W, scaling with logic Setting (1 Meter = 15W).
+		[*]Default tower signal is 250 Meters (3750W + Base Power).
+		[/list]
+
+		[h2]Requirements[/h2]
+		[list]
+		[*]Steam must be initialized when launching the game.
+		[*]StationeersLaunchPad with BepInEx installed.
+		[/list]
+
+		Report Issues: github.com/Michael-CodeLabs/Issues_StationeersPlayerComms/issues
+
+		Credits:
+		Stationeers &amp; RocketWerkz (Reuse of some assets)
+		@Inaki (Dev) - Huge Thanks
+		@lorexcold (Dev)
+		@taco2849 (Dev)
+		Smiles (3D Models)
+	</Description>
+	<ChangeLog>
+		[h3]Version 1.0.0:[/h3]
+		[list]
+		[*]Initial release
+		[/list]
+	</ChangeLog>
+	<Tags>
+		<Tag>Communication</Tag>
+		<Tag>Multiplayer</Tag>
+		<Tag>BepInEx</Tag>
+	</Tags>
+	<Dependencies />
+	<LoadBefore />
+	<LoadAfter />
+	<InGameDescription>
+		<![CDATA[<size="30"><color=#ffa500> Player Communications </color></size>
+<b>WARNING:</b> <color=#ff0000>This is a Stationeers LaunchPad Plugin Mod. It requires Bepinex to be installed with the Stationeers Launchpad plugin.</color>
+Installation Guide: <color=#0cb3f5>github.com/StationeersLaunchPad/StationeersLaunchPad</color>
+
+<color=#02d1fa><b>[FEATURES]</b></color>
+<color=#1380bf>•</color> Immersive directional voice chat
+<color=#1380bf>•</color> Face-to-face communication affected by environment
+<color=#1380bf>•</color> Long-range radio communication system
+<color=#1380bf>•</color> 16 radio channels with talk-over protection
+<color=#1380bf>•</color> Radio Tower (Base: 200W, 1M = 15W)
+<color=#1380bf>•</color> Steam Voice integration
+<color=#1380bf>•</color> Custom keybinds
+
+<color=#02d1fa><b>[NOTES]</b></color>
+<color=#c49c08>•</color> Helmets, pressure, and objects affect voice
+<color=#c49c08>•</color> Configure microphone in Steam first
+<color=#c49c08>•</color> Dedicated Server Compatible
+<color=#c49c08>•</color> Default tower range: 250M (3750W + 200W)
+
+<color=#02d1fa><b>[REQUIREMENTS]</b></color>
+<color=#22c933>•</color> Steam initialized
+<color=#22c933>•</color> StationeersLaunchPad + BepInEx
+
+<color=#ffa500>Report Issues:</color> <color=#0cb3f5>github.com/Michael-CodeLabs/Issues_StationeersPlayerComms/issues</color>
+
+<color=#ffa500>Credits:</color> Stationeers & RocketWerkz (Use of game assets), @Inaki, @lorexcold, @taco2849, Smiles
 ]]>
-  </InGameDescription>
-  <!-- All contents of ChangeLog should be changed for each publication for Steam workshop page -->
-  <ChangeLog>
-    [h3]Version 0.2.5116.23239.1:[/h3]
-    [list]
-    [*]Initial release
-    [/list]
-  </ChangeLog>
-  <!-- StationeersMods and BepInEx tags for Steam workshop page will be automatically added by the framework when publishing -->
-  <Tags>
-    <Tag>StationeersMods</Tag>
-  </Tags>
-  <!-- Automatic downloads of dependencies -->
-  <Dependencies />
-  <!-- Automatic reordering of the mods list -->
-  <LoadBefore />
-  <LoadAfter />
+	</InGameDescription>
 </ModMetadata>

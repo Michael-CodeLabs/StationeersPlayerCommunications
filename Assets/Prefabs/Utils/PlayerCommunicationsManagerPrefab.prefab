@@ -63,12 +63,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f693e109811d8584dbc80219b425f617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioReceiver: {fileID: 2254027799377473201}
-  IsReady: 0
-  VoiceRecordEnabled: 1
-  AppId: 544550
-  voiceCaptureMode: 0
-  UseStream: 0
+  _audioReceiver: {fileID: 2254027799377473201}
+  _voiceCaptureMode: 0
+  _appId: 544550
+  _useStream: 0
 --- !u!114 &1478760234394598285
 MonoBehaviour:
   m_ObjectHideFlags: 0

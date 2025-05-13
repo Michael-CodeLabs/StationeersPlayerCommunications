@@ -1,15 +1,14 @@
-﻿using Steamworks;
+﻿using Assets.Scripts;
+using Assets.Scripts.Networking;
+using Steamworks;
 using System;
 using System.IO;
 using UnityEngine;
+using System.Reflection;
+using System.Collections.Generic;
 
 namespace BrainClock.PlayerComms
 {
-
-    /// <summary>
-    /// Records audio from Steam.
-    /// Expects SteamClient to be initialized.
-    /// </summary>
     public class SteamVoiceRecorder : MonoBehaviour
     {
         public enum VoiceCaptureMode
@@ -18,170 +17,232 @@ namespace BrainClock.PlayerComms
             OnDemand
         }
 
-        // Dynamically fetch transmission mode from config.
+        private const int MAX_STREAM_SIZE = 1024 * 1024;
+        private const float STREAM_CLEAN_INTERVAL = 30f;
+
+        [SerializeField] private GameObject _audioReceiver;
+        [SerializeField] private VoiceCaptureMode _voiceCaptureMode = VoiceCaptureMode.FixedUpdate;
+        [SerializeField] private uint _appId = 0;
+        [SerializeField] private bool _useStream = false;
+
         private bool _transmissionMode;
-        public bool TransmissionMode => _transmissionMode;
-
-
-        // Stream to store the audio data
-        [Tooltip("Component that will receive the audio stream when available.")]
-        [SerializeField]
-        public GameObject AudioReceiver;
-        private IAudioStreamReceiver[] audioStreamReceivers;
-
-        public bool IsReady = false;
-        public bool VoiceRecordEnabled = true;
-
-        [Tooltip("Steam AppId you want to initialize")]
-        public uint AppId = 0;
-
-        // Stream to store the audio data
-        [Tooltip("Audio capture method")]
-        public VoiceCaptureMode voiceCaptureMode;
-
-        [Tooltip("Use this only for local testing")]
-        public bool UseStream = false;
-
-        private MemoryStream voiceStream;
+        private MemoryStream _voiceStream;
+        private bool _isPushToTalkActive;
+        private bool _wasPushToTalkActive;
+        private IAudioStreamReceiver[] _audioStreamReceivers;
+        private float _lastStreamCleanTime;
+        private byte[] _reusableBuffer;
 
         public static SteamVoiceRecorder Instance { get; private set; }
+        public bool TransmissionMode => _transmissionMode;
+        public bool IsReady { get; private set; }
+        public bool VoiceRecordEnabled { get; private set; }
+
         private void Awake()
         {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this);
+                return;
+            }
+
             Instance = this;
-            // Initialize Voice stream
-            voiceStream = new MemoryStream();
+            _voiceStream = new MemoryStream(8192);
+            _reusableBuffer = new byte[8192];
 
             StationeersPlayerCommunications.TransmissionModeConfig.SettingChanged += OnTransmissionModeChanged;
-
-            //Inital fetch from config
             UpdateTransmissionMode();
 
-            if (AudioReceiver == null)
-                AudioReceiver = this.gameObject;
+            _audioStreamReceivers = (_audioReceiver != null ? _audioReceiver : gameObject).GetComponents<IAudioStreamReceiver>();
         }
 
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-            // Try to initialize Steam if not done already.
+            InitializeSteam();
+            IsReady = SteamClient.IsValid && _audioStreamReceivers != null && _audioStreamReceivers.Length > 0;
+            SteamUser.VoiceRecord = true;
+            _lastStreamCleanTime = Time.time;
+        }
+
+        private void InitializeSteam()
+        {
             if (!SteamClient.IsValid)
-                SteamClient.Init(AppId, true);
+            {
+                SteamClient.Init(_appId, true);
+            }
 
-            if (!SteamClient.IsValid)
-                return;
-            Debug.Log("SteamVoiceRecorder: Steam is valid");
-
-            IsReady = true;
-
-            // Do we have anyone to send data to?
-            audioStreamReceivers = AudioReceiver.GetComponents<IAudioStreamReceiver>();
-            if (audioStreamReceivers != null && audioStreamReceivers.Length > 0)
-                IsReady = true;
-
-            Debug.Log("PlayerCommunicationsManager.HandleWorldStarted() is ready");
-
-            // Create a new Stream for voice capture
-            voiceStream = new MemoryStream();
-
-            SteamUser.VoiceRecord = VoiceRecordEnabled;
-        }
-
-
-        public void Shutdown()
-        {
-            SteamUser.VoiceRecord = false;
-            voiceStream = null;
-        }
-
-        private void OnDestroy()
-        {
-            if (Instance == this)
-                Instance = null;
+            if (SteamClient.IsValid)
+            {
+                Debug.Log("SteamVoiceRecorder: Steam initialized successfully");
+            }
         }
 
         private void FixedUpdate()
         {
-            if (voiceCaptureMode == VoiceCaptureMode.FixedUpdate)
+            UpdatePushToTalkState();
+
+            if (_voiceCaptureMode == VoiceCaptureMode.FixedUpdate)
             {
                 ProcessCapture();
             }
         }
 
+        private void Update()
+        {
+
+            if (!_transmissionMode && Time.time - _lastStreamCleanTime > STREAM_CLEAN_INTERVAL)
+            {
+                if (_voiceStream.Capacity > MAX_STREAM_SIZE)
+                {
+                    ClearVoiceStream();
+                }
+                _lastStreamCleanTime = Time.time;
+            }
+        }
+
+        private void UpdatePushToTalkState()
+        {
+            _wasPushToTalkActive = _isPushToTalkActive;
+
+            _isPushToTalkActive = Radio.RadioIsActivating ||
+                                (!_transmissionMode) ||
+                                (_transmissionMode && IsPushToTalkKeyPressed());
+
+            VoiceRecordEnabled = _isPushToTalkActive;
+
+            if (_transmissionMode || _isPushToTalkActive && !_wasPushToTalkActive)
+            {
+                ClearVoiceStream();
+            }
+        }
+
+        private void ClearVoiceStream()
+        {
+            _voiceStream.SetLength(0);
+            _voiceStream.Position = 0;
+            _voiceStream.Capacity = Math.Min(_voiceStream.Capacity, MAX_STREAM_SIZE);
+        }
+
         public void ProcessCapture()
         {
-            if (!IsReady || !VoiceRecordEnabled || voiceStream == null)
+            if (!IsReady || !VoiceRecordEnabled || _voiceStream == null)
                 return;
 
-            // Check if we're in PTT mode and the PTT key is not held
-            if (_transmissionMode && !IsPushToTalkKeyPressed())
-                return;
-
-            int compressedRead = SteamUser.ReadVoiceData(voiceStream);
-            voiceStream.Position = 0;
+            int compressedRead = SteamUser.ReadVoiceData(_voiceStream);
+            _voiceStream.Position = 0;
 
             if (compressedRead > 0)
             {
-                // Stream can be used when network is not involved (local to local).
-                if (UseStream)
-                    SendToAllReceivers(voiceStream, compressedRead);
+                if (_useStream)
+                {
+                    SendToAllReceivers(_voiceStream, compressedRead);
+                }
                 else
                 {
-                    var bytes = new System.ArraySegment<byte>(voiceStream.GetBuffer(), 0, compressedRead);
-                    SendToAllReceivers(bytes.Array, compressedRead);
+
+                    byte[] bufferToSend = compressedRead <= _reusableBuffer.Length
+                        ? _reusableBuffer
+                        : new byte[compressedRead];
+
+                    Buffer.BlockCopy(_voiceStream.GetBuffer(), 0, bufferToSend, 0, compressedRead);
+                    SendToAllReceivers(bufferToSend, compressedRead);
                 }
 
+                if (_transmissionMode)
+                {
+                    ClearVoiceStream();
+                }
+                else
+                {
+                    _voiceStream.SetLength(0);
+                    _voiceStream.Position = 0;
+                }
             }
         }
+
         private bool IsPushToTalkKeyPressed()
         {
-
             if (Radio.RadioIsActivating)
             {
-                //Debug.Log("[SteamVoiceRecorder] Radio is activating � bypassing Push to Talk key.");
                 return true;
             }
-
-
-            bool isPressed = KeyManager.GetButton(StationeersPlayerCommunications.PushToTalk);
-            // Only log when the key is pressed // Remove Later!
-            if (isPressed)
-            {
-                //Debug.Log("[SteamVoiceRecorder] Push to talk key pressed!");
-            }
-
-            return isPressed;
+            return KeyManager.GetButton(StationeersPlayerCommunications.PushToTalk);
         }
 
-        //BepInEx config change event trigger which calls UpdateTransmissionMode. This allows us to change modes without game restarts.
+        private void SendToAllReceivers(MemoryStream stream, int length)
+        {
+            if (_audioStreamReceivers == null || length <= 0) return;
+
+            foreach (var receiver in _audioStreamReceivers)
+            {
+                stream.Position = 0;
+                receiver.ReceiveAudioStreamData(stream, length);
+            }
+        }
+
+        private void SendToAllReceivers(byte[] data, int length)
+        {
+            if (_audioStreamReceivers == null || length <= 0) return;
+
+            foreach (var receiver in _audioStreamReceivers)
+            {
+                receiver.ReceiveAudioStreamData(data, length);
+            }
+        }
+
         private void OnTransmissionModeChanged(object sender, EventArgs e)
         {
             UpdateTransmissionMode();
         }
 
-        // Fetch TransmissionMode config
-        public void UpdateTransmissionMode()
+        private void UpdateTransmissionMode()
         {
             _transmissionMode = StationeersPlayerCommunications.TransmissionModeConfig.Value;
             Debug.Log($"[SteamVoiceRecorder] TransmissionMode updated to: {_transmissionMode}");
+
+            ClearVoiceStream();
         }
 
-        private void SendToAllReceivers(MemoryStream stream, int length)
+        public void Shutdown()
         {
-            foreach (IAudioStreamReceiver receiver in audioStreamReceivers)
+            SteamUser.VoiceRecord = false;
+            _voiceStream?.Dispose();
+            _voiceStream = null;
+        }
+
+        //TODO SERVER MANAGEMENT 
+
+        //private void OnServer()
+        //{
+        //    if (NetworkManager.IsServer)
+        //    {
+        //        byte AddEventCounter = 0;
+        //        NetworkBase.PausedForClientDelegate PausedForClient = null;
+
+        //        if (AddEventCounter == 0)
+        //        {
+        //            NetworkServer.PausedForClientConnectEvent += PausedForClient;
+        //            AddEventCounter = 1;
+        //        }
+
+        //        PausedForClient.Invoke(UpdateClientsList)
+        //    }
+
+        //    void UpdateClientsList()
+        //    {
+        //        NetworkBase.Clients.RemoveAll
+        //    }
+        //}
+
+        private void OnDestroy()
+        {
+            if (Instance == this)
             {
-                receiver.ReceiveAudioStreamData(stream, length);
+                Instance = null;
             }
 
-        }
-        private void SendToAllReceivers(byte[] data, int length)
-        {
-            if (audioStreamReceivers != null)
-            {
-                foreach (IAudioStreamReceiver receiver in audioStreamReceivers)
-                {
-                    receiver.ReceiveAudioStreamData(data, length);
-                }
-            }
+            StationeersPlayerCommunications.TransmissionModeConfig.SettingChanged -= OnTransmissionModeChanged;
+            Shutdown();
         }
     }
 }

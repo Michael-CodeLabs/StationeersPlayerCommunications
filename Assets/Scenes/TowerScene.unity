@@ -552,6 +552,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+      propertyPath: BuildStates.Array.data[1].Tool.EntryQuantity
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+      propertyPath: BuildStates.Array.data[2].Tool.EntryQuantity
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
+      propertyPath: BuildStates.Array.data[3].Tool.EntryQuantity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966849676222148615, guid: 487f49506930c3e4aac509f32ca20ceb, type: 3}
       propertyPath: BuildStates.Array.data[0].Colliders.Array.data[0]
       value: 
       objectReference: {fileID: 0}

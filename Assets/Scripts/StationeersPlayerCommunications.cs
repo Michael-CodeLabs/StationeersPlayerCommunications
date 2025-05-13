@@ -1,10 +1,9 @@
-using BepInEx;
 using BepInEx.Configuration;
+using BrainClock.PlayerComms;
 using HarmonyLib;
+using StationeersMods.Interface;
 using System.Linq;
 using UnityEngine;
-using StationeersMods.Interface;
-using BrainClock.PlayerComms;
 
 [StationeersMod("StationeersPlayerCommunications", "StationeersPlayerCommunications [StationeersMods]", "0.2.4657.21547.1")]
 public class StationeersPlayerCommunications : ModBehaviour
@@ -13,9 +12,13 @@ public class StationeersPlayerCommunications : ModBehaviour
     /// StationeersMods/BepinEx ModBehaviour to handle the mod initialization.
     /// </summary>
     /// <param name="contentHandler">Contains the assets of the mod package</param>
-  
+
     public static KeyCode PushToTalk;
     public static KeyCode VoiceStrength;
+    public static KeyCode RadioVolumeDown;
+    public static KeyCode RadioVolumeUp;
+    public static KeyCode RadioChannelDown;
+    public static KeyCode RadioChannelUp;
 
     public static ConfigEntry<bool> TransmissionModeConfig; // true = PushToTalk
 
@@ -63,5 +66,9 @@ public class StationeersPlayerCommunications : ModBehaviour
     {
         PushToTalk = KeyManager.GetKey("Push To Talk");
         VoiceStrength = KeyManager.GetKey("Voice Strength");
+        RadioVolumeDown = KeyManager.GetKey("Radio Volume Down");
+        RadioVolumeUp = KeyManager.GetKey("Radio Volume Up");
+        RadioChannelDown = KeyManager.GetKey("Radio Channel Down");
+        RadioChannelUp = KeyManager.GetKey("Radio Channel Up");
     }
 }

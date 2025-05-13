@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 1200417347, guid: da8de3ecce08b7a469c6f2a86190a972, type: 3}
   m_Name: ExportSettings
   m_EditorClassIdentifier: 
-  _author: TBD
-  _description: Adds player's voice to Stationeers.
+  _author: lorexcold
+  _description: Player Communications adds immersive directional voice chat to Stationeers,
+    allowing players to communicate using voice chat whether it be face-to-face or
+    over long distances using radios.
   _name: StationeersPlayerCommunications
   _outputDirectory: C:/Users/Moe/Documents/My Games/Stationeers/mods
   _stationeersDirectory: C:/Program Files (x86)/Steam/steamapps/common/Stationeers
   _stationeersArguments: 
-  _version: 0.001
+  _version: 1.0.0
   _assemblies:
   - Assets/Scripts/StationeersPlayerCommunications.asmdef
   _artifacts: []
   _contentTypes: -1
-  _includePdbs: 1
+  _includePdbs: 0
   _waitForDebugger: 0
   _bootType: 0
   _startupPrefab: {fileID: 0}
