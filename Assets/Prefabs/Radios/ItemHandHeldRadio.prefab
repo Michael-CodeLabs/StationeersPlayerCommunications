@@ -477,7 +477,6 @@ RectTransform:
   - {fileID: 8690196355516015363}
   - {fileID: 645092785504634885}
   - {fileID: 8888689994791940167}
-  - {fileID: 7204762925036681656}
   - {fileID: 7584916657884851622}
   - {fileID: 113845495554576899}
   m_Father: {fileID: 4541598332651061534}
@@ -1164,6 +1163,23 @@ MonoBehaviour:
     AssociatedAudioEvents: []
     ActionName: 
     _state: 5
+  - StringKey: Exporting2
+    StringHash: -1384615867
+    Parent: {fileID: 2892032943883829781}
+    Collider: {fileID: 0}
+    FakeCollider: {fileID: 0}
+    Bounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    Action: 44
+    Animator: {fileID: 0}
+    JoinInProgressSync: 1
+    Layer: 1
+    CanKeyInteract: 0
+    KeyMap: 
+    AssociatedAudioEvents: []
+    ActionName: 
+    _state: 0
   AudioEvents:
   - Name: BaseFailure
     NameHash: -102118816
@@ -1701,7 +1717,11 @@ MonoBehaviour:
   VolumeIndicator: {fileID: 666166204296869984}
   SignalTower: {fileID: 7064134811930801948}
   BatteryIcon: {fileID: 783526608630663353}
-  batteryDisplay: {fileID: 3232317844169058720}
+  Battery20: {fileID: 5675207604028854988}
+  Battery40: {fileID: 6904461592447222334}
+  Battery60: {fileID: 5241461997755655468}
+  Battery80: {fileID: 1806250631649105781}
+  Battery100: {fileID: 3350331086092149263}
   IncomingTransmissionClip: {fileID: 8300000, guid: 3a33ce787df90eb438046b253d70676c, type: 3}
   OnRadioClip: {fileID: 8300000, guid: 43ffd8b942680e642be25fe4424655d5, type: 3}
   OffRadioClip: {fileID: 8300000, guid: bdc1389defef0bf4e8b127ef10ba5e57, type: 3}
@@ -2214,81 +2234,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &5359352366307368702
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7204762925036681656}
-  - component: {fileID: 9108597373730852240}
-  - component: {fileID: 5699595675808793267}
-  m_Layer: 0
-  m_Name: Logo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &7204762925036681656
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5359352366307368702}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.4552e-11}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1861587187033778491}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0004, y: -0.00074}
-  m_SizeDelta: {x: 0.16524, y: 0.10877}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &9108597373730852240
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5359352366307368702}
-  m_CullTransparentMesh: 1
---- !u!114 &5699595675808793267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5359352366307368702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: d67317c72def7e9499ef5f55ab5ca7cd, type: 2}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a291896fdb098d04b8657f086f55fd5e, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &5946913497250085387
 GameObject:
   m_ObjectHideFlags: 0
@@ -4230,10 +4175,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 71685ab45315bdd4297e2a801e2e145e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3232317844169058720}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71685ab45315bdd4297e2a801e2e145e, type: 3}
 --- !u!4 &113845495554576899 stripped
 Transform:
@@ -4245,23 +4187,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 71685ab45315bdd4297e2a801e2e145e, type: 3}
   m_PrefabInstance: {fileID: 441014790349026792}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3232317844169058720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 783526608630663353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9afc50256fd6bc45a666b19e56cc926, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Battery20: {fileID: 5675207604028854988}
-  Battery40: {fileID: 6904461592447222334}
-  Battery60: {fileID: 5241461997755655468}
-  Battery80: {fileID: 1806250631649105781}
-  Battery100: {fileID: 3350331086092149263}
 --- !u!1 &1806250631649105781 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2238249416642749085, guid: 71685ab45315bdd4297e2a801e2e145e, type: 3}

@@ -26,7 +26,7 @@ namespace BrainClock.PlayerComms
     /// <summary>
     /// Class for basic radio communications
     /// </summary>
-    public class Radio : PowerTool, IAudioDataReceiver, ISetable
+    public class Radio : PowerTool, IAudioDataReceiver
     {
         // Cached list of audio receivers in this Radio
         private IAudioStreamReceiver[] audioStreamReceivers = new IAudioStreamReceiver[0];
@@ -70,7 +70,12 @@ namespace BrainClock.PlayerComms
         [SerializeField] private GameObject BatteryIcon;
 
         [Header("UI")]
-        [SerializeField] private BatteryDisplay batteryDisplay;
+
+        [SerializeField] public GameObject Battery20;
+        [SerializeField] public GameObject Battery40;
+        [SerializeField] public GameObject Battery60;
+        [SerializeField] public GameObject Battery80;
+        [SerializeField] public GameObject Battery100;
         private float currentTime;
 
         #region Input Timing Control
@@ -102,7 +107,6 @@ namespace BrainClock.PlayerComms
                 _currentChannel = value;
             }
         }
-
 
         // Current Volume of this radio
         private int _currentVolume;
@@ -143,106 +147,6 @@ namespace BrainClock.PlayerComms
             get
             {
                 return _towersInRange;
-            }
-        }
-
-        // Needed for ISetable
-        private float _setting;
-        [ByteArraySync]
-        public double Setting
-        {
-            get
-            {
-                return _setting;
-            }
-            set
-            {
-                if (NetworkManager.IsServer)
-                {
-                    base.NetworkUpdateFlags |= 256;
-                }
-                _setting = (float)value;
-            }
-        }
-
-        //Handle Setting change
-        public override double GetLogicValue(LogicType logictype)
-        {
-            if (logictype == LogicType.Setting)
-            {
-                return Setting;
-            }
-            return base.GetLogicValue(logictype);
-        }
-
-        public override void SetLogicValue(LogicType logicType, double value)
-        {
-            base.SetLogicValue(logicType, value);
-        }
-        //Update Dedicated Server
-        public virtual void OnSettingChanged()
-        {
-            if (NetworkManager.IsServer)
-            {
-                base.NetworkUpdateFlags |= 256;
-            }
-        }
-
-        //Serialize - Deserialize On Join
-        public override void SerializeOnJoin(RocketBinaryWriter writer)
-        {
-            base.SerializeOnJoin(writer);
-            writer.WriteDouble(Setting);
-        }
-        public override void DeserializeOnJoin(RocketBinaryReader reader)
-        {
-            base.DeserializeOnJoin(reader);
-            Setting = reader.ReadDouble();
-        }
-
-        // Serialize - Deserialze On World Save
-        public override ThingSaveData SerializeSave()
-        {
-            ThingSaveData savedData = new LogicBaseSaveData();
-            InitialiseSaveData(ref savedData);
-            return savedData;
-        }
-
-        public override void DeserializeSave(ThingSaveData savedData)
-        {
-            base.DeserializeSave(savedData);
-            if (savedData is LogicBaseSaveData logicBaseSaveData)
-            {
-                Setting = logicBaseSaveData.Setting;
-            }
-        }
-
-        // Initalise Save Data
-        protected override void InitialiseSaveData(ref ThingSaveData savedData)
-        {
-            base.InitialiseSaveData(ref savedData);
-            if (savedData is LogicBaseSaveData logicBaseSaveData)
-            {
-                logicBaseSaveData.Setting = Setting;
-            }
-        }
-
-        //Process Setting Updates on dedicated servers? (Might be completly useless in this code?)
-        public override void BuildUpdate(RocketBinaryWriter writer, ushort networkUpdateType)
-        {
-            base.BuildUpdate(writer, networkUpdateType);
-            if (Thing.IsNetworkUpdateRequired(256u, networkUpdateType))
-            {
-                writer.WriteDouble(Setting);
-            }
-        }
-
-        public override void ProcessUpdate(RocketBinaryReader reader, ushort networkUpdateType)
-        {
-            base.ProcessUpdate(reader, networkUpdateType);
-            if (Thing.IsNetworkUpdateRequired(256u, networkUpdateType))
-            {
-                Setting = reader.ReadDouble();
             }
         }
 
@@ -495,10 +399,19 @@ namespace BrainClock.PlayerComms
 
         private void UpdateBatteryStatus()
         {
-            if (Battery != null && batteryDisplay.isActiveAndEnabled)
-                _setting = this.Battery.PowerRatio;
-            batteryDisplay.SetBatteryStatus(_setting);
-            this.SignalTower.SetActive(isBoosted && Powered);
+            Radio radio = this;
+            if (radio.Battery != null)
+            radio.SetBatteryStatus(Battery.CurrentPowerPercentage);
+            radio.SignalTower.SetActive(isBoosted && Powered);
+        }
+
+        public void SetBatteryStatus(byte CurrentPowerPercentage)
+        {
+            Battery20.SetActive(CurrentPowerPercentage > 10);
+            Battery40.SetActive(CurrentPowerPercentage > 30);
+            Battery60.SetActive(CurrentPowerPercentage > 50);
+            Battery80.SetActive(CurrentPowerPercentage > 70);
+            Battery100.SetActive(CurrentPowerPercentage > 90);
         }
 
         private void UpdateBoosterStatus()
