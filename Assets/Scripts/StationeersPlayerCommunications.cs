@@ -4,6 +4,7 @@ using HarmonyLib;
 using StationeersMods.Interface;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [StationeersMod("StationeersPlayerCommunications", "StationeersPlayerCommunications [StationeersMods]", "0.2.4657.21547.1")]
 public class StationeersPlayerCommunications : ModBehaviour

@@ -69,7 +69,7 @@ namespace BrainClock.PlayerComms
 
             if (SteamClient.IsValid)
             {
-                Debug.Log("SteamVoiceRecorder: Steam initialized successfully");
+                //Debug.log("SteamVoiceRecorder: Steam initialized successfully");
             }
         }
 
@@ -194,7 +194,7 @@ namespace BrainClock.PlayerComms
         private void UpdateTransmissionMode()
         {
             _transmissionMode = StationeersPlayerCommunications.TransmissionModeConfig.Value;
-            Debug.Log($"[SteamVoiceRecorder] TransmissionMode updated to: {_transmissionMode}");
+            //Debug.log($"[SteamVoiceRecorder] TransmissionMode updated to: {_transmissionMode}");
 
             ClearVoiceStream();
         }

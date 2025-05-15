@@ -14,6 +14,7 @@
 		[list]
 		[*]Face-to-Face Voice Chat: Voices are affected by environmental factors such as pressure, helmets, and world occlusion.
 		[*]Directional Audio: When speaking face-to-face, voices are heard based on their position and orientation.
+		[*]Voice Mode: Adjustable face to face talking voice which effects how loud you are and how far your audio travels. (Indicator on External UI Window)
 		[*]Radio Communication: Enables long-range communication between players.
 		[*]Radio Talk Over Protection: Only 1 transmitter is allowed on a channel at a time.
 		[*]Radio Channels: Up to 16 Radio Channels.
@@ -73,6 +74,7 @@ Installation Guide: <color=#0cb3f5>github.com/StationeersLaunchPad/StationeersLa
 <color=#1380bf>•</color> Immersive directional voice chat
 <color=#1380bf>•</color> Face-to-face communication affected by environment
 <color=#1380bf>•</color> Long-range radio communication system
+<color=#1380bf>•</color> Adjustable talking voice which effects how loud you are <b>&</b> how far your audio travels. (Indicator on External UI Window)
 <color=#1380bf>•</color> 16 radio channels with talk-over protection
 <color=#1380bf>•</color> Radio Tower (Base: 200W, 1M = 15W)
 <color=#1380bf>•</color> Steam Voice integration

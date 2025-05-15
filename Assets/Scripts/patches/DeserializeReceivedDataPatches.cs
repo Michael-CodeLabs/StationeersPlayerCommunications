@@ -67,7 +67,7 @@ namespace BrainClock.PlayerComms
             // Add extra allowed message types here
             //allowedOnClient.Add(typeof(VoiceMessage));  // Example custom message
             allowedOnClient.Add(typeof(AudioClipMessage));  // Example custom message
-            
+            //allowedOnClient.Add(typeof(MorsePlayMessage));
             if (!isServer && !allowedOnClient.Contains(messageSerialisable.GetType()))
             {
                 ConsoleWindow.PrintError($"** Messages should only be processed on the server. Message: ({messageSerialisable.GetType()}) {messageSerialisable}", false);

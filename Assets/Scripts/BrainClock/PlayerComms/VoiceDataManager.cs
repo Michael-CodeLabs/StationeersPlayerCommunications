@@ -41,7 +41,7 @@ namespace BrainClock.PlayerComms
 
         private void Awake()
         {
-            Debug.Log("VoiceDataManager.Awake()");
+            //Debug.log("VoiceDataManager.Awake()");
 
             // Implement as proper Singleton
             Instance = this;
@@ -50,7 +50,7 @@ namespace BrainClock.PlayerComms
 
         public void SendVoiceRecording(long referenceId, byte[] data, int Length)
         {
-            Debug.Log($"VoiceDataManager.SendVoiceRecording({referenceId})");
+            //Debug.log($"VoiceDataManager.SendVoiceRecording({referenceId})");
 
             VoiceDataToAudioClip source = GetHumanAudioSource(referenceId);
             
@@ -69,7 +69,7 @@ namespace BrainClock.PlayerComms
 
         VoiceDataToAudioClip CreateHumanVoicePrefab(long referenceId)
         {
-            Debug.Log($"VoiceDataManager.CreateHumanVoicePrefab({referenceId})");
+            //Debug.log($"VoiceDataManager.CreateHumanVoicePrefab({referenceId})");
 
             VoiceDataToAudioClip voiceDataToAudioClip = null;
 
@@ -79,12 +79,12 @@ namespace BrainClock.PlayerComms
                 return null;
 
             // Instantiate voice source prefab
-            Debug.Log($"Intancing HumanVoicePrefab for refId {referenceId}");
+            //Debug.log($"Intancing HumanVoicePrefab for refId {referenceId}");
             GameObject go = Object.Instantiate(HumanVoicePrefab, human.transform);
             if (go == null)
                 return null;
              
-            Debug.Log($"Finding VoiceDataToAudioClip for refId {referenceId}");
+            //Debug.log($"Finding VoiceDataToAudioClip for refId {referenceId}");
             voiceDataToAudioClip = go.GetComponent<VoiceDataToAudioClip>();
             if (voiceDataToAudioClip == null)
                 return null;
@@ -96,7 +96,7 @@ namespace BrainClock.PlayerComms
             
 
             // Add to the sources list
-            Debug.Log($"Adding HumanAudioSource for refId {referenceId}");
+            //Debug.log($"Adding HumanAudioSource for refId {referenceId}");
             HumanAudioSources.Add(referenceId, voiceDataToAudioClip);
 
             return voiceDataToAudioClip;
@@ -104,7 +104,7 @@ namespace BrainClock.PlayerComms
 
         private void OnDestroy()
         {
-            Debug.Log("VoiceDataManager.OnDestroy()");
+            //Debug.log("VoiceDataManager.OnDestroy()");
 
         }
     }

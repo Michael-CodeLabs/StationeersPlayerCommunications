@@ -23,7 +23,7 @@ namespace BrainClock.PlayerComms
             {
                 // Make sure Steam is intialized to operate Asynchronously
                 SteamClient.Init(AppId, true);
-                Debug.Log("SteamAPI initialized");
+                //Debug.log("SteamAPI initialized");
             }
         }
 

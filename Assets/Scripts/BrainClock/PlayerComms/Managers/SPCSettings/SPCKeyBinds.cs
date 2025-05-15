@@ -36,7 +36,7 @@ namespace BrainClock.PlayerComms
                 }
                 else
                 {
-                    Debug.LogWarning("SPCKeybinds: _controlsGroupLookup is null. Key assignment may not appear in UI.");
+                    //Debug.logWarning("SPCKeybinds: _controlsGroupLookup is null. Key assignment may not appear in UI.");
                 }
 
                 // Create the key item and register it in the KeyManager

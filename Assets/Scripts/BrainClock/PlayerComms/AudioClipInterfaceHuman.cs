@@ -63,7 +63,7 @@ namespace BrainClock.PlayerComms
         /// </summary>
         void Start()
         {
-            Debug.Log("AudioClipInterfaceHuman.Start()");
+            //Debug.log("AudioClipInterfaceHuman.Start()");
 
             if (Application.platform == RuntimePlatform.WindowsServer)
                 return;
@@ -82,7 +82,7 @@ namespace BrainClock.PlayerComms
         /// <param name="entity"></param>
         private void OnHumanCreated(Assets.Scripts.Objects.Entity entity)
         {
-            //Debug.Log($"AudioClipInterfaceHuman.OnHumanCreated() adding entity: {entity.ReferenceId} for {entity.CustomName}");
+            ////Debug.log($"AudioClipInterfaceHuman.OnHumanCreated() adding entity: {entity.ReferenceId} for {entity.CustomName}");
 
             if (HumanAudioPrefab == null)
                 return;
@@ -91,17 +91,17 @@ namespace BrainClock.PlayerComms
             GameObject newGameObject = UnityEngine.Object.Instantiate(HumanAudioPrefab, entity.transform);
             if (newGameObject == null)
             {
-                Debug.Log("Object not instanced correctly");
+                //Debug.log("Object not instanced correctly");
                 return;
             }
 
-            Debug.Log($"AudioClipInterfaceHuman.OnHumanCreated() Prefab spawned!");
+            //Debug.log($"AudioClipInterfaceHuman.OnHumanCreated() Prefab spawned!");
             IAudioDataReceiver audioDataReceiver = newGameObject.GetComponent<IAudioDataReceiver>();
             */
 
             IAudioDataReceiver audioDataReceiver = UnityEngine.Object.Instantiate(HumanAudioPrefab, entity.transform).GetComponent<IAudioDataReceiver>();
             HumanAudioDataReceivers.Add(entity.ReferenceId, audioDataReceiver);
-            Debug.Log($"AudioClipInterfaceHuman.OnHumanCreated() Saved {entity.ReferenceId} {audioDataReceiver}");
+            //Debug.log($"AudioClipInterfaceHuman.OnHumanCreated() Saved {entity.ReferenceId} {audioDataReceiver}");
         }
 
         /// <summary>
@@ -117,14 +117,14 @@ namespace BrainClock.PlayerComms
             if (!isReady) 
                 return;
 
-            //Debug.Log($"AudioClipInterfaceHuman.ReceiveAudioData()");
+            ////Debug.log($"AudioClipInterfaceHuman.ReceiveAudioData()");
 
             // If we can hear our own audio, we need to give it our own Human referenceId
             if (InventoryManager.ParentHuman)
             {
                 if (referenceId == InventoryManager.ParentHuman.ReferenceId)
                 {
-                    //Debug.Log("Received Audio for unknown referenceId, ignoring");
+                    ////Debug.log("Received Audio for unknown referenceId, ignoring");
                     return;
                 }
                 // Otherwise assign the audio as our 
@@ -133,7 +133,7 @@ namespace BrainClock.PlayerComms
 
             if (referenceId < 1)
             {
-                //Debug.Log("Received Audio for unknown referenceId, ignoring");
+                ////Debug.log("Received Audio for unknown referenceId, ignoring");
                 return;
             }
 
@@ -142,12 +142,12 @@ namespace BrainClock.PlayerComms
             IAudioDataReceiver humanAudioReceiver;
             if (!HumanAudioDataReceivers.TryGetValue(referenceId, out humanAudioReceiver))
             {
-               // Debug.Log($"No saved human audio receiver for {referenceId}, searching in Humans");
+               // //Debug.log($"No saved human audio receiver for {referenceId}, searching in Humans");
                 Human theHuman = null;
                 foreach (Human human in Human.AllHumans){
                     if (human.ReferenceId == referenceId)
                     {
-                        //Debug.Log("Found our human");
+                        ////Debug.log("Found our human");
                         theHuman = human;
                     }
                 }

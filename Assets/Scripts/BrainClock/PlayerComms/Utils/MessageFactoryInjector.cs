@@ -43,14 +43,14 @@ namespace BrainClock.PlayerComms
                 Array.Copy(originalArray, newArray, originalArray.Length);
                 indexToMessageTypeField.SetValue(null, newArray);
 
-                Debug.Log($"Extended MessageFactory IndexToMessageType array to {newSize} elements.");
+                //Debug.log($"Extended MessageFactory IndexToMessageType array to {newSize} elements.");
             }
 
             // Inject the custom type into the array
             Type[] updatedArray = (Type[])indexToMessageTypeField.GetValue(null);
             updatedArray[nextIndex] = customMessageType;
 
-            Debug.Log($"Injected {customMessageType.Name} at index {nextIndex} in IndexToMessageType.");
+            //Debug.log($"Injected {customMessageType.Name} at index {nextIndex} in IndexToMessageType.");
 
             // Ensure the dictionary has space for a new byte index
             if (nextIndex > 255)
@@ -58,7 +58,7 @@ namespace BrainClock.PlayerComms
 
             // Inject custom message type into dictionary
             messageTypeToIndex[customMessageType] = nextIndex;
-            Debug.Log($"Mapped {customMessageType.Name} to index {nextIndex} in MessageTypeToIndex.");
+            //Debug.log($"Mapped {customMessageType.Name} to index {nextIndex} in MessageTypeToIndex.");
         }
     }
 

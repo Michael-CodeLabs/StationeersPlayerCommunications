@@ -57,14 +57,14 @@ namespace BrainClock.PlayerComms
         public override void Process(long hostId)
         {
             base.Process(hostId);
-            //Debug.Log($"AudioClipMessage.Process(hostId {hostId})");
+            ////Debug.log($"AudioClipMessage.Process(hostId {hostId})");
             //this.PrintDebug();
 
             // Note, on hosted sessions, we still have our own audio available
             if (NetworkManager.IsServer)
             {
-                //Debug.Log("+ this is the Server recieving AudioClip from a client");
-                //Debug.Log("+ re-sending AudioClip to clients now");
+                ////Debug.log("+ this is the Server recieving AudioClip from a client");
+                ////Debug.log("+ re-sending AudioClip to clients now");
                 //TODO send to all clients except the origin (to save bandwith).
                 this.SendToClients();
                 if (Application.platform != RuntimePlatform.WindowsServer)
@@ -74,8 +74,8 @@ namespace BrainClock.PlayerComms
             // Note, we are getting audio from everyone, including ourselves
             if (NetworkManager.IsClient)
             {
-                //Debug.Log("+ this is a client recieving AudioClip from the server");
-                //Debug.Log("+ Sending AudioClip to the Audio Manager");
+                ////Debug.log("+ this is a client recieving AudioClip from the server");
+                ////Debug.log("+ Sending AudioClip to the Audio Manager");
                 SendAudioDataToManager();
             }
 
@@ -84,7 +84,7 @@ namespace BrainClock.PlayerComms
 
         private void SendAudioDataToManager()
         {
-            //Debug.Log("AudioClipMessage.SendAudioDataToManager");
+            ////Debug.log("AudioClipMessage.SendAudioDataToManager");
 
             if (PlayerCommunicationsManager.Instance)
             {
@@ -100,7 +100,7 @@ namespace BrainClock.PlayerComms
 
         public void PrintDebug()
         {
-            Debug.Log($"AudioClipMessage.Debug - Id: {this.referenceId} {this.Message.Length} {this.Flags}");
+            //Debug.log($"AudioClipMessage.Debug - Id: {this.referenceId} {this.Message.Length} {this.Flags}");
         }
     }
 

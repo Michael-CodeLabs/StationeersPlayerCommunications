@@ -1,50 +1,52 @@
 //using Assets.Scripts.Networking;
-//using Objects.Structures;
+//using System;
 //using UnityEngine;
 
-//namespace BrainClock.PlayerComms
+//public class MorsePlayMessage : ProcessedMessage<MorsePlayMessage>
 //{
-//    public class MorsePlayMessage : ProcessedMessage<MorsePlayMessage>
+//    public long ReferenceId;
+//    public bool IsBoosted;
+//    public byte PlayCounter;
+
+//    public MorsePlayMessage() { }
+
+//    public MorsePlayMessage(long referenceId, bool isBoosted, byte playCounter)
 //    {
-//        public long ReferenceId { get; set; }
-//        public bool IsBoosted { get; set; }
+//        ReferenceId = referenceId;
+//        IsBoosted = isBoosted;
+//        PlayCounter = playCounter;
+//    }
 
-//        public MorsePlayMessage() { }
+//    public override void Deserialize(RocketBinaryReader reader)
+//    {
+//        ReferenceId = reader.ReadInt64();
+//        IsBoosted = reader.ReadBoolean();
+//        PlayCounter = reader.ReadByte();
+//    }
 
-//        public MorsePlayMessage(long referenceId, bool isBoosted)
+//    public override void Serialize(RocketBinaryWriter writer)
+//    {
+//        writer.WriteInt64(ReferenceId);
+//        writer.WriteBoolean(IsBoosted);
+//        writer.WriteByte(PlayCounter);
+//    }
+
+//    public override void Process(long hostId)
+//    {
+//        // Server should re-broadcast to other clients
+//        if (NetworkManager.IsServer)
 //        {
-//            this.ReferenceId = referenceId;
-//            this.IsBoosted = isBoosted;
+//            this.SendToClients(); // send to all clients except sender
 //        }
 
-//        public override void Serialize(RocketBinaryWriter writer)
-//        {
-//            writer.WriteInt64(ReferenceId);
-//            writer.WriteBoolean(IsBoosted);
-//        }
-
-//        public override void Deserialize(RocketBinaryReader reader)
-//        {
-//            ReferenceId = reader.ReadInt64();
-//            IsBoosted = reader.ReadBoolean();
-//        }
-
-//        public override void Process(long hostId)
-//        {
-//            base.Process(hostId);
-
-//            // Skip execution if we're the host (only for clients)
-//            if (NetworkManager.IsServer)
-//                return;
-
-//            foreach (Radio radio in Radio.AllRadios)
-//            {
-//                if (radio.ReferenceId == ReferenceId)
-//                {
-//                    radio._morseCode.PlayMorse(IsBoosted);
-//                    break;
-//                }
-//            }
-//        }
+//        // On clients or dedicated server with audio output
+//        //foreach (var radio in BrainClock.PlayerComms.Radio.AllRadios)
+//        //{
+//        //    if (radio.ReferenceId == this.ReferenceId)
+//        //    {
+//        //        radio.PlayMorseFromNetwork(IsBoosted, PlayCounter);
+//        //        break;
+//        //    }
+//        //}
 //    }
 //}

@@ -193,7 +193,7 @@ namespace BrainClock.PlayerComms
 
             //Assign Default Signal
             Setting = RangeDefault;
-            Debug.Log("Set Tower Default Signal strength to " + Setting);
+            //Debug.log("Set Tower Default Signal strength to " + Setting);
             base.Awake();
         }
         public override void Start()
@@ -220,7 +220,7 @@ namespace BrainClock.PlayerComms
 
         public override void Update1000MS(float deltaTime)
         {
-            //Debug.Log("Tower calculating intruders()");
+            ////Debug.log("Tower calculating intruders()");
             base.Update1000MS(deltaTime);
             if (RangeController != null)
                 RangeController.CalculateIntruders();

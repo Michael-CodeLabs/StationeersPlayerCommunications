@@ -52,7 +52,7 @@ namespace BrainClock.PlayerComms
         /// </summary>
         void Start()
         {
-            Debug.Log("AudioClipInterfaceRadio.Start()");
+            //Debug.log("AudioClipInterfaceRadio.Start()");
 
             if (Application.platform == RuntimePlatform.WindowsServer)
                 return;
@@ -94,7 +94,7 @@ namespace BrainClock.PlayerComms
             if (!isReady) 
                 return;
 
-            //Debug.Log($"AudioClipInterfaceRadio.ReceiveAudioData() referenceId {referenceId}");
+            ////Debug.log($"AudioClipInterfaceRadio.ReceiveAudioData() referenceId {referenceId}");
 
             // This is to prevent client's echo
             if (referenceId < 1 && NetworkManager.IsClient)
@@ -107,12 +107,12 @@ namespace BrainClock.PlayerComms
                     referenceId = InventoryManager.ParentHuman.ReferenceId;
                 else
                 {
-                    //Debug.Log("Can't find human referenceId, returning");
+                    ////Debug.log("Can't find human referenceId, returning");
                     return;
                 }
             }
 
-            //Debug.Log($"AudioClipInterfaceRadio.ReceiveAudioData() continuing with {referenceId}");
+            ////Debug.log($"AudioClipInterfaceRadio.ReceiveAudioData() continuing with {referenceId}");
             bool send = false;
             int emittingChannel = -1;
             Transform emittingTransform = null;
@@ -144,7 +144,7 @@ namespace BrainClock.PlayerComms
                             }
                         }
 
-                        //Debug.Log($"SEND THIS Audio FROM referenceId {referenceId}");
+                        ////Debug.log($"SEND THIS Audio FROM referenceId {referenceId}");
                         send = true;
                     }
                 }
@@ -152,14 +152,14 @@ namespace BrainClock.PlayerComms
 
             if (!send)
             {
-                //Debug.Log("No human detected with an active tool in hand");
+                ////Debug.log("No human detected with an active tool in hand");
                 return;
             }
 
             /* This is US talking locally on a hosted session, there will no network traffic
             if (referenceId < 1)
             {
-                Debug.Log("Received Audio for unknown referenceId, ignoring");
+                //Debug.log("Received Audio for unknown referenceId, ignoring");
                 return;
             }
             */
@@ -179,12 +179,12 @@ namespace BrainClock.PlayerComms
 
             foreach (Radio radio in radios)
             {
-                //Debug.Log($"Radio {radio.ReferenceId}");
+                ////Debug.log($"Radio {radio.ReferenceId}");
                 // Alternatively find channel through Radio.AllChannels
                 if (radio.Channel == emittingChannel)
                 {
                     IAudioDataReceiver receiver = radio as IAudioDataReceiver;
-                    //Debug.Log($"Receiver {receiver}");
+                    ////Debug.log($"Receiver {receiver}");
                     receiver.ReceiveAudioData(referenceId, data, length, volume * VolumeMultiplier, flags);
                 }
             }
@@ -206,7 +206,7 @@ namespace BrainClock.PlayerComms
                 }
                 catch (Exception e)
                 {
-                    Debug.Log("Exception running SetupGameAudioSource");
+                    //Debug.log("Exception running SetupGameAudioSource");
                 }
             }
 

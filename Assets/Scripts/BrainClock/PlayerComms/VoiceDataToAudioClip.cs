@@ -47,7 +47,7 @@ namespace BrainClock.PlayerComms
             // Attach to the right Audio mixer
             // Too Early to do it here for now, 
             //audioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("Interface"));
-            Debug.Log($"VoiceDataToAudioClip Started.");
+            //Debug.log($"VoiceDataToAudioClip Started.");
 
             staticAudioSource.GameAudioSource.SetSpatialBlend(1);
             staticAudioSource.GameAudioSource.ManageOcclusion(true);
@@ -56,10 +56,10 @@ namespace BrainClock.PlayerComms
             staticAudioSource.SetEnable(true);
             
 
-            Debug.Log("GameAudioSource setup");
+            //Debug.log("GameAudioSource setup");
             Singleton<AudioManager>.Instance.AddPlayingAudioSource(staticAudioSource.GameAudioSource);
             //Singleton<AudioManager>.Instance.AddConcurrencySubscriptions(staticAudioSource.GameAudioSource);
-            Debug.Log("GameAudioSource added to AudioManager");
+            //Debug.log("GameAudioSource added to AudioManager");
 
 
 
@@ -72,7 +72,7 @@ namespace BrainClock.PlayerComms
             if (audioSource == null || !IsReady)
                 return;
 
-            Debug.Log($"VoiceDataToAudioClip Received {length} bytes");
+            //Debug.log($"VoiceDataToAudioClip Received {length} bytes");
             compressedStream.Position = 0;
             compressedStream.Write(compressed, 0, length);
             compressedStream.Position = 0;

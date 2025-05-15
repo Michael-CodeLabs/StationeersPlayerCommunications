@@ -10,7 +10,7 @@ namespace BrainClock.PlayerComms
 
         public void ReceiveVoiceRecording(long referenceId, byte[] Message, int Length, float VolumeMultiplier, bool HasHelmet)
         {
-            Debug.Log($"ReceiveVoiceRecording in PlayerCommunicationsManager from {referenceId} with {Length} bytes ");
+            //Debug.log($"ReceiveVoiceRecording in PlayerCommunicationsManager from {referenceId} with {Length} bytes ");
 
 
         }

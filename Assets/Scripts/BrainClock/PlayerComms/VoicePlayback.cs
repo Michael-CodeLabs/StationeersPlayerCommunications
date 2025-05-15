@@ -36,7 +36,7 @@ namespace BrainClock.PlayerComms
             Instance = this;
             //Initialize();
 
-            Debug.Log($"VoicePlayback Started.");
+            //Debug.log($"VoicePlayback Started.");
         }
 
         public void Initialize()
@@ -66,12 +66,12 @@ namespace BrainClock.PlayerComms
                 if (AudioManager.Instance != null)
                 {
                     audioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("Interface"));
-                    Debug.Log("Assigning Interface mixer");
+                    //Debug.log("Assigning Interface mixer");
                 }
             }
 
 
-            Debug.Log($"VoicePlayback Received {length} bytes");
+            //Debug.log($"VoicePlayback Received {length} bytes");
             compressedStream.Position = 0;
             compressedStream.Write(compressed, 0, length);
             compressedStream.Position = 0;

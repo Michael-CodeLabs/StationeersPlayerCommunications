@@ -1699,9 +1699,8 @@ MonoBehaviour:
   UsedPowerPassive: 10
   UsedPowerActive: 100
   _towersInRange: []
-  _morseCode: {fileID: 826638555136256577}
   SpeakerAudioSource: {fileID: 4759559812049139909}
-  MorseAudioSource: {fileID: 826638555136256577}
+  MorseAudioSource: {fileID: 0}
   Channels: 16
   Range: 100
   RangeController: {fileID: 5715219108913881827}
@@ -3329,14 +3328,13 @@ GameObject:
   - component: {fileID: 4252627623051091902}
   - component: {fileID: 1633730957257074146}
   - component: {fileID: 3748318757906051388}
-  - component: {fileID: 826638555136256577}
   m_Layer: 0
   m_Name: MorseCodeSpeaker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6690086667556801993
 Transform:
   m_ObjectHideFlags: 0
@@ -3492,105 +3490,6 @@ AudioHighPassFilter:
   m_Enabled: 1
   m_CutoffFrequency: 1000
   m_HighpassResonanceQ: 1
---- !u!114 &826638555136256577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7852005743719373285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b7b5c33d8ba165408996b7b3f46f4d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameObject: {fileID: 2686529464066537426}
-  Transform: {fileID: 8996161405010228041}
-  GameAudioSource:
-    Name: MorseCodeSpeaker
-    ParentPooledAudioSource: {fileID: 0}
-    ParentStaticAudioSource: {fileID: 826638555136256577}
-    AudioSource: {fileID: 4252627623051091902}
-    LowPassFilter: {fileID: 1633730957257074146}
-    HighPassFilter: {fileID: 3748318757906051388}
-    SourceVolume: 0.3
-    SourcePitch: 1
-    SpatialCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0.0041656494
-        value: 0.9056587
-        inSlope: -0.19915305
-        outSlope: -0.19915305
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.48004523
-      - serializedVersion: 3
-        time: 0.49370188
-        value: 0.70719075
-        inSlope: -0.90331614
-        outSlope: -0.90331614
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.9916687
-        value: 0.009433746
-        inSlope: -1.4012119
-        outSlope: -1.4012119
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    ReverbCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: -0.0041656494
-        value: 0.7806587
-        inSlope: -2.120029
-        outSlope: -2.120029
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.2057779
-        value: 0.33557233
-        inSlope: -1.2675107
-        outSlope: -1.2675107
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.9916687
-        value: 0.009433746
-        inSlope: -0.41499224
-        outSlope: -0.41499224
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    OcclusionType: 0
-    LocalMixerGroupHash: -1929936868
-    ExternalMixerGroupHash: -1591426066
-    VacuumMixerGroupHash: -710576460
-    OccludedMixerGroupHash: -1140213991
-  VolumeMultiplier: 1
-  Static: {fileID: 8300000, guid: 209fe6b1787118b448999f4fdf3ea337, type: 3}
-  stuckOnTitanClip: {fileID: 8300000, guid: e4e76cf7ea1848b429af33dd1568ea7a, type: 3}
-  baseFailureClip: {fileID: 8300000, guid: 3fc6c0324741f854e87d373e80742fd1, type: 3}
-  lowO2Clip: {fileID: 8300000, guid: 0064f1258d1e00b49b85ce378d105ddb, type: 3}
 --- !u!1 &8301477127538299870
 GameObject:
   m_ObjectHideFlags: 0

@@ -49,7 +49,7 @@ namespace BrainClock.PlayerComms
         // Start is called before the first frame update
         void Start()
         {
-            //Debug.Log("AudioClipIntefaceNetwork.Start()");
+            ////Debug.log("AudioClipIntefaceNetwork.Start()");
 
             // Note: We can remove this and feed the received data in the server as well, 
             // this will allow us to inject audio directly from a dedicated server
@@ -80,15 +80,15 @@ namespace BrainClock.PlayerComms
             if (!isReady)
                 return;
 
-            //Debug.Log("AudioClipIntefaceNetwork.ReceiveAudioData()");
+            ////Debug.log("AudioClipIntefaceNetwork.ReceiveAudioData()");
 
             if (!NetworkManager.IsActive)
                 return;
-            //Debug.Log("AudioClipIntefaceNetwork.ReceiveAudioData() network is active");
+            ////Debug.log("AudioClipIntefaceNetwork.ReceiveAudioData() network is active");
 
             if (!InventoryManager.ParentHuman)
                 return;
-            //Debug.Log("AudioClipIntefaceNetwork.ReceiveAudioData() parent human is around");
+            ////Debug.log("AudioClipIntefaceNetwork.ReceiveAudioData() parent human is around");
 
             long humanReferenceId = InventoryManager.ParentHuman.ReferenceId;
 
@@ -134,7 +134,7 @@ namespace BrainClock.PlayerComms
         /// <param name="length"></param>
         private void ProcessAndSendAudioStream(long referenceId, byte[] data, int length, float volume, int flags)
         {
-            //Debug.Log($"AudioClipInterfaceNetwork:ProcessAndSendAudioMessage of {length} bytes");
+            ////Debug.log($"AudioClipInterfaceNetwork:ProcessAndSendAudioMessage of {length} bytes");
 
             // Create network message
             AudioClipMessage audioClipMessage = new AudioClipMessage(
@@ -148,12 +148,12 @@ namespace BrainClock.PlayerComms
             // Send to one or Send to Many.
             if (NetworkManager.IsClient)
             {
-                //Debug.Log("AudioClipInterfaceNetwork:Client sending message to server");
+                ////Debug.log("AudioClipInterfaceNetwork:Client sending message to server");
                 audioClipMessage.SendToServer();
             }
             if (NetworkManager.IsServer)
             {
-                //Debug.Log("AudioClipInterfaceNetwork:Server sending message to clients");
+                ////Debug.log("AudioClipInterfaceNetwork:Server sending message to clients");
                 audioClipMessage.SendToClients();
             }
 

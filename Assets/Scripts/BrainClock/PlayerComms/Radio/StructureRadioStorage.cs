@@ -20,18 +20,18 @@ namespace BrainClock.PlayerComms
 
             if (itemCrowbar == null)
             {
-                Debug.LogError("[BrainClock.PlayerComms] Failed to find ItemCrowbar!");
+                //Debug.logError("[BrainClock.PlayerComms] Failed to find ItemCrowbar!");
                 return;
             }
 
             if (BuildStates != null && BuildStates.Count > 0)
             {
                 BuildStates[0].Tool.ToolExit = itemCrowbar;
-                Debug.Log("[BrainClock.PlayerComms] Successfully set ToolExit to ItemCrowbar.");
+                //Debug.log("[BrainClock.PlayerComms] Successfully set ToolExit to ItemCrowbar.");
             }
             else
             {
-                Debug.LogWarning("[BrainClock.PlayerComms] StructureRadioHolder has no BuildStates!");
+                //Debug.logWarning("[BrainClock.PlayerComms] StructureRadioHolder has no BuildStates!");
             }
         }
         public override void SetSlotOccupantTransformData(DynamicThing newChild)

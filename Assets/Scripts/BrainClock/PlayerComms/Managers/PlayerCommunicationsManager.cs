@@ -50,7 +50,7 @@ namespace BrainClock.PlayerComms
 
         void Start()
         {
-            Debug.Log("PlayerCommunicationsManager.Start()");
+            //Debug.log("PlayerCommunicationsManager.Start()");
 
             WorldManager.OnWorldStarted += HandleWorldStarted;
             WorldManager.OnWorldExit += HandleWorldExit;
@@ -71,7 +71,7 @@ namespace BrainClock.PlayerComms
         private void CycleVoiceMode()
         {
             currentVoiceMode = (VoiceMode)(((int)currentVoiceMode + 1) % Enum.GetValues(typeof(VoiceMode)).Length);
-            Debug.Log($"[Voice Mode] Switched to: {currentVoiceMode}");
+            //Debug.log($"[Voice Mode] Switched to: {currentVoiceMode}");
         }
 
         private void HandleWorldStarted()
@@ -88,7 +88,7 @@ namespace BrainClock.PlayerComms
 
         private void OnDestroy()
         {
-            Debug.Log("PlayerCommunicationsManager.OnDestroy()");
+            //Debug.log("PlayerCommunicationsManager.OnDestroy()");
             HandleWorldExit();
             WorldManager.OnWorldStarted -= HandleWorldStarted;
             WorldManager.OnWorldExit -= HandleWorldExit;

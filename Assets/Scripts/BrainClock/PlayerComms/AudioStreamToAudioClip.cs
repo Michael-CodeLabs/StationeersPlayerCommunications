@@ -43,7 +43,7 @@ namespace BrainClock.PlayerComms
         // Start is called before the first frame update
         void Start()
         {
-            Debug.Log("AudioStreamToAudioClip checking Steam");
+            //Debug.log("AudioStreamToAudioClip checking Steam");
             // Try to initialize Steam if not done already.
             if (!SteamClient.IsValid)
                 SteamClient.Init(AppId, true);
@@ -51,7 +51,7 @@ namespace BrainClock.PlayerComms
             if (!SteamClient.IsValid)
                 return;
 
-            Debug.Log("AudioStreamToAudioClip.Start() Steam is valid");
+            //Debug.log("AudioStreamToAudioClip.Start() Steam is valid");
 
             IsReady = true;
 
@@ -79,7 +79,7 @@ namespace BrainClock.PlayerComms
             // Create the clip again if it has been destroyed.
             if (AudioSource.clip == null)
             {
-                Debug.Log("AudioClip empty, creating one");
+                //Debug.log("AudioClip empty, creating one");
                 // Here optimalRate * 2 seems to be what fixes the playback issues
                 AudioSource.clip = AudioClip.Create(AudioClipName, dataRate * 2, 1, dataRate, true, OnAudioRead, null);
                 AudioSource.loop = true;

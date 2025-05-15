@@ -2,11 +2,8 @@ using Assets.Scripts;
 using Assets.Scripts.GridSystem;
 using Assets.Scripts.Inventory;
 using Assets.Scripts.Localization2;
-using Assets.Scripts.Networking;
 using Assets.Scripts.Objects;
-using Assets.Scripts.Objects.Electrical;
 using Assets.Scripts.Objects.Items;
-using Assets.Scripts.Objects.Motherboards;
 using Assets.Scripts.Objects.Pipes;
 using Assets.Scripts.Sound;
 using Assets.Scripts.UI;
@@ -44,8 +41,8 @@ namespace BrainClock.PlayerComms
         public List<Tower> _towersInRange = new List<Tower>();
 
         //MorseAssigner
-        [SerializeField] public MorseCode _morseCode;
-        private bool _playingMorseLoop = false;
+        //[SerializeField] public MorseCode _morseCode;
+        //private bool _playingMorseLoop = false;
         private bool _PlayedClip = false;
         //[SerializeField] private AudioSource MorseAudioSource;
 
@@ -154,16 +151,16 @@ namespace BrainClock.PlayerComms
         {
             // Basic setup of speaker gameaudio. We need to initialize the GameAudioSource
             // first so base.Awake() finds it ready to be used.
-            Debug.Log("Radio.Start()");
+            //Debug.log("Radio.Start()");
             try
             {
                 IAudioParent audioparent = transform.GetComponent<Assets.Scripts.Objects.Thing>() as IAudioParent;
                 SpeakerAudioSource.GameAudioSource.Init((IAudioParent)audioparent);
-                MorseAudioSource.GameAudioSource.Init((IAudioParent)audioparent);
+                //MorseAudioSource.GameAudioSource.Init((IAudioParent)audioparent);
             }
             catch (Exception ex)
             {
-                Debug.Log("Setting Speaker GameAudioSource.Init failed " + ex.ToString());
+                //Debug.log("Setting Speaker GameAudioSource.Init failed " + ex.ToString());
             }
 
             // Force screen offline at spawn, it will be updated with the Powered interactable.
@@ -214,7 +211,7 @@ namespace BrainClock.PlayerComms
         public void SetupGameAudioSource()
         {
             // Setting up Speaker GameAudioSource
-            Debug.Log("Setting up Speaker GameAudioSource");
+            //Debug.log("Setting up Speaker GameAudioSource");
             GameAudioSource source = SpeakerAudioSource.GameAudioSource;
             source.AudioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("External"));
             source.AudioSource.loop = true;
@@ -243,7 +240,7 @@ namespace BrainClock.PlayerComms
             // If a radio becomes active, mark that channel used by that reference Id.
             if (interactable.Action == InteractableType.Activate)
             {
-                Debug.Log($"Updating Channel {Channel} status: {interactable.State} from Radio: {ReferenceId}");
+                //Debug.log($"Updating Channel {Channel} status: {interactable.State} from Radio: {ReferenceId}");
                 long refid;
                 if (AllChannels.TryGetValue(Channel, out refid))
                 {
@@ -314,10 +311,10 @@ namespace BrainClock.PlayerComms
                 }
                 ;
 
-                if (this.Channel == 15 && this.Powered && !this._playingMorseLoop)
-                {
-                    StartMorseLoop().Forget();
-                }
+                //if (this.Channel == 15 && this.Powered && !this._playingMorseLoop)
+                //{
+                //    StartMorseLoop().Forget();
+                //}
             }
 
             // Volume Knob buttons, can be interacted if the device is offline.
@@ -401,7 +398,7 @@ namespace BrainClock.PlayerComms
         {
             Radio radio = this;
             if (radio.Battery != null)
-            radio.SetBatteryStatus(Battery.CurrentPowerPercentage);
+                radio.SetBatteryStatus(Battery.CurrentPowerPercentage);
             radio.SignalTower.SetActive(isBoosted && Powered);
         }
 
@@ -433,11 +430,11 @@ namespace BrainClock.PlayerComms
                 }
             }
 
-            if (this.Channel != 15 || !this.Powered)
-            {
-                this.MorseAudioSource.GameAudioSource.AudioSource.Stop();
-                this._playingMorseLoop = false;
-            }
+            //if (this.Channel != 15 || !this.Powered)
+            //{
+            //    this.MorseAudioSource.GameAudioSource.AudioSource.Stop();
+            //    this._playingMorseLoop = false;
+            //}
 
             if (RangeController != null)
                 RangeController.CalculateIntruders();
@@ -491,7 +488,7 @@ namespace BrainClock.PlayerComms
                 return;
 
             // Only operate if everything is ok
-            //Debug.Log($"Human is holding this radio {ReferenceId}");
+            ////Debug.log($"Human is holding this radio {ReferenceId}");
             if (KeyManager.GetMouse("Primary") && !_primaryKey && !KeyManager.GetButton(KeyMap.MouseControl))
             {
                 Radio.RadioIsActivating = true;
@@ -585,9 +582,9 @@ namespace BrainClock.PlayerComms
                 // Setting Knob value
                 this.knobVolume.SetKnob(Exporting, _maxVolumeSteps, 0).Forget();
                 float vol = (float)Exporting * (1f / _maxVolumeSteps);
-                //Debug.Log($"UpdaingKnobVolume {Exporting} {vol}");
+                ////Debug.log($"UpdaingKnobVolume {Exporting} {vol}");
                 this.SpeakerAudioSource.GameAudioSource.SourceVolume = vol;
-                this.MorseAudioSource.GameAudioSource.AudioSource.volume = vol;
+                //this.MorseAudioSource.GameAudioSource.AudioSource.volume = vol;
             }
         }
 
@@ -668,36 +665,36 @@ namespace BrainClock.PlayerComms
             extendedText.AppendLine("Boosted: " + isBoosted.ToString());
             return extendedText;
         }
-        private async UniTaskVoid StartMorseLoop()
-        {
-            this._playingMorseLoop = true;
+        //private async UniTaskVoid StartMorseLoop()
+        //{
+        //    this._playingMorseLoop = true;
 
-            while (this.Channel == 15 && this.Powered && !this.MorseAudioSource.GameAudioSource.AudioSource.isPlaying)
-            {
-                _morseCode.PlayMorse(isBoosted);
+        //    while (this.Channel == 15 && this.Powered && !this.MorseAudioSource.GameAudioSource.AudioSource.isPlaying)
+        //    {
+        //        _morseCode.PlayMorse(isBoosted);
 
-                //if (NetworkManager.IsServer)
-                //{
-                //    new MorsePlayMessage(this.ReferenceId, this.isBoosted).SendToClients();
-                //}
+        //        //if (NetworkManager.IsServer)
+        //        //{
+        //        //    new MorsePlayMessage(this.ReferenceId, this.isBoosted).SendToClients();
+        //        //}
 
-                while (this.MorseAudioSource.GameAudioSource.AudioSource.isPlaying &&
-                       this.Channel == 15 && this.Powered)
-                {
-                    await UniTask.Yield();
-                }
+        //        while (this.MorseAudioSource.GameAudioSource.AudioSource.isPlaying &&
+        //               this.Channel == 15 && this.Powered)
+        //        {
+        //            await UniTask.Yield();
+        //        }
 
-                await UniTask.Delay(7000);
-            }
+        //        await UniTask.Delay(7000);
+        //    }
 
-            this._playingMorseLoop = false;
-        }
+        //    this._playingMorseLoop = false;
+        //}
 
 
-        public void PlayMorseFromNetwork(bool isBoosted)
-        {
-            _morseCode.PlayMorse(isBoosted);
-        }
+        //public void PlayMorseFromNetwork(bool isBoosted)
+        //{
+        //    _morseCode.PlayMorse(isBoosted);
+        //}
 
 
         public void UpdateAudioMaxDistance()
@@ -722,7 +719,7 @@ namespace BrainClock.PlayerComms
         /// <param name="flags"></param>
         public void ReceiveAudioData(long referenceId, byte[] data, int length, float volume, int flags)
         {
-            //Debug.Log("Radio.ReceiveAudioStreamData()"); 
+            ////Debug.log("Radio.ReceiveAudioStreamData()"); 
 
             if (!this.Powered || this.Activate != 0)
                 return;
