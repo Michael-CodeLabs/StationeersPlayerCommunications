@@ -7,13 +7,9 @@ namespace BrainClock.PlayerComms
     public class AudioClipMessage : ProcessedMessage<AudioClipMessage>
     {
         public long referenceId { get; set; }
-
-    public int Length { get; set; }
-
+        public int Length { get; set; }
         public byte[] Message { get; set; }
-
         public float Volume { get; set; }
-
         public int Flags { get; set; }
 
         [Flags]
@@ -57,52 +53,41 @@ namespace BrainClock.PlayerComms
         public override void Process(long hostId)
         {
             base.Process(hostId);
-            ////Debug.log($"AudioClipMessage.Process(hostId {hostId})");
-            //this.PrintDebug();
+            Debug.Log($"AudioClipMessage.Process(hostId={hostId}, referenceId={referenceId}, Flags={Flags})");
 
-            // Note, on hosted sessions, we still have our own audio available
             if (NetworkManager.IsServer)
             {
-                ////Debug.log("+ this is the Server recieving AudioClip from a client");
-                ////Debug.log("+ re-sending AudioClip to clients now");
-                //TODO send to all clients except the origin (to save bandwith).
+                Debug.Log("Server received AudioClipMessage, forwarding to clients");
                 this.SendToClients();
-                if (Application.platform != RuntimePlatform.WindowsServer)
-                    SendAudioDataToManager();
+                SendAudioDataToManager(); // Process locally regardless of platform for testing
             }
-
-            // Note, we are getting audio from everyone, including ourselves
-            if (NetworkManager.IsClient)
+            else
             {
-                ////Debug.log("+ this is a client recieving AudioClip from the server");
-                ////Debug.log("+ Sending AudioClip to the Audio Manager");
+                Debug.Log("Client received AudioClipMessage, sending to Audio Manager");
                 SendAudioDataToManager();
             }
-
-            // Ignore any other case
         }
 
         private void SendAudioDataToManager()
         {
-            ////Debug.log("AudioClipMessage.SendAudioDataToManager");
-
+            Debug.Log($"Sending audio to manager: referenceId={referenceId}, Length={Length}, Volume={Volume}, Flags={Flags}");
             if (PlayerCommunicationsManager.Instance)
             {
                 foreach (IAudioDataReceiver receiver in PlayerCommunicationsManager.Instance.GetComponents<IAudioDataReceiver>())
                 {
+                    Debug.Log($"Forwarding to receiver: {receiver.GetType().Name}");
                     receiver.ReceiveAudioData(referenceId, Message, Length, Volume, Flags);
                 }
-
             }
-
+            else
+            {
+                Debug.LogError("PlayerCommunicationsManager.Instance is null");
+            }
         }
-
 
         public void PrintDebug()
         {
-            //Debug.log($"AudioClipMessage.Debug - Id: {this.referenceId} {this.Message.Length} {this.Flags}");
+            Debug.Log($"AudioClipMessage.Debug - Id: {this.referenceId} {this.Message.Length} {this.Flags}");
         }
     }
-
-
 }

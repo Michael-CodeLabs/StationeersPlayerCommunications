@@ -1627,7 +1627,7 @@ MonoBehaviour:
   TowerMode: 0
   RangeDefault: 250
   RangeMax: 1000
-  PowerScale: 15
+  PowerScale: 3
   RangeController: {fileID: 4928382796035644935}
 --- !u!65 &7924616653725997657
 BoxCollider:
@@ -4744,6 +4744,7 @@ MonoBehaviour:
   ParentThing: {fileID: 4966849676222148615}
   AntennaRangeMode: 1
   Ready: 0
+  _range: 0
 --- !u!1 &7775770339999102464
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,7 +34,7 @@ public class StationeersPlayerCommunications : ModBehaviour
             true, // default: PushToTalk
             "Sets the voice transmission mode. True = Push To Talk, False = Continuous.");
 
-        Harmony harmony = new Harmony("StationeersPlayerCommunications");
+        Harmony harmony = new("StationeersPlayerCommunications");
 
         // The InventoryManager patch will spawn our main Manager into the 
         // game alongside the rest of game managers. This manager is created
@@ -52,9 +52,7 @@ public class StationeersPlayerCommunications : ModBehaviour
 
         Debug.Log("+ Injecting network messages");
         MessageFactoryInjector.InjectCustomMessageType(typeof(AudioClipMessage));
-        //MessageFactoryInjector.InjectCustomMessageType(typeof(MorsePlayMessage));
-        //MessageFactoryInjector.InjectCustomMessageType(typeof(IncomingTransmissionMessage));
-        // Add the content (Thing) prefabs to the game.
+
         PrefabPatch.prefabs = contentHandler.prefabs;
         StationpediaPatches.prefabs = contentHandler.prefabs;
         harmony.PatchAll();

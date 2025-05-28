@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using Assets.Scripts.Inventory;
 using Assets.Scripts.Objects.Entities;
 using Assets.Scripts.Networking;
-using Assets.Scripts.Objects;
-using static Assets.Scripts.Networking.NetworkUpdateType.Thing;
-using Assets.Scripts;
+
 using Unity.Collections;
 
 namespace BrainClock.PlayerComms
@@ -40,7 +38,7 @@ namespace BrainClock.PlayerComms
         /// <summary>
         /// List of know Radios in the world
         /// </summary>
-        private List<Radio> RadioThings = new List<Radio>();
+        private List<Radio> RadioThings = new();
 
         /// <summary>
         /// For those cases where we should not run.
@@ -57,7 +55,7 @@ namespace BrainClock.PlayerComms
             if (Application.platform == RuntimePlatform.WindowsServer)
                 return;
 
-            WorldManager.OnWorldStarted += HandleWorldStarted;
+            //WorldManager.OnWorldStarted += HandleWorldStarted;
             WorldManager.OnWorldExit    += HandleWorldExit;
 
             Radio.OnRadioCreated += OnRadioCreated;
@@ -114,9 +112,8 @@ namespace BrainClock.PlayerComms
 
             ////Debug.log($"AudioClipInterfaceRadio.ReceiveAudioData() continuing with {referenceId}");
             bool send = false;
-            int emittingChannel = -1;
-            Transform emittingTransform = null;
             Radio emittingRadio = null;
+            int emittingChannel = -1;
             foreach (Human human in Human.AllHumans)
             {
                 if (human.ReferenceId == referenceId)
@@ -125,6 +122,7 @@ namespace BrainClock.PlayerComms
                     Radio rh = human.RightHandSlot.Get() as Radio;
                     if ((lh != null && lh.Activate > 0) || (rh != null && rh.Activate > 0))
                     {
+                        Transform emittingTransform;
                         if (lh != null)
                         {
                             if (lh.Activate > 0)
@@ -195,22 +193,23 @@ namespace BrainClock.PlayerComms
         /// <summary>
         /// Initialize all the human information every time we start a new world.
         /// </summary>
-        private void HandleWorldStarted()
-        {
-            //Console.WriteLine("AudioClipInterfaceRadio.HandleWOrldStart()");
-            foreach(Radio radio in RadioThings)
-            {
-                try
-                {
-                    radio.SetupGameAudioSource();
-                }
-                catch (Exception e)
-                {
-                    //Debug.log("Exception running SetupGameAudioSource");
-                }
-            }
+        //private void HandleWorldStarted()
+        //{
+        //    //Console.WriteLine("AudioClipInterfaceRadio.HandleWOrldStart()");
+        //    foreach(Radio radio in RadioThings)
+        //    {
+        //        try
+        //        {
+        //            radio.SetupGameAudioSource();
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            Debug.LogWarning("[PlayerComms: AudioClipInterfaceRadio Exception]");
+        //            Debug.LogException(e);
+        //        }
+        //    }
 
-        }
+        //}
 
         /// <summary>
         /// Clean up after leaving a world.
@@ -233,7 +232,7 @@ namespace BrainClock.PlayerComms
 
             HandleWorldExit();
             
-            WorldManager.OnWorldStarted -= HandleWorldStarted;
+            //WorldManager.OnWorldStarted -= HandleWorldStarted;
             WorldManager.OnWorldExit    -= HandleWorldExit;
 
             Radio.OnRadioCreated -= OnRadioCreated;

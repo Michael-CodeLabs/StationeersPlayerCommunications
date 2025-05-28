@@ -2,7 +2,7 @@
 <ModMetadata xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Name>Player Communications</Name>
 	<Author>lorexcold</Author>
-	<Version>1.0.0</Version>
+	<Version>1.0.2</Version>
 	<Description>
 		[h1]Player Communications[/h1]
 		[b]WARNING:[/b] This is a Stationeers Launchpad Plugin Mod. It requires Bepinex to be installed with the Stationeers Launchpad plugin.
@@ -32,8 +32,8 @@
 		[*]Voices are directional for face-to-face communication.
 		[*]Configure your microphone in Steam before launching.
 		[*]Dedicated Server Compatible
-		[*]Radio tower base power usage is 200W, scaling with logic Setting (1 Meter = 15W).
-		[*]Default tower signal is 250 Meters (3750W + Base Power).
+		[*]Radio tower base power usage is 200W, scaling with logic Setting (1 Meter = 3W).
+		[*]Default tower signal is 250 Meters (750W + Base Power).
 		[/list]
 
 		[h2]Requirements[/h2]
@@ -51,10 +51,11 @@
 		@taco2849 (Dev)
 		Smiles (3D Models)
 	</Description>
+	<WorkshopHandle>3481457290</WorkshopHandle>
 	<ChangeLog>
-		[h3]Version 1.0.0:[/h3]
+		[h3]Version 1.0.2:[/h3]
 		[list]
-		[*]Initial release
+		[*]Improved AudioStreamToAudioClip, should fix delay and looping issues, please report issue if it doesn't.
 		[/list]
 	</ChangeLog>
 	<Tags>
@@ -76,7 +77,7 @@ Installation Guide: <color=#0cb3f5>github.com/StationeersLaunchPad/StationeersLa
 <color=#1380bf>•</color> Long-range radio communication system
 <color=#1380bf>•</color> Adjustable talking voice which effects how loud you are <b>&</b> how far your audio travels. (Indicator on External UI Window)
 <color=#1380bf>•</color> 16 radio channels with talk-over protection
-<color=#1380bf>•</color> Radio Tower (Base: 200W, 1M = 15W)
+<color=#1380bf>•</color> Radio Tower (Basepower: 200W, 1M = 3W)
 <color=#1380bf>•</color> Steam Voice integration
 <color=#1380bf>•</color> Custom keybinds
 
@@ -84,7 +85,7 @@ Installation Guide: <color=#0cb3f5>github.com/StationeersLaunchPad/StationeersLa
 <color=#c49c08>•</color> Helmets, pressure, and objects affect voice
 <color=#c49c08>•</color> Configure microphone in Steam first
 <color=#c49c08>•</color> Dedicated Server Compatible
-<color=#c49c08>•</color> Default tower range: 250M (3750W + 200W)
+<color=#c49c08>•</color> Default tower range: 250M (750W + 200W)
 
 <color=#02d1fa><b>[REQUIREMENTS]</b></color>
 <color=#22c933>•</color> Steam initialized

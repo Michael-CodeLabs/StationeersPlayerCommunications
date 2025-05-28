@@ -53,7 +53,8 @@ public class ModStaticAudioSource : StaticAudioSource, IAudioDataReceiver, IAudi
         }
         catch (Exception ex)
         {
-            //Debug.log("GameAudioSource.Init failed " + ex);
+            Debug.LogWarning("[PlayerComms: ModStaticAudioSource Exception] :");
+            Debug.LogException(ex);
         }
 
         GameAudioSource.AudioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(Animator.StringToHash("External"));

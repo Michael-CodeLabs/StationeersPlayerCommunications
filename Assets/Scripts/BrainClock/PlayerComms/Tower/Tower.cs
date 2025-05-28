@@ -23,7 +23,7 @@ namespace BrainClock.PlayerComms
         
         // Global registeration so radios or a manager can iterate over all towers.
         public static List<Tower> AllTowers = new();
-        public static Dictionary<int, long> TowerModes = new Dictionary<int, long>();
+        public static Dictionary<int, long> TowerModes = new();
 
         //Add Events later ** **
 
@@ -193,6 +193,7 @@ namespace BrainClock.PlayerComms
 
             //Assign Default Signal
             Setting = RangeDefault;
+
             //Debug.log("Set Tower Default Signal strength to " + Setting);
             base.Awake();
         }

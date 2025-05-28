@@ -17,10 +17,10 @@ MonoBehaviour:
     allowing players to communicate using voice chat whether it be face-to-face or
     over long distances using radios.
   _name: StationeersPlayerCommunications
-  _outputDirectory: C:/Users/Moe/Documents/My Games/Stationeers/mods
-  _stationeersDirectory: C:/Program Files (x86)/Steam/steamapps/common/Stationeers
+  _outputDirectory: D:/ModdingProjects/StationeersPlayerCommunications/Build
+  _stationeersDirectory: D:/SteamLibrary/steamapps/common/Stationeers
   _stationeersArguments: 
-  _version: 1.0.0
+  _version: 1.0.2
   _assemblies:
   - Assets/Scripts/StationeersPlayerCommunications.asmdef
   _artifacts: []

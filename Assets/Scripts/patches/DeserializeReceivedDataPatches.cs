@@ -21,11 +21,7 @@ namespace BrainClock.PlayerComms
             Type type = reader.ReadMessageType();
 
             // Get the "Singleton" property using reflection
-            PropertyInfo property = type.GetProperty("Singleton", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
-            if (property == null)
-            {
-                throw new NullReferenceException($"Failed to find 'Singleton' on type {type}");
-            }
+            PropertyInfo property = type.GetProperty("Singleton", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy) ?? throw new NullReferenceException($"Failed to find 'Singleton' on type {type}");
 
             // Get the property's getter method and invoke it
             MethodInfo getMethod = property.GetGetMethod();
@@ -48,25 +44,24 @@ namespace BrainClock.PlayerComms
                 Debug.LogError($"Message: ({instance.GetType()}) {instance}");
             }
 
-            if (!(messageSerialisable is IMessageProcessable messageProcessable))
+            if (messageSerialisable is not IMessageProcessable messageProcessable)
                 return false; // Skip original method if it's not a valid message
 
             bool isServer = NetworkManager.IsServer;
 
             // Original allowed message types
-            HashSet<Type> allowedOnClient = new HashSet<Type>
+            HashSet<Type> allowedOnClient = new()
             {
                 typeof(NetworkMessages.Handshake),
                 typeof(NetworkMessages.VerifyPlayerRequest),
                 typeof(ChatMessage),
                 typeof(AnimationEmoteMessage),
                 typeof(MoveToSlotMessage),
-                typeof(TradingResultMessageFromServer)
+                typeof(TradingResultMessageFromServer),
+                // Add extra allowed message types here
+                //allowedOnClient.Add(typeof(VoiceMessage));  // Example custom message
+                typeof(AudioClipMessage)  // Example custom message
             };
-
-            // Add extra allowed message types here
-            //allowedOnClient.Add(typeof(VoiceMessage));  // Example custom message
-            allowedOnClient.Add(typeof(AudioClipMessage));  // Example custom message
             //allowedOnClient.Add(typeof(MorsePlayMessage));
             if (!isServer && !allowedOnClient.Contains(messageSerialisable.GetType()))
             {

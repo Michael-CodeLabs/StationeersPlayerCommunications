@@ -394,7 +394,7 @@ MonoBehaviour:
   StructureCollisionType: 2
   AllowMounting: 0
   UseCellPosition: 0
-  BoundsGridRatio: 0.9
+  BoundsGridRatio: 0.5
   BoundsGridShiftForward: 0
   BoundsGridShiftSide: 0
   BoundsGridExtraHeight: 0

@@ -249,10 +249,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AudioSource: {fileID: 7534122942922871630}
-  AudioClipName: HumanVoice
+  AudioClipName: VoiceAudio
   AppId: 544550
   dataRate: 0
-  IsReady: 0
+  bufferSizeSeconds: 5
+  logBufferStats: 0
 --- !u!169 &5330181372779360234
 AudioLowPassFilter:
   m_ObjectHideFlags: 0
