@@ -1,54 +1,56 @@
+using Assets.Scripts.Networking;
 using BepInEx.Configuration;
 using BrainClock.PlayerComms;
 using HarmonyLib;
 using StationeersMods.Interface;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Networking;
 
-[StationeersMod("StationeersPlayerCommunications", "StationeersPlayerCommunications [StationeersMods]", "0.2.4657.21547.1")]
+[StationeersMod("StationeersPlayerCommunications", "StationeersPlayerCommunications", "0.2.4657.21547.1")]
 public class StationeersPlayerCommunications : ModBehaviour
 {
-    /// <summary>
-    /// StationeersMods/BepinEx ModBehaviour to handle the mod initialization.
-    /// </summary>
-    /// <param name="contentHandler">Contains the assets of the mod package</param>
-
     public static KeyCode PushToTalk;
     public static KeyCode VoiceStrength;
     public static KeyCode RadioVolumeDown;
     public static KeyCode RadioVolumeUp;
     public static KeyCode RadioChannelDown;
     public static KeyCode RadioChannelUp;
-
     public static ConfigEntry<bool> TransmissionModeConfig; // true = PushToTalk
+    public static ConfigEntry<float> VoiceVolume;
+    public static ConfigEntry<float> HumanVolumeMultiplier;
+    public static ConfigEntry<float> RadioVolumeMultipler;
 
     public override void OnLoaded(ContentHandler contentHandler)
     {
         Debug.Log("StationeersPlayerCommunications Loaded!");
+        if (!NetworkManager.IsServer)
+        {
+            // Bind the config
+            TransmissionModeConfig = Config.Bind(
+                "Player Communications",
+                "TransmissionMode",
+                true, // default: PushToTalk
+                "Sets the voice transmission mode. True = Push To Talk, False = Continuous.");
 
-        // Bind the config
-        TransmissionModeConfig = Config.Bind(
-            "Player Communications",
-            "TransmissionMode",
-            true, // default: PushToTalk
-            "Sets the voice transmission mode. True = Push To Talk, False = Continuous.");
+            HumanVolumeMultiplier = Config.Bind(
+                "Player Communications",
+                "Human Volume Multiplier",
+                2f, // default: 2f
+                "Sets Human Volume Multiplier");
+
+            RadioVolumeMultipler = Config.Bind(
+                "Player Communications",
+                "Radio Volume Multiplier",
+                2f, // default: 2f
+                "Sets Radio Volume Multiplier");
+        }
 
         Harmony harmony = new("StationeersPlayerCommunications");
 
-        // The InventoryManager patch will spawn our main Manager into the 
-        // game alongside the rest of game managers. This manager is created
-        // after the game has loaded all files/resources and will survive 
-        // between games.
         Debug.Log("+ Queueing the spawn of managers");
 
         var targetPrefab = contentHandler.prefabs.FirstOrDefault(prefab => prefab.name == "PlayerCommunicationsManagerPrefab");
         InventoryManagerPatch.PlayerCommunicationsManagerPrefab = targetPrefab;
-
-        // Adding custom message types through an injector. The message Class
-        // needs to be added to the factory in two lookup tables, and because
-        // this message type needs to be processed in the client to it also 
-        // needs an additional injection in the Network process() handler.
 
         Debug.Log("+ Injecting network messages");
         MessageFactoryInjector.InjectCustomMessageType(typeof(AudioClipMessage));
@@ -70,5 +72,26 @@ public class StationeersPlayerCommunications : ModBehaviour
         RadioVolumeUp = KeyManager.GetKey("Radio Volume Up");
         RadioChannelDown = KeyManager.GetKey("Radio Channel Down");
         RadioChannelUp = KeyManager.GetKey("Radio Channel Up");
+    }
+
+    public static void AudioConfigChanged(string target, float value)
+    {
+        // Update the config values based on the target
+        switch (target.ToLowerInvariant())
+        {
+            case "human":
+                HumanVolumeMultiplier.Value = value;
+                //Debug.Log($"[SPC] Config updated: Human Multiplier = {value}");
+                break;
+
+            case "radio":
+                RadioVolumeMultipler.Value = value;
+                //Debug.Log($"[SPC] Config updated: Radio Multipler = {value}");
+                break;
+
+            default:
+                Debug.LogWarning($"[SPC] Unknown config target: {target}");
+                break;
+        }
     }
 }

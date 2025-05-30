@@ -7,6 +7,5 @@ namespace BrainClock.PlayerComms
 {
     public class RadioSwitchOnOff : SwitchOnOff
     {
-
     }
 }

@@ -3,9 +3,7 @@ using System.Collections.ObjectModel;
 using Assets.Scripts;
 using Assets.Scripts.Objects;
 using HarmonyLib;
-using StationeersMods.Interface;
 using UnityEngine;
-using UnityEngine.Rendering;
 namespace BrainClock.PlayerComms
 {
     [HarmonyPatch]

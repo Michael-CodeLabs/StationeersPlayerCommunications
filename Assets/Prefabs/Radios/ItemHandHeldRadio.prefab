@@ -350,9 +350,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5054560105500194860}
   - component: {fileID: 5947228222304207137}
-  - component: {fileID: 1867780430128744750}
-  - component: {fileID: 6104700852649133419}
-  - component: {fileID: 3041607569437587235}
   m_Layer: 0
   m_Name: MorseSpeaker
   m_TagString: Untagged
@@ -384,7 +381,7 @@ AudioSource:
   m_GameObject: {fileID: 307033545158360905}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4263722120269950801, guid: 9ae647a30458b7f4bb4729decaae57dd, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -480,135 +477,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!169 &1867780430128744750
-AudioLowPassFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307033545158360905}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_LowpassResonanceQ: 1
-  lowpassLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.22692133
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!165 &6104700852649133419
-AudioHighPassFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307033545158360905}
-  m_Enabled: 1
-  m_CutoffFrequency: 1000
-  m_HighpassResonanceQ: 1
---- !u!114 &3041607569437587235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307033545158360905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e950d997e252d545bc991ddb5e2f2b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameObject: {fileID: 2686529464066537426}
-  Transform: {fileID: 8996161405010228041}
-  GameAudioSource:
-    Name: MorseAudioSource
-    ParentPooledAudioSource: {fileID: 0}
-    ParentStaticAudioSource: {fileID: 0}
-    AudioSource: {fileID: 5947228222304207137}
-    LowPassFilter: {fileID: 0}
-    HighPassFilter: {fileID: 0}
-    SourceVolume: 1
-    SourcePitch: 1
-    SpatialCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0.0041656494
-        value: 0.9056587
-        inSlope: -0.19915305
-        outSlope: -0.19915305
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.48004523
-      - serializedVersion: 3
-        time: 0.49370188
-        value: 0.70719075
-        inSlope: -0.90331614
-        outSlope: -0.90331614
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.9916687
-        value: 0.009433746
-        inSlope: -1.4012119
-        outSlope: -1.4012119
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    ReverbCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: -0.0041656494
-        value: 0.7806587
-        inSlope: -2.120029
-        outSlope: -2.120029
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.2057779
-        value: 0.33557233
-        inSlope: -1.2675107
-        outSlope: -1.2675107
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.9916687
-        value: 0.009433746
-        inSlope: -0.41499224
-        outSlope: -0.41499224
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    OcclusionType: 0
-    LocalMixerGroupHash: -1929936868
-    ExternalMixerGroupHash: -1591426066
-    VacuumMixerGroupHash: -710576460
-    OccludedMixerGroupHash: -1140213991
 --- !u!1 &828336478673811580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,7 +1217,7 @@ MonoBehaviour:
       Parent: {fileID: 2892032943883829781}
       ClipsData:
         Name: Hi
-        ChannelName: 
+        ChannelName: Interact1
         Looping: 0
         LoopingOneShots: 0
         RandomStartTime: 0
@@ -1378,41 +1246,6 @@ MonoBehaviour:
       - Type: 41
         Value: 1
       BuildStateConditions: 
-    - Name: Lo
-      NameHash: -1072140737
-      Channel: 0
-      Parent: {fileID: 2892032943883829781}
-      ClipsData:
-        Name: Lo
-        ChannelName: 
-        Looping: 0
-        LoopingOneShots: 0
-        RandomStartTime: 0
-        RandomPitch: 0
-        RandomPitchRangeHigh: 0
-        RandomPitchRangeLow: 0
-        Delay: 0
-        FadeIn: 0
-        FadeOut: 0
-        FadeDown: 0
-        FadeDownTime: 0
-        FadeDownTarget: 0
-        FadePitch: 0
-        FadeInTime: 0
-        FadeOutTime: 0
-        Clips:
-        - {fileID: 8300000, guid: f779ea64e33ddf44a8a8e53b2a772c47, type: 3}
-        Concurrencies: []
-        ConcurrencyIds: 
-        NameHash: -1072140737
-        SoundAlert: 0
-      StopIfInvalid: 0
-      Conditions:
-      - Type: 42
-        Value: 1
-      - Type: 41
-        Value: 0
-      BuildStateConditions: 
     ActionName: 
     _state: 0
   - StringKey: Exporting
@@ -1433,28 +1266,59 @@ MonoBehaviour:
     ActionName: 
     _state: 5
   AudioEvents:
-  - Name: BaseFailure
-    NameHash: -102118816
-    Channel: 0
+  - Name: Static
+    NameHash: -2022953709
+    Channel: 1
     Parent: {fileID: 2892032943883829781}
     ClipsData:
-      Name: BaseFailure
-      ChannelName: 
-      Looping: 0
+      Name: Static
+      ChannelName: MorseAudioSource
+      Looping: 1
       LoopingOneShots: 0
       RandomStartTime: 0
       RandomPitch: 0
       RandomPitchRangeHigh: 0
       RandomPitchRangeLow: 0
       Delay: 0
+      FadeIn: 1
+      FadeOut: 1
+      FadeDown: 1
+      FadeDownTime: 0.3
+      FadeDownTarget: 0.3
+      FadePitch: 1
+      FadeInTime: 0.3
+      FadeOutTime: 0.3
+      Clips:
+      - {fileID: 8300000, guid: 209fe6b1787118b448999f4fdf3ea337, type: 3}
+      Concurrencies: []
+      ConcurrencyIds: 
+      NameHash: -2022953709
+      SoundAlert: 0
+    StopIfInvalid: 0
+    Conditions: []
+    BuildStateConditions: 
+  - Name: BaseFailure
+    NameHash: -102118816
+    Channel: 1
+    Parent: {fileID: 2892032943883829781}
+    ClipsData:
+      Name: StaticClip
+      ChannelName: MorseAudioSource
+      Looping: 0
+      LoopingOneShots: 0
+      RandomStartTime: 0
+      RandomPitch: 0
+      RandomPitchRangeHigh: 0
+      RandomPitchRangeLow: 0
+      Delay: 1
       FadeIn: 0
       FadeOut: 0
       FadeDown: 0
-      FadeDownTime: 0
-      FadeDownTarget: 0
-      FadePitch: 0
-      FadeInTime: 0
-      FadeOutTime: 0
+      FadeDownTime: 0.3
+      FadeDownTarget: 0.3
+      FadePitch: 1
+      FadeInTime: 0.3
+      FadeOutTime: 0.3
       Clips:
       - {fileID: 8300000, guid: 3fc6c0324741f854e87d373e80742fd1, type: 3}
       Concurrencies: []
@@ -1464,75 +1328,75 @@ MonoBehaviour:
     StopIfInvalid: 0
     Conditions: []
     BuildStateConditions: 
-  - Name: LOWO2
-    NameHash: 1318268993
-    Channel: 0
+  - Name: StuckOnTitan
+    NameHash: 147868863
+    Channel: 1
     Parent: {fileID: 2892032943883829781}
     ClipsData:
-      Name: LOWO2
-      ChannelName: 
+      Name: StaticClip
+      ChannelName: MorseAudioSource
       Looping: 0
       LoopingOneShots: 0
       RandomStartTime: 0
       RandomPitch: 0
       RandomPitchRangeHigh: 0
       RandomPitchRangeLow: 0
-      Delay: 0
+      Delay: 1
       FadeIn: 0
-      FadeOut: 0
-      FadeDown: 0
-      FadeDownTime: 0
-      FadeDownTarget: 0
-      FadePitch: 0
-      FadeInTime: 0
-      FadeOutTime: 0
-      Clips:
-      - {fileID: 8300000, guid: 0064f1258d1e00b49b85ce378d105ddb, type: 3}
-      Concurrencies: []
-      ConcurrencyIds: 
-      NameHash: 1318268993
-      SoundAlert: 0
-    StopIfInvalid: 0
-    Conditions: []
-    BuildStateConditions: 
-  - Name: morseStuckOnTitan
-    NameHash: 1192423714
-    Channel: 0
-    Parent: {fileID: 2892032943883829781}
-    ClipsData:
-      Name: morseStuckOnTitan
-      ChannelName: 
-      Looping: 0
-      LoopingOneShots: 0
-      RandomStartTime: 0
-      RandomPitch: 0
-      RandomPitchRangeHigh: 0
-      RandomPitchRangeLow: 0
-      Delay: 0
-      FadeIn: 0
-      FadeOut: 0
-      FadeDown: 0
-      FadeDownTime: 0
-      FadeDownTarget: 0
-      FadePitch: 0
-      FadeInTime: 0
-      FadeOutTime: 0
+      FadeOut: 1
+      FadeDown: 1
+      FadeDownTime: 3
+      FadeDownTarget: 3
+      FadePitch: 1
+      FadeInTime: 3
+      FadeOutTime: 3
       Clips:
       - {fileID: 8300000, guid: e4e76cf7ea1848b429af33dd1568ea7a, type: 3}
       Concurrencies: []
       ConcurrencyIds: 
-      NameHash: 1192423714
+      NameHash: 147868863
       SoundAlert: 0
     StopIfInvalid: 0
     Conditions: []
     BuildStateConditions: 
-  - Name: Static
-    NameHash: -2022953709
+  - Name: LowO2
+    NameHash: -689120865
+    Channel: 1
+    Parent: {fileID: 2892032943883829781}
+    ClipsData:
+      Name: StaticClip
+      ChannelName: MorseAudioSource
+      Looping: 0
+      LoopingOneShots: 0
+      RandomStartTime: 0
+      RandomPitch: 0
+      RandomPitchRangeHigh: 0
+      RandomPitchRangeLow: 0
+      Delay: 1
+      FadeIn: 1
+      FadeOut: 1
+      FadeDown: 1
+      FadeDownTime: 0.3
+      FadeDownTarget: 0.3
+      FadePitch: 1
+      FadeInTime: 0.3
+      FadeOutTime: 0.3
+      Clips:
+      - {fileID: 8300000, guid: 0064f1258d1e00b49b85ce378d105ddb, type: 3}
+      Concurrencies: []
+      ConcurrencyIds: 
+      NameHash: -689120865
+      SoundAlert: 0
+    StopIfInvalid: 0
+    Conditions: []
+    BuildStateConditions: 
+  - Name: RadioOn
+    NameHash: 1584529811
     Channel: 0
     Parent: {fileID: 2892032943883829781}
     ClipsData:
-      Name: Static
-      ChannelName: 
+      Name: RadioOn
+      ChannelName: Interact1
       Looping: 0
       LoopingOneShots: 0
       RandomStartTime: 0
@@ -1549,10 +1413,72 @@ MonoBehaviour:
       FadeInTime: 0
       FadeOutTime: 0
       Clips:
-      - {fileID: 8300000, guid: 209fe6b1787118b448999f4fdf3ea337, type: 3}
+      - {fileID: 8300000, guid: 43ffd8b942680e642be25fe4424655d5, type: 3}
       Concurrencies: []
       ConcurrencyIds: 
-      NameHash: -2022953709
+      NameHash: 1584529811
+      SoundAlert: 0
+    StopIfInvalid: 0
+    Conditions: []
+    BuildStateConditions: 
+  - Name: RadioOff
+    NameHash: -682487529
+    Channel: 0
+    Parent: {fileID: 2892032943883829781}
+    ClipsData:
+      Name: RadioOff
+      ChannelName: Interact1
+      Looping: 0
+      LoopingOneShots: 0
+      RandomStartTime: 0
+      RandomPitch: 0
+      RandomPitchRangeHigh: 0
+      RandomPitchRangeLow: 0
+      Delay: 0
+      FadeIn: 0
+      FadeOut: 0
+      FadeDown: 0
+      FadeDownTime: 0
+      FadeDownTarget: 0
+      FadePitch: 0
+      FadeInTime: 0
+      FadeOutTime: 0
+      Clips:
+      - {fileID: 8300000, guid: bdc1389defef0bf4e8b127ef10ba5e57, type: 3}
+      Concurrencies: []
+      ConcurrencyIds: 
+      NameHash: -682487529
+      SoundAlert: 0
+    StopIfInvalid: 0
+    Conditions: []
+    BuildStateConditions: 
+  - Name: Incoming
+    NameHash: -1147551268
+    Channel: 0
+    Parent: {fileID: 2892032943883829781}
+    ClipsData:
+      Name: RadioOff
+      ChannelName: Interact1
+      Looping: 0
+      LoopingOneShots: 0
+      RandomStartTime: 0
+      RandomPitch: 0
+      RandomPitchRangeHigh: 0
+      RandomPitchRangeLow: 0
+      Delay: 0
+      FadeIn: 0
+      FadeOut: 0
+      FadeDown: 0
+      FadeDownTime: 0
+      FadeDownTarget: 0
+      FadePitch: 0
+      FadeInTime: 0
+      FadeOutTime: 0
+      Clips:
+      - {fileID: 8300000, guid: 3a33ce787df90eb438046b253d70676c, type: 3}
+      Concurrencies: []
+      ConcurrencyIds: 
+      NameHash: -1147551268
       SoundAlert: 0
     StopIfInvalid: 0
     Conditions: []
@@ -2044,7 +1970,7 @@ MonoBehaviour:
   UsedPowerActive: 20
   _towersInRange: []
   SpeakerAudioSource: {fileID: 4759559812049139909}
-  MorseAudioSource: {fileID: 3041607569437587235}
+  MorseAudioSource: {fileID: 5947228222304207137}
   Channels: 16
   Range: 100
   RangeController: {fileID: 5715219108913881827}
@@ -2065,13 +1991,7 @@ MonoBehaviour:
   Battery60: {fileID: 5241461997755655468}
   Battery80: {fileID: 1806250631649105781}
   Battery100: {fileID: 3350331086092149263}
-  IncomingTransmissionClip: {fileID: 8300000, guid: 3a33ce787df90eb438046b253d70676c, type: 3}
-  OnRadioClip: {fileID: 8300000, guid: 43ffd8b942680e642be25fe4424655d5, type: 3}
-  OffRadioClip: {fileID: 8300000, guid: bdc1389defef0bf4e8b127ef10ba5e57, type: 3}
-  MorseStaticClip: {fileID: 8300000, guid: 209fe6b1787118b448999f4fdf3ea337, type: 3}
-  MorseStuckOnTitanClip: {fileID: 8300000, guid: e4e76cf7ea1848b429af33dd1568ea7a, type: 3}
-  MorseBaseFailureClip: {fileID: 8300000, guid: 3fc6c0324741f854e87d373e80742fd1, type: 3}
-  MorseLowO2Clip: {fileID: 8300000, guid: 0064f1258d1e00b49b85ce378d105ddb, type: 3}
+  SPCMaster: {fileID: 24100000, guid: 9ae647a30458b7f4bb4729decaae57dd, type: 2}
 --- !u!65 &3245312114357494934
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2929,7 +2849,7 @@ AudioSource:
   m_GameObject: {fileID: 6260792769971158394}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300020, guid: 9ae647a30458b7f4bb4729decaae57dd, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -3032,7 +2952,7 @@ AudioLowPassFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6260792769971158394}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_LowpassResonanceQ: 1
   lowpassLevelCustomCurve:
@@ -3057,7 +2977,7 @@ AudioHighPassFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6260792769971158394}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CutoffFrequency: 1000
   m_HighpassResonanceQ: 1
 --- !u!114 &4759559812049139909

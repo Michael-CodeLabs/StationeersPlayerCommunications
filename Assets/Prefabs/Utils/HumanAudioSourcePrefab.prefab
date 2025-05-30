@@ -45,12 +45,12 @@ AudioSource:
   m_GameObject: {fileID: 8517613730600658599}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300060, guid: 9ae647a30458b7f4bb4729decaae57dd, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -162,7 +162,7 @@ MonoBehaviour:
     AudioSource: {fileID: 7534122942922871630}
     LowPassFilter: {fileID: 0}
     HighPassFilter: {fileID: 0}
-    SourceVolume: 0.5
+    SourceVolume: 1
     SourcePitch: 1
     SpatialCurve:
       serializedVersion: 2

@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using HarmonyLib;
-using Util.Commands;
+using Assets.Scripts.Networking;
 
 namespace BrainClock.PlayerComms
 {
@@ -11,12 +9,9 @@ namespace BrainClock.PlayerComms
     public class InventoryManagerPatch
     {
         public static GameObject PlayerCommunicationsManagerPrefab;
-
         static void Postfix(Assets.Scripts.Inventory.InventoryManager __instance)
         {
-
-
-            if (PlayerCommunicationsManagerPrefab != null && Application.platform != RuntimePlatform.WindowsServer)
+            if (PlayerCommunicationsManagerPrefab != null && !NetworkManager.IsServer)
             {
                 GameObject.Instantiate(PlayerCommunicationsManagerPrefab, Vector3.zero, Quaternion.identity, __instance.transform);
                 Debug.Log("PlayerCommunicationsManagerPrefab spawned after ManagerAwake()");

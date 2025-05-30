@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace BrainClock.PlayerComms
 {
@@ -37,10 +38,9 @@ namespace BrainClock.PlayerComms
 
         [Header("Radio")]
         public StaticAudioSource SpeakerAudioSource;
-        public StaticAudioSource MorseAudioSource;
+
         public int Channels = 1;
         private int _maxVolumeSteps = 10;
-
         [Tooltip("Radius of sphere for signal range. Requires a RadioRangeController to work")]
         public float Range = 200;
         [Tooltip("If not assigned, all radios will receive all audio. If assigned, only radios within this range will receive the audio")]
@@ -62,14 +62,6 @@ namespace BrainClock.PlayerComms
         public GameObject Battery80;
         public GameObject Battery100;
 
-        [Header("Audio Clips")]
-        public AudioClip IncomingTransmissionClip;
-        public AudioClip OnRadioClip;
-        public AudioClip OffRadioClip;
-        public AudioClip MorseStaticClip;
-        public AudioClip MorseStuckOnTitanClip;
-        public AudioClip MorseBaseFailureClip;
-        public AudioClip MorseLowO2Clip;
         #region Input Timing Control
 
         private float channelChangeCooldown = 0.25f;
@@ -89,15 +81,29 @@ namespace BrainClock.PlayerComms
         private int _currentChannel;
         public int Channel
         {
-            get => _currentChannel;
-            set => _currentChannel = value;
+            get
+            {
+                return _currentChannel;
+            }
+            set
+            {
+                _currentChannel = value;
+            }
         }
 
+
+        // Current Volume of this radio
         private int _currentVolume;
         public int Volume
         {
-            get => _currentVolume;
-            set => _currentVolume = value;
+            get
+            {
+                return _currentVolume;
+            }
+            set
+            {
+                _currentVolume = value;
+            }
         }
 
         public bool IsBoosted
@@ -127,12 +133,13 @@ namespace BrainClock.PlayerComms
             {
                 IAudioParent audioParent = transform.GetComponent<Assets.Scripts.Objects.Thing>() as IAudioParent;
                 SpeakerAudioSource.GameAudioSource.Init(audioParent);
-                MorseAudioSource.GameAudioSource.Init(audioParent);
             }
             catch (Exception ex)
             {
                 Debug.LogError($"Setting Speaker GameAudioSource.Init failed: {ex}");
             }
+
+            VolumeMultiplier = StationeersPlayerCommunications.RadioVolumeMultipler.Value;
 
             Screen.enabled = false;
             base.Awake();
@@ -140,6 +147,7 @@ namespace BrainClock.PlayerComms
             Channel = Mode;
             Volume = Exporting;
 
+            MorseCondition();
             knobVolume.Initialize(this);
         }
 
@@ -162,23 +170,33 @@ namespace BrainClock.PlayerComms
                 RangeController.Range = Range;
 
             UpdateAudioMaxDistance();
+
+            StationeersPlayerCommunications.RadioVolumeMultipler.SettingChanged += VolumeMultiplierSetter;
         }
 
+        /// <summary>
+        /// Applies a volume multiplier to all audios sent to radios
+        /// </summary>
+        [Tooltip("Apply this volume multiplier to all clips sent to radio entities")]
+        public static float VolumeMultiplier = 0.5f;
+        [SerializeField] private AudioMixer SPCMaster;
+        private void VolumeMultiplierSetter(object sender, EventArgs e)
+        {
+            VolumeMultiplier = StationeersPlayerCommunications.RadioVolumeMultipler.Value;
+            SPCMaster.SetFloat("RadioFX", VolumeMultiplier);
+            ConsoleWindow.Print($"Radio Volume Multiplier set: {VolumeMultiplier:0.00}", ConsoleColor.Green);
+        }
         public void SetupGameAudioSource()
         {
-
             GameAudioSource source = SpeakerAudioSource.GameAudioSource;
-            source.AudioSource.outputAudioMixerGroup = AudioManager.Instance.GetMixerGroup(UnityEngine.Animator.StringToHash("External"));
             source.AudioSource.loop = true;
             source.AudioSource.volume = 1;
             source.AudioSource.Play();
-            source.CurrentMixerGroupNameHash = UnityEngine.Animator.StringToHash("External");
             source.SetSpatialBlend(1);
             source.ManageOcclusion(true);
             source.CalculateAndSetAtmosphericVolume(true);
             source.SetEnabled(true);
             source.SourceVolume = 1;
-
             Singleton<AudioManager>.Instance.AddPlayingAudioSource(SpeakerAudioSource.GameAudioSource);
         }
 
@@ -196,7 +214,14 @@ namespace BrainClock.PlayerComms
                 _previousOnOffState = OnOff;
                 if (Battery != null && !Battery.IsEmpty)
                 {
-                    PlayOneShot(SpeakerAudioSource, OnOff ? OnRadioClip : OffRadioClip, 3f);
+                    if (OnOff)
+                    {
+                        AudioEvents[4].Trigger(3); // Play the radio on sound
+                    }
+                    else
+                    {
+                        AudioEvents[5].Trigger(3); // Play the radio off sound
+                    }
                 }
             }
 
@@ -212,14 +237,6 @@ namespace BrainClock.PlayerComms
 
             UpdateKnobVolume();
             UpdatePushToTalkButton();
-        }
-
-        private void PlayOneShot(StaticAudioSource source, AudioClip clip, float volumeScale = 1f)
-        {
-            if (source == null || source.GameAudioSource == null || source.GameAudioSource.AudioSource == null || clip == null)
-                return;
-
-            source.GameAudioSource.AudioSource.PlayOneShot(clip, volumeScale);
         }
 
         public override Assets.Scripts.Objects.Thing.DelayedActionInstance InteractWith(Interactable interactable, Interaction interaction, bool doAction = true)
@@ -252,6 +269,7 @@ namespace BrainClock.PlayerComms
                     }
                     else
                         return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMin);
+
                 }
                 ;
             }
@@ -265,6 +283,7 @@ namespace BrainClock.PlayerComms
 
                     Volume++;
                     Thing.Interact(this.InteractExport, Volume);
+                    UpdateAudioMaxDistance();
                 }
                 else
                     return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMax);
@@ -278,29 +297,61 @@ namespace BrainClock.PlayerComms
 
                     Volume--;
                     Thing.Interact(this.InteractExport, Volume);
+                    UpdateAudioMaxDistance();
                 }
                 else
                     return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMin);
-                UpdateAudioMaxDistance();
             }
 
             return base.InteractWith(interactable, interaction, doAction);
         }
 
-        public virtual void CheckError()
+        private void MorseCondition()
         {
-            if (!GameManager.RunSimulation)
-                return;
-
-            if (AllChannels.TryGetValue(Channel, out long referenceId))
+            if (Channel != 15 || !Powered)
             {
-                if (referenceId > 0 && referenceId != ReferenceId)
-                    pushToTalk.MaterialChanger.ChangeState(2);
-                else
-                    pushToTalk.MaterialChanger.ChangeState(Activate);
+                _playingMorseLoop = false;
+                if (_audioEventsPlaying && AudioEvents != null)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if (AudioEvents[i] != null)
+                        {
+                            AudioEvents[i].Stop();
+                        }
+                    }
+                    _audioEventsPlaying = false;
+                }
+                morseLoopCts?.Cancel();
+                morseLoopCts?.Dispose();
+                morseLoopCts = null;
             }
-            else
-                pushToTalk.MaterialChanger.ChangeState(Activate);
+            else if (Channel == 15 && Powered && !_playingMorseLoop)
+            {
+                _playingMorseLoop = true;
+                morseLoopCts?.Cancel();
+                morseLoopCts?.Dispose();
+                morseLoopCts = new CancellationTokenSource();
+                StartMorseLoop(morseLoopCts.Token).Forget();
+            }
+            else if (Channel == 15 && Powered && !IsBoosted && _playingMorseLoop)
+            {
+                if (AudioEvents != null && AudioEvents.Count > 0)
+                {
+                    for (int i = 1; i < 4; i++)
+                    {
+                        if (AudioEvents[i] != null)
+                        {
+                            AudioEvents[i].Stop();
+                        }
+                    }
+                    if (AudioEvents[0] != null)
+                    {
+                        AudioEvents[0].Trigger();
+                        _audioEventsPlaying = true;
+                    }
+                }
+            }
         }
 
         public void OnDocked()
@@ -348,6 +399,9 @@ namespace BrainClock.PlayerComms
             this.SignalTower.SetActive(IsBoosted && Powered);
         }
 
+        private CancellationTokenSource morseLoopCts;
+        private bool _audioEventsPlaying = false;
+
         public override void Update1000MS(float deltaTime)
         {
             base.Update1000MS(deltaTime);
@@ -363,6 +417,14 @@ namespace BrainClock.PlayerComms
 
             if (RangeController != null)
                 RangeController.CalculateIntruders();
+
+            MorseCondition();
+        }
+
+        private void HandleKeys()
+        {
+            if (!KeyManager.GetButton(StationeersPlayerCommunications.RadioChannelDown) || !KeyManager.GetButton(StationeersPlayerCommunications.RadioChannelUp) || !KeyManager.GetButton(StationeersPlayerCommunications.RadioVolumeUp) || !KeyManager.GetButton(StationeersPlayerCommunications.RadioVolumeDown))
+                return;
 
             if (KeyManager.GetButton(StationeersPlayerCommunications.RadioChannelUp) &&
                 Channel < Channels - 1 &&
@@ -400,7 +462,6 @@ namespace BrainClock.PlayerComms
                 lastVolumeChangeTime = currentTime;
             }
         }
-
         public void OnTowerInRadius(Tower tower)
         {
             if (tower == null) return;
@@ -416,8 +477,6 @@ namespace BrainClock.PlayerComms
             if (_towersInRange.Contains(tower))
                 _towersInRange.Remove(tower);
         }
-
-        private CancellationTokenSource morseLoopCts;
         private void FixedUpdate()
         {
 
@@ -429,45 +488,6 @@ namespace BrainClock.PlayerComms
             if (this.Powered)
                 UpdateBatteryStatus();
 
-            if (Channel != 15 || !Powered)
-            {
-                _playingMorseLoop = false;
-                MorseAudioSource?.Stop();
-                morseLoopCts?.Cancel();
-                morseLoopCts?.Dispose();
-                morseLoopCts = null;
-            }
-            else if (Channel == 15 && Powered && !_playingMorseLoop)
-            {
-
-                _playingMorseLoop = true;
-                morseLoopCts?.Cancel();
-                morseLoopCts?.Dispose();
-
-                morseLoopCts = new CancellationTokenSource();
-                StartMorseLoop(morseLoopCts.Token).Forget();
-            }
-            else if (Channel == 15 && Powered && !IsBoosted && _playingMorseLoop)
-            {
-
-                if (MorseAudioSource?.GameAudioSource?.AudioSource != null &&
-                    MorseAudioSource.GameAudioSource.AudioSource.isPlaying &&
-                    MorseAudioSource.GameAudioSource.AudioSource.clip != MorseStaticClip)
-                {
-
-                    MorseAudioSource.GameAudioSource.AudioSource.Stop();
-
-                    MorseAudioSource.GameAudioSource.AudioSource.clip = MorseStaticClip;
-                    MorseAudioSource.GameAudioSource.AudioSource.loop = true;
-                    MorseAudioSource.GameAudioSource.AudioSource.Play();
-
-                    morseLoopCts?.Cancel();
-                    morseLoopCts?.Dispose();
-                    morseLoopCts = new CancellationTokenSource();
-                    _playingMorseLoop = false;
-                }
-            }
-
             Slot activeSlot = InventoryManager.ActiveHandSlot;
             if (activeSlot == null || activeSlot.Get() as Radio != this)
                 return;
@@ -477,6 +497,9 @@ namespace BrainClock.PlayerComms
 
             if (CurrentMode == InventoryManager.Mode.PrecisionPlacement || Stationpedia.IsOpen || GameManager.GameState == GameState.Paused)
                 return;
+
+            if (activeSlot.Get() as Radio != this)
+                HandleKeys();
 
             if (KeyManager.GetMouse("Primary") && !_primaryKey && !KeyManager.GetButton(KeyMap.MouseControl))
             {
@@ -513,10 +536,6 @@ namespace BrainClock.PlayerComms
             AllChannels.Remove(Channel);
 
             OnRadioDestroyed?.Invoke(this);
-
-            morseLoopCts?.Cancel();
-            morseLoopCts?.Dispose();
-            morseLoopCts = null;
         }
 
         #region knob Volume control
@@ -527,12 +546,13 @@ namespace BrainClock.PlayerComms
                 this.UpdateKnobVolumeFromThread().Forget();
             else
             {
-
+                var MorseAudioSource = this.AudioSources[1];
                 this.knobVolume.SetKnob(Exporting, _maxVolumeSteps, 0).Forget();
-                float vol = (float)Exporting * (1f / _maxVolumeSteps);
-
-                SpeakerAudioSource.GameAudioSource.AudioSource.volume = vol;
-                MorseAudioSource.GameAudioSource.AudioSource.volume = vol;
+                //float vol = (float)Exporting * (1f / _maxVolumeSteps);
+                SpeakerAudioSource.GameAudioSource.SourceVolume = Volume;
+                SpeakerAudioSource.GameAudioSource.AudioSource.volume = Volume;
+                MorseAudioSource.AudioSource.volume = Volume;
+                MorseAudioSource.SourceVolume = Volume;
             }
         }
 
@@ -584,7 +604,7 @@ namespace BrainClock.PlayerComms
 
                 if (!_PlayedClip)
                 {
-                    SpeakerAudioSource.GameAudioSource.AudioSource.PlayOneShot(IncomingTransmissionClip);
+                    AudioEvents[6].Trigger(1.5f);
                     this._PlayedClip = true;
                 }
             }
@@ -605,104 +625,125 @@ namespace BrainClock.PlayerComms
         public override StringBuilder GetExtendedText()
         {
             StringBuilder extendedText = base.GetExtendedText();
-            extendedText.AppendLine("Volume: " + (SpeakerAudioSource.GameAudioSource.SourceVolume * 100).ToString("0") + "%");
+            float unifiedVolume = SpeakerAudioSource.GameAudioSource.SourceVolume;
+            extendedText.AppendLine("Volume: " + (unifiedVolume * 100f / 10).ToString("0") + "%");
             extendedText.AppendLine("Channel: " + (Channel + 1).ToString());
             extendedText.AppendLine("Boosted: " + IsBoosted.ToString());
             return extendedText;
         }
+
         private async UniTask StartMorseLoop(CancellationToken cancellationToken = default)
         {
             try
             {
-
-                if (MorseAudioSource?.GameAudioSource?.AudioSource != null)
-                {
-                    MorseAudioSource.GameAudioSource.AudioSource.enabled = true;
-                }
-                else
+                // Early exit if conditions are not met
+                if (!GameManager.IsRunning || AudioEvents == null || AudioEvents.Count < 4 || !Powered || Channel != 15)
                 {
                     _playingMorseLoop = false;
                     return;
                 }
 
-                if (!GameManager.RunSimulation || MorseAudioSource == null || !Powered || Channel != 15)
+                // Stop any currently playing audio events
+                if (_audioEventsPlaying)
                 {
-                    _playingMorseLoop = false;
-                    return;
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if (AudioEvents[i] != null)
+                        {
+                            AudioEvents[i].Stop();
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"AudioEvents[{i}] is null when stopping.");
+                        }
+                    }
+                    _audioEventsPlaying = false;
                 }
 
-                MorseAudioSource.GameAudioSource.AudioSource.Stop();
-                MorseAudioSource.GameAudioSource.AudioSource.loop = false;
-
-                while (GameManager.RunSimulation && Powered && Channel == 15 && !cancellationToken.IsCancellationRequested)
+                while (GameManager.IsRunning && Powered && Channel == 15 && !cancellationToken.IsCancellationRequested)
                 {
                     if (IsBoosted)
                     {
+                        int eventIndex = (PlayCounter % 3) + 1; // Indices 1, 2, 3 for Morse clips
+                        var morseEvent = AudioEvents[eventIndex];
 
-                        AudioClip clip = (PlayCounter % 3) switch
+                        if (morseEvent != null)
                         {
-                            0 => MorseStuckOnTitanClip,
-                            1 => MorseBaseFailureClip,
-                            2 => MorseLowO2Clip,
-                            _ => null
-                        };
+                            morseEvent.Trigger();
+                            _audioEventsPlaying = true;
 
-                        if (clip != null)
-                        {
-                            MorseAudioSource.GameAudioSource.AudioSource.clip = clip;
-                            await PlayAudioAsync(MorseAudioSource.GameAudioSource.AudioSource, cancellationToken);
+                            Debug.Log($"Playing Morse clip {eventIndex}, IsPlaying initially: {morseEvent.IsPlaying}");
+                            await UniTask.NextFrame();
+                            Debug.Log($"IsPlaying after starting: {morseEvent.IsPlaying}");
+
+                            if (morseEvent.ClipsData.Clips != null)
+                            {
+                                await UniTask.Delay(TimeSpan.FromSeconds(morseEvent.ClipsData.Clips[0].length), cancellationToken: cancellationToken);
+                            }
+                            else
+                            {
+                                Debug.LogWarning($"Morse event {eventIndex} has null AudioSource or clip.");
+                            }
+
+                            Debug.Log($"Finished playing Morse clip {eventIndex}, IsPlaying now: {morseEvent.IsPlaying}");
                             PlayCounter++;
-
-                            await UniTask.Delay(TimeSpan.FromSeconds(2), cancellationToken: cancellationToken);
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"AudioEvents[{eventIndex}] is null when triggering Morse clip.");
                         }
                     }
                     else
                     {
+                        if (AudioEvents[0] != null)
+                        {
+                            AudioEvents[0].Trigger();
+                            _audioEventsPlaying = true;
 
-                        MorseAudioSource.GameAudioSource.AudioSource.clip = MorseStaticClip;
-                        MorseAudioSource.GameAudioSource.AudioSource.loop = true;
-                        MorseAudioSource.GameAudioSource.AudioSource.Play();
+                            await UniTask.WaitUntil(() => !GameManager.IsRunning || !Powered || Channel != 15 || IsBoosted || cancellationToken.IsCancellationRequested, cancellationToken: cancellationToken);
 
-                        await UniTask.WaitUntil(() => !GameManager.RunSimulation || !Powered || Channel != 15 || IsBoosted || cancellationToken.IsCancellationRequested, cancellationToken: cancellationToken);
-
-                        MorseAudioSource.GameAudioSource.AudioSource.Stop();
+                            AudioEvents[0].Stop();
+                            _audioEventsPlaying = false;
+                        }
+                        else
+                        {
+                            Debug.LogWarning("AudioEvents[0] is null when triggering static clip.");
+                        }
                     }
                 }
             }
             catch (OperationCanceledException)
             {
-
-                MorseAudioSource?.GameAudioSource?.AudioSource.Stop();
+                if (_audioEventsPlaying)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if (AudioEvents[i] != null)
+                        {
+                            AudioEvents[i].Stop();
+                        }
+                    }
+                    _audioEventsPlaying = false;
+                }
             }
             catch (Exception ex)
             {
-
-                Debug.LogError($"Error in StartMorseLoop: {ex.Message}");
+                Debug.LogError($"Error in StartMorseLoop: {ex}");
             }
             finally
             {
-
                 _playingMorseLoop = false;
             }
         }
 
-        private async UniTask PlayAudioAsync(AudioSource audioSource, CancellationToken cancellationToken)
-        {
-            if (audioSource == null || audioSource.clip == null)
-            {
-                return;
-            }
-
-            audioSource.Play();
-            await UniTask.Delay(TimeSpan.FromSeconds(audioSource.clip.length), cancellationToken: cancellationToken);
-        }
         public void UpdateAudioMaxDistance()
         {
-            float maxDistance = Mathf.PI * Volume;
+            var MorseAudioSource = this.AudioSources[1];
+            float maxDistance = Mathf.PI * 0.5f * Volume;
             if (SpeakerAudioSource.GameAudioSource != null && MorseAudioSource != null)
             {
                 SpeakerAudioSource.GameAudioSource.maxDistance = maxDistance;
-                MorseAudioSource.GameAudioSource.maxDistance = maxDistance;
+                MorseAudioSource.maxDistance = maxDistance;
             }
         }
 

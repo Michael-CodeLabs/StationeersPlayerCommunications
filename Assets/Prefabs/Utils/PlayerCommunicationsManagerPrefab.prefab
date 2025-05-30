@@ -95,7 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HumanAudioPrefab: {fileID: 8517613730600658599, guid: a5a2074b2c9f3ab4eac97397ad0c68ed, type: 3}
   HearOwnAudio: 0
-  VolumeMultiplier: 0.4
+  VolumeMultiplier: 0.5
 --- !u!114 &156911544261497105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,4 +108,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eafac14d1ad90a24394da61c9e7535a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VolumeMultiplier: 0.5

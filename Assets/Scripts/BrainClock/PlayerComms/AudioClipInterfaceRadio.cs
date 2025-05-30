@@ -32,8 +32,8 @@ namespace BrainClock.PlayerComms
         /// <summary>
         /// Applies a volume multiplier to all audios sent to radios
         /// </summary>
-        [Tooltip("Apply this volume multiplier to all clips sent to radio entities")]
-        public float VolumeMultiplier = 1.0f;
+        //[Tooltip("Apply this volume multiplier to all clips sent to radio entities")]
+        //public float VolumeMultiplier = 0.5f;
 
         /// <summary>
         /// List of know Radios in the world
@@ -48,6 +48,7 @@ namespace BrainClock.PlayerComms
         /// <summary>
         /// Autoinitializes all the hooks required 
         /// </summary>
+        /// 
         void Start()
         {
             //Debug.log("AudioClipInterfaceRadio.Start()");
@@ -55,7 +56,7 @@ namespace BrainClock.PlayerComms
             if (Application.platform == RuntimePlatform.WindowsServer)
                 return;
 
-            //WorldManager.OnWorldStarted += HandleWorldStarted;
+            WorldManager.OnWorldStarted += HandleWorldStarted;
             WorldManager.OnWorldExit    += HandleWorldExit;
 
             Radio.OnRadioCreated += OnRadioCreated;
@@ -183,7 +184,7 @@ namespace BrainClock.PlayerComms
                 {
                     IAudioDataReceiver receiver = radio as IAudioDataReceiver;
                     ////Debug.log($"Receiver {receiver}");
-                    receiver.ReceiveAudioData(referenceId, data, length, volume * VolumeMultiplier, flags);
+                    receiver.ReceiveAudioData(referenceId, data, length, volume, flags);
                 }
             }
 
@@ -193,23 +194,23 @@ namespace BrainClock.PlayerComms
         /// <summary>
         /// Initialize all the human information every time we start a new world.
         /// </summary>
-        //private void HandleWorldStarted()
-        //{
-        //    //Console.WriteLine("AudioClipInterfaceRadio.HandleWOrldStart()");
-        //    foreach(Radio radio in RadioThings)
-        //    {
-        //        try
-        //        {
-        //            radio.SetupGameAudioSource();
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            Debug.LogWarning("[PlayerComms: AudioClipInterfaceRadio Exception]");
-        //            Debug.LogException(e);
-        //        }
-        //    }
+        private void HandleWorldStarted()
+        {
+            //Console.WriteLine("AudioClipInterfaceRadio.HandleWOrldStart()");
+            foreach(Radio radio in RadioThings)
+            {
+                try
+                {
+                    radio.SetupGameAudioSource();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogWarning("[PlayerComms: AudioClipInterfaceRadio Exception]");
+                    Debug.LogException(e);
+                }
+            }
 
-        //}
+        }
 
         /// <summary>
         /// Clean up after leaving a world.
@@ -232,7 +233,7 @@ namespace BrainClock.PlayerComms
 
             HandleWorldExit();
             
-            //WorldManager.OnWorldStarted -= HandleWorldStarted;
+            WorldManager.OnWorldStarted -= HandleWorldStarted;
             WorldManager.OnWorldExit    -= HandleWorldExit;
 
             Radio.OnRadioCreated -= OnRadioCreated;

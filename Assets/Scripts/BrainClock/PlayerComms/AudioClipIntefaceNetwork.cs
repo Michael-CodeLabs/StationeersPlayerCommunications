@@ -55,8 +55,9 @@ namespace BrainClock.PlayerComms
             // this will allow us to inject audio directly from a dedicated server
             // specially audio that doesn't not come from a player (e.g. a music device).
             // We can prevent loopback if we add extra referenceId checks.
+            
             if (Application.platform == RuntimePlatform.WindowsServer)
-                return;
+               return;
 
             WorldManager.OnWorldStarted += HandleWorldStarted;
             WorldManager.OnWorldExit += HandleWorldExit;

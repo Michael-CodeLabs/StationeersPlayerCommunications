@@ -72,4 +72,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 /[Aa]ssets/[Ss]tationeersMods/[Rr]esources/ExportSettings.asset
 /Build~
-/Build~
+Build~/StationeersPlayerCommunications/About/About.xml
+/Assets/Assemblies
+/Assets/TextMesh Pro

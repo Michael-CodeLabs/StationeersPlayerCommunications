@@ -1,8 +1,10 @@
+using Assets.Scripts;
 using Assets.Scripts.Inventory;
 using Assets.Scripts.Objects.Entities;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Util.Commands;
 using static BrainClock.PlayerComms.AudioClipMessage;
 
 namespace BrainClock.PlayerComms
@@ -49,7 +51,7 @@ namespace BrainClock.PlayerComms
         /// Volume multiplier applied only to human entities.
         /// </summary>
         [Tooltip("Applies this volume multiplier to all audio data sent to the human audiosources")]
-        public float VolumeMultiplier = 1.0f;
+        public float VolumeMultiplier = 0.5f;
 
 
         /// <summary>
@@ -57,7 +59,17 @@ namespace BrainClock.PlayerComms
         /// </summary>
         private bool isReady = false;
 
+        private void VolumeMultiplierSetter(object sender, EventArgs e)
+        {
+            VolumeMultiplier = StationeersPlayerCommunications.HumanVolumeMultiplier.Value;
+            HumanAudioPrefab.GetComponent<AudioSource>().outputAudioMixerGroup.audioMixer.SetFloat("LocalPlayer", VolumeMultiplier);
+            ConsoleWindow.Print($"Volume Multiplier set: {VolumeMultiplier}", ConsoleColor.Green);
+        }
 
+        private void Awake()
+        {
+            VolumeMultiplier = StationeersPlayerCommunications.RadioVolumeMultipler.Value;
+        }
         /// <summary>
         /// Autoinitializes all the hooks required 
         /// </summary>
@@ -71,6 +83,7 @@ namespace BrainClock.PlayerComms
             WorldManager.OnWorldStarted += HandleWorldStarted;
             WorldManager.OnWorldExit    += HandleWorldExit;
 
+            StationeersPlayerCommunications.HumanVolumeMultiplier.SettingChanged += VolumeMultiplierSetter;
             Human.OnHumanCreated += OnHumanCreated;
 
             isReady = true;
@@ -167,7 +180,7 @@ namespace BrainClock.PlayerComms
                 return;
 
             // Apply the human custom receiver
-            humanAudioReceiver.ReceiveAudioData(referenceId, data, length, volume * VolumeMultiplier, flags);
+            humanAudioReceiver.ReceiveAudioData(referenceId, data, length, volume, flags);
 
             // Adjust maxDistance based on flags (voice mode)
             if (humanAudioReceiver is MonoBehaviour receiverMono)
