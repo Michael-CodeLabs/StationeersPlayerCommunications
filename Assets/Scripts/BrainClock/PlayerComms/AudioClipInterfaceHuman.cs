@@ -51,7 +51,7 @@ namespace BrainClock.PlayerComms
         /// Volume multiplier applied only to human entities.
         /// </summary>
         [Tooltip("Applies this volume multiplier to all audio data sent to the human audiosources")]
-        public float VolumeMultiplier = 0.5f;
+        public float VolumeMultiplier;
 
 
         /// <summary>
@@ -85,7 +85,8 @@ namespace BrainClock.PlayerComms
 
             StationeersPlayerCommunications.HumanVolumeMultiplier.SettingChanged += VolumeMultiplierSetter;
             Human.OnHumanCreated += OnHumanCreated;
-
+            VolumeMultiplier = StationeersPlayerCommunications.HumanVolumeMultiplier.Value;
+            HumanAudioPrefab.GetComponent<AudioSource>().outputAudioMixerGroup.audioMixer.SetFloat("LocalPlayer", VolumeMultiplier);
             isReady = true;
         }
 

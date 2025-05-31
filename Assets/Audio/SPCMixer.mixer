@@ -67,7 +67,7 @@ AudioMixerController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Master
+  m_Name: SPCMixer
   m_OutputGroup: {fileID: 0}
   m_MasterGroup: {fileID: 24300008}
   m_Snapshots:
@@ -100,15 +100,15 @@ AudioMixerGroupController:
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: ffa93ee5829f9914eba4a1a57fe662a7
   m_Children:
+  - {fileID: -4263722120269950801}
   - {fileID: 24300060}
   - {fileID: 24300020}
-  - {fileID: -4263722120269950801}
   m_Volume: c55d75e1e468eb3468ab7f6967f0b140
   m_Pitch: 9a46497c1d2172c42b9dc16eefa6def1
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400010}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 4
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -140,7 +140,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LocalPlayer
+  m_Name: SPCLocalPlayer
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 8fb87c1c7c2249845a4de4cfac2486e4
   m_Children: []
@@ -296,6 +296,7 @@ AudioMixerSnapshotController:
     ffe8699bec8bf6140837eaca6ba8ad09: 1
     8d4edaeb2eea27c4ea7069363591e2f7: 0.2
     f9fb922c0bee3a945a0630b178d2f984: 1
+    d1ac044c7f39afa4fa0219e7f7b5cd45: 0.04171297
     9a46497c1d2172c42b9dc16eefa6def1: 1
     d047a58cdd570ef4f8e82cb0533c03f4: 10
     c0ee26acc8cf3954396961db89d3deb7: -80

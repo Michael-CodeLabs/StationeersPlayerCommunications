@@ -10,6 +10,7 @@ using Assets.Scripts.UI;
 using Assets.Scripts.Util;
 using Audio;
 using Cysharp.Threading.Tasks;
+using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,10 +21,8 @@ using UnityEngine.Audio;
 
 namespace BrainClock.PlayerComms
 {
-
     public class Radio : PowerTool, IAudioDataReceiver
     {
-
         private IAudioStreamReceiver[] audioStreamReceivers = new IAudioStreamReceiver[0];
 
         public static List<Radio> AllRadios = new();
@@ -63,7 +62,6 @@ namespace BrainClock.PlayerComms
         public GameObject Battery100;
 
         #region Input Timing Control
-
         private float channelChangeCooldown = 0.25f;
         private float volumeChangeCooldown = 0.25f;
         private float lastChannelChangeTime = 0f;
@@ -91,7 +89,6 @@ namespace BrainClock.PlayerComms
             }
         }
 
-
         // Current Volume of this radio
         private int _currentVolume;
         public int Volume
@@ -110,7 +107,6 @@ namespace BrainClock.PlayerComms
         {
             get
             {
-
                 bool result = false;
                 for (int i = _towersInRange.Count - 1; i >= 0; i--)
                 {
@@ -125,10 +121,10 @@ namespace BrainClock.PlayerComms
                 return result;
             }
         }
+
         public List<Tower> TowersInRange => _towersInRange;
         public override void Awake()
         {
-
             try
             {
                 IAudioParent audioParent = transform.GetComponent<Assets.Scripts.Objects.Thing>() as IAudioParent;
@@ -140,7 +136,7 @@ namespace BrainClock.PlayerComms
             }
 
             VolumeMultiplier = StationeersPlayerCommunications.RadioVolumeMultipler.Value;
-
+            SPCMaster.SetFloat("RadioFX", VolumeMultiplier);
             Screen.enabled = false;
             base.Awake();
 
@@ -150,7 +146,7 @@ namespace BrainClock.PlayerComms
             MorseCondition();
             knobVolume.Initialize(this);
         }
-
+        private AudioMixerGroup customMixer;
         public override void Start()
         {
             base.Start();
@@ -158,17 +154,15 @@ namespace BrainClock.PlayerComms
             audioStreamReceivers = GetComponents<IAudioStreamReceiver>();
 
             OnRadioCreated?.Invoke(this);
-
+            customMixer = SPCMaster.FindMatchingGroups("Morse")[0];
             SetupGameAudioSource();
-
             SignalTower.SetActive(Powered && IsBoosted);
             BatteryIcon.SetActive(Powered);
 
             AllRadios.Add(this);
-
+            AudioSources[1].AudioSource.outputAudioMixerGroup = SPCMaster.FindMatchingGroups("Morse")[0];
             if (RangeController != null)
                 RangeController.Range = Range;
-
             UpdateAudioMaxDistance();
 
             StationeersPlayerCommunications.RadioVolumeMultipler.SettingChanged += VolumeMultiplierSetter;
@@ -178,7 +172,7 @@ namespace BrainClock.PlayerComms
         /// Applies a volume multiplier to all audios sent to radios
         /// </summary>
         [Tooltip("Apply this volume multiplier to all clips sent to radio entities")]
-        public static float VolumeMultiplier = 0.5f;
+        public static float VolumeMultiplier;
         [SerializeField] private AudioMixer SPCMaster;
         private void VolumeMultiplierSetter(object sender, EventArgs e)
         {
@@ -186,6 +180,8 @@ namespace BrainClock.PlayerComms
             SPCMaster.SetFloat("RadioFX", VolumeMultiplier);
             ConsoleWindow.Print($"Radio Volume Multiplier set: {VolumeMultiplier:0.00}", ConsoleColor.Green);
         }
+
+        public Dictionary<int, AudioMixerGroup> MixerGroups;
         public void SetupGameAudioSource()
         {
             GameAudioSource source = SpeakerAudioSource.GameAudioSource;
@@ -198,6 +194,32 @@ namespace BrainClock.PlayerComms
             source.SetEnabled(true);
             source.SourceVolume = 1;
             Singleton<AudioManager>.Instance.AddPlayingAudioSource(SpeakerAudioSource.GameAudioSource);
+            // Ensure custom Morse mixer is preserved
+        }
+
+        // Method to preserve the custom AudioMixerGroup for Morse code audio
+        private void PreserveCustomMixerForMorse()
+        {
+            var morseAudioSource = AudioSources[1];
+            if (morseAudioSource.AudioSource.outputAudioMixerGroup == customMixer)
+                return;
+
+            if (morseAudioSource != null && morseAudioSource.AudioSource != null)
+            {
+                if (customMixer != null)
+                {
+                    morseAudioSource.AudioSource.outputAudioMixerGroup = customMixer;
+                    Debug.Log($"[RadioMod] Preserved custom Morse AudioMixerGroup for Radio {this.name}");
+                }
+                else
+                {
+                    Debug.LogWarning($"[RadioMod] Morse AudioMixerGroup not found in SPCMaster for Radio {this.name}");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"[RadioMod] Morse AudioSource is null for Radio {this.name}");
+            }
         }
 
         public override void OnInteractableUpdated(Interactable interactable)
@@ -241,7 +263,6 @@ namespace BrainClock.PlayerComms
 
         public override Assets.Scripts.Objects.Thing.DelayedActionInstance InteractWith(Interactable interactable, Interaction interaction, bool doAction = true)
         {
-
             if (this.Powered && CurrentMode != InventoryManager.Mode.PrecisionPlacement && !Stationpedia.IsOpen && GameManager.GameState != GameState.Paused)
             {
                 if (interactable.Action == InteractableType.Button1)
@@ -269,9 +290,7 @@ namespace BrainClock.PlayerComms
                     }
                     else
                         return new Assets.Scripts.Objects.Thing.DelayedActionInstance().Fail(GameStrings.GlobalAlreadyMin);
-
                 }
-                ;
             }
 
             if (interactable.Action == InteractableType.Button5)
@@ -413,12 +432,12 @@ namespace BrainClock.PlayerComms
                     _towersInRange.RemoveAt(i);
                 }
             }
-            ;
 
             if (RangeController != null)
                 RangeController.CalculateIntruders();
 
             MorseCondition();
+            PreserveCustomMixerForMorse();
         }
 
         private void HandleKeys()
@@ -462,6 +481,7 @@ namespace BrainClock.PlayerComms
                 lastVolumeChangeTime = currentTime;
             }
         }
+
         public void OnTowerInRadius(Tower tower)
         {
             if (tower == null) return;
@@ -477,9 +497,9 @@ namespace BrainClock.PlayerComms
             if (_towersInRange.Contains(tower))
                 _towersInRange.Remove(tower);
         }
+
         private void FixedUpdate()
         {
-
             UpdateChannelBusy();
 
             if (SignalTower != null)
@@ -539,7 +559,6 @@ namespace BrainClock.PlayerComms
         }
 
         #region knob Volume control
-
         private void UpdateKnobVolume()
         {
             if (!GameManager.IsMainThread)
@@ -548,7 +567,7 @@ namespace BrainClock.PlayerComms
             {
                 var MorseAudioSource = this.AudioSources[1];
                 this.knobVolume.SetKnob(Exporting, _maxVolumeSteps, 0).Forget();
-                //float vol = (float)Exporting * (1f / _maxVolumeSteps);
+                float Volume = (float)Exporting * (1f / _maxVolumeSteps);
                 SpeakerAudioSource.GameAudioSource.SourceVolume = Volume;
                 SpeakerAudioSource.GameAudioSource.AudioSource.volume = Volume;
                 MorseAudioSource.AudioSource.volume = Volume;
@@ -565,7 +584,6 @@ namespace BrainClock.PlayerComms
         #endregion
 
         #region PushToTalk button
-
         private void UpdatePushToTalkButton()
         {
             if (!GameManager.IsMainThread)
@@ -605,13 +623,13 @@ namespace BrainClock.PlayerComms
                 if (!_PlayedClip)
                 {
                     AudioEvents[6].Trigger(1.5f);
-                    this._PlayedClip = true;
+                    _PlayedClip = true;
                 }
             }
             else
             {
                 pushToTalk.MaterialChanger.ChangeState(Activate);
-                this._PlayedClip = false;
+                _PlayedClip = false;
             }
         }
 
@@ -710,6 +728,8 @@ namespace BrainClock.PlayerComms
                             Debug.LogWarning("AudioEvents[0] is null when triggering static clip.");
                         }
                     }
+                    // Ensure custom Morse mixer is preserved after each Morse clip trigger
+                    PreserveCustomMixerForMorse();
                 }
             }
             catch (OperationCanceledException)
@@ -749,7 +769,6 @@ namespace BrainClock.PlayerComms
 
         public void ReceiveAudioData(long referenceId, byte[] data, int length, float volume, int flags)
         {
-
             if (!this.Powered || this.Activate != 0)
                 return;
 

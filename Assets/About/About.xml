@@ -2,7 +2,7 @@
 <ModMetadata xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Name>Player Communications</Name>
 	<Author>lorexcold</Author>
-	<Version>1.0.2</Version>
+	<Version>1.0.4</Version>
 	<Description>
 		[h1]Player Communications[/h1]
 		[b]WARNING:[/b] This is a Stationeers Launchpad Plugin Mod. It requires Bepinex to be installed with the Stationeers Launchpad plugin.
@@ -23,7 +23,8 @@
 		[*]Steam Voice Integration: Uses Steam's built-in voice chat system.
 		[*]Custom Key Binds: Custom Keybinds in the controls settings under Player Communications.
 		[*]Transmission modes: PTT &amp; Continuous transmission (change in workshop without restart).
-		[*]Custom Lore: New entry in the factions page with custom lore.
+		[*]Volume Configs: Configurable global audio volume, either use the config or directly use our new console command (SPC SET 10 Radio/Human)
+		[*]Custom Lore: New entry in the factions page with custom lore &amp; more.
 		[/list]
 
 		[h2]Notes[/h2]
@@ -53,9 +54,11 @@
 	</Description>
 	<WorkshopHandle>3481457290</WorkshopHandle>
 	<ChangeLog>
-		[h3]Version 1.0.2:[/h3]
+		[h3]Version 1.0.4:[/h3]
 		[list]
-		[*]Improved AudioStreamToAudioClip, should fix delay and looping issues, please report issue if it doesn't.
+		[b]HOTFIX[/b]
+		[*]Fixed static clip was not playing.
+		[*]Fixed Audio Multipliers not preserving their previous state on restarts.
 		[/list]
 	</ChangeLog>
 	<Tags>
@@ -76,6 +79,7 @@ Installation Guide: <color=#0cb3f5>github.com/StationeersLaunchPad/StationeersLa
 <color=#1380bf>•</color> Face-to-face communication affected by environment
 <color=#1380bf>•</color> Long-range radio communication system
 <color=#1380bf>•</color> Adjustable talking voice which effects how loud you are <b>&</b> how far your audio travels. (Indicator on External UI Window)
+<color=#1380bf>•</color> Configurable global audio volume, either use the config or directly use our new console command (SPC SET 10 Radio/Human)
 <color=#1380bf>•</color> 16 radio channels with talk-over protection
 <color=#1380bf>•</color> Radio Tower (Basepower: 200W, 1M = 3W)
 <color=#1380bf>•</color> Steam Voice integration

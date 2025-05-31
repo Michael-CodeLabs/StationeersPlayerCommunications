@@ -12,9 +12,9 @@ public class ModStaticAudioSource : StaticAudioSource, IAudioDataReceiver, IAudi
 {
     private IAudioStreamReceiver[] audioStreamReceivers = new IAudioStreamReceiver[0];
 
-    private float volume = 0;
+    //private float volume = 0;
     private int flags = 0;
-    public float VolumeMultiplier = 1.0f;
+    //public float VolumeMultiplier = 1.0f;
 
     public void ReceiveAudioData(long referenceId, byte[] data, int length, float volume, int flags)
     {
@@ -23,12 +23,12 @@ public class ModStaticAudioSource : StaticAudioSource, IAudioDataReceiver, IAudi
             receiver.ReceiveAudioStreamData(data, length);
         }
 
-        float newVolume = volume * VolumeMultiplier;
-        if (!Mathf.Approximately(this.volume, newVolume))
-        {
-            this.volume = newVolume;
-            GameAudioSource.SourceVolume = this.volume;
-        }
+        //float newVolume = volume * VolumeMultiplier;
+        //if (!Mathf.Approximately(this.volume, newVolume))
+        //{
+            //this.volume = newVolume;
+            //GameAudioSource.SourceVolume = this.volume;
+        //}
 
         if (this.flags != flags)
         {

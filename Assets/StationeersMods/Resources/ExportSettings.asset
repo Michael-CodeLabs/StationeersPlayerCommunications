@@ -20,7 +20,7 @@ MonoBehaviour:
   _outputDirectory: D:/ModdingProjects/StationeersPlayerCommunications/Build
   _stationeersDirectory: D:/SteamLibrary/steamapps/common/Stationeers
   _stationeersArguments: 
-  _version: 1.0.3
+  _version: 1.0.4
   _assemblies:
   - Assets/Scripts/StationeersPlayerCommunications.asmdef
   _artifacts: []

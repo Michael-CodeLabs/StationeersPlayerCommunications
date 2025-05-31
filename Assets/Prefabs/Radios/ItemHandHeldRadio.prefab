@@ -1284,10 +1284,10 @@ MonoBehaviour:
       FadeOut: 1
       FadeDown: 1
       FadeDownTime: 0.3
-      FadeDownTarget: 0.3
+      FadeDownTarget: 0.2
       FadePitch: 1
       FadeInTime: 0.3
-      FadeOutTime: 0.3
+      FadeOutTime: 0.2
       Clips:
       - {fileID: 8300000, guid: 209fe6b1787118b448999f4fdf3ea337, type: 3}
       Concurrencies: []
@@ -1310,15 +1310,15 @@ MonoBehaviour:
       RandomPitch: 0
       RandomPitchRangeHigh: 0
       RandomPitchRangeLow: 0
-      Delay: 1
+      Delay: 2
       FadeIn: 0
       FadeOut: 0
       FadeDown: 0
-      FadeDownTime: 0.3
-      FadeDownTarget: 0.3
+      FadeDownTime: 3
+      FadeDownTarget: 3
       FadePitch: 1
-      FadeInTime: 0.3
-      FadeOutTime: 0.3
+      FadeInTime: 3
+      FadeOutTime: 3
       Clips:
       - {fileID: 8300000, guid: 3fc6c0324741f854e87d373e80742fd1, type: 3}
       Concurrencies: []
@@ -1341,7 +1341,7 @@ MonoBehaviour:
       RandomPitch: 0
       RandomPitchRangeHigh: 0
       RandomPitchRangeLow: 0
-      Delay: 1
+      Delay: 2
       FadeIn: 0
       FadeOut: 1
       FadeDown: 1
@@ -1372,15 +1372,15 @@ MonoBehaviour:
       RandomPitch: 0
       RandomPitchRangeHigh: 0
       RandomPitchRangeLow: 0
-      Delay: 1
+      Delay: 3
       FadeIn: 1
       FadeOut: 1
       FadeDown: 1
-      FadeDownTime: 0.3
-      FadeDownTarget: 0.3
+      FadeDownTime: 3
+      FadeDownTarget: 3
       FadePitch: 1
-      FadeInTime: 0.3
-      FadeOutTime: 0.3
+      FadeInTime: 3
+      FadeOutTime: 3
       Clips:
       - {fileID: 8300000, guid: 0064f1258d1e00b49b85ce378d105ddb, type: 3}
       Concurrencies: []
@@ -1970,7 +1970,6 @@ MonoBehaviour:
   UsedPowerActive: 20
   _towersInRange: []
   SpeakerAudioSource: {fileID: 4759559812049139909}
-  MorseAudioSource: {fileID: 5947228222304207137}
   Channels: 16
   Range: 100
   RangeController: {fileID: 5715219108913881827}
@@ -2952,7 +2951,7 @@ AudioLowPassFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6260792769971158394}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_LowpassResonanceQ: 1
   lowpassLevelCustomCurve:
@@ -2977,7 +2976,7 @@ AudioHighPassFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6260792769971158394}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CutoffFrequency: 1000
   m_HighpassResonanceQ: 1
 --- !u!114 &4759559812049139909

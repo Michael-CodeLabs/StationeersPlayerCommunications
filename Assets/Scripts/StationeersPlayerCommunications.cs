@@ -16,7 +16,6 @@ public class StationeersPlayerCommunications : ModBehaviour
     public static KeyCode RadioChannelDown;
     public static KeyCode RadioChannelUp;
     public static ConfigEntry<bool> TransmissionModeConfig; // true = PushToTalk
-    public static ConfigEntry<float> VoiceVolume;
     public static ConfigEntry<float> HumanVolumeMultiplier;
     public static ConfigEntry<float> RadioVolumeMultipler;
 
@@ -35,13 +34,13 @@ public class StationeersPlayerCommunications : ModBehaviour
             HumanVolumeMultiplier = Config.Bind(
                 "Player Communications",
                 "Human Volume Multiplier",
-                2f, // default: 2f
+                5f, // default: 5f
                 "Sets Human Volume Multiplier");
 
             RadioVolumeMultipler = Config.Bind(
                 "Player Communications",
                 "Radio Volume Multiplier",
-                2f, // default: 2f
+                5f, // default: 5f
                 "Sets Radio Volume Multiplier");
         }
 
